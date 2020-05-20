@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutterwarehouseapp/ui/view/home/blocs/home_page_bloc.dart';
+import 'package:flutterwarehouseapp/ui/view/home/home_screen.dart';
 
 import 'ui/view/invoice/create_new_invoice/create_new_invoice.dart';
 
@@ -13,10 +15,9 @@ RouteFactory router() {
 
     if (currentRoot == 1) {
       currentRoot = 2;
-//      screen = HomePage();
-    screen = BlocProvider(
-        create: (context) => CreateNewInvoiceBloc()..add(GetAllProductsEvent()),
-        child: CreateNewInvoiceScreen());
+      screen = BlocProvider(
+          create: (context) => HomePageBloc(),
+          child: HomeScreen());
     }
 
     final args = settings.arguments as Map<String, dynamic> ?? {};
@@ -24,7 +25,9 @@ RouteFactory router() {
     // todo:  add screen route here
     switch (settings.name) {
       case '/create-invoice':
-        screen = CreateNewInvoiceScreen();
+        screen = BlocProvider(
+            create: (context) => CreateNewInvoiceBloc()..add(GetAllProductsEvent()),
+            child: CreateNewInvoiceScreen());
         break;
     }
 //    switch (settings.name) {

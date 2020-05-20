@@ -33,7 +33,7 @@ class InvoiceListItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Icon(
-                  Icons.home,
+                  Icons.group,
                   color: Colors.white,
                   size: ScreenUtil().setSp(18),
                 ),
@@ -51,7 +51,10 @@ class InvoiceListItemWidget extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               itemCount: 5,
               itemBuilder: (context, index) {
-                return ProductFormWidget();
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: ProductFormWidget(),
+                );
               }),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8),

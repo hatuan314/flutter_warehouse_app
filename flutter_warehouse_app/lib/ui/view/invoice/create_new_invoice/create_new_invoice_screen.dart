@@ -6,6 +6,7 @@ import 'package:flutterwarehouseapp/models/invoice/product_of_invoice_model.dart
 import 'package:flutterwarehouseapp/ui/view/invoice/create_new_invoice/bloc/create_new_invoice_bloc.dart';
 import 'package:flutterwarehouseapp/ui/view/invoice/create_new_invoice/widgets/widgets.dart';
 import 'package:flutterwarehouseapp/ui/widgets/widgets.dart';
+import 'package:flutterwarehouseapp/utils.dart';
 
 class CreateNewInvoiceScreen extends StatefulWidget {
   @override
@@ -107,7 +108,7 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
                 child: Text(
                   state is CreateNewInvoiceInitialState
                       ? state.allProductsOfInvoice.isNotEmpty
-                          ? '12.000.000 đ'
+                          ? '${Utils.formatMoney(state.totalPrice)} đ'
                           : '0 đ'
                       : '0 đ',
                   style: TextStyle(
@@ -263,6 +264,11 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
             )));
   }
 
+  _btnRemoveOnPress(int index) {
+    BlocProvider.of<CreateNewInvoiceBloc>(context)
+        .add(BtnRemoveProductOfInvoiceOnPressEvent(index));
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -274,10 +280,5 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
         body: _mBody(state),
       );
     });
-  }
-
-  _btnRemoveOnPress(int index) {
-    BlocProvider.of<CreateNewInvoiceBloc>(context)
-        .add(BtnRemoveProductOfInvoiceOnPressEvent(index));
   }
 }
