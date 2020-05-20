@@ -5,12 +5,12 @@ abstract class CreateNewInvoiceState extends Equatable {
 }
 
 class CreateNewInvoiceInitialState extends CreateNewInvoiceState {
-  final List<ProductModel> allProducts;
-  CreateNewInvoiceInitialState(this.allProducts);
+  final List<ProductOfInvoiceModel> allProductsOfInvoice;
+  CreateNewInvoiceInitialState(this.allProductsOfInvoice);
 
   @override
   // TODO: implement props
-  List<Object> get props => [this.allProducts];
+  List<Object> get props => [this.allProductsOfInvoice];
 
 }
 

@@ -4,11 +4,12 @@ class ProductOfInvoiceModel {
   String id;
   String invoiceId;
   String productId;
+  String productName;
   String enteredPrice;
   String amount;
 
   ProductOfInvoiceModel(
-      {this.id, this.invoiceId, this.productId, this.enteredPrice, this.amount});
+      {this.id, this.invoiceId, this.productId, this.productName, this.enteredPrice, this.amount});
   factory ProductOfInvoiceModel.fromJson(Map<String, dynamic> json) {
     try {
       return ProductOfInvoiceModel(

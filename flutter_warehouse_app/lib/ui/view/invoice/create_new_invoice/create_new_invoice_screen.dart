@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutterwarehouseapp/models/invoice/product_of_invoice_model.dart';
 
 import 'package:flutterwarehouseapp/ui/view/invoice/create_new_invoice/bloc/create_new_invoice_bloc.dart';
 import 'package:flutterwarehouseapp/ui/view/invoice/create_new_invoice/widgets/widgets.dart';
@@ -12,16 +13,6 @@ class CreateNewInvoiceScreen extends StatefulWidget {
 }
 
 class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-      backgroundColor: Colors.indigo[800],
-      appBar: _mAppBar(),
-      body: _mBody(),
-    );
-  }
-
   Widget _mAppBar() {
     return HeaderAppBar(
       title: 'Tạo hoá đơn',
@@ -37,13 +28,10 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
     );
   }
 
-  Widget _mBody() {
-    return BlocBuilder<CreateNewInvoiceBloc, CreateNewInvoiceState>(
-        builder: (context, state) {
-      if (state is CreateNewInvoiceInitialState ||
-          state is CreateNewInvoiceLoadState) return _buildContent(state);
-      return _buildDefaut();
-    });
+  Widget _mBody(CreateNewInvoiceState state) {
+    if (state is CreateNewInvoiceInitialState ||
+        state is CreateNewInvoiceLoadState) return _buildContent(state);
+    return _buildDefaut();
   }
 
   Widget _buildContent(CreateNewInvoiceState state) {
@@ -70,10 +58,13 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
           ),
           SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
-            return _productItemForm(context);
+            if (state is CreateNewInvoiceInitialState)
+              return _productItemForm(
+                  context, state.allProductsOfInvoice[index], index);
+            return Container();
           },
                   childCount: state is CreateNewInvoiceInitialState
-                      ? state.allProducts.length
+                      ? state.allProductsOfInvoice.length
                       : 0)),
           SliverToBoxAdapter(
             child: _buildSubTotal(state),
@@ -91,7 +82,7 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
         children: <Widget>[
           Visibility(
             visible: state is CreateNewInvoiceInitialState
-                ? state.allProducts.isNotEmpty
+                ? state.allProductsOfInvoice.isNotEmpty
                 : false,
             child: Divider(
               thickness: 0.75,
@@ -115,7 +106,9 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
                 flex: 1,
                 child: Text(
                   state is CreateNewInvoiceInitialState
-                      ? state.allProducts.isNotEmpty ? '12.000.000 đ' : '0 đ'
+                      ? state.allProductsOfInvoice.isNotEmpty
+                          ? '12.000.000 đ'
+                          : '0 đ'
                       : '0 đ',
                   style: TextStyle(
                       color: Colors.red,
@@ -131,7 +124,8 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
     );
   }
 
-  Widget _productItemForm(BuildContext context) {
+  Widget _productItemForm(BuildContext context,
+      ProductOfInvoiceModel productOfInvoiceModel, int index) {
     return Padding(
       padding: EdgeInsets.only(
           right: ScreenUtil().setWidth(12),
@@ -140,6 +134,7 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
       child: Row(
         children: <Widget>[
           IconButton(
+            onPressed: () => _btnRemoveOnPress(index),
             icon: Icon(
               Icons.remove_circle_outline,
               color: Colors.red,
@@ -147,8 +142,11 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
           ),
           Expanded(
               child: InkWell(
-                  onTap: () => _showProductFormDialog(context),
-                  child: ProductFormWidget())),
+                  onTap: () => _showProductFormDialog(
+                      productOfInvoiceModel: productOfInvoiceModel,
+                      index: index),
+                  child: ProductFormWidget(
+                      productOfInvoiceModel: productOfInvoiceModel))),
         ],
       ),
     );
@@ -208,6 +206,7 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
                           fontSize: ScreenUtil().setSp(18),
                           fontWeight: FontWeight.bold)),
                   IconButton(
+                    onPressed: () => _showProductFormDialog(),
                     icon: Icon(
                       Icons.add_circle_outline,
                       color: Colors.indigo[800],
@@ -251,9 +250,34 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
     );
   }
 
-  _showProductFormDialog(BuildContext context) {
+  _showProductFormDialog(
+      {ProductOfInvoiceModel productOfInvoiceModel, int index}) {
+    var _createNewInvoiceBloc = BlocProvider.of<CreateNewInvoiceBloc>(context);
     showDialog(
         context: context,
-        builder: (BuildContext context) => Center(child: ProductFormDialog()));
+        builder: (BuildContext context) => Center(
+                child: ProductFormDialog(
+              createNewInvoiceBloc: _createNewInvoiceBloc,
+              productOfInvoiceModel: productOfInvoiceModel,
+              index: index,
+            )));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return BlocBuilder<CreateNewInvoiceBloc, CreateNewInvoiceState>(
+        builder: (context, state) {
+      return Scaffold(
+        backgroundColor: Colors.indigo[800],
+        appBar: _mAppBar(),
+        body: _mBody(state),
+      );
+    });
+  }
+
+  _btnRemoveOnPress(int index) {
+    BlocProvider.of<CreateNewInvoiceBloc>(context)
+        .add(BtnRemoveProductOfInvoiceOnPressEvent(index));
   }
 }

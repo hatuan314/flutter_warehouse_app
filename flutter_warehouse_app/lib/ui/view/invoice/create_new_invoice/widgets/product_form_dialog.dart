@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutterwarehouseapp/ui/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:flutterwarehouseapp/models/invoice/product_of_invoice_model.dart';
+import 'package:flutterwarehouseapp/ui/view/invoice/create_new_invoice/bloc/create_new_invoice_bloc.dart';
+import 'package:flutterwarehouseapp/ui/widgets/widgets.dart';
+
+
 class ProductFormDialog extends StatefulWidget {
+  final CreateNewInvoiceBloc createNewInvoiceBloc;
+  final ProductOfInvoiceModel productOfInvoiceModel;
+  final int index;
+
+  const ProductFormDialog({Key key, this.createNewInvoiceBloc, this.productOfInvoiceModel, this.index}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _ProductFormDialogState();
 }
@@ -19,6 +29,15 @@ class _ProductFormDialogState extends State<ProductFormDialog> {
 
   GlobalKey<FormState> _textFormKey = GlobalKey<FormState>();
 
+  initState() {
+    super.initState();
+    if (widget.productOfInvoiceModel != null) {
+      _nameController.text = "${widget.productOfInvoiceModel.productName}";
+      _amountController.text = '${widget.productOfInvoiceModel.amount}';
+      _priceController.text = '${widget.productOfInvoiceModel.enteredPrice}';
+    }
+  }
+
   Container _buildProductForm() {
     return Container(
       decoration: BoxDecoration(
@@ -29,9 +48,11 @@ class _ProductFormDialogState extends State<ProductFormDialog> {
       child: Form(
         key: _textFormKey,
         child: Padding(
-          padding: EdgeInsets.symmetric(
-              vertical: ScreenUtil().setHeight(20),
-              horizontal: ScreenUtil().setWidth(20)),
+          padding: EdgeInsets.only(
+              left: ScreenUtil().setHeight(20),
+              top: ScreenUtil().setWidth(20),
+          right: ScreenUtil().setHeight(20),
+          bottom: ScreenUtil().setWidth(8)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -169,7 +190,16 @@ class _ProductFormDialogState extends State<ProductFormDialog> {
   void _btnCreateOnPress() {
     FocusScope.of(context).requestFocus(new FocusNode());
     if (_textFormKey.currentState.validate()) {
-      print('Save');
+      final String productName = _nameController.text.trim();
+      final String amount = _amountController.text.trim();
+      final String enteredPrice = _priceController.text.trim();
+      widget.createNewInvoiceBloc.add(btnAddDialogOnPressEvent(
+        productName: productName,
+        amount: amount,
+        enteredPrice: enteredPrice,
+        index: widget.index
+      ));
+      Navigator.of(context).pop();
     }
   }
 
@@ -177,27 +207,12 @@ class _ProductFormDialogState extends State<ProductFormDialog> {
     Navigator.of(context).pop();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Dialog(
-      backgroundColor: Colors.transparent,
-      child: Stack(
-        alignment: Alignment.topCenter,
-        children: <Widget>[
-          _buildProductForm(),
-          _buildHeaderAppBar()
-        ],
-      ),
-    );
-  }
-
   Widget _buildHeaderAppBar() {
     return Container(
       height: ScreenUtil().setHeight(70),
       width: ScreenUtil().setWidth(70),
       decoration:
-          BoxDecoration(shape: BoxShape.circle, color: Colors.indigo[800]),
+      BoxDecoration(shape: BoxShape.circle, color: Colors.indigo[800]),
       alignment: Alignment.center,
       child: Icon(
         FontAwesomeIcons.stickyNote,
@@ -206,4 +221,23 @@ class _ProductFormDialogState extends State<ProductFormDialog> {
       ),
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      child: SingleChildScrollView(
+        child: Stack(
+          alignment: Alignment.topCenter,
+          children: <Widget>[
+            _buildProductForm(),
+            _buildHeaderAppBar()
+          ],
+        ),
+      ),
+    );
+  }
+
+
 }
