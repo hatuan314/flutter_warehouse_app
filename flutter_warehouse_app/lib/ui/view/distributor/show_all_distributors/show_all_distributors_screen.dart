@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterwarehouseapp/ui/view/distributor/create_new_distributor/create_new_distributor_dialog.dart';
 import 'package:flutterwarehouseapp/ui/widgets/base_app_bar_widget.dart';
 
 import 'distributors_list_item_widget.dart';
@@ -13,12 +14,12 @@ class ShowAllDistributorScreen extends StatelessWidget {
   Widget _buildContent(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.indigo[800],
-      appBar: _mAppBar(),
+      appBar: _mAppBar(context),
       body: _mBody(context),
     );
   }
 
-  Widget _mAppBar() {
+  Widget _mAppBar(BuildContext context) {
     return BaseAppBarWidget(
       title: 'Nhà phân phối',
       actions: <Widget>[
@@ -29,6 +30,7 @@ class ShowAllDistributorScreen extends StatelessWidget {
           icon: Icon(Icons.sort, color: Colors.white, size: 24),
         ),
         IconButton(
+          onPressed: () => _showCreateNewDistributorDialog(context),
           icon: Icon(Icons.add, color: Colors.white, size: 24),
         )
       ],
@@ -39,8 +41,15 @@ class ShowAllDistributorScreen extends StatelessWidget {
     return ListView.builder(
         itemCount: 10,
         itemBuilder: (context, index) {
-      return DistributorsListItemWidget();
-    });
+          return DistributorsListItemWidget();
+        });
   }
 
+  _showCreateNewDistributorDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => Center(
+              child: CreateNewDistributorDialog(),
+            ));
+  }
 }

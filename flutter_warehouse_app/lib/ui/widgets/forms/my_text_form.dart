@@ -47,8 +47,9 @@ class MyTextForm extends StatelessWidget {
             new EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(12)),
         errorStyle: TextStyle(
           color: Colors.red,
-          fontSize: ScreenUtil().setSp(16),
+          fontSize: ScreenUtil().setSp(14),
         ),
+        errorMaxLines: 2,
         errorBorder: formBoder(color: Colors.red),
         focusedErrorBorder: formBoder(color: Colors.red),
         enabledBorder: formBoder(color: Colors.black87),
