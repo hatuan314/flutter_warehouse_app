@@ -6,13 +6,17 @@ import 'package:flutterwarehouseapp/models/invoice/product_of_invoice_model.dart
 import 'package:flutterwarehouseapp/ui/view/invoice/create_new_invoice/bloc/create_new_invoice_bloc.dart';
 import 'package:flutterwarehouseapp/ui/widgets/widgets.dart';
 
-
 class ProductFormDialog extends StatefulWidget {
   final CreateNewInvoiceBloc createNewInvoiceBloc;
   final ProductOfInvoiceModel productOfInvoiceModel;
   final int index;
 
-  const ProductFormDialog({Key key, this.createNewInvoiceBloc, this.productOfInvoiceModel, this.index}) : super(key: key);
+  const ProductFormDialog(
+      {Key key,
+      this.createNewInvoiceBloc,
+      this.productOfInvoiceModel,
+      this.index})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _ProductFormDialogState();
@@ -51,14 +55,15 @@ class _ProductFormDialogState extends State<ProductFormDialog> {
           padding: EdgeInsets.only(
               left: ScreenUtil().setHeight(20),
               top: ScreenUtil().setWidth(20),
-          right: ScreenUtil().setHeight(20),
-          bottom: ScreenUtil().setWidth(8)),
+              right: ScreenUtil().setHeight(20),
+              bottom: ScreenUtil().setWidth(8)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               _headerForm(),
               _productTextFieldGroup(),
-              _buildButtonGroup()],
+              _buildButtonGroup()
+            ],
           ),
         ),
       ),
@@ -69,12 +74,14 @@ class _ProductFormDialogState extends State<ProductFormDialog> {
     return Column(
       children: <Widget>[
         SizedBox(height: ScreenUtil().setHeight(20)),
-        Text('Nhập sản phẩm', style: TextStyle(
-            color: Colors.black87,
-            fontSize: ScreenUtil().setSp(28),
-            fontWeight: FontWeight.bold
+        Text(
+          'Nhập sản phẩm',
+          style: TextStyle(
+              color: Colors.black87,
+              fontSize: ScreenUtil().setSp(28),
+              fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
         ),
-        textAlign: TextAlign.center,),
         SizedBox(height: ScreenUtil().setHeight(25))
       ],
     );
@@ -194,11 +201,10 @@ class _ProductFormDialogState extends State<ProductFormDialog> {
       final String amount = _amountController.text.trim();
       final String enteredPrice = _priceController.text.trim();
       widget.createNewInvoiceBloc.add(btnAddDialogOnPressEvent(
-        productName: productName,
-        amount: amount,
-        enteredPrice: enteredPrice,
-        index: widget.index
-      ));
+          productName: productName,
+          amount: amount,
+          enteredPrice: enteredPrice,
+          index: widget.index));
       Navigator.of(context).pop();
     }
   }
@@ -207,37 +213,10 @@ class _ProductFormDialogState extends State<ProductFormDialog> {
     Navigator.of(context).pop();
   }
 
-  Widget _buildHeaderAppBar() {
-    return Container(
-      height: ScreenUtil().setHeight(70),
-      width: ScreenUtil().setWidth(70),
-      decoration:
-      BoxDecoration(shape: BoxShape.circle, color: Colors.indigo[800]),
-      alignment: Alignment.center,
-      child: Icon(
-        FontAwesomeIcons.stickyNote,
-        color: Colors.white,
-        size: ScreenUtil().setHeight(34),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Dialog(
-      backgroundColor: Colors.transparent,
-      child: SingleChildScrollView(
-        child: Stack(
-          alignment: Alignment.topCenter,
-          children: <Widget>[
-            _buildProductForm(),
-            _buildHeaderAppBar()
-          ],
-        ),
-      ),
-    );
+    return BaseDialog(
+        iconHeader: FontAwesomeIcons.stickyNote, body: _buildProductForm());
   }
-
-
 }

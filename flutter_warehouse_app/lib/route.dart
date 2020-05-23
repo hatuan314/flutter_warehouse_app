@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutterwarehouseapp/ui/view/distributor/bloc/distributor_bloc.dart';
 import 'package:flutterwarehouseapp/ui/view/home/blocs/home_page_bloc.dart';
 import 'package:flutterwarehouseapp/ui/view/home/home_screen.dart';
 
@@ -15,9 +16,16 @@ RouteFactory router() {
 
     if (currentRoot == 1) {
       currentRoot = 2;
-      screen = BlocProvider(
-          create: (context) => HomePageBloc(),
-          child: HomeScreen());
+      screen = MultiBlocProvider(
+        providers: [
+          BlocProvider(
+              create: (context) => HomePageBloc()),
+          BlocProvider(
+            create: (context) => DistributorBloc()..add(ShowAllDistributorsEvent()),
+          )
+        ],
+        child: HomeScreen(),
+      );
     }
 
     final args = settings.arguments as Map<String, dynamic> ?? {};

@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:flutterwarehouseapp/ui/view/distributor/bloc/distributor_bloc.dart';
 import 'package:flutterwarehouseapp/ui/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CreateNewDistributorDialog extends StatefulWidget {
+  final DistributorBloc distributorBloc;
+
+  CreateNewDistributorDialog(this.distributorBloc);
+
   @override
   State<StatefulWidget> createState() => _CreateNewDistributorDialogState();
-
 }
 
-class _CreateNewDistributorDialogState extends State<CreateNewDistributorDialog> {
+class _CreateNewDistributorDialogState
+    extends State<CreateNewDistributorDialog> {
   GlobalKey<FormState> _textFormKey = GlobalKey<FormState>();
 
   TextEditingController _nameController = TextEditingController();
@@ -21,23 +26,6 @@ class _CreateNewDistributorDialogState extends State<CreateNewDistributorDialog>
   FocusNode _addressNode = FocusNode();
   FocusNode _phoneOneNode = FocusNode();
   FocusNode _phoneTwoNode = FocusNode();
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Dialog(
-      backgroundColor: Colors.transparent,
-      child: SingleChildScrollView(
-        child: Stack(
-          alignment: Alignment.topCenter,
-          children: <Widget>[
-            _buildContent(),
-            _buildHeaderAppBar()
-          ],
-        ),
-      ),
-    );
-  }
 
   Widget _buildContent() {
     return Container(
@@ -59,7 +47,8 @@ class _CreateNewDistributorDialogState extends State<CreateNewDistributorDialog>
             children: <Widget>[
               _headerForm(),
               _productTextFieldGroup(),
-              _buildButtonGroup()],
+              _buildButtonGroup()
+            ],
           ),
         ),
       ),
@@ -70,12 +59,14 @@ class _CreateNewDistributorDialogState extends State<CreateNewDistributorDialog>
     return Column(
       children: <Widget>[
         SizedBox(height: ScreenUtil().setHeight(20)),
-        Text('Nhà phân phối', style: TextStyle(
-            color: Colors.black87,
-            fontSize: ScreenUtil().setSp(28),
-            fontWeight: FontWeight.bold
+        Text(
+          'Nhà phân phối',
+          style: TextStyle(
+              color: Colors.black87,
+              fontSize: ScreenUtil().setSp(28),
+              fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
         ),
-          textAlign: TextAlign.center,),
         SizedBox(height: ScreenUtil().setHeight(25))
       ],
     );
@@ -197,6 +188,14 @@ class _CreateNewDistributorDialogState extends State<CreateNewDistributorDialog>
   void _btnCreateOnPress() {
     FocusScope.of(context).requestFocus(new FocusNode());
     if (_textFormKey.currentState.validate()) {
+      final String name = _nameController.text.trim();
+      final String address = _addressController.text.trim();
+      final String phoneOne = _phoneOneController.text.trim();
+      final String phoneTwo = _phoneTwoController.text.trim();
+
+      widget.distributorBloc.add(BtnAddDistributorOnPressEvent(
+          name, address, phoneOne,
+          phoneTwo: phoneTwo));
       Navigator.of(context).pop();
     }
   }
@@ -205,19 +204,12 @@ class _CreateNewDistributorDialogState extends State<CreateNewDistributorDialog>
     Navigator.of(context).pop();
   }
 
-  Widget _buildHeaderAppBar() {
-    return Container(
-      height: ScreenUtil().setHeight(70),
-      width: ScreenUtil().setWidth(70),
-      decoration:
-      BoxDecoration(shape: BoxShape.circle, color: Colors.indigo[800]),
-      alignment: Alignment.center,
-      child: Icon(
-        FontAwesomeIcons.userPlus,
-        color: Colors.white,
-        size: ScreenUtil().setHeight(34),
-      ),
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return BaseDialog(
+      iconHeader: FontAwesomeIcons.userPlus,
+      body: _buildContent(),
     );
   }
-
 }
