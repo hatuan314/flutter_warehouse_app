@@ -112,7 +112,8 @@ class _CreateNewDistributorDialogState
             controller: _phoneTwoController,
             keyboardType: TextInputType.number,
             currentNode: _phoneTwoNode,
-            hintText: 'Số điện thoại 2'),
+            hintText: 'Số điện thoại 2',
+        validator: (value) => null),
         SizedBox(
           height: ScreenUtil().setHeight(20),
         ),

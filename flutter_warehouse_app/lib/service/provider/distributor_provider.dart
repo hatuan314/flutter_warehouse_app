@@ -4,10 +4,10 @@ import 'package:flutterwarehouseapp/models/models.dart';
 import 'package:flutterwarehouseapp/service/database.dart';
 
 class DistributorProvider {
-  Future<void> insertDistributor(DistributorModel distributorModel) async {
+  Future<void> insertDistributor(DistributorModel distributorModel, String colorKey) async {
     try {
       await db.insert(
-          DatabaseCreator.distributorTable, distributorModel.toMap());
+          DatabaseCreator.distributorTable, distributorModel.toMap(colorKey: colorKey));
     } catch (e) {
       debugPrint('DistributorProvider - Error: {${e.toString()}');
     }

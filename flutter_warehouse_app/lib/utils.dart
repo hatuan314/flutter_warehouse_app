@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterwarehouseapp/models/distributor/represent_color_model.dart';
 import 'package:intl/intl.dart';
 
 class Utils {
@@ -46,44 +47,26 @@ class Utils {
     "Zest"
   ];
 
-  static Map<String, Color> distributorColors = {
-    '0': Colors.blue,
-    '1': Colors.blueAccent,
-    '2': Colors.blueGrey,
-    '3': Colors.lightBlue,
-    '4': Colors.lightBlueAccent,
-    '5': Colors.cyan,
-    '6': Colors.cyanAccent,
-    '7': Colors.green,
-    '8': Colors.greenAccent,
-    '9': Colors.lightGreen,
-    '10': Colors.lightGreen,
-    '11': Colors.lightGreenAccent,
-    '12': Colors.teal,
-    '13': Colors.tealAccent,
-    '14': Colors.indigo,
-    '15': Colors.indigoAccent,
-    '16': Colors.purple,
-    '17': Colors.deepPurple,
-    '18': Colors.deepPurpleAccent,
-    '19': Colors.purple,
-    '20': Colors.purpleAccent,
-    '21': Colors.pinkAccent,
-    '22': Colors.pink,
-    '23': Colors.redAccent,
-    '24': Colors.red,
-    '25': Colors.deepOrange,
-    '26': Colors.deepOrangeAccent,
-    '27': Colors.orange,
-    '28': Colors.orangeAccent,
-    '29': Colors.amber,
-    '30': Colors.amberAccent,
-    '31': Colors.yellow,
-    '32': Colors.yellowAccent,
-    '33': Colors.lime,
-    '34': Colors.limeAccent,
-    '35': Colors.brown,
-    '36': Colors.grey,
-    '37': Colors.black
+  static Map<String, RepresentColorModel> distributorColors = {
+    '0': RepresentColorModel(Colors.blue, Colors.blue[800]),
+    '1': RepresentColorModel(Colors.blueGrey, Colors.blueGrey[800]),
+    '2': RepresentColorModel(Colors.lightBlue, Colors.lightBlue[800]),
+    '3': RepresentColorModel(Colors.cyan, Colors.cyan[800]),
+    '4': RepresentColorModel(Colors.green, Colors.green[800]),
+    '5': RepresentColorModel(Colors.lightGreen, Colors.lightGreen[800]),
+    '6': RepresentColorModel(Colors.teal, Colors.teal[800]),
+    '7': RepresentColorModel(Colors.indigoAccent, Colors.indigo[800]),
+    '9': RepresentColorModel(Colors.deepPurpleAccent, Colors.deepPurple[800]),
+    '10': RepresentColorModel(Colors.purpleAccent, Colors.purple[800]),
+    '11': RepresentColorModel(Colors.pinkAccent, Colors.pink),
+    '12': RepresentColorModel(Colors.redAccent, Colors.red[800]),
+    '13': RepresentColorModel(Colors.deepOrangeAccent, Colors.deepOrange[800]),
+    '14': RepresentColorModel(Colors.orangeAccent, Colors.orange[800]),
+    '15': RepresentColorModel(Colors.amberAccent, Colors.amber[800]),
+    '16': RepresentColorModel(Colors.yellowAccent, Colors.yellow[800]),
+    '17': RepresentColorModel(Colors.limeAccent, Colors.lime[800]),
+    '18': RepresentColorModel(Colors.brown[400], Colors.brown[800]),
+    '19': RepresentColorModel(Colors.grey[400], Colors.grey[800]),
+    '20': RepresentColorModel(Colors.black38, Colors.black87)
   };
 }

@@ -29,7 +29,7 @@ class DistributorsListItemWidget extends StatelessWidget {
                 child: Text('${distributorModel.name}',
                     style: TextStyle(
                         color: Colors.black87,
-                        fontSize: ScreenUtil().setSp(24),
+                        fontSize: ScreenUtil().setSp(22),
                         fontWeight: FontWeight.bold)),
               ),
               Row(
@@ -39,14 +39,20 @@ class DistributorsListItemWidget extends StatelessWidget {
                     flex: 1,
                     child: Container(
                       decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.indigoAccent),
+                          shape: BoxShape.circle,
+                          color: distributorModel.representColorModel != null
+                              ? distributorModel
+                                  .representColorModel.backgroundColor
+                              : Colors.indigoAccent),
                       alignment: Alignment.center,
                       padding: EdgeInsets.all(8),
                       child: Text(
                         '${distributorModel.name[0].toUpperCase()}',
                         style: TextStyle(
                             fontSize: ScreenUtil().setSp(36),
-                            color: Colors.indigo[800],
+                            color: distributorModel.representColorModel != null
+                                ? distributorModel.representColorModel.textColor
+                                : Colors.indigo[800],
                             fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),

@@ -28,6 +28,13 @@ class DistributorSuccessState extends DistributorState {
 
 }
 
+class DistributorNoDataState extends DistributorState {
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+
+}
+
 class DistributorFailureState extends DistributorState {
   final String error;
 

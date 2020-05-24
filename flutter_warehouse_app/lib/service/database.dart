@@ -86,7 +86,8 @@ class DatabaseCreator {
     (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       date INTEGER,
-      distributor_id INTEGER
+      distributor_id INTEGER,
+      total_pricec TEXT
     )''';
 
     await db.execute(sql);

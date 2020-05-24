@@ -65,7 +65,7 @@ class ShowAllDistributorScreen extends StatelessWidget {
         alignment: Alignment.center,
         child: Text('Không có dữ liệu',
             style: TextStyle(
-                color: Colors.black26,
+                color: Colors.white,
                 fontSize: ScreenUtil().setSp(18),
                 fontWeight: FontWeight.w600)),
       );

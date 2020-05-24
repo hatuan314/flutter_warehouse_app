@@ -5,8 +5,8 @@ class DistributorRepository {
   DistributorProvider provider = DistributorProvider();
 
   Future<void> createNewDistributorReposotpry(
-          DistributorModel distributorModel) =>
-      provider.insertDistributor(distributorModel);
+          DistributorModel distributorModel, String colorKey) =>
+      provider.insertDistributor(distributorModel, colorKey);
 
   Future<List<DistributorModel>> getAllDistributors() =>
       provider.selectAllDistributors();
