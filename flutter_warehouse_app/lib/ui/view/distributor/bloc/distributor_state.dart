@@ -20,8 +20,9 @@ class DistributorLoadingState extends DistributorState {
 
 class DistributorSuccessState extends DistributorState {
   final List<DistributorModel> allDistributors;
+  final bool isOpenSearchDistributor;
 
-  DistributorSuccessState(this.allDistributors);
+  DistributorSuccessState(this.allDistributors, this.isOpenSearchDistributor);
   @override
   // TODO: implement props
   List<Object> get props => [this.allDistributors];

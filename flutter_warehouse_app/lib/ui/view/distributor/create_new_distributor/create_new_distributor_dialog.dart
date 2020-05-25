@@ -28,50 +28,17 @@ class _CreateNewDistributorDialogState
   FocusNode _phoneTwoNode = FocusNode();
 
   Widget _buildContent() {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(30)),
-        color: Colors.white,
-      ),
-      margin: EdgeInsets.only(top: ScreenUtil().setHeight(35)),
-      child: Form(
-        key: _textFormKey,
-        child: Padding(
-          padding: EdgeInsets.only(
-              left: ScreenUtil().setHeight(20),
-              top: ScreenUtil().setWidth(20),
-              right: ScreenUtil().setHeight(20),
-              bottom: ScreenUtil().setWidth(8)),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              _headerForm(),
-              _productTextFieldGroup(),
-              _buildButtonGroup()
-            ],
-          ),
-        ),
+    return Form(
+      key: _textFormKey,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          _productTextFieldGroup(),
+          _buildButtonGroup()
+        ],
       ),
     );
   }
-
-  Widget _headerForm() {
-    return Column(
-      children: <Widget>[
-        SizedBox(height: ScreenUtil().setHeight(20)),
-        Text(
-          'Nhà phân phối',
-          style: TextStyle(
-              color: Colors.black87,
-              fontSize: ScreenUtil().setSp(28),
-              fontWeight: FontWeight.bold),
-          textAlign: TextAlign.center,
-        ),
-        SizedBox(height: ScreenUtil().setHeight(25))
-      ],
-    );
-  }
-
   Column _productTextFieldGroup() {
     return Column(
       children: <Widget>[
@@ -211,6 +178,7 @@ class _CreateNewDistributorDialogState
     return BaseDialog(
       iconHeader: FontAwesomeIcons.userPlus,
       body: _buildContent(),
+      title: 'Nhà phân phối',
     );
   }
 }

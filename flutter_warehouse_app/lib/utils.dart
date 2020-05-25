@@ -69,4 +69,12 @@ class Utils {
     '19': RepresentColorModel(Colors.grey[400], Colors.grey[800]),
     '20': RepresentColorModel(Colors.black38, Colors.black87)
   };
+
+  static void dismissKeyboard(BuildContext context) {
+    final FocusScopeNode currentFocus = FocusScope.of(context);
+
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
+  }
 }

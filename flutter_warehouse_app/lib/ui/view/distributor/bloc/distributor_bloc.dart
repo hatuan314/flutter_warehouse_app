@@ -12,6 +12,9 @@ part 'distributor_event.dart';
 class DistributorBloc extends Bloc<DistributorEvent, DistributorState> {
   DistributorRepository repository = DistributorRepository();
   List<DistributorModel> allDistributors = <DistributorModel>[];
+  bool isOpenSearchDistributor = false;
+
+  int currentIndex = 0;
 
   @override
   // TODO: implement initialState
@@ -24,6 +27,10 @@ class DistributorBloc extends Bloc<DistributorEvent, DistributorState> {
       yield* _mapAddDistributorEventToState(event);
     if (event is ShowAllDistributorsEvent)
       yield* _mapShowAllDistributorsEventToState();
+    if (event is BtnFilterDistributorsOptionOnPressEvent)
+      yield* _mapFilterDistributorsEventToState(event.actionIndex);
+    if (event is BtnOpenSearchDistributorOnPressEvent)
+      yield* _mapOpenSearchDistributorEventToState(event.isOpenSearchForm);
   }
 
   Stream<DistributorState> _mapAddDistributorEventToState(
@@ -39,7 +46,8 @@ class DistributorBloc extends Bloc<DistributorEvent, DistributorState> {
           phoneOne: event.phoneOne,
           phoneTwo: event.phoneTwo);
 
-      await repository.createNewDistributorReposotpry(distributorModel, colorKey);
+      await repository.createNewDistributorReposotpry(
+          distributorModel, colorKey);
       yield* _mapShowAllDistributorsEventToState();
     } catch (e) {
       yield DistributorFailureState(e.toString());
@@ -53,9 +61,28 @@ class DistributorBloc extends Bloc<DistributorEvent, DistributorState> {
       if (allDistributors.length == 0)
         yield DistributorNoDataState();
       else
-        yield DistributorSuccessState(allDistributors);
+        yield DistributorSuccessState(allDistributors, isOpenSearchDistributor);
     } catch (e) {
       yield DistributorFailureState(e.toString());
     }
+  }
+
+  Stream<DistributorState> _mapFilterDistributorsEventToState(
+      int actionIndex) async* {
+    yield DistributorLoadingState();
+    if (allDistributors.length == 0)
+      yield DistributorNoDataState();
+    else {
+      if (currentIndex != actionIndex)
+        currentIndex = actionIndex;
+        allDistributors = List.from(allDistributors.reversed);
+      yield DistributorSuccessState(allDistributors, isOpenSearchDistributor);
+    }
+  }
+
+  Stream<DistributorState> _mapOpenSearchDistributorEventToState(bool isOpen) async* {
+    yield DistributorLoadingState();
+    isOpenSearchDistributor = isOpen;
+    yield DistributorSuccessState(allDistributors, isOpenSearchDistributor);
   }
 }

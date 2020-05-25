@@ -23,3 +23,25 @@ class ShowAllDistributorsEvent extends DistributorEvent {
   List<Object> get props => null;
 
 }
+
+class BtnFilterDistributorsOptionOnPressEvent extends DistributorEvent {
+  final int actionIndex;
+
+  BtnFilterDistributorsOptionOnPressEvent(this.actionIndex);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [this.actionIndex];
+
+}
+
+class BtnOpenSearchDistributorOnPressEvent extends DistributorEvent {
+  final bool isOpenSearchForm;
+
+  BtnOpenSearchDistributorOnPressEvent(this.isOpenSearchForm);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [this.isOpenSearchForm];
+
+}

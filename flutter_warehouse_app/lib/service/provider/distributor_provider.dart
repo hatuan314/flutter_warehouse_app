@@ -14,10 +14,11 @@ class DistributorProvider {
   }
 
   Future<List<DistributorModel>> selectAllDistributors() async {
+
     List<DistributorModel> allDistributors = <DistributorModel>[];
     try {
       final List<Map<String, dynamic>> maps =
-          await db.query('${DatabaseCreator.distributorTable}');
+          await db.query('${DatabaseCreator.distributorTable}', orderBy: 'name ASC');
 
       allDistributors = List.generate(maps.length, (index) {
         return DistributorModel.fromJson(maps[index]);
