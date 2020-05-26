@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/screenutil.dart';
 
 class SearchForm extends StatelessWidget {
   TextEditingController controller;
+  ValueChanged<String> onchange;
+
+  SearchForm({this.controller, this.onchange});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,7 @@ class SearchForm extends StatelessWidget {
           enabledBorder: formBoder(color: Colors.black87),
           focusedBorder: formBoder(color: Colors.black87),
         ),
-        onChanged: (value) => debugPrint(value),
+        onChanged: onchange,
       ),
     );
   }

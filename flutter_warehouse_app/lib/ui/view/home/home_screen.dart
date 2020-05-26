@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutterwarehouseapp/ui/view/distributor/show_all_distributors/show_all_distributors_screen.dart';
 
 import 'package:flutterwarehouseapp/ui/view/home/blocs/home_page_bloc.dart';
@@ -23,7 +24,10 @@ class HomeScreen extends StatelessWidget {
   Widget _buildContent(BuildContext context, HomePageState state) {
     return Scaffold(
         backgroundColor: Colors.indigo[800],
-        body: state is HomePageInitialState ? _changeTab(state) : SizedBox(),
+        body: Padding(
+          padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(20)),
+          child: state is HomePageInitialState ? _changeTab(state) : SizedBox(),
+        ),
         bottomNavigationBar: CurvedNavigationBar(
           key: _bottomNavigationKey,
           index: 0,

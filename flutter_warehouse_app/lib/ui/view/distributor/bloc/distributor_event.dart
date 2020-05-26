@@ -45,3 +45,13 @@ class BtnOpenSearchDistributorOnPressEvent extends DistributorEvent {
   List<Object> get props => [this.isOpenSearchForm];
 
 }
+
+class TypeKeyboardSearchDistributorEvent extends DistributorEvent {
+  final String keyword;
+
+  TypeKeyboardSearchDistributorEvent(this.keyword);
+  @override
+  // TODO: implement props
+  List<Object> get props => [this.keyword];
+
+}

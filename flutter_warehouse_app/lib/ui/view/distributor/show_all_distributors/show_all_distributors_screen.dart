@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+
 import 'package:flutterwarehouseapp/models/models.dart';
 import 'package:flutterwarehouseapp/ui/view/distributor/bloc/distributor_bloc.dart';
 import 'package:flutterwarehouseapp/ui/view/distributor/create_new_distributor/create_new_distributor_dialog.dart';
@@ -13,6 +14,8 @@ import 'package:flutterwarehouseapp/utils.dart';
 import 'distributors_list_item_widget.dart';
 
 class ShowAllDistributorScreen extends StatelessWidget {
+  TextEditingController _searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -42,7 +45,11 @@ class ShowAllDistributorScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(
             horizontal: ScreenUtil().setWidth(15),
           ),
-          child: SearchForm(),
+          child: SearchForm(
+            controller: _searchController,
+            onchange: (value) => BlocProvider.of<DistributorBloc>(context)
+                .add(TypeKeyboardSearchDistributorEvent(value)),
+          ),
         )),
       );
     else

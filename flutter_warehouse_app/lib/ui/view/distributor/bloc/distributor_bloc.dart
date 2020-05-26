@@ -31,6 +31,8 @@ class DistributorBloc extends Bloc<DistributorEvent, DistributorState> {
       yield* _mapFilterDistributorsEventToState(event.actionIndex);
     if (event is BtnOpenSearchDistributorOnPressEvent)
       yield* _mapOpenSearchDistributorEventToState(event.isOpenSearchForm);
+    if (event is TypeKeyboardSearchDistributorEvent)
+      yield* _mapSearchDistributorTypeKeyboardEventToState(event.keyword);
   }
 
   Stream<DistributorState> _mapAddDistributorEventToState(
@@ -73,16 +75,37 @@ class DistributorBloc extends Bloc<DistributorEvent, DistributorState> {
     if (allDistributors.length == 0)
       yield DistributorNoDataState();
     else {
-      if (currentIndex != actionIndex)
-        currentIndex = actionIndex;
-        allDistributors = List.from(allDistributors.reversed);
+      if (currentIndex != actionIndex) currentIndex = actionIndex;
+      allDistributors = List.from(allDistributors.reversed);
       yield DistributorSuccessState(allDistributors, isOpenSearchDistributor);
     }
   }
 
-  Stream<DistributorState> _mapOpenSearchDistributorEventToState(bool isOpen) async* {
+  Stream<DistributorState> _mapOpenSearchDistributorEventToState(
+      bool isOpen) async* {
     yield DistributorLoadingState();
     isOpenSearchDistributor = isOpen;
     yield DistributorSuccessState(allDistributors, isOpenSearchDistributor);
+  }
+
+  Stream<DistributorState> _mapSearchDistributorTypeKeyboardEventToState(
+      String keyword) async* {
+    yield DistributorLoadingState();
+    List<DistributorModel> searchDistributorsList = <DistributorModel>[];
+    if (keyword.isEmpty)
+      searchDistributorsList = allDistributors;
+    else {
+      for (int index = 0; index < allDistributors.length; index++) {
+        String phoneTwo = '0';
+        if (allDistributors[index].phoneTwo.isNotEmpty)
+          phoneTwo = allDistributors[index].phoneTwo;
+        String searchItem =
+            '${allDistributors[index].name} ${allDistributors[index].phoneOne} $phoneTwo';
+        if (searchItem.toLowerCase().contains(keyword.toLowerCase()))
+          searchDistributorsList.add(allDistributors[index]);
+      }
+    }
+    yield DistributorSuccessState(
+        searchDistributorsList, isOpenSearchDistributor);
   }
 }
