@@ -1,20 +1,27 @@
 import 'dart:math';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/models/models.dart';
 import 'package:flutterwarehouseapp/service/service.dart';
+import 'package:kiwi/kiwi.dart' as kiwi;
 
 part 'distributor_state.dart';
 
 part 'distributor_event.dart';
 
 class DistributorBloc extends Bloc<DistributorEvent, DistributorState> {
-  DistributorRepository repository = DistributorRepository();
-  List<DistributorModel> allDistributors = <DistributorModel>[];
-  bool isOpenSearchDistributor = false;
+  DistributorRepository _repository = DistributorRepository();
+  List<DistributorModel> _allDistributors = <DistributorModel>[];
+  bool _isOpenSearchDistributor = false;
+  int _currentIndex = 0;
+  var container = kiwi.Container();
 
-  int currentIndex = 0;
+  DistributorBloc() {
+    _allDistributors =
+        container.resolve<ShareService>('share_service').allDistributors;
+  }
 
   @override
   // TODO: implement initialState
@@ -48,7 +55,7 @@ class DistributorBloc extends Bloc<DistributorEvent, DistributorState> {
           phoneOne: event.phoneOne,
           phoneTwo: event.phoneTwo);
 
-      await repository.createNewDistributorReposotpry(
+      await _repository.createNewDistributorReposotpry(
           distributorModel, colorKey);
       yield* _mapShowAllDistributorsEventToState();
     } catch (e) {
@@ -59,11 +66,18 @@ class DistributorBloc extends Bloc<DistributorEvent, DistributorState> {
   Stream<DistributorState> _mapShowAllDistributorsEventToState() async* {
     yield DistributorLoadingState();
     try {
-      allDistributors = await repository.getAllDistributors();
-      if (allDistributors.length == 0)
+      debugPrint(
+          'DistributorBloc - mapShowAllDistributorsEventToState - allDistributors: ${container.resolve<ShareService>('share_service').allDistributors.length}');
+      _allDistributors = await _repository.getAllDistributors();
+      container.resolve<ShareService>('share_service').allDistributors =
+          _allDistributors;
+      debugPrint(
+          'DistributorBloc - mapShowAllDistributorsEventToState - allDistributors: ${container.resolve<ShareService>('share_service').allDistributors.length}');
+      if (_allDistributors.length == 0)
         yield DistributorNoDataState();
       else
-        yield DistributorSuccessState(allDistributors, isOpenSearchDistributor);
+        yield DistributorSuccessState(
+            _allDistributors, _isOpenSearchDistributor);
     } catch (e) {
       yield DistributorFailureState(e.toString());
     }
@@ -72,20 +86,20 @@ class DistributorBloc extends Bloc<DistributorEvent, DistributorState> {
   Stream<DistributorState> _mapFilterDistributorsEventToState(
       int actionIndex) async* {
     yield DistributorLoadingState();
-    if (allDistributors.length == 0)
+    if (_allDistributors.length == 0)
       yield DistributorNoDataState();
     else {
-      if (currentIndex != actionIndex) currentIndex = actionIndex;
-      allDistributors = List.from(allDistributors.reversed);
-      yield DistributorSuccessState(allDistributors, isOpenSearchDistributor);
+      if (_currentIndex != actionIndex) _currentIndex = actionIndex;
+      _allDistributors = List.from(_allDistributors.reversed);
+      yield DistributorSuccessState(_allDistributors, _isOpenSearchDistributor);
     }
   }
 
   Stream<DistributorState> _mapOpenSearchDistributorEventToState(
       bool isOpen) async* {
     yield DistributorLoadingState();
-    isOpenSearchDistributor = isOpen;
-    yield DistributorSuccessState(allDistributors, isOpenSearchDistributor);
+    _isOpenSearchDistributor = isOpen;
+    yield DistributorSuccessState(_allDistributors, _isOpenSearchDistributor);
   }
 
   Stream<DistributorState> _mapSearchDistributorTypeKeyboardEventToState(
@@ -93,19 +107,19 @@ class DistributorBloc extends Bloc<DistributorEvent, DistributorState> {
     yield DistributorLoadingState();
     List<DistributorModel> searchDistributorsList = <DistributorModel>[];
     if (keyword.isEmpty)
-      searchDistributorsList = allDistributors;
+      searchDistributorsList = _allDistributors;
     else {
-      for (int index = 0; index < allDistributors.length; index++) {
+      for (int index = 0; index < _allDistributors.length; index++) {
         String phoneTwo = '0';
-        if (allDistributors[index].phoneTwo.isNotEmpty)
-          phoneTwo = allDistributors[index].phoneTwo;
+        if (_allDistributors[index].phoneTwo.isNotEmpty)
+          phoneTwo = _allDistributors[index].phoneTwo;
         String searchItem =
-            '${allDistributors[index].name} ${allDistributors[index].phoneOne} $phoneTwo';
+            '${_allDistributors[index].name} ${_allDistributors[index].phoneOne} $phoneTwo';
         if (searchItem.toLowerCase().contains(keyword.toLowerCase()))
-          searchDistributorsList.add(allDistributors[index]);
+          searchDistributorsList.add(_allDistributors[index]);
       }
     }
     yield DistributorSuccessState(
-        searchDistributorsList, isOpenSearchDistributor);
+        searchDistributorsList, _isOpenSearchDistributor);
   }
 }

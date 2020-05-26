@@ -1,9 +1,10 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kiwi/kiwi.dart' as kiwi;
+
 import 'package:flutterwarehouseapp/models/models.dart';
 import 'package:flutterwarehouseapp/service/service.dart';
-import 'package:flutterwarehouseapp/service_locator.dart';
+import 'package:flutterwarehouseapp/ui/view/distributor/bloc/distributor_bloc.dart';
 
 part 'create_new_invoice_event.dart';
 
@@ -13,10 +14,19 @@ class CreateNewInvoiceBloc
     extends Bloc<CreateNewInvoiceEvent, CreateNewInvoiceState> {
   var _allProducts = <ProductModel>[];
   var _allProductsOfInvoice = <ProductOfInvoiceModel>[];
+  var _allDistributors = <DistributorModel>[];
   double _totalPrice = 0;
 
-  var _shareService = locator<ShareService>();
+  var _container = kiwi.Container();
+
   var _productRepository = ProductRepository();
+
+  CreateNewInvoiceBloc() {
+    _allProducts =
+        _container.resolve<ShareService>('share_service').allProducts;
+    _allDistributors =
+        _container.resolve<ShareService>('share_service').allDistributors;
+  }
 
   @override
   // TODO: implement initialState
@@ -37,13 +47,12 @@ class CreateNewInvoiceBloc
 
   Stream<CreateNewInvoiceState> _mapGetAllProductsEventToState() async* {
     yield CreateNewInvoiceLoadState();
-    if (_shareService.allProducts.isNotEmpty) {
-      _allProducts.addAll(_shareService.allProducts);
-    } else {
+    if (_allProducts.isEmpty) {
       _allProducts = await _productRepository.fetchProductRepository();
-      debugPrint(
-          '_mapGetAllProductsEventToState - allProduct: ${_allProducts.length}');
+      _container.resolve<ShareService>('share_service').allProducts =
+          _allProducts;
     }
+
     yield CreateNewInvoiceInitialState(_allProductsOfInvoice, _totalPrice);
   }
 

@@ -4,14 +4,13 @@ import 'package:flutter_screenutil/screenutil.dart';
 
 import 'package:flutterwarehouseapp/models/models.dart';
 import 'package:flutterwarehouseapp/ui/view/distributor/bloc/distributor_bloc.dart';
-import 'package:flutterwarehouseapp/ui/view/distributor/create_new_distributor/create_new_distributor_dialog.dart';
-import 'package:flutterwarehouseapp/ui/view/distributor/create_new_distributor/filter_distributors_dialog.dart';
+import 'package:flutterwarehouseapp/ui/view/distributor/show_all_distributors/widgets/widgets.dart';
 import 'package:flutterwarehouseapp/ui/widgets/base_app_bar_widget.dart';
 import 'package:flutterwarehouseapp/ui/widgets/forms/search_form.dart';
 import 'package:flutterwarehouseapp/ui/widgets/widgets.dart';
 import 'package:flutterwarehouseapp/utils.dart';
 
-import 'distributors_list_item_widget.dart';
+import 'widgets/distributors_list_item_widget.dart';
 
 class ShowAllDistributorScreen extends StatelessWidget {
   TextEditingController _searchController = TextEditingController();
