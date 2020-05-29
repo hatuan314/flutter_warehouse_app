@@ -18,6 +18,10 @@ RouteFactory router() {
         providers: [
           BlocProvider(create: (context) => HomePageBloc()),
           BlocProvider(
+            create: (context) => container.resolve<ShowAllInvoicesBloc>()
+              ..add(GetAllInvoicesEvent()),
+          ),
+          BlocProvider(
             create: (context) => container.resolve<DistributorBloc>()
               ..add(ShowAllDistributorsEvent()),
           )

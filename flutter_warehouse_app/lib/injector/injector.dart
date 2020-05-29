@@ -7,8 +7,12 @@ part 'injector.g.dart';
 
 abstract class Injector {
   @Register.factory(ShareService)
+  @Register.factory(DistributorProvider)
+  @Register.factory(InvoiceProvider)
+
   @Register.factory(CreateNewInvoiceBloc)
   @Register.factory(DistributorBloc)
+  @Register.factory(ShowAllInvoicesBloc)
   @Register.singleton(ShareService, name: 'share_service')
   void configure();
 }
