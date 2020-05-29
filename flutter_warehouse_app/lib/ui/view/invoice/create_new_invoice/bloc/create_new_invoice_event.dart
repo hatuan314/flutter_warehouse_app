@@ -24,17 +24,27 @@ class BtnRemoveProductOfInvoiceOnPressEvent extends CreateNewInvoiceEvent {
   List<Object> get props => [this.index];
 }
 
-class btnAddDialogOnPressEvent extends CreateNewInvoiceEvent {
+class BtnAddDialogOnPressEvent extends CreateNewInvoiceEvent {
   final String productName;
   final String amount;
   final String enteredPrice;
   final int index;
 
-  btnAddDialogOnPressEvent(
+  BtnAddDialogOnPressEvent(
       {this.productName, this.amount, this.enteredPrice, this.index});
 
   @override
   // TODO: implement props
   List<Object> get props =>
       [this.productName, this.amount, this.enteredPrice, this.index];
+}
+
+class SelectDistributorOnPressEvent extends CreateNewInvoiceEvent {
+  final int distributorIndex;
+
+  SelectDistributorOnPressEvent(this.distributorIndex);
+  @override
+  // TODO: implement props
+  List<Object> get props => [this.distributorIndex];
+
 }

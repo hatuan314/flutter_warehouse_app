@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
 
@@ -16,12 +17,12 @@ class CreateNewInvoiceBloc
   var _allProductsOfInvoice = <ProductOfInvoiceModel>[];
   var _allDistributors = <DistributorModel>[];
   double _totalPrice = 0;
-
+  String _distributorName = '';
   var _container = kiwi.Container();
-
   var _productRepository = ProductRepository();
+  final DistributorBloc distributorBloc;
 
-  CreateNewInvoiceBloc() {
+  CreateNewInvoiceBloc({this.distributorBloc}) {
     _allProducts =
         _container.resolve<ShareService>('share_service').allProducts;
     _allDistributors =
@@ -37,12 +38,16 @@ class CreateNewInvoiceBloc
       CreateNewInvoiceEvent event) async* {
     // TODO: implement mapEventToState
     if (event is GetAllProductsEvent) yield* _mapGetAllProductsEventToState();
-    if (event is btnAddDialogOnPressEvent) if (event.index != null)
-      yield* _mapUpdateProductEventToState(event);
-    else
-      yield* _mapAddProductEventToState(event);
+    if (event is BtnAddDialogOnPressEvent) {
+      if (event.index != null)
+        yield* _mapUpdateProductEventToState(event);
+      else
+        yield* _mapAddProductEventToState(event);
+    }
     if (event is BtnRemoveProductOfInvoiceOnPressEvent)
       yield* _mapRemoveProductEventToState(event);
+    if (event is SelectDistributorOnPressEvent)
+      yield* _mapSelectDistributorEventToState(event.distributorIndex);
   }
 
   Stream<CreateNewInvoiceState> _mapGetAllProductsEventToState() async* {
@@ -52,12 +57,20 @@ class CreateNewInvoiceBloc
       _container.resolve<ShareService>('share_service').allProducts =
           _allProducts;
     }
+    if (_allDistributors.isEmpty) {
+      distributorBloc.add(ShowAllDistributorsEvent());
+      _allDistributors =
+          _container.resolve<ShareService>('share_service').allDistributors;
+      debugPrint(
+          'CreateNewInvoiceBloc - mapGetAllProductsEventToState - allDistributors: ${_allDistributors.length}');
+    }
 
-    yield CreateNewInvoiceInitialState(_allProductsOfInvoice, _totalPrice);
+    yield CreateNewInvoiceInitialState(_allProductsOfInvoice, _allDistributors,
+        _distributorName, _totalPrice);
   }
 
   Stream<CreateNewInvoiceState> _mapAddProductEventToState(
-      btnAddDialogOnPressEvent event) async* {
+      BtnAddDialogOnPressEvent event) async* {
     yield CreateNewInvoiceLoadState();
     _totalPrice = 0;
     final ProductOfInvoiceModel productOfInvoiceModel = ProductOfInvoiceModel(
@@ -66,7 +79,8 @@ class CreateNewInvoiceBloc
         amount: event.amount);
     _allProductsOfInvoice.add(productOfInvoiceModel);
     _totalPrice = setTotalPrice();
-    yield CreateNewInvoiceInitialState(_allProductsOfInvoice, _totalPrice);
+    yield CreateNewInvoiceInitialState(_allProductsOfInvoice, _allDistributors,
+        _distributorName, _totalPrice);
   }
 
   double setTotalPrice() {
@@ -78,7 +92,7 @@ class CreateNewInvoiceBloc
   }
 
   Stream<CreateNewInvoiceState> _mapUpdateProductEventToState(
-      btnAddDialogOnPressEvent event) async* {
+      BtnAddDialogOnPressEvent event) async* {
     yield CreateNewInvoiceLoadState();
     final ProductOfInvoiceModel productOfInvoiceModel = ProductOfInvoiceModel(
         productName: event.productName,
@@ -86,13 +100,25 @@ class CreateNewInvoiceBloc
         amount: event.amount);
     _allProductsOfInvoice[event.index] = productOfInvoiceModel;
     _totalPrice = setTotalPrice();
-    yield CreateNewInvoiceInitialState(_allProductsOfInvoice, _totalPrice);
+    yield CreateNewInvoiceInitialState(_allProductsOfInvoice, _allDistributors,
+        _distributorName, _totalPrice);
   }
 
   Stream<CreateNewInvoiceState> _mapRemoveProductEventToState(
       BtnRemoveProductOfInvoiceOnPressEvent event) async* {
     yield CreateNewInvoiceLoadState();
     _allProductsOfInvoice.removeAt(event.index);
-    yield CreateNewInvoiceInitialState(_allProductsOfInvoice, _totalPrice);
+    yield CreateNewInvoiceInitialState(_allProductsOfInvoice, _allDistributors,
+        _distributorName, _totalPrice);
+  }
+
+  Stream<CreateNewInvoiceState> _mapSelectDistributorEventToState(
+      int distributorIndex) async* {
+    yield CreateNewInvoiceLoadState();
+    debugPrint('$distributorIndex');
+    _distributorName = _allDistributors[distributorIndex].name;
+    debugPrint('$_distributorName');
+    yield CreateNewInvoiceInitialState(_allProductsOfInvoice, _allDistributors,
+        _distributorName, _totalPrice);
   }
 }

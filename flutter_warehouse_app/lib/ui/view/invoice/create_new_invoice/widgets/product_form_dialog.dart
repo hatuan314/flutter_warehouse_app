@@ -48,14 +48,12 @@ class _ProductFormDialogState extends State<ProductFormDialog> {
         borderRadius: BorderRadius.all(Radius.circular(30)),
         color: Colors.white,
       ),
-      margin: EdgeInsets.only(top: ScreenUtil().setHeight(35)),
       child: Form(
         key: _textFormKey,
         child: Padding(
           padding: EdgeInsets.only(
-              left: ScreenUtil().setHeight(20),
-              top: ScreenUtil().setWidth(20),
-              right: ScreenUtil().setHeight(20),
+              left: ScreenUtil().setHeight(10),
+              right: ScreenUtil().setHeight(10),
               bottom: ScreenUtil().setWidth(8)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -200,7 +198,7 @@ class _ProductFormDialogState extends State<ProductFormDialog> {
       final String productName = _nameController.text.trim();
       final String amount = _amountController.text.trim();
       final String enteredPrice = _priceController.text.trim();
-      widget.createNewInvoiceBloc.add(btnAddDialogOnPressEvent(
+      widget.createNewInvoiceBloc.add(BtnAddDialogOnPressEvent(
           productName: productName,
           amount: amount,
           enteredPrice: enteredPrice,

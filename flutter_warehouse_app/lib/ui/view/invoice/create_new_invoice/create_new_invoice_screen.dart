@@ -8,12 +8,9 @@ import 'package:flutterwarehouseapp/ui/view/invoice/create_new_invoice/widgets/w
 import 'package:flutterwarehouseapp/ui/widgets/widgets.dart';
 import 'package:flutterwarehouseapp/utils.dart';
 
-class CreateNewInvoiceScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => _CreateNewInvoiceScreenState();
-}
+class CreateNewInvoiceScreen extends StatelessWidget {
+  var _createNewInvoiceBloc;
 
-class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
   Widget _mAppBar() {
     return HeaderAppBar(
       title: 'Tạo hoá đơn',
@@ -29,25 +26,27 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
     );
   }
 
-  Widget _mBody(CreateNewInvoiceState state) {
+  Widget _mBody(BuildContext context, CreateNewInvoiceState state) {
     if (state is CreateNewInvoiceInitialState ||
-        state is CreateNewInvoiceLoadState) return _buildContent(state);
-    return _buildDefaut();
+        state is CreateNewInvoiceLoadState)
+      return _buildContent(context, state);
+    return _buildDefaut(context);
   }
 
-  Widget _buildContent(CreateNewInvoiceState state) {
+  Widget _buildContent(BuildContext context, CreateNewInvoiceState state) {
     return Stack(
       children: <Widget>[
-        _buildInvoiceForm(state),
+        _buildInvoiceForm(context, state),
         Visibility(
           visible: state is CreateNewInvoiceLoadState,
-          child: _buildLoading(),
+          child: _buildLoading(context),
         )
       ],
     );
   }
 
-  Container _buildInvoiceForm(CreateNewInvoiceState state) {
+  Container _buildInvoiceForm(
+      BuildContext context, CreateNewInvoiceState state) {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -55,7 +54,7 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
       child: CustomScrollView(
         slivers: <Widget>[
           SliverToBoxAdapter(
-            child: _formHeader(),
+            child: _formHeader(context, state),
           ),
           SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
@@ -135,7 +134,7 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
       child: Row(
         children: <Widget>[
           IconButton(
-            onPressed: () => _btnRemoveOnPress(index),
+            onPressed: () => _btnRemoveOnPress(context, index),
             icon: Icon(
               Icons.remove_circle_outline,
               color: Colors.red,
@@ -143,7 +142,7 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
           ),
           Expanded(
               child: InkWell(
-                  onTap: () => _showProductFormDialog(
+                  onTap: () => _showProductFormDialog(context,
                       productOfInvoiceModel: productOfInvoiceModel,
                       index: index),
                   child: ProductFormWidget(
@@ -153,7 +152,7 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
     );
   }
 
-  Widget _formHeader() {
+  Widget _formHeader(BuildContext context, CreateNewInvoiceState state) {
     return Column(
       children: <Widget>[
         SizedBox(
@@ -181,11 +180,32 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
             Expanded(flex: 15, child: Icon(Icons.group, color: Colors.black87)),
             Expanded(
               flex: 85,
-              child: Text(
-                'Nhà phân phối',
-                style: TextStyle(
-                    color: Colors.black38, fontSize: ScreenUtil().setSp(18)),
-                textAlign: TextAlign.center,
+              child: InkWell(
+                onTap: () => _showDistributorDialog(context, state),
+                child: state is CreateNewInvoiceInitialState
+                    ? (state.distributorName.isEmpty
+                        ? Text(
+                            'Nhà phân phối',
+                            style: TextStyle(
+                                color: Colors.black38,
+                                fontSize: ScreenUtil().setSp(18)),
+                            textAlign: TextAlign.center,
+                          )
+                        : Text(
+                            '${state.distributorName}',
+                            style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: ScreenUtil().setSp(18),
+                            fontWeight: FontWeight.w600),
+                            textAlign: TextAlign.center,
+                          ))
+                    : Text(
+                        'Nhà phân phối',
+                        style: TextStyle(
+                            color: Colors.black38,
+                            fontSize: ScreenUtil().setSp(18)),
+                        textAlign: TextAlign.center,
+                      ),
               ),
             )
           ],
@@ -207,7 +227,7 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
                           fontSize: ScreenUtil().setSp(18),
                           fontWeight: FontWeight.bold)),
                   IconButton(
-                    onPressed: () => _showProductFormDialog(),
+                    onPressed: () => _showProductFormDialog(context),
                     icon: Icon(
                       Icons.add_circle_outline,
                       color: Colors.indigo[800],
@@ -227,7 +247,7 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
     );
   }
 
-  Widget _buildLoading() {
+  Widget _buildLoading(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: double.infinity,
@@ -235,7 +255,7 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
     );
   }
 
-  Widget _buildDefaut() {
+  Widget _buildDefaut(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: double.infinity,
@@ -251,9 +271,8 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
     );
   }
 
-  _showProductFormDialog(
+  _showProductFormDialog(BuildContext context,
       {ProductOfInvoiceModel productOfInvoiceModel, int index}) {
-    var _createNewInvoiceBloc = BlocProvider.of<CreateNewInvoiceBloc>(context);
     showDialog(
         context: context,
         builder: (BuildContext context) => Center(
@@ -264,9 +283,20 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
             )));
   }
 
-  _btnRemoveOnPress(int index) {
+  _btnRemoveOnPress(BuildContext context, int index) {
     BlocProvider.of<CreateNewInvoiceBloc>(context)
         .add(BtnRemoveProductOfInvoiceOnPressEvent(index));
+  }
+
+  void _showDistributorDialog(
+      BuildContext context, CreateNewInvoiceState state) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => ShowAllDistributorDialog(
+            createNewInvoiceBloc: _createNewInvoiceBloc,
+            allDistributors: state is CreateNewInvoiceInitialState
+                ? state.allDistributors
+                : []));
   }
 
   @override
@@ -274,10 +304,11 @@ class _CreateNewInvoiceScreenState extends State<CreateNewInvoiceScreen> {
     // TODO: implement build
     return BlocBuilder<CreateNewInvoiceBloc, CreateNewInvoiceState>(
         builder: (context, state) {
+      _createNewInvoiceBloc = BlocProvider.of<CreateNewInvoiceBloc>(context);
       return Scaffold(
         backgroundColor: Colors.indigo[800],
         appBar: _mAppBar(),
-        body: _mBody(state),
+        body: _mBody(context, state),
       );
     });
   }
