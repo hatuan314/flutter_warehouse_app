@@ -20,9 +20,8 @@ class CreateNewInvoiceBloc
   String _distributorName = '';
   var _container = kiwi.Container();
   var _productRepository = ProductRepository();
-  final DistributorBloc distributorBloc;
 
-  CreateNewInvoiceBloc({this.distributorBloc}) {
+  CreateNewInvoiceBloc() {
     _allProducts =
         _container.resolve<ShareService>('share_service').allProducts;
     _allDistributors =
@@ -58,15 +57,17 @@ class CreateNewInvoiceBloc
           _allProducts;
     }
     if (_allDistributors.isEmpty) {
-      distributorBloc.add(ShowAllDistributorsEvent());
-      _allDistributors =
-          _container.resolve<ShareService>('share_service').allDistributors;
+      _allDistributors = await _container
+          .resolve<DistributorRepository>()
+          .getAllDistributors();
+      _container.resolve<ShareService>('share_service').allDistributors =
+          _allDistributors;
       debugPrint(
           'CreateNewInvoiceBloc - mapGetAllProductsEventToState - allDistributors: ${_allDistributors.length}');
     }
 
-    yield CreateNewInvoiceInitialState(_allProductsOfInvoice, _allDistributors,
-        _distributorName, _totalPrice);
+    yield CreateNewInvoiceInitialState(
+        _allProductsOfInvoice, _allDistributors, _distributorName, _totalPrice);
   }
 
   Stream<CreateNewInvoiceState> _mapAddProductEventToState(
@@ -79,8 +80,8 @@ class CreateNewInvoiceBloc
         amount: event.amount);
     _allProductsOfInvoice.add(productOfInvoiceModel);
     _totalPrice = setTotalPrice();
-    yield CreateNewInvoiceInitialState(_allProductsOfInvoice, _allDistributors,
-        _distributorName, _totalPrice);
+    yield CreateNewInvoiceInitialState(
+        _allProductsOfInvoice, _allDistributors, _distributorName, _totalPrice);
   }
 
   double setTotalPrice() {
@@ -100,16 +101,16 @@ class CreateNewInvoiceBloc
         amount: event.amount);
     _allProductsOfInvoice[event.index] = productOfInvoiceModel;
     _totalPrice = setTotalPrice();
-    yield CreateNewInvoiceInitialState(_allProductsOfInvoice, _allDistributors,
-        _distributorName, _totalPrice);
+    yield CreateNewInvoiceInitialState(
+        _allProductsOfInvoice, _allDistributors, _distributorName, _totalPrice);
   }
 
   Stream<CreateNewInvoiceState> _mapRemoveProductEventToState(
       BtnRemoveProductOfInvoiceOnPressEvent event) async* {
     yield CreateNewInvoiceLoadState();
     _allProductsOfInvoice.removeAt(event.index);
-    yield CreateNewInvoiceInitialState(_allProductsOfInvoice, _allDistributors,
-        _distributorName, _totalPrice);
+    yield CreateNewInvoiceInitialState(
+        _allProductsOfInvoice, _allDistributors, _distributorName, _totalPrice);
   }
 
   Stream<CreateNewInvoiceState> _mapSelectDistributorEventToState(
@@ -118,7 +119,7 @@ class CreateNewInvoiceBloc
     debugPrint('$distributorIndex');
     _distributorName = _allDistributors[distributorIndex].name;
     debugPrint('$_distributorName');
-    yield CreateNewInvoiceInitialState(_allProductsOfInvoice, _allDistributors,
-        _distributorName, _totalPrice);
+    yield CreateNewInvoiceInitialState(
+        _allProductsOfInvoice, _allDistributors, _distributorName, _totalPrice);
   }
 }

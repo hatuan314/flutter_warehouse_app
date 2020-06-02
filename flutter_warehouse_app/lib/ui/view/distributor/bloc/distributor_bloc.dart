@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/models/models.dart';
 import 'package:flutterwarehouseapp/service/service.dart';
@@ -66,16 +65,12 @@ class DistributorBloc extends Bloc<DistributorEvent, DistributorState> {
   Stream<DistributorState> _mapShowAllDistributorsEventToState() async* {
     yield DistributorLoadingState();
     try {
-      debugPrint(
-          'DistributorBloc - mapShowAllDistributorsEventToState - allDistributors: ${container.resolve<ShareService>('share_service').allDistributors.length}');
-      _allDistributors = await _repository.getAllDistributors();
-      container.resolve<ShareService>('share_service').allDistributors =
-          _allDistributors;
-      debugPrint(
-          'DistributorBloc - mapShowAllDistributorsEventToState - allDistributors: ${container.resolve<ShareService>('share_service').allDistributors.length}');
-      if (_allDistributors.length == 0)
-        yield DistributorNoDataState();
-      else
+      if (_allDistributors.isEmpty) {
+        _allDistributors = await _repository.getAllDistributors();
+        container.resolve<ShareService>('share_service').allDistributors =
+            _allDistributors;
+        if (_allDistributors.isEmpty) yield DistributorNoDataState();
+      } else
         yield DistributorSuccessState(
             _allDistributors, _isOpenSearchDistributor);
     } catch (e) {
