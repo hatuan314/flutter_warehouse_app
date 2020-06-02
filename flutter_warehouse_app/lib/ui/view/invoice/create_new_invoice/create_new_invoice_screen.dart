@@ -7,6 +7,7 @@ import 'package:flutterwarehouseapp/ui/view/invoice/create_new_invoice/bloc/crea
 import 'package:flutterwarehouseapp/ui/view/invoice/create_new_invoice/widgets/widgets.dart';
 import 'package:flutterwarehouseapp/ui/widgets/widgets.dart';
 import 'package:flutterwarehouseapp/utils.dart';
+import 'package:flutterwarehouseapp/utils/utils.dart';
 
 class CreateNewInvoiceScreen extends StatelessWidget {
   var _createNewInvoiceBloc;
@@ -163,11 +164,16 @@ class CreateNewInvoiceScreen extends StatelessWidget {
             Expanded(flex: 15, child: Icon(Icons.today, color: Colors.black87)),
             Expanded(
               flex: 85,
-              child: Text(
-                '16/05/2020',
-                style: TextStyle(
-                    color: Colors.black38, fontSize: ScreenUtil().setSp(18)),
-                textAlign: TextAlign.center,
+              child: InkWell(
+                onTap: () => _showDatePicker(context),
+                child: Text(
+                  state is CreateNewInvoiceInitialState
+                      ? '${state.invoiceDate}'
+                      : '${DateConvert.dateTimeConvertToDateFormat(DateTime.now())}',
+                  style: TextStyle(
+                      color: Colors.black38, fontSize: ScreenUtil().setSp(18)),
+                  textAlign: TextAlign.center,
+                ),
               ),
             )
           ],
@@ -196,7 +202,7 @@ class CreateNewInvoiceScreen extends StatelessWidget {
                             style: TextStyle(
                                 color: Colors.black87,
                                 fontSize: ScreenUtil().setSp(18),
-                            fontWeight: FontWeight.w600),
+                                fontWeight: FontWeight.w600),
                             textAlign: TextAlign.center,
                           ))
                     : Text(
@@ -311,5 +317,16 @@ class CreateNewInvoiceScreen extends StatelessWidget {
         body: _mBody(context, state),
       );
     });
+  }
+
+  Future _showDatePicker(BuildContext context) async {
+    DateTime invoiceDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(DateTime.now().year - 5),
+        lastDate: DateTime(DateTime.now().year + 5));
+
+    BlocProvider.of<CreateNewInvoiceBloc>(context)
+        .add(SelectDateInvoiceOnPressEvent(invoiceDate: invoiceDate));
   }
 }

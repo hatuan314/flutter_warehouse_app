@@ -7,13 +7,20 @@ class CreateNewInvoiceInitialState extends CreateNewInvoiceState {
   final List<DistributorModel> allDistributors;
   final String distributorName;
   final double totalPrice;
+  final String invoiceDate;
 
-  CreateNewInvoiceInitialState(
-      this.allProductsOfInvoice, this.allDistributors, this.distributorName, this.totalPrice);
+  CreateNewInvoiceInitialState(this.allProductsOfInvoice, this.allDistributors,
+      this.distributorName, this.totalPrice, this.invoiceDate);
 
   @override
   // TODO: implement props
-  List<Object> get props => [this.allProductsOfInvoice, this.totalPrice];
+  List<Object> get props => [
+        this.allProductsOfInvoice,
+        this.allDistributors,
+        this.distributorName,
+        this.totalPrice,
+        this.invoiceDate
+      ];
 }
 
 class AddProductOfInvoiceState extends CreateNewInvoiceState {
@@ -50,5 +57,10 @@ class SelectDistributorState extends CreateNewInvoiceState {
   @override
   // TODO: implement props
   List<Object> get props => null;
+}
 
+class SelectInvoiceDateState extends CreateNewInvoiceState {
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
 }

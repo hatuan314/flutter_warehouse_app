@@ -43,8 +43,18 @@ class SelectDistributorOnPressEvent extends CreateNewInvoiceEvent {
   final int distributorIndex;
 
   SelectDistributorOnPressEvent(this.distributorIndex);
+
   @override
   // TODO: implement props
   List<Object> get props => [this.distributorIndex];
+}
 
+class SelectDateInvoiceOnPressEvent extends CreateNewInvoiceEvent {
+  final DateTime invoiceDate;
+
+  SelectDateInvoiceOnPressEvent({this.invoiceDate});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [this.invoiceDate];
 }

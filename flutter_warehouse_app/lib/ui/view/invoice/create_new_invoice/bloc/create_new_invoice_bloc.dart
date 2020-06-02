@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterwarehouseapp/utils/utils.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
 
 import 'package:flutterwarehouseapp/models/models.dart';
 import 'package:flutterwarehouseapp/service/service.dart';
-import 'package:flutterwarehouseapp/ui/view/distributor/bloc/distributor_bloc.dart';
 
 part 'create_new_invoice_event.dart';
 
@@ -20,12 +20,15 @@ class CreateNewInvoiceBloc
   String _distributorName = '';
   var _container = kiwi.Container();
   var _productRepository = ProductRepository();
+  int _invoiceDateMilliseconds = 0;
 
   CreateNewInvoiceBloc() {
     _allProducts =
         _container.resolve<ShareService>('share_service').allProducts;
     _allDistributors =
         _container.resolve<ShareService>('share_service').allDistributors;
+    _invoiceDateMilliseconds =
+        DateConvert.dateTimeConvertToMilliseconds(DateTime.now());
   }
 
   @override
@@ -47,6 +50,8 @@ class CreateNewInvoiceBloc
       yield* _mapRemoveProductEventToState(event);
     if (event is SelectDistributorOnPressEvent)
       yield* _mapSelectDistributorEventToState(event.distributorIndex);
+    if (event is SelectDateInvoiceOnPressEvent)
+      yield* _mapSelectInvoiceDateEventToState(event.invoiceDate);
   }
 
   Stream<CreateNewInvoiceState> _mapGetAllProductsEventToState() async* {
@@ -67,7 +72,11 @@ class CreateNewInvoiceBloc
     }
 
     yield CreateNewInvoiceInitialState(
-        _allProductsOfInvoice, _allDistributors, _distributorName, _totalPrice);
+        _allProductsOfInvoice,
+        _allDistributors,
+        _distributorName,
+        _totalPrice,
+        DateConvert.millisecondsConvertToDateFormat(_invoiceDateMilliseconds));
   }
 
   Stream<CreateNewInvoiceState> _mapAddProductEventToState(
@@ -81,7 +90,11 @@ class CreateNewInvoiceBloc
     _allProductsOfInvoice.add(productOfInvoiceModel);
     _totalPrice = setTotalPrice();
     yield CreateNewInvoiceInitialState(
-        _allProductsOfInvoice, _allDistributors, _distributorName, _totalPrice);
+        _allProductsOfInvoice,
+        _allDistributors,
+        _distributorName,
+        _totalPrice,
+        DateConvert.millisecondsConvertToDateFormat(_invoiceDateMilliseconds));
   }
 
   double setTotalPrice() {
@@ -102,7 +115,11 @@ class CreateNewInvoiceBloc
     _allProductsOfInvoice[event.index] = productOfInvoiceModel;
     _totalPrice = setTotalPrice();
     yield CreateNewInvoiceInitialState(
-        _allProductsOfInvoice, _allDistributors, _distributorName, _totalPrice);
+        _allProductsOfInvoice,
+        _allDistributors,
+        _distributorName,
+        _totalPrice,
+        DateConvert.millisecondsConvertToDateFormat(_invoiceDateMilliseconds));
   }
 
   Stream<CreateNewInvoiceState> _mapRemoveProductEventToState(
@@ -110,7 +127,11 @@ class CreateNewInvoiceBloc
     yield CreateNewInvoiceLoadState();
     _allProductsOfInvoice.removeAt(event.index);
     yield CreateNewInvoiceInitialState(
-        _allProductsOfInvoice, _allDistributors, _distributorName, _totalPrice);
+        _allProductsOfInvoice,
+        _allDistributors,
+        _distributorName,
+        _totalPrice,
+        DateConvert.millisecondsConvertToDateFormat(_invoiceDateMilliseconds));
   }
 
   Stream<CreateNewInvoiceState> _mapSelectDistributorEventToState(
@@ -120,6 +141,22 @@ class CreateNewInvoiceBloc
     _distributorName = _allDistributors[distributorIndex].name;
     debugPrint('$_distributorName');
     yield CreateNewInvoiceInitialState(
-        _allProductsOfInvoice, _allDistributors, _distributorName, _totalPrice);
+        _allProductsOfInvoice,
+        _allDistributors,
+        _distributorName,
+        _totalPrice,
+        DateConvert.millisecondsConvertToDateFormat(_invoiceDateMilliseconds));
+  }
+
+  Stream<CreateNewInvoiceState> _mapSelectInvoiceDateEventToState(
+      DateTime date) async* {
+    yield SelectInvoiceDateState();
+    _invoiceDateMilliseconds = DateConvert.dateTimeConvertToMilliseconds(date);
+    yield CreateNewInvoiceInitialState(
+        _allProductsOfInvoice,
+        _allDistributors,
+        _distributorName,
+        _totalPrice,
+        DateConvert.millisecondsConvertToDateFormat(_invoiceDateMilliseconds));
   }
 }
