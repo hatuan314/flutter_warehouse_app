@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
 
-import 'package:flutterwarehouseapp/ui/view/views.dart';
+import 'package:flutterwarehouseapp/src/src.dart';
 
 int currentRoot = 1;
 
