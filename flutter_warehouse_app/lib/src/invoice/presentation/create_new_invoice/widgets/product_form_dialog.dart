@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:flutterwarehouseapp/common/utils/utils.dart';
 
-import 'package:flutterwarehouseapp/src/invoice/data/models/product_of_invoice_model.dart';
+import 'package:flutterwarehouseapp/src/invoice/domain/domain.dart';
 import 'package:flutterwarehouseapp/src/invoice/presentation/create_new_invoice/bloc/create_new_invoice_bloc.dart';
 
 
 class ProductFormDialog extends StatefulWidget {
   final CreateNewInvoiceBloc createNewInvoiceBloc;
-  final ProductOfInvoiceModel productOfInvoiceModel;
+  final ProductOfInvoiceEntity productOfInvoiceEntity;
   final int index;
+  final bool isUpdate;
 
   const ProductFormDialog(
       {Key key,
       this.createNewInvoiceBloc,
-      this.productOfInvoiceModel,
-      this.index})
+      this.productOfInvoiceEntity,
+      this.index, this.isUpdate = false})
       : super(key: key);
 
   @override
@@ -37,10 +39,10 @@ class _ProductFormDialogState extends State<ProductFormDialog> {
 
   initState() {
     super.initState();
-    if (widget.productOfInvoiceModel != null) {
-      _nameController.text = "${widget.productOfInvoiceModel.productName}";
-      _amountController.text = '${widget.productOfInvoiceModel.amount}';
-      _priceController.text = '${widget.productOfInvoiceModel.enteredPrice}';
+    if (widget.productOfInvoiceEntity != null) {
+      _nameController.text = "${widget.productOfInvoiceEntity.productName}";
+      _amountController.text = '${widget.productOfInvoiceEntity.amount}';
+      _priceController.text = '${widget.productOfInvoiceEntity.enteredPrice}';
     }
   }
 
@@ -54,9 +56,7 @@ class _ProductFormDialogState extends State<ProductFormDialog> {
         key: _textFormKey,
         child: Padding(
           padding: EdgeInsets.only(
-              left: ScreenUtil().setHeight(10),
-              right: ScreenUtil().setHeight(10),
-              bottom: ScreenUtil().setWidth(8)),
+              bottom: ScreenUtil().setHeight(8)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -145,7 +145,7 @@ class _ProductFormDialogState extends State<ProductFormDialog> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Icon(FontAwesomeIcons.times,
-                      size: ScreenUtil().setHeight(20), color: Colors.white),
+                      size: ScreenUtil().setHeight(16), color: Colors.white),
                   Text(
                     'Huỷ',
                     style: TextStyle(
@@ -174,11 +174,11 @@ class _ProductFormDialogState extends State<ProductFormDialog> {
                 children: <Widget>[
                   Icon(
                     FontAwesomeIcons.check,
-                    size: ScreenUtil().setHeight(20),
+                    size: ScreenUtil().setHeight(16),
                     color: Colors.white,
                   ),
                   Text(
-                    'Thêm',
+                    widget.isUpdate ? 'Sửa' : 'Thêm',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: ScreenUtil().setSp(18),

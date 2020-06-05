@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutterwarehouseapp/src/invoice/data/models/product_of_invoice_model.dart';
+
 import 'package:flutterwarehouseapp/common/utils/utils.dart';
+import 'package:flutterwarehouseapp/src/invoice/domain/domain.dart';
 
 class ProductFormWidget extends StatelessWidget {
-  final ProductOfInvoiceModel productOfInvoiceModel;
+  final ProductOfInvoiceEntity productOfInvoiceEntity;
 
   String _name = '';
   String _amount = '0';
   String _price = '0';
 
-  ProductFormWidget({Key key, this.productOfInvoiceModel}) : super(key: key);
+  ProductFormWidget({Key key, this.productOfInvoiceEntity}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    if (productOfInvoiceModel != null) {
-      _name = productOfInvoiceModel.productName;
-      _amount = productOfInvoiceModel.amount;
+    if (productOfInvoiceEntity != null) {
+      _name = productOfInvoiceEntity.productName;
+      _amount = productOfInvoiceEntity.amount;
       _price =
-          formatMoney(double.parse(productOfInvoiceModel.enteredPrice));
+          formatMoney(double.parse(productOfInvoiceEntity.enteredPrice));
     }
 
     return Row(

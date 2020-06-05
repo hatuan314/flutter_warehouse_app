@@ -122,7 +122,7 @@ class CreateNewInvoiceScreen extends StatelessWidget {
   }
 
   Widget _productItemForm(BuildContext context,
-      ProductOfInvoiceModel productOfInvoiceModel, int index) {
+      ProductOfInvoiceEntity productOfInvoiceEntity, int index) {
     return Padding(
       padding: EdgeInsets.only(
           right: ScreenUtil().setWidth(12),
@@ -140,10 +140,10 @@ class CreateNewInvoiceScreen extends StatelessWidget {
           Expanded(
               child: InkWell(
                   onTap: () => _showProductFormDialog(context,
-                      productOfInvoiceModel: productOfInvoiceModel,
+                      productOfInvoiceEntity: productOfInvoiceEntity,
                       index: index),
                   child: ProductFormWidget(
-                      productOfInvoiceModel: productOfInvoiceModel))),
+                      productOfInvoiceEntity: productOfInvoiceEntity))),
         ],
       ),
     );
@@ -274,14 +274,15 @@ class CreateNewInvoiceScreen extends StatelessWidget {
   }
 
   _showProductFormDialog(BuildContext context,
-      {ProductOfInvoiceModel productOfInvoiceModel, int index}) {
+      {ProductOfInvoiceEntity productOfInvoiceEntity, int index}) {
     showDialog(
         context: context,
         builder: (BuildContext context) => Center(
                 child: ProductFormDialog(
               createNewInvoiceBloc: _createNewInvoiceBloc,
-              productOfInvoiceModel: productOfInvoiceModel,
+              productOfInvoiceEntity: productOfInvoiceEntity,
               index: index,
+              isUpdate: true,
             )));
   }
 
