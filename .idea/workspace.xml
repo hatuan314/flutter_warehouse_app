@@ -2,189 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="737fe371-5167-44fa-b452-04611fb1b171" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/img/2.0x/app_logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/img/3.0x/app_logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/img/app_logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/.last_build_id" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/common/constants/app_constants.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/common/constants/image_constants.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/common/constants/route_constants.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/common/extensions/screen_utils_extensions.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/common/locator/service_locator.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/common/utils/screen_utils.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/login/login_routes.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/login/splash/splash_constants.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/login/splash/splash_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/themes/theme_color.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/themes/theme_data.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/themes/theme_icon.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/themes/theme_text.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/android/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/android/app/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/android/app/src/debug/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/android/app/src/main/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/android/app/src/main/java/vn/com/hatuan314/flutterwarehouseapp/MainActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/android/app/src/main/res/drawable/launch_background.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/android/app/src/main/res/values/styles.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/android/app/src/profile/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/android/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/android/gradle.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/android/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/assets/fonts/Quicksand-Bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/assets/fonts/Quicksand-Light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/assets/fonts/Quicksand-Medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/assets/fonts/Quicksand-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/assets/fonts/Quicksand-SemiBold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Flutter/AppFrameworkInfo.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Flutter/Debug.xcconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Flutter/Release.xcconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Podfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Podfile.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/AppDelegate.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Base.lproj/LaunchScreen.storyboard" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Base.lproj/Main.storyboard" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/ios/Runner/Runner-Bridging-Header.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/app.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/blocs/simple_bloc_delegate.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/constants/constants.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/constants/distributor_color.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/injector/injector.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/injector/injector.g.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/utils/date_convert_utils.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/utils/format_money.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/utils/ui/base_app_bar_widget.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/utils/ui/base_dialog.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/utils/ui/forms/forms.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/utils/ui/forms/my_text_form.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/utils/ui/forms/product_form_widget.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/utils/ui/forms/search_form.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/utils/ui/loading/dot_type.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/utils/ui/loading/loading_view.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/utils/ui/splash/splash_view.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/utils/ui/ui_utils.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/utils/ui/widget_util.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/common/utils/utils.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/data/data.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/data/database.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/data/share_service.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/main.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/models/category.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/models/distributor.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/models/invoice.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/models/product.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/models/register.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/models/statistic.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/route.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/data/data.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/data/distributor_provider.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/data/distributor_repository_impl.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/data/models/distributor_model.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/data/models/models.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/distributor.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/domain/distributor_repository.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/domain/distributor_use_case.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/domain/domain.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/domain/entities/distributor_entity.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/domain/entities/entities.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/presentation/presensation.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/presentation/show_all_distributors/bloc/distributor_bloc.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/presentation/show_all_distributors/bloc/distributor_event.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/presentation/show_all_distributors/bloc/distributor_state.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/presentation/show_all_distributors/ui/show_all_distributors_screen.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/presentation/show_all_distributors/ui/widgets/create_new_distributor_dialog.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/presentation/show_all_distributors/ui/widgets/distributors_list_item_widget.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/presentation/show_all_distributors/ui/widgets/filter_distributors_dialog.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/distributor/presentation/show_all_distributors/ui/widgets/widgets.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/home/blocs/home_page_bloc.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/home/blocs/home_page_event.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/home/blocs/home_page_state.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/home/home.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/home/home_screen.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/data/data.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/data/invoice_provider.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/data/invoice_repository_impl.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/data/models/invoice_model.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/data/models/models.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/data/models/product_of_invoice_model.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/domain/domain.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/domain/entities/entities.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/domain/entities/invoice_entity.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/domain/entities/product_of_invoice_entity.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/domain/invoice_repository.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/domain/invoice_use_case.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/invoice.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/presentation/create_new_invoice/bloc/create_new_invoice_bloc.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/presentation/create_new_invoice/bloc/create_new_invoice_event.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/presentation/create_new_invoice/bloc/create_new_invoice_state.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/presentation/create_new_invoice/create_new_invoice.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/presentation/create_new_invoice/create_new_invoice_screen.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/presentation/create_new_invoice/widgets/header_app_bar.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/presentation/create_new_invoice/widgets/product_form_dialog.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/presentation/create_new_invoice/widgets/show_all_distributors_dialog.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/presentation/create_new_invoice/widgets/widgets.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/presentation/presensation.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/presentation/show_all_invoices/bloc/show_all_invoices_bloc.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/presentation/show_all_invoices/bloc/show_all_invoices_event.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/presentation/show_all_invoices/bloc/show_all_invoices_state.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/presentation/show_all_invoices/show_all_invoices.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/presentation/show_all_invoices/show_all_invoices_screen.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/presentation/show_all_invoices/widgets/invoice_list_item_widget.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/invoice/presentation/show_all_invoices/widgets/widgets.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/product/data/data.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/product/data/models/models.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/product/data/models/product_model.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/product/data/product_provider.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/product/data/product_repository_impl.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/product/domain/domain.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/product/domain/entities/entities.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/product/domain/entities/product_entity.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/product/domain/product_repository.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/product/domain/product_use_case.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/product/presentation/presensation.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/product/presentation/show_all_products/show_all_products_screen.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/product/product.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/lib/src/src.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/pubspec.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_warehouse_app/test/widget_test.dart" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/img/login-background.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/common/constants/layout_constants.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/login/login/login_constants.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/login/login/login_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/login/login/widgets/login_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/login/login_routes.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/login/splash/blocs/splash_bloc.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/login/splash/blocs/splash_event.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/login/splash/blocs/splash_state.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/widgets/button/button_constants.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/widgets/button/button_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/widgets/text_form/text_form_constants.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/widgets/text_form/text_form_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/flutter_warehouse_app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/flutter_warehouse_app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/constants/image_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/constants/image_constants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/locator/service_locator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/locator/service_locator.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/login/login_routes.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/login/splash/splash_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/login/splash/splash_constants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/login/splash/splash_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/login/splash/splash_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/themes/theme_color.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/themes/theme_color.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/themes/theme_data.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/themes/theme_data.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/themes/theme_text.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/themes/theme_text.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,10 +49,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Dart" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="flutter.settings" />
+    <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -242,25 +85,25 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1238" height="306" key="GridCell.Tab.0.bottom" timestamp="1611680100336">
+    <state width="1238" height="306" key="GridCell.Tab.0.bottom" timestamp="1613498997723">
       <screen x="0" y="25" width="1280" height="711" />
     </state>
-    <state width="1238" height="306" key="GridCell.Tab.0.bottom/0.25.1280.711@0.25.1280.711" timestamp="1611680100336" />
-    <state width="1238" height="306" key="GridCell.Tab.0.center" timestamp="1611680100333">
+    <state width="1238" height="306" key="GridCell.Tab.0.bottom/0.25.1280.711@0.25.1280.711" timestamp="1613498997723" />
+    <state width="1238" height="306" key="GridCell.Tab.0.center" timestamp="1613498997718">
       <screen x="0" y="25" width="1280" height="711" />
     </state>
-    <state width="1238" height="306" key="GridCell.Tab.0.center/0.25.1280.711@0.25.1280.711" timestamp="1611680100333" />
-    <state width="1238" height="306" key="GridCell.Tab.0.left" timestamp="1611680100332">
+    <state width="1238" height="306" key="GridCell.Tab.0.center/0.25.1280.711@0.25.1280.711" timestamp="1613498997718" />
+    <state width="1238" height="306" key="GridCell.Tab.0.left" timestamp="1613498997716">
       <screen x="0" y="25" width="1280" height="711" />
     </state>
-    <state width="1238" height="306" key="GridCell.Tab.0.left/0.25.1280.711@0.25.1280.711" timestamp="1611680100332" />
-    <state width="1238" height="306" key="GridCell.Tab.0.right" timestamp="1611680100335">
+    <state width="1238" height="306" key="GridCell.Tab.0.left/0.25.1280.711@0.25.1280.711" timestamp="1613498997716" />
+    <state width="1238" height="306" key="GridCell.Tab.0.right" timestamp="1613498997720">
       <screen x="0" y="25" width="1280" height="711" />
     </state>
-    <state width="1238" height="306" key="GridCell.Tab.0.right/0.25.1280.711@0.25.1280.711" timestamp="1611680100335" />
-    <state x="141" y="25" width="997" height="711" key="SettingsEditor" timestamp="1611675034167">
+    <state width="1238" height="306" key="GridCell.Tab.0.right/0.25.1280.711@0.25.1280.711" timestamp="1613498997720" />
+    <state x="141" y="25" width="997" height="711" key="SettingsEditor" timestamp="1613493679429">
       <screen x="0" y="25" width="1280" height="711" />
     </state>
-    <state x="141" y="25" width="997" height="711" key="SettingsEditor/0.25.1280.711@0.25.1280.711" timestamp="1611675034167" />
+    <state x="141" y="25" width="997" height="711" key="SettingsEditor/0.25.1280.711@0.25.1280.711" timestamp="1613493679429" />
   </component>
 </project>

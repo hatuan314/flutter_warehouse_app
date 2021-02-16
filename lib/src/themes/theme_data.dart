@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 import 'package:flutterwarehouseapp/common/utils/screen_utils.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_icon.dart';
@@ -15,7 +16,7 @@ ThemeData appTheme(BuildContext context) {
         //update and enhance in screens where necessary
         buttonColor: AppColor.primaryColor,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0),
+          borderRadius: BorderRadius.circular(LayoutConstants.roundedRadius),
         ),
       ),
       scaffoldBackgroundColor: AppColor.backgroundColor,

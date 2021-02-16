@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterwarehouseapp/src/login/login_routes.dart';
+import 'package:flutterwarehouseapp/src/presentation/login/login_routes.dart';
 
 class Routes {
   static Map<String, WidgetBuilder> _getCombinedRoutes() => {
