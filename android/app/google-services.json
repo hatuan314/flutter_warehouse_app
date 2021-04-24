@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "359144355524",
+    "project_id": "pikata-project",
+    "storage_bucket": "pikata-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359144355524:android:c6eb8ebc3f152b1bb03b91",
+        "android_client_info": {
+          "package_name": "vn.com.hatuan314.flutterwarehouseapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "359144355524-nepgq927140r7evpb67j27e5unsg5c4d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vn.com.hatuan314.flutterwarehouseapp",
+            "certificate_hash": "c5d59a392225359fc88888e1f645b95d9403ca51"
+          }
+        },
+        {
+          "client_id": "359144355524-gjsi0fbq77d71r6i3dudc89sh52d4uga.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCquJC_E2549kK6m-YrlQFpaVAlCjEyxO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "359144355524-gjsi0fbq77d71r6i3dudc89sh52d4uga.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "359144355524-2hhahpaqn1rricia5q45cenrvqd6a26g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "vn.com.hatuan314.flutterwarehouseapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

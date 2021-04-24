@@ -9,4 +9,6 @@ class AppColor {
 
   static const Color white = Colors.white;
   static const Color grey = Colors.grey;
+  static Color black25 = Colors.black.withAlpha(64);
+  static const Color red = Colors.red;
 }

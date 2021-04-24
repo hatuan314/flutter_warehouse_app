@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/constants/image_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
-import 'package:flutterwarehouseapp/src/presentation/login/login/login_constants.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 import 'package:flutterwarehouseapp/src/widgets/button/button_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/text_form/text_form_widget.dart';
+
+import 'login_constants.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController phoneController = TextEditingController();
@@ -33,8 +34,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     Text(
                       LoginConstants.loginTxt,
-                      style: ThemeText.getDefaultTextTheme()
-                          .headline6
+                      style: ThemeText.headline6
                           .copyWith(fontWeight: FontWeight.w900),
                     ),
                     SizedBox(

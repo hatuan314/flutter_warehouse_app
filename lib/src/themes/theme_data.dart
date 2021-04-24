@@ -6,12 +6,10 @@ import 'package:flutterwarehouseapp/src/themes/theme_icon.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 
 ThemeData appTheme(BuildContext context) {
-//  ScreenUtil.init(context, width: 375, height: 812);
   ScreenUtil.init(context);
   return ThemeData(
       fontFamily: 'QS',
       primaryColor: AppColor.primaryColor,
-      textTheme: ThemeText.getDefaultTextTheme(),
       buttonTheme: ButtonThemeData(
         //update and enhance in screens where necessary
         buttonColor: AppColor.primaryColor,

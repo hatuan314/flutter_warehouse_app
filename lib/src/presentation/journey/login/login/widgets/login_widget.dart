@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterwarehouseapp/src/login/login/login_constants.dart';
+
+import 'package:flutterwarehouseapp/src/presentation/journey/login/login/login_constants.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 
 class LoginWidget extends StatelessWidget {
@@ -9,7 +10,7 @@ class LoginWidget extends StatelessWidget {
       children: [
         Text(
           LoginConstants.loginTxt,
-          style: ThemeText.getDefaultTextTheme().headline6,
+          style: ThemeText.headline6,
         ),
 
       ],

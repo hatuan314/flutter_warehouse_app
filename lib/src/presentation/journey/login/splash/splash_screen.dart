@@ -3,11 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/common/constants/app_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/image_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
-import 'package:flutterwarehouseapp/src/presentation/login/splash/blocs/splash_bloc.dart';
-import 'package:flutterwarehouseapp/src/presentation/login/splash/blocs/splash_state.dart';
-import 'package:flutterwarehouseapp/src/presentation/login/splash/splash_constants.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/login/splash/blocs/splash_bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/login/splash/blocs/splash_state.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
+
+import 'splash_constants.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
@@ -47,7 +48,7 @@ class SplashScreen extends StatelessWidget {
               ),
               Text(
                 AppConstant.appName,
-                style: ThemeText.getDefaultTextTheme().headline3,
+                style: ThemeText.headline3,
               )
             ],
           ),
@@ -56,7 +57,7 @@ class SplashScreen extends StatelessWidget {
           ),
           Text(
             SplashConstants.content,
-            style: ThemeText.getDefaultTextTheme().bodyText2,
+            style: ThemeText.body2,
           )
         ],
       ),

@@ -18,7 +18,7 @@ class ButtonWidget extends RaisedButton {
               alignment: Alignment.center,
               child: Text(
                 title,
-                style: ThemeText.getDefaultTextTheme().button,
+                style: ThemeText.button,
               ),
             ),
           ),

@@ -9,14 +9,14 @@ class TextFormWidget extends TextFormField {
     String errorText,
   }) : super(
           controller: controller,
-          style: ThemeText.getDefaultTextTheme().bodyText1,
+          style: ThemeText.body1,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: ThemeText.getDefaultTextTheme().bodyText1.copyWith(
+            hintStyle: ThemeText.body1.copyWith(
                   color: AppColor.hintColor,
                 ),
             errorText: errorText,
-            errorStyle: ThemeText.getDefaultTextTheme().bodyText1.copyWith(
+            errorStyle: ThemeText.body1.copyWith(
                   color: AppColor.errorColor,
                 ),
           ),

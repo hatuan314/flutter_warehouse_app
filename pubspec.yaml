@@ -28,9 +28,11 @@ dependencies:
   equatable: ^1.1.1
   flutter_screenutil: ^1.0.2
   intl: ^0.16.1
-  toast: ^0.1.5
+  flutter_svg:
+  fluttertoast:
   # Biometric secure
   local_auth: ^0.6.1
+  firebase_auth:
 
 dev_dependencies:
   flutter_test:
