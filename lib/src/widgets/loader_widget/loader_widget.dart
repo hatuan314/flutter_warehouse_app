@@ -19,54 +19,59 @@ class LoadingContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final _queryData = MediaQuery.of(context);
 
-    return Stack(
-      children: <Widget>[
-        child,
-        BlocBuilder<LoaderBloc, LoaderState>(
-          builder: (context, state) {
-            return Visibility(
-                visible: state.loading,
-                child: !state.isTopLoading
-                    ? Container(
-                        key:
-                            const ValueKey(LoaderConstants.loaderBackgroundKey),
-                        height: _queryData.size.height,
-                        width: _queryData.size.width,
-                        color: Colors.black.withOpacity(
-                            LoaderConstants.loaderBackgroundOpacity),
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                                AppColor.primaryColor),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: Stack(
+        children: <Widget>[
+          child,
+          BlocBuilder<LoaderBloc, LoaderState>(
+            builder: (context, state) {
+              return Visibility(
+                  visible: state.loading,
+                  child: !state.isTopLoading
+                      ? Container(
+                          key: const ValueKey(
+                              LoaderConstants.loaderBackgroundKey),
+                          height: _queryData.size.height,
+                          width: _queryData.size.width,
+                          color: Colors.black.withOpacity(
+                              LoaderConstants.loaderBackgroundOpacity),
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  AppColor.primaryColor),
+                            ),
                           ),
-                        ),
-                      )
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  top: LoaderConstants.loaderPaddingTop),
-                              child: Container(
-                                alignment: Alignment.topCenter,
-                                color: Colors.transparent,
-                                height: DeviceDimension.getProportionalWidth(
-                                    _queryData.size.width,
-                                    LoaderConstants.loaderWidth),
-                                width: DeviceDimension.getProportionalWidth(
-                                    _queryData.size.height,
-                                    LoaderConstants.loaderHeight),
-                                child: const Image(
-                                    key: ValueKey(
-                                        LoaderConstants.loaderTopImageKey),
-                                    image: AssetImage(
-                                        LoaderConstants.loaderImage)),
-                              ))
-                        ],
-                      ));
-          },
-        ),
-      ],
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    top: LoaderConstants.loaderPaddingTop),
+                                child: Container(
+                                  alignment: Alignment.topCenter,
+                                  color: Colors.transparent,
+                                  height: DeviceDimension.getProportionalWidth(
+                                      _queryData.size.width,
+                                      LoaderConstants.loaderWidth),
+                                  width: DeviceDimension.getProportionalWidth(
+                                      _queryData.size.height,
+                                      LoaderConstants.loaderHeight),
+                                  child: const Image(
+                                      key: ValueKey(
+                                          LoaderConstants.loaderTopImageKey),
+                                      image: AssetImage(
+                                          LoaderConstants.loaderImage)),
+                                ))
+                          ],
+                        ));
+            },
+          ),
+        ],
+      ),
     );
   }
 }

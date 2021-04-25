@@ -2,56 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="737fe371-5167-44fa-b452-04611fb1b171" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/android/app/google-services.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/CP Warehouse/Info.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/CP Warehouse/NotificationService.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Runner.entitlements" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/common/utils/device_dimension_utils.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/loader_bloc/bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/loader_bloc/loader_bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/loader_bloc/loader_event.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/loader_bloc/loader_state.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/snackbar_bloc/bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/snackbar_bloc/snackbar_bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/snackbar_bloc/snackbar_event.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/snackbar_bloc/snackbar_state.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/snackbar_bloc/snackbar_type.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/widgets/loader_widget/loader_constants.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/widgets/loader_widget/loader_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/common/constants/string_constants.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/common/utils/validator_utils.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/login/blocs/blocs.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/login/blocs/login_bloc.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/login/blocs/login_event.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/login/blocs/login_state.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/view_state.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/flutter_warehouse_app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/flutter_warehouse_app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Flutter/.last_build_id" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/.last_build_id" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Podfile" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/AppDelegate.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/AppDelegate.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/locator/service_locator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/locator/service_locator.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/route.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/route.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/blocs/simple_bloc_delegate.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/simple_bloc_delegate.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/login/login/login_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/login/login_constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/login/login/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/login/login_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/login/login/widgets/login_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/login/widgets/login_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/login/login_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/login_routes.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/login/splash/blocs/splash_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/splash/blocs/splash_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/login/splash/blocs/splash_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/splash/blocs/splash_event.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/login/splash/blocs/splash_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/splash/blocs/splash_state.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/login/splash/splash_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/splash/splash_constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/login/splash/splash_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/splash/splash_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/login/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/login/login_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/splash/splash_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/splash/splash_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/themes/theme_color.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/themes/theme_color.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/themes/theme_data.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/themes/theme_data.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/themes/theme_text.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/themes/theme_text.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/widgets/button/button_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/widgets/button/button_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/widgets/loader_widget/loader_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/widgets/loader_widget/loader_widget.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/widgets/text_form/text_form_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/widgets/text_form/text_form_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,13 +75,15 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -137,7 +105,8 @@
       <option name="presentableId" value="Default" />
       <updated>1611674838200</updated>
       <workItem from="1619256215352" duration="1415000" />
-      <workItem from="1619272028804" duration="3671000" />
+      <workItem from="1619272028804" duration="5497000" />
+      <workItem from="1619362372123" duration="1407000" />
     </task>
     <servers />
   </component>

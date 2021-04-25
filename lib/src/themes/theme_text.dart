@@ -65,7 +65,7 @@ class ThemeText {
 
   static TextStyle button = TextStyle(
     fontSize: 18.sp,
-    color: AppColor.textColor,
+    color: AppColor.white,
     fontWeight: FontWeight.w600,
   );
 

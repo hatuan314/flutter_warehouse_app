@@ -16,10 +16,9 @@ class SplashScreen extends StatelessWidget {
     return BlocConsumer<SplashBloc, SplashState>(
       listener: (context, state) {
         if (state is SplashCompleteState)
-          Navigator.pushNamedAndRemoveUntil(
+          Navigator.pushReplacementNamed(
             context,
             RouteList.login,
-            (route) => false,
           );
       },
       builder: (context, state) {
@@ -48,7 +47,8 @@ class SplashScreen extends StatelessWidget {
               ),
               Text(
                 AppConstant.appName,
-                style: ThemeText.headline3,
+                style:
+                    ThemeText.headline3.copyWith(fontWeight: FontWeight.w500),
               )
             ],
           ),

@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/constants/image_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
+import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 import 'package:flutterwarehouseapp/src/widgets/button/button_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/text_form/text_form_widget.dart';
@@ -15,7 +18,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
             ImageConstants.loginBackground,
@@ -43,6 +46,9 @@ class LoginScreen extends StatelessWidget {
                     TextFormWidget(
                       controller: phoneController,
                       hintText: LoginConstants.hintPhoneTxt,
+                      validator: (value) {
+                        return ValidatorUtils.validatePhoneNumber(value);
+                      },
                     ),
                     SizedBox(
                       height: LayoutConstants.paddingVertical20,
@@ -61,5 +67,9 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void _onLogin(BuildContext context) {}
+  void _onLogin(BuildContext context) {
+    if (formKey.currentState.validate()) {
+      log('On Login');
+    }
+  }
 }
