@@ -26,13 +26,17 @@ dependencies:
   get_it: ^3.1.0
   flutter_bloc: ^4.0.0
   equatable: ^1.1.1
-  flutter_screenutil: ^1.0.2
-  intl: ^0.16.1
-  flutter_svg:
+#  flutter_screenutil: ^1.0.2
+#  intl: ^0.16.1
+#  flutter_svg: ^0.19.1
   fluttertoast:
   # Biometric secure
   local_auth: ^0.6.1
-  firebase_auth:
+  firebase_storage: ^5.0.1
+  firebase_core: ^0.5.1
+  firebase_auth: ^0.18.2
+  cloud_firestore: ^0.14.2
+  firebase_database: ^4.4.0
 
 dev_dependencies:
   flutter_test:

@@ -1,8 +1,13 @@
 # This is a generated file; do not edit or check into version control.
-firebase_auth=/Users/tuanha/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-0.20.1/
-firebase_auth_web=/Users/tuanha/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-0.3.3/
-firebase_core=/Users/tuanha/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.7.0/
-firebase_core_web=/Users/tuanha/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-0.2.1+3/
+cloud_firestore=/Users/tuanha/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-0.14.4/
+cloud_firestore_web=/Users/tuanha/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_web-0.2.1+2/
+firebase_auth=/Users/tuanha/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-0.18.4+1/
+firebase_auth_web=/Users/tuanha/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-0.3.2+3/
+firebase_core=/Users/tuanha/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.5.3/
+firebase_core_web=/Users/tuanha/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-0.2.1+1/
+firebase_database=/Users/tuanha/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_database-4.4.0/
+firebase_storage=/Users/tuanha/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_storage-5.2.0/
+firebase_storage_web=/Users/tuanha/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_storage_web-0.1.1+1/
 flutter_plugin_android_lifecycle=/Users/tuanha/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.11/
 fluttertoast=/Users/tuanha/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-7.1.8/
 local_auth=/Users/tuanha/flutter/.pub-cache/hosted/pub.dartlang.org/local_auth-0.6.3+4/
