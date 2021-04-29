@@ -7,10 +7,12 @@ import 'package:flutterwarehouseapp/common/utils/screen_utils.dart';
 import 'package:flutterwarehouseapp/route.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_data.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 import 'package:flutterwarehouseapp/src/widgets/loader_widget/loader_widget.dart';
+import 'package:flutterwarehouseapp/src/widgets/snackbar_widget/snackbar_widget.dart';
 
 class MyApp extends StatelessWidget {
   final GlobalKey<NavigatorState> _navigator = GlobalKey<NavigatorState>();
@@ -34,8 +36,15 @@ class MyApp extends StatelessWidget {
           Fluttertoast.showToast(
               msg: state.title,
               toastLength: Toast.LENGTH_SHORT,
-              backgroundColor: AppColor.primaryColor,
+              backgroundColor: state.type == SnackBarType.success
+                  ? AppColor.primaryColor
+                  : AppColor.red,
               textColor: AppColor.white);
+          // TopSnackBar(
+          //   title: state.title,
+          //   type: state.type,
+          //   key: state.key,
+          // ).showWithNavigator(_navigator.currentState, context);
         }
       },
       child: widget,

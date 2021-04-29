@@ -60,11 +60,12 @@ class LoadingContainer extends StatelessWidget {
                                   width: DeviceDimension.getProportionalWidth(
                                       _queryData.size.height,
                                       LoaderConstants.loaderHeight),
-                                  child: const Image(
-                                      key: ValueKey(
-                                          LoaderConstants.loaderTopImageKey),
-                                      image: AssetImage(
-                                          LoaderConstants.loaderImage)),
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          AppColor.primaryColor),
+                                    ),
+                                  ),
                                 ))
                           ],
                         ));

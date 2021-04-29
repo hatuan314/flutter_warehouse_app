@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/login/login/blocs/blocs.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/login/login_screen.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/splash/blocs/splash_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/splash/blocs/splash_event.dart';
@@ -14,7 +15,8 @@ class LoginRoutes {
       RouteList.welcome: (context) => BlocProvider(
           create: (_) => locator<SplashBloc>()..add(InitialSplashEvent()),
           child: SplashScreen()),
-      RouteList.login: (context) => LoginScreen(),
+      RouteList.login: (context) => BlocProvider(
+          create: (_) => locator<LoginBloc>(), child: LoginScreen()),
     };
   }
 }

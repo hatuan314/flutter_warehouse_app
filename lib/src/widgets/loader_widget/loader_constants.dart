@@ -1,4 +1,4 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutterwarehouseapp/common/extensions/screen_utils_extensions.dart';
 
 class LoaderConstants {
   static const String loaderBackgroundKey = 'loadingContent';

@@ -289,17 +289,10 @@
             </list>
           </value>
         </entry>
-        <entry key="flutter_screenutil">
-          <value>
-            <list>
-              <option value="$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_screenutil-1.1.0/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="flutter_svg">
           <value>
             <list>
-              <option value="$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-0.19.1/lib" />
+              <option value="$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-0.18.1/lib" />
             </list>
           </value>
         </entry>
@@ -745,8 +738,7 @@
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/fixnum-0.10.11/lib" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_bloc-4.0.1/lib" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.11/lib" />
-      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_screenutil-1.1.0/lib" />
-      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-0.19.1/lib" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-0.18.1/lib" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-7.1.8/lib" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/get_it-3.1.0/lib" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/glob-1.2.0/lib" />

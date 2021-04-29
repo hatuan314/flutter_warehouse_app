@@ -26,9 +26,9 @@ dependencies:
   get_it: ^3.1.0
   flutter_bloc: ^4.0.0
   equatable: ^1.1.1
+  flutter_svg: ^0.18.0
 #  flutter_screenutil: ^1.0.2
 #  intl: ^0.16.1
-#  flutter_svg: ^0.19.1
   fluttertoast:
   # Biometric secure
   local_auth: ^0.6.1
