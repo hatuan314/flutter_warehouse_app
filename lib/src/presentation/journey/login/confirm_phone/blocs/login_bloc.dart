@@ -3,17 +3,17 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterwarehouseapp/common/configs/firebase_setup.dart';
 import 'package:flutterwarehouseapp/common/utils/phone_utils.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
 
 import 'blocs.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
+  final SetupFirebaseDatabase setup;
   final LoaderBloc loaderBloc;
 
-  FirebaseAuth _auth;
-
-  LoginBloc({@required this.loaderBloc});
+  LoginBloc({@required this.setup, @required this.loaderBloc});
 
   @override
   LoginState get initialState => LoginState(state: AuthState.initial);
@@ -36,8 +36,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> _mapSubmitPhoneEventToState(
       SubmitPhoneEvent event) async* {
     loaderBloc.add(StartLoading());
-    _auth = FirebaseAuth.instance;
-    _auth.verifyPhoneNumber(
+    setup.auth.verifyPhoneNumber(
         phoneNumber: PhoneUtils.convertInternationalPhone(event.phone),
         // phoneNumber: event.phone,
         verificationCompleted: _verificationCompleted,
@@ -53,7 +52,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Stream<LoginState> _mapCodeSendEventToState(CodeSendEvent event) async* {
-    yield LoginState(state: AuthState.sendCode, errorMsg: '');
+    yield LoginState(
+      state: AuthState.sendCode,
+      errorMsg: '',
+      verificationId: event.verificationId,
+    );
     loaderBloc.add(FinishLoading());
   }
 

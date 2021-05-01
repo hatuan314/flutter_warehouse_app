@@ -1,7 +1,8 @@
 import 'package:flutterwarehouseapp/common/configs/firebase_setup.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
-import 'package:flutterwarehouseapp/src/presentation/journey/login/login/blocs/blocs.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/login/confirm_otp/bloc/bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/login/confirm_phone/blocs/blocs.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/splash/blocs/splash_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -13,6 +14,11 @@ void setup() {
   locator.registerLazySingleton<SnackbarBloc>(() => SnackbarBloc());
   locator.registerFactory(() => SplashBloc());
   locator.registerFactory<LoginBloc>(() => LoginBloc(
+        setup: locator<SetupFirebaseDatabase>(),
+        loaderBloc: locator<LoaderBloc>(),
+      ));
+  locator.registerFactory<ConfirmOtpBloc>(() => ConfirmOtpBloc(
+        setup: locator<SetupFirebaseDatabase>(),
         loaderBloc: locator<LoaderBloc>(),
       ));
 

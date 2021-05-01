@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/login_routes.dart';
 
 class Routes {
@@ -12,6 +13,10 @@ class Routes {
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case RouteList.confirmOtp:
+        return MaterialPageRoute(
+            builder: LoginRoutes.getRoutesWithSettings(settings)[settings.name],
+            settings: settings);
       // case RouteList.loginVerifyCode:
       // case RouteList.createDevicePIN:
       // case RouteList.createProfile:
