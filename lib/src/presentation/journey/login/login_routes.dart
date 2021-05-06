@@ -32,7 +32,7 @@ class LoginRoutes {
         var phone = args[ArgumentConstants.phoneArgument];
         var verificationId = args[ArgumentConstants.verificationIdArgument];
         return BlocProvider(
-          create: (_) => locator<ConfirmOtpBloc>(),
+          create: (_) => locator<ConfirmOtpBloc>()..add(ConfirmOtpInitialEvent()),
           child: ConfirmOtpScreen(
             phone: phone,
             verificationId: verificationId,

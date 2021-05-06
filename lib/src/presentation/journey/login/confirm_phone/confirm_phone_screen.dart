@@ -8,6 +8,7 @@ import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/dev_mode_screen.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/login/auth_state.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/confirm_phone/blocs/blocs.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';

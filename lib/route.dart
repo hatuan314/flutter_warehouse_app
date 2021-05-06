@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/login_routes.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/profile/profile_routes.dart';
 
 class Routes {
   static Map<String, WidgetBuilder> _getCombinedRoutes() => {
     ...LoginRoutes.getAll(),
+    ...ProfileRoute.getAll(),
   };
 
   static Map<String, WidgetBuilder> getAll() => _getCombinedRoutes();

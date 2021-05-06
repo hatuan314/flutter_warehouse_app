@@ -20,15 +20,30 @@ class DevModeScreen extends StatelessWidget {
           children: [
             RaisedButton(
               onPressed: () {
-                Navigator.pushNamed(context, RouteList.confirmOtp,
-                    arguments: {
-                      ArgumentConstants.verificationIdArgument:
+                Navigator.pushNamed(context, RouteList.confirmOtp, arguments: {
+                  ArgumentConstants.verificationIdArgument:
                       'ALiwoWJj6Ww8kJerE7vbsyrq1BEV_uGiIVlWhSzLsJTSBKzyqoqdE8EjYC4TlpzwBCHasUi8KXoad8MV_Fnlns5qnajQqiPbAZSFS2lZAB1IoP3ue0NfuCtS9VvlDoIr-xsI0zF8lHkw_DizPqbLeAay5eO2B-OXFw',
-                  ArgumentConstants.phoneArgument: '0123456789'});
+                  ArgumentConstants.phoneArgument: '0123456789'
+                });
               },
               child: Center(
                 child: Text(
                   'Confirm OTP',
+                  style: ThemeText.body2.copyWith(
+                      fontWeight: FontWeight.w500, color: AppColor.white),
+                ),
+              ),
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  RouteList.updateProfile,
+                );
+              },
+              child: Center(
+                child: Text(
+                  'Update Profile',
                   style: ThemeText.body2.copyWith(
                       fontWeight: FontWeight.w500, color: AppColor.white),
                 ),

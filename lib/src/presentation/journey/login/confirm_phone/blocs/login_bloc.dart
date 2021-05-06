@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/common/configs/firebase_setup.dart';
 import 'package:flutterwarehouseapp/common/utils/phone_utils.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/login/auth_state.dart';
 
 import 'blocs.dart';
 

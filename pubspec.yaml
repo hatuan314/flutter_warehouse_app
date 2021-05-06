@@ -30,6 +30,7 @@ dependencies:
   pin_code_fields: ^6.1.0
   intl: ^0.16.1
   custom_timer: ^0.0.3
+  cached_network_image: ^2.5.1
   fluttertoast:
   # Biometric secure
   local_auth: ^0.6.1

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:custom_timer/custom_timer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/constants/image_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
@@ -61,30 +62,52 @@ class ConfirmOtpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: AppColor.white,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+      child: Stack(
         children: [
-          SafeArea(
-            child: Image.asset(
-              ImageConstants.loginBackground,
-              // height: MediaQuery.of(context).size.height * 0.75,
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SafeArea(
+                child: Image.asset(
+                  ImageConstants.loginBackground,
+                  // height: MediaQuery.of(context).size.height * 0.75,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: LayoutConstants.paddingHorizontal20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _headerWidget(),
+                    ConfirmOtpBodyWidget(
+                      phone: phone,
+                      verificationId: verificationId,
+                      countdownTimerController: countdownTimerController,
+                      errorController: errorController,
+                      otpController: otpController,
+                    )
+                  ],
+                ),
+              )
+            ],
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: LayoutConstants.paddingHorizontal20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _headerWidget(),
-                ConfirmOtpBodyWidget(
-                  verificationId: verificationId,
-                  countdownTimerController: countdownTimerController,
-                  errorController: errorController,
-                  otpController: otpController,
-                )
-              ],
+          SafeArea(
+            child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: Container(
+                width: LayoutConstants.appBarIconBtnSize,
+                height: LayoutConstants.appBarIconBtnSize,
+                alignment: Alignment.center,
+                child: Icon(
+                  CupertinoIcons.back,
+                  color: AppColor.primaryColor,
+                ),
+              ),
             ),
           )
         ],

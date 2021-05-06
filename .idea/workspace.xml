@@ -2,69 +2,48 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="737fe371-5167-44fa-b452-04611fb1b171" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-1024.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-120.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-121.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-152.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-167.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-180.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-20.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-29.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-30.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-40.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-41.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-42.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-58.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-59.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-60.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-76.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-80.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-81.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-87.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/common/constants/argument_constants.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/data/data_sources/remote/auth_datasource.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/dev_mode_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_event.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_state.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/confirm_otp_constants.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/confirm_otp_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/widgets/confirm_otp_body_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/common/configs/default_env.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/data/currencies.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/data/models/currency_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/data/models/user_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/domain/entities/currency_entity.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/domain/entities/user_entity.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/auth_state.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/create_information/create_information_constants.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/create_information/create_information_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/create_information/widgets/create_information_body_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/create_information/widgets/user_information_form_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/profile_constants.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/profile_routes.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/widgets/avatar/avatar_constants.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/widgets/avatar/avatar_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/widgets/image_network_widget/image_network_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Info.plist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/configs/firebase_setup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/configs/firebase_setup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/constants/layout_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/constants/layout_constants.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/common/constants/route_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/constants/route_constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/locator/service_locator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/locator/service_locator.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/constants/string_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/constants/string_constants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/utils/validator_utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/utils/validator_utils.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/route.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/route.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/login/blocs/blocs.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/blocs/blocs.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/login/blocs/login_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/blocs/login_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/login/blocs/login_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/blocs/login_event.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/login/blocs/login_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/blocs/login_state.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/login/login_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/confirm_phone_constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/login/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/confirm_phone_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/login/widgets/login_widget.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/dev_mode_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/dev_mode_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_event.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/confirm_otp_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/confirm_otp_constants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/confirm_otp_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/confirm_otp_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/widgets/confirm_otp_body_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/widgets/confirm_otp_body_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/blocs/login_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/blocs/login_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/blocs/login_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/blocs/login_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/confirm_phone_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/confirm_phone_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/login_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/login_routes.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/themes/theme_text.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/themes/theme_text.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/splash/blocs/splash_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/splash/blocs/splash_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/widgets/text_form/text_form_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/widgets/text_form/text_form_constants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/widgets/text_form/text_form_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/widgets/text_form/text_form_widget.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,25 +63,25 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/confirm_phone_screen.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/confirm_otp_constants.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/lib/src/themes/theme_color.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/pubspec.yaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/blocs/login_event.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/lib/src/themes/theme_text.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/lib/src/themes/theme_data.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ios/Runner/Info.plist" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/lib/common/constants/layout_constants.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/confirm_otp_screen.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/lib/common/constants/icon_constants.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/lib/common/constants/argument_constants.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ios/Runner/AppDelegate.swift" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/lib/common/constants/route_constants.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/lib/common/locator/service_locator.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/lib/src/presentation/journey/login/login_routes.dart" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/app.dart" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/route.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/confirm_phone_screen.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/blocs/login_event.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/lib/common/locator/service_locator.dart" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/src/presentation/journey/dev_mode_screen.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/lib/src/presentation/journey/login/login_routes.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/lib/common/constants/argument_constants.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/lib/common/constants/route_constants.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ios/Runner/Info.plist" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/lib/src/themes/theme_data.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ios/Runner/AppDelegate.swift" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/pubspec.yaml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/confirm_otp_constants.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/confirm_otp_screen.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/lib/src/themes/theme_text.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/lib/src/themes/theme_color.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/lib/common/constants/layout_constants.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/lib/common/constants/icon_constants.dart" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1nc20uCNRIXS12V400ZAQUjCcQl" />
   <component name="ProjectLevelVcsManager">
@@ -119,26 +98,28 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Dart" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/icons" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/src/widgets" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/assets/icons" />
       <recent name="$PROJECT_DIR$/lib/src/widgets" />
-      <recent name="$PROJECT_DIR$/lib/common/utils" />
-      <recent name="$PROJECT_DIR$/lib/src/presentation/blocs" />
-      <recent name="$PROJECT_DIR$/android/app" />
+      <recent name="$PROJECT_DIR$/lib/src/domain/entities" />
+      <recent name="$PROJECT_DIR$/lib/src/data/models" />
+      <recent name="$PROJECT_DIR$/lib/src/data" />
+      <recent name="$PROJECT_DIR$/assets/icons" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/src/widgets/avatar" />
       <recent name="$PROJECT_DIR$/lib/src/data" />
       <recent name="$PROJECT_DIR$/lib/src/presentation/journey" />
       <recent name="$PROJECT_DIR$/lib/src/presentation" />
@@ -181,7 +162,11 @@
       <workItem from="1619706097662" duration="8676000" />
       <workItem from="1619754356628" duration="5154000" />
       <workItem from="1619760125107" duration="1697000" />
-      <workItem from="1619873709701" duration="9298000" />
+      <workItem from="1619873709701" duration="9396000" />
+      <workItem from="1619947467357" duration="7845000" />
+      <workItem from="1620016338340" duration="11189000" />
+      <workItem from="1620108976771" duration="2000" />
+      <workItem from="1620312848073" duration="4331000" />
     </task>
     <servers />
   </component>

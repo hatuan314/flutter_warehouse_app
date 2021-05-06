@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
+import 'package:flutterwarehouseapp/src/widgets/text_form/text_form_constants.dart';
 
 class TextFormWidget extends TextFormField {
   TextFormWidget({
@@ -20,6 +21,11 @@ class TextFormWidget extends TextFormField {
             errorStyle: ThemeText.caption.copyWith(
               color: AppColor.errorColor,
             ),
+            contentPadding: EdgeInsets.fromLTRB(
+                TextFormConstants.paddingHorizontal,
+                TextFormConstants.paddingTop,
+                TextFormConstants.paddingHorizontal,
+                TextFormConstants.paddingBottom),
             focusColor: AppColor.paleGrey,
             hoverColor: AppColor.paleGrey,
             fillColor: AppColor.paleGrey,

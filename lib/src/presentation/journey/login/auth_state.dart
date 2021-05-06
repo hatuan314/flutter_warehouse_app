@@ -1,0 +1,1 @@
+enum AuthState { loading, initial, error, sendCode, success }

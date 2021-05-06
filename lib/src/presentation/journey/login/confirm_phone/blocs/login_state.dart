@@ -1,3 +1,5 @@
+import 'package:flutterwarehouseapp/src/presentation/journey/login/auth_state.dart';
+
 class LoginState {
   final AuthState state;
   String errorMsg;
@@ -23,5 +25,3 @@ class LoginState {
         forceResendingToken: forceResendingToken ?? this.forceResendingToken,
       );
 }
-
-enum AuthState { loading, initial, error, sendCode, success }

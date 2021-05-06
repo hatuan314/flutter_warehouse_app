@@ -5,6 +5,7 @@ class ConfirmOtpConstants {
   static const String contentTxt = 'Hãy nhập mã số được gửi tới số điện thoại ';
   static const String resendOtpMsgTxt = 'Gửi lại mã OTP sau ';
   static const String resendOtpTxt = 'Gửi lại';
+  static const String otpTimeOut = 'Hết thời gian nhập mã OTP';
 
   static double otpFieldHeight = 68.h;
   static double otpFieldWidth = 45.w;

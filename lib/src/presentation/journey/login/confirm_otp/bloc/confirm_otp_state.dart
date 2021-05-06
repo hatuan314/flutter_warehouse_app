@@ -1,29 +1,34 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterwarehouseapp/src/presentation/view_state.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/login/auth_state.dart';
 
 abstract class ConfirmOtpState extends Equatable {}
 
 class ConfirmOtpInitialState extends ConfirmOtpState {
-  final ViewState verifyState;
+  final AuthState authState;
   final bool activeResendBtn;
   final String errorMsg;
 
   ConfirmOtpInitialState(
       {@required this.activeResendBtn,
-      @required this.verifyState,
+      @required this.authState,
       this.errorMsg = ''});
 
   ConfirmOtpInitialState update({
     bool activeResendBtn,
-    ViewState verifyState,
     String errorMsg,
+    AuthState authState,
   }) =>
       ConfirmOtpInitialState(
-          activeResendBtn: activeResendBtn ?? this.activeResendBtn,
-          verifyState: verifyState ?? this.verifyState,
-          errorMsg: errorMsg ?? this.errorMsg);
+        activeResendBtn: activeResendBtn ?? this.activeResendBtn,
+        errorMsg: errorMsg ?? this.errorMsg,
+        authState: authState ?? this.authState,
+      );
 
   @override
-  List<Object> get props => [this.activeResendBtn];
+  List<Object> get props => [
+        this.activeResendBtn,
+        this.errorMsg,
+        this.authState,
+      ];
 }
