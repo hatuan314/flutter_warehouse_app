@@ -4,7 +4,9 @@ import 'dart:developer';
 import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterwarehouseapp/common/constants/argument_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
+import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/auth_state.dart';
@@ -47,6 +49,10 @@ class ConfirmOtpBodyWidget extends StatelessWidget {
             type: SnackBarType.error,
           ));
         }
+        if (state.authState == AuthState.success) {
+          Navigator.pushReplacementNamed(context, RouteList.updateProfile,
+              arguments: {ArgumentConstants.fireUserArgument: state.fireUser});
+        }
       }
     }, builder: (context, state) {
       if (state is ConfirmOtpInitialState)
@@ -82,7 +88,6 @@ class ConfirmOtpBodyWidget extends StatelessWidget {
               errorAnimationController: errorController,
               controller: otpController,
               onCompleted: (otpCode) {
-                // model.onCompleteOtp(context, otpCode);
                 BlocProvider.of<ConfirmOtpBloc>(context).add(VerifyOtpEvent(
                     verificationId: verificationId, smsCode: otpCode));
               },

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 abstract class ConfirmOtpEvent {}
@@ -29,4 +30,10 @@ class CodeSendEvent extends ConfirmOtpEvent {
   final int forceResendingToken;
 
   CodeSendEvent({@required this.forceResendingToken});
+}
+
+class VerifyOtpSuccessEvent extends ConfirmOtpEvent {
+  final User fireUser;
+
+  VerifyOtpSuccessEvent({@required this.fireUser});
 }

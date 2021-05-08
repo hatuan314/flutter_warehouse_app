@@ -1,20 +1,26 @@
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
-import 'package:flutterwarehouseapp/src/presentation/journey/profile/create_information/create_information_constants.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/profile/update_information/blocs/update_info_bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/profile/update_information/blocs/update_info_event.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/profile/update_information/update_information_constants.dart';
 import 'package:flutterwarehouseapp/src/widgets/button/button_widget.dart';
 
 import 'user_information_form_widget.dart';
 
 class UpdateProfileBodyWidget extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final User fireUser;
+
+  UpdateProfileBodyWidget({Key key, this.fireUser}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +51,17 @@ class UpdateProfileBodyWidget extends StatelessWidget {
             SafeArea(
               bottom: true,
               child: ButtonWidget(
-                  title: CreateInformationConstants.startTxt,
+                  title: UpdateInformationConstants.startTxt,
                   onPressed: () {
                     if (formKey.currentState.validate()) {
-                      log('Start');
+                      BlocProvider.of<UpdateInfoBloc>(context)
+                          .add(CreateInfoEvent(
+                        uid: fireUser.uid,
+                        imageUri: null,
+                        phone: fireUser.phoneNumber,
+                        email: emailController.text.trim(),
+                        fullName: fullNameController.text.trim(),
+                      ));
                     }
                   }),
             )

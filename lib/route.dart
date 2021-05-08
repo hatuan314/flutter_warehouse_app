@@ -19,6 +19,10 @@ class Routes {
         return MaterialPageRoute(
             builder: LoginRoutes.getRoutesWithSettings(settings)[settings.name],
             settings: settings);
+      case RouteList.updateProfile:
+        return MaterialPageRoute(
+            builder: ProfileRoute.getRoutesWithSettings(settings)[settings.name],
+            settings: settings);
       // case RouteList.loginVerifyCode:
       // case RouteList.createDevicePIN:
       // case RouteList.createProfile:

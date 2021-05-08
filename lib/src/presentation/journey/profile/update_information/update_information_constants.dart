@@ -1,4 +1,4 @@
-class CreateInformationConstants {
+class UpdateInformationConstants {
   static const String updateProfileTxt = 'Cập nhật hồ sơ';
   static const String fullNameTxt = 'Họ và tên*';
   static const String emailTxt = 'Email';

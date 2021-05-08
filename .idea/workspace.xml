@@ -2,49 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="737fe371-5167-44fa-b452-04611fb1b171" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/common/configs/default_env.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/data/currencies.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/data/models/currency_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/data/models/user_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/domain/entities/currency_entity.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/domain/entities/user_entity.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/auth_state.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/create_information/create_information_constants.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/create_information/create_information_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/create_information/widgets/create_information_body_widget.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/create_information/widgets/user_information_form_widget.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/profile_constants.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/profile_routes.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/widgets/avatar/avatar_constants.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/widgets/avatar/avatar_widget.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/widgets/image_network_widget/image_network_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/data/data_sources/local/currency_datasource.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/data/data_sources/remote/user_datasource.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/data/repositories/user_repository_impl.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/domain/repositories/user_repository.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/domain/usecases/user_usecase.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/user_bloc/bloc.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/user_bloc/user_bloc.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/user_bloc/user_event.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/user_bloc/user_state.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/blocs/blocs.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/blocs/update_info_bloc.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/blocs/update_info_event.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/blocs/update_info_state.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/flutter_warehouse_app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/flutter_warehouse_app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/constants/layout_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/constants/layout_constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/constants/route_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/constants/route_constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/constants/string_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/constants/string_constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/utils/validator_utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/utils/validator_utils.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/configs/default_env.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/configs/default_env.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/configs/firebase_setup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/configs/firebase_setup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/constants/argument_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/constants/argument_constants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/locator/service_locator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/locator/service_locator.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/route.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/route.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/dev_mode_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/dev_mode_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/data/models/user_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/data/models/user_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/domain/entities/user_entity.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/domain/entities/user_entity.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/blocs/auth_bloc/auth_event.dart" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_bloc.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_event.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_state.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/confirm_otp_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/confirm_otp_constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/confirm_otp_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/confirm_otp_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/widgets/confirm_otp_body_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/widgets/confirm_otp_body_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/blocs/login_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/blocs/login_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/blocs/login_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/blocs/login_state.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/confirm_phone_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_phone/confirm_phone_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/login_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/login_routes.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/splash/blocs/splash_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/splash/blocs/splash_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/widgets/text_form/text_form_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/widgets/text_form/text_form_constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/widgets/text_form/text_form_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/widgets/text_form/text_form_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/profile/create_information/create_information_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/update_information_constants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/profile/create_information/create_information_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/update_information_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/profile/create_information/widgets/create_information_body_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/widgets/update_information_body_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/profile/create_information/widgets/user_information_form_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/widgets/user_information_form_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/profile/profile_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/profile_routes.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,18 +95,18 @@
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Dart" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/src/widgets" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/src/data/data_sources/local" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/src/data/data_sources/local" />
       <recent name="$PROJECT_DIR$/lib/src/widgets" />
       <recent name="$PROJECT_DIR$/lib/src/domain/entities" />
       <recent name="$PROJECT_DIR$/lib/src/data/models" />
       <recent name="$PROJECT_DIR$/lib/src/data" />
-      <recent name="$PROJECT_DIR$/assets/icons" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib/src/widgets/avatar" />
@@ -127,13 +117,15 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -166,7 +158,8 @@
       <workItem from="1619947467357" duration="7845000" />
       <workItem from="1620016338340" duration="11189000" />
       <workItem from="1620108976771" duration="2000" />
-      <workItem from="1620312848073" duration="4331000" />
+      <workItem from="1620312848073" duration="4409000" />
+      <workItem from="1620476590506" duration="12561000" />
     </task>
     <servers />
   </component>

@@ -1,12 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
-import 'package:flutterwarehouseapp/src/presentation/journey/profile/create_information/create_information_constants.dart';
-import 'package:flutterwarehouseapp/src/presentation/journey/profile/create_information/widgets/create_information_body_widget.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/profile/update_information/update_information_constants.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/profile/update_information/widgets/update_information_body_widget.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 
-class CreateInformationScreen extends StatelessWidget {
+class UpdateInformationScreen extends StatelessWidget {
+  final User fireUser;
+
+  const UpdateInformationScreen({Key key, this.fireUser}) : super(key: key);
+
   Widget _appbar(BuildContext context) {
     return SafeArea(
       bottom: false,
@@ -29,7 +35,7 @@ class CreateInformationScreen extends StatelessWidget {
             ),
           ),
           Text(
-            CreateInformationConstants.updateProfileTxt,
+            UpdateInformationConstants.updateProfileTxt,
             style: ThemeText.body1.copyWith(
                 fontWeight: FontWeight.bold, color: AppColor.primaryColor),
           ),
@@ -46,7 +52,7 @@ class CreateInformationScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _appbar(context),
-          Expanded(child: UpdateProfileBodyWidget()),
+          Expanded(child: UpdateProfileBodyWidget(fireUser: fireUser,)),
         ],
       ),
     );

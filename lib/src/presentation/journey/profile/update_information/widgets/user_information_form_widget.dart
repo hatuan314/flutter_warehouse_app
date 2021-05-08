@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterwarehouseapp/src/presentation/journey/profile/create_information/create_information_constants.dart';
+
+import 'package:flutterwarehouseapp/src/presentation/journey/profile/update_information/update_information_constants.dart';
 import 'package:flutterwarehouseapp/src/widgets/avatar/avatar_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/text_form/text_form_widget.dart';
 import 'package:flutterwarehouseapp/common/extensions/screen_utils_extensions.dart';
@@ -27,12 +28,16 @@ class UserInformationFormWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SizedBox(height: 50.h,),
+        SizedBox(
+          height: 50.h,
+        ),
         AvatarWidget(),
-        SizedBox(height: 30.h,),
+        SizedBox(
+          height: 30.h,
+        ),
         TextFormWidget(
           controller: fullNameController,
-          hintText: CreateInformationConstants.fullNameTxt,
+          hintText: UpdateInformationConstants.fullNameTxt,
           handlerOnSubmitted: handlerOnFullNameSubmitted,
           validator: fullNameValidator,
         ),
@@ -41,7 +46,7 @@ class UserInformationFormWidget extends StatelessWidget {
         ),
         TextFormWidget(
           controller: emailController,
-          hintText: CreateInformationConstants.emailTxt,
+          hintText: UpdateInformationConstants.emailTxt,
           handlerOnSubmitted: handlerOnEmailSubmitted,
           validator: emailValidator,
         ),

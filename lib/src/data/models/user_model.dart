@@ -2,6 +2,7 @@ import 'package:flutterwarehouseapp/src/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   UserModel({
+    String id,
     String name,
     String phone,
     String email,
@@ -9,6 +10,7 @@ class UserModel extends UserEntity {
     int createAt,
     int lastUpdate,
   }) : super(
+          id: id,
           name: name,
           phone: phone,
           email: email,
@@ -26,5 +28,12 @@ class UserModel extends UserEntity {
         lastUpdate: json['last_update'],
       );
 
-
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'phone': phone,
+        'email': email,
+        'iso_code': isoCode,
+        'create_at': createAt,
+        'last_update': lastUpdate,
+      };
 }

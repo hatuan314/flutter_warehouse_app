@@ -45,6 +45,21 @@ class ConfirmOtpBloc extends Bloc<ConfirmOtpEvent, ConfirmOtpState> {
       case CodeSendEvent:
         yield* _mapCodeSendEventToState(event);
         break;
+      case VerifyOtpSuccessEvent:
+        yield* _mapVerifyOtpSuccessEventToState(event);
+        break;
+    }
+  }
+
+  Stream<ConfirmOtpState> _mapVerifyOtpSuccessEventToState(VerifyOtpSuccessEvent event) async* {
+    final currentState = state;
+    if (currentState is ConfirmOtpInitialState) {
+      yield currentState.update(
+        activeResendBtn: false,
+        authState: AuthState.success,
+        fireUser: event.fireUser,
+        errorMsg: '',
+      );
     }
   }
 
@@ -96,6 +111,7 @@ class ConfirmOtpBloc extends Bloc<ConfirmOtpEvent, ConfirmOtpState> {
           await setup.auth.signInWithCredential(credential).then(
               (userCredential) {
             log('ConfirmOtpBloc - VerifyOtpEvent - userCredential: ${userCredential.user.phoneNumber}');
+            add(VerifyOtpSuccessEvent(fireUser: userCredential.user));
           }, onError: (error) {
             add(VerifyFailedEvent(error.toString()));
           });
