@@ -5,6 +5,7 @@ class UserEntity {
   String name;
   String phone;
   String email;
+  String avatar;
   String isoCode;
   int createAt;
   int lastUpdate;
@@ -14,6 +15,7 @@ class UserEntity {
     this.name,
     this.phone,
     this.email,
+    this.avatar,
     this.isoCode,
     this.createAt,
     this.lastUpdate,
@@ -24,6 +26,7 @@ class UserEntity {
         name: name,
         phone: phone,
         email: email,
+    avatar: this.avatar,
         isoCode: isoCode,
         createAt: createAt,
         lastUpdate: lastUpdate,

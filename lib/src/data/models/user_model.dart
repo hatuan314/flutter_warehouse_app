@@ -6,6 +6,7 @@ class UserModel extends UserEntity {
     String name,
     String phone,
     String email,
+    String avatar,
     String isoCode,
     int createAt,
     int lastUpdate,
@@ -14,6 +15,7 @@ class UserModel extends UserEntity {
           name: name,
           phone: phone,
           email: email,
+          avatar: avatar,
           isoCode: isoCode,
           createAt: createAt,
           lastUpdate: lastUpdate,
@@ -23,6 +25,7 @@ class UserModel extends UserEntity {
         name: json['name'],
         phone: json['phone'],
         email: json['email'],
+        avatar: json['avatar'],
         isoCode: json['iso_code'],
         createAt: json['create_at'],
         lastUpdate: json['last_update'],
@@ -35,5 +38,6 @@ class UserModel extends UserEntity {
         'iso_code': isoCode,
         'create_at': createAt,
         'last_update': lastUpdate,
+        'avatar': avatar,
       };
 }
