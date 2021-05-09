@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
+import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/login_routes.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/main/bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/main_screen.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/profile/profile_routes.dart';
 
@@ -26,7 +28,9 @@ class Routes {
                 ProfileRoute.getRoutesWithSettings(settings)[settings.name],
             settings: settings);
       case RouteList.main:
-        return MaterialPageRoute(builder: (_) => MainScreen());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                create: (_) => locator<MainBloc>(), child: MainScreen()));
       // case RouteList.loginVerifyCode:
       // case RouteList.createDevicePIN:
       // case RouteList.createProfile:

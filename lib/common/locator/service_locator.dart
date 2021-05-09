@@ -11,6 +11,7 @@ import 'package:flutterwarehouseapp/src/presentation/blocs/user_bloc/user_bloc.d
 import 'package:flutterwarehouseapp/src/presentation/journey/login/confirm_otp/bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/confirm_phone/blocs/blocs.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/splash/blocs/splash_bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/main/bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/profile/update_information/blocs/update_info_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -49,6 +50,7 @@ void setup() {
         loaderBloc: locator<LoaderBloc>(),
         userBloc: locator<UserBloc>(),
       ));
+  locator.registerFactory<MainBloc>(() => MainBloc());
 
   /// UseCases
   locator.registerFactory<UserUseCase>(() => UserUseCase(
