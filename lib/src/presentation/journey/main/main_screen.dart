@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/bloc/bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/main/dashboard_page/dashboard_page.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/main_constants.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 
@@ -16,9 +17,7 @@ class MainScreen extends StatelessWidget {
     Center(
       child: Text(MainConstants.productTxt),
     ),
-    Center(
-      child: Text(MainConstants.dashboardTxt),
-    ),
+    DashboardPage(),
   ];
 
   @override
@@ -26,7 +25,7 @@ class MainScreen extends StatelessWidget {
     return BlocBuilder<MainBloc, MainState>(builder: (context, state) {
       return Scaffold(
         backgroundColor: AppColor.paleGrey,
-        body: _pages.elementAt(state.selectedIndex),
+        body: SafeArea(top: true, child: _pages.elementAt(state.selectedIndex)),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -51,7 +50,7 @@ class MainScreen extends StatelessWidget {
           unselectedItemColor: AppColor.black25,
           type: BottomNavigationBarType.fixed,
           backgroundColor: AppColor.backgroundColor,
-            elevation: 0,
+          elevation: 0,
           onTap: (index) {
             BlocProvider.of<MainBloc>(context).add(MainEvent(index));
           },

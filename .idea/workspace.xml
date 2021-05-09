@@ -2,18 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="737fe371-5167-44fa-b452-04611fb1b171" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/main/bloc/bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/main/bloc/main_bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/main/bloc/main_event.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/main/bloc/main_state.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/main/main_constants.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/img/ic-product.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/lottie/categoryIcon.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/lottie/distributorIcon.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/lottie/productIcon.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/lottie/unitIcon.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/common/constants/lottie_constants.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/main/dashboard_page/dashboard_constants.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/main/dashboard_page/dashboard_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/main/dashboard_page/widgets/dashboard_item_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/main/dashboard_page/widgets/user_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/main/dashboard_page/widgets/warehouse_dashboard_widget.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Info.plist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/locator/service_locator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/locator/service_locator.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/route.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/route.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/constants/layout_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/constants/layout_constants.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/main/main_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/main/main_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/widgets/avatar/avatar_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/widgets/avatar/avatar_widget.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,18 +80,18 @@
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Dart" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/src/data/data_sources/local" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/lottie" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/lib/src/data/data_sources/local" />
+      <recent name="$PROJECT_DIR$/assets/lottie" />
       <recent name="$PROJECT_DIR$/lib/src/widgets" />
+      <recent name="$PROJECT_DIR$/lib/src/data/data_sources/local" />
       <recent name="$PROJECT_DIR$/lib/src/domain/entities" />
       <recent name="$PROJECT_DIR$/lib/src/data/models" />
-      <recent name="$PROJECT_DIR$/lib/src/data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib/src/widgets/avatar" />
@@ -138,7 +143,7 @@
       <workItem from="1620108976771" duration="2000" />
       <workItem from="1620312848073" duration="4409000" />
       <workItem from="1620476590506" duration="13094000" />
-      <workItem from="1620528561577" duration="16492000" />
+      <workItem from="1620528561577" duration="25594000" />
     </task>
     <servers />
   </component>

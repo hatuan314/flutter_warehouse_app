@@ -8,10 +8,12 @@ class LayoutConstants {
   static double paddingVertical20 = 20.h;
   static double paddingVertical50 = 50.h;
   static double paddingHorizontal10 = 10.w;
+  static double paddingHorizontal15 = 15.w;
   static double paddingHorizontal18 = 18.w;
   static double paddingHorizontal20 = 20.w;
 
   static double appBarIconBtnSize = 40.w;
   static double smallIconBtnSize = 24.w;
+  static double avatarSize = 80.w;
   static double iconSize = 18.w;
 }
