@@ -2,39 +2,50 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="737fe371-5167-44fa-b452-04611fb1b171" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/src/data/data_sources/local/currency_datasource.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/data/data_sources/remote/user_datasource.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/data/repositories/user_repository_impl.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/domain/repositories/user_repository.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/domain/usecases/user_usecase.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/user_bloc/bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/user_bloc/user_bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/user_bloc/user_event.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/user_bloc/user_state.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/blocs/blocs.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/blocs/update_info_bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/blocs/update_info_event.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/blocs/update_info_state.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/data/data_sources/local/app_preference.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/data/data_sources/local/pref.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/presentation/journey/main/main_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/flutter_warehouse_app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/flutter_warehouse_app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/configs/default_env.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/configs/default_env.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/configs/firebase_setup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/configs/firebase_setup.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/constants/argument_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/constants/argument_constants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-1024.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-1024.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-120.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-120.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-121.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-121.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-152.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-152.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-167.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-167.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-180.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-180.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-20.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-20.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-29.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-29.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-30.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-30.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-40.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-40.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-41.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-41.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-42.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-42.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-58.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-58.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-59.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-59.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-60.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-60.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-76.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-76.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-80.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-80.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-81.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-81.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-87.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-87.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/constants/route_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/constants/route_constants.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/common/locator/service_locator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/locator/service_locator.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/route.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/route.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/data/models/user_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/data/models/user_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/domain/entities/user_entity.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/domain/entities/user_entity.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/blocs/auth_bloc/auth_event.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/blocs/user_bloc/user_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/blocs/user_bloc/user_bloc.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_event.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/bloc/confirm_otp_state.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/widgets/confirm_otp_body_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/confirm_otp/widgets/confirm_otp_body_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/profile/create_information/create_information_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/update_information_constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/profile/create_information/create_information_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/update_information_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/profile/create_information/widgets/create_information_body_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/widgets/update_information_body_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/profile/create_information/widgets/user_information_form_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/widgets/user_information_form_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/profile/profile_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/profile_routes.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/splash/blocs/splash_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/splash/blocs/splash_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/splash/blocs/splash_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/splash/blocs/splash_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/login/splash/splash_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/login/splash/splash_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/blocs/update_info_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/blocs/update_info_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/widgets/update_information_body_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/presentation/journey/profile/update_information/widgets/update_information_body_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,15 +128,13 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -159,7 +168,8 @@
       <workItem from="1620016338340" duration="11189000" />
       <workItem from="1620108976771" duration="2000" />
       <workItem from="1620312848073" duration="4409000" />
-      <workItem from="1620476590506" duration="12561000" />
+      <workItem from="1620476590506" duration="13094000" />
+      <workItem from="1620528561577" duration="12072000" />
     </task>
     <servers />
   </component>

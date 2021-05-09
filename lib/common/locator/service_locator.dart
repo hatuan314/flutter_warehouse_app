@@ -1,4 +1,6 @@
 import 'package:flutterwarehouseapp/common/configs/firebase_setup.dart';
+import 'package:flutterwarehouseapp/src/data/data_sources/local/app_preference.dart';
+import 'package:flutterwarehouseapp/src/data/data_sources/local/pref.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/user_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/user_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/user_repository.dart';
@@ -18,19 +20,31 @@ void setup() {
   /// Blocs
   locator.registerLazySingleton<LoaderBloc>(() => LoaderBloc());
   locator.registerLazySingleton<SnackbarBloc>(() => SnackbarBloc());
-  locator.registerFactory(() => SplashBloc());
+  locator.registerFactory(() => SplashBloc(
+        pref: locator<AppPreference>(),
+        setupFirebase: locator<SetupFirebaseDatabase>(),
+        userUseCase: locator<UserUseCase>(),
+        userBloc: locator<UserBloc>(),
+      ));
   locator.registerFactory<LoginBloc>(() => LoginBloc(
         setup: locator<SetupFirebaseDatabase>(),
         loaderBloc: locator<LoaderBloc>(),
       ));
   locator.registerFactory<ConfirmOtpBloc>(() => ConfirmOtpBloc(
         setup: locator<SetupFirebaseDatabase>(),
+        pref: locator<AppPreference>(),
+        userUseCase: locator<UserUseCase>(),
         loaderBloc: locator<LoaderBloc>(),
+        userBloc: locator<UserBloc>(),
       ));
   locator.registerLazySingleton<UserBloc>(() => UserBloc(
-        useCase: locator<UserUseCase>(),
+        setupFirebase: locator<SetupFirebaseDatabase>(),
+        userUseCase: locator<UserUseCase>(),
+        loaderBloc: locator<LoaderBloc>(),
+        snackbarBloc: locator<SnackbarBloc>(),
       ));
   locator.registerFactory(() => UpdateInfoBloc(
+        pref: locator<AppPreference>(),
         userUseCase: locator<UserUseCase>(),
         loaderBloc: locator<LoaderBloc>(),
         userBloc: locator<UserBloc>(),
@@ -49,6 +63,10 @@ void setup() {
   /// DataSource
   locator.registerLazySingleton<UserDataSource>(() => UserDataSource(
         setupFirebase: locator<SetupFirebaseDatabase>(),
+      ));
+  locator.registerLazySingleton<Pref>(() => LocalPref());
+  locator.registerLazySingleton<AppPreference>(() => AppPreference(
+        pref: locator<Pref>(),
       ));
 
   /// Utils

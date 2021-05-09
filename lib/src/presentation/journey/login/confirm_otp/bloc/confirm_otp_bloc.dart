@@ -4,9 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/common/configs/firebase_setup.dart';
+import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/utils/phone_utils.dart';
+import 'package:flutterwarehouseapp/src/data/data_sources/local/app_preference.dart';
+import 'package:flutterwarehouseapp/src/domain/usecases/user_usecase.dart';
 
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/blocs/user_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/auth_state.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/confirm_otp/confirm_otp_constants.dart';
 
@@ -14,11 +18,20 @@ import 'bloc.dart';
 
 class ConfirmOtpBloc extends Bloc<ConfirmOtpEvent, ConfirmOtpState> {
   final SetupFirebaseDatabase setup;
+  final AppPreference pref;
+  final UserUseCase userUseCase;
   final LoaderBloc loaderBloc;
+  final UserBloc userBloc;
 
   bool isTimeOut;
 
-  ConfirmOtpBloc({@required this.setup, @required this.loaderBloc});
+  ConfirmOtpBloc({
+    @required this.setup,
+    @required this.pref,
+    @required this.userUseCase,
+    @required this.loaderBloc,
+    @required this.userBloc,
+  });
 
   @override
   ConfirmOtpState get initialState => ConfirmOtpInitialState(
@@ -51,15 +64,28 @@ class ConfirmOtpBloc extends Bloc<ConfirmOtpEvent, ConfirmOtpState> {
     }
   }
 
-  Stream<ConfirmOtpState> _mapVerifyOtpSuccessEventToState(VerifyOtpSuccessEvent event) async* {
+  Stream<ConfirmOtpState> _mapVerifyOtpSuccessEventToState(
+      VerifyOtpSuccessEvent event) async* {
     final currentState = state;
     if (currentState is ConfirmOtpInitialState) {
-      yield currentState.update(
-        activeResendBtn: false,
-        authState: AuthState.success,
-        fireUser: event.fireUser,
-        errorMsg: '',
-      );
+      final user = await userUseCase.getUser(event.fireUser.uid);
+      if (user == null) {
+        yield currentState.update(
+            activeResendBtn: false,
+            authState: AuthState.success,
+            fireUser: event.fireUser,
+            errorMsg: '',
+            route: RouteList.updateProfile);
+      } else {
+        userBloc.user = user;
+        await pref.saveSession();
+        yield currentState.update(
+            activeResendBtn: false,
+            authState: AuthState.success,
+            fireUser: event.fireUser,
+            errorMsg: '',
+            route: RouteList.main);
+      }
     }
   }
 
@@ -110,7 +136,6 @@ class ConfirmOtpBloc extends Bloc<ConfirmOtpEvent, ConfirmOtpState> {
               verificationId: event.verificationId, smsCode: event.smsCode);
           await setup.auth.signInWithCredential(credential).then(
               (userCredential) {
-            log('ConfirmOtpBloc - VerifyOtpEvent - userCredential: ${userCredential.user.phoneNumber}');
             add(VerifyOtpSuccessEvent(fireUser: userCredential.user));
           }, onError: (error) {
             add(VerifyFailedEvent(error.toString()));
@@ -156,8 +181,7 @@ class ConfirmOtpBloc extends Bloc<ConfirmOtpEvent, ConfirmOtpState> {
   void _codeSent(String verificationId, int forceResendingToken) {
     log('ConfirmOtpBloc - codeSent - forceResendingToken: $forceResendingToken');
     log('ConfirmOtpBloc - codeSent - verificationId: $verificationId');
-    add(CodeSendEvent(
-        forceResendingToken: forceResendingToken));
+    add(CodeSendEvent(forceResendingToken: forceResendingToken));
   }
 
   void _codeAutoRetrievalTimeout(String verificationId) {

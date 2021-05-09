@@ -50,7 +50,7 @@ class ConfirmOtpBodyWidget extends StatelessWidget {
           ));
         }
         if (state.authState == AuthState.success) {
-          Navigator.pushReplacementNamed(context, RouteList.updateProfile,
+          Navigator.pushReplacementNamed(context, state.route,
               arguments: {ArgumentConstants.fireUserArgument: state.fireUser});
         }
       }
@@ -116,8 +116,8 @@ class ConfirmOtpBodyWidget extends StatelessWidget {
                     ),
                     CustomTimer(
                       controller: countdownTimerController,
-                      from: Duration(seconds: 10),
-                      to: Duration(seconds: 0),
+                      from: Duration(minutes: 5),
+                      to: Duration(minutes: 0),
                       onBuildAction: CustomTimerAction.auto_start,
                       builder: (CustomTimerRemainingTime remaining) {
                         return Text(

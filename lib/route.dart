@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/login_routes.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/main/main_screen.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/profile/profile_routes.dart';
 
 class Routes {
   static Map<String, WidgetBuilder> _getCombinedRoutes() => {
-    ...LoginRoutes.getAll(),
-    ...ProfileRoute.getAll(),
-  };
+        ...LoginRoutes.getAll(),
+        ...ProfileRoute.getAll(),
+      };
 
   static Map<String, WidgetBuilder> getAll() => _getCombinedRoutes();
 
@@ -21,8 +22,11 @@ class Routes {
             settings: settings);
       case RouteList.updateProfile:
         return MaterialPageRoute(
-            builder: ProfileRoute.getRoutesWithSettings(settings)[settings.name],
+            builder:
+                ProfileRoute.getRoutesWithSettings(settings)[settings.name],
             settings: settings);
+      case RouteList.main:
+        return MaterialPageRoute(builder: (_) => MainScreen());
       // case RouteList.loginVerifyCode:
       // case RouteList.createDevicePIN:
       // case RouteList.createProfile:
