@@ -10,11 +10,10 @@ import 'package:lottie/lottie.dart';
 import 'loader_constants.dart';
 
 class LoadingContainer extends StatelessWidget {
-  LoadingContainer({@required this.key, @required this.child, this.navigator})
-      : super(key: key);
+  LoadingContainer({@required this.child, this.navigator})
+      : super(key: const ValueKey('LoadingContainer'));
 
   @override
-  final Key key;
   final Widget child;
   final GlobalKey<NavigatorState> navigator;
 

@@ -5,11 +5,12 @@ part 'unit_entity.g.dart';
 
 @HiveType(typeId: 0)
 class UnitEntity {
+  String id;
   String name;
   DateTime createAt;
   DateTime lastUpdate;
 
-  UnitEntity({this.name, this.createAt, this.lastUpdate});
+  UnitEntity({this.name, this.createAt, this.lastUpdate, this.id});
 
   UnitModel toModel() => UnitModel(
         name: name,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/constants/lottie_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
+import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 
 import 'dashboard_item_widget.dart';
 
@@ -31,7 +32,7 @@ class WarehouseDashboardWidget extends StatelessWidget {
           onPressed: () {
             Navigator.pushNamed(context, RouteList.unitList);
           },
-          title: 'Đơn vị tính',
+          title: StringConstants.unitTxt,
         ),
       ],
     );

@@ -68,6 +68,8 @@ class ConfirmOtpBloc extends Bloc<ConfirmOtpEvent, ConfirmOtpState> {
       VerifyOtpSuccessEvent event) async* {
     final currentState = state;
     if (currentState is ConfirmOtpInitialState) {
+      log('ConfirmOtpBloc - uid: ${event.fireUser.uid}');
+      setup.setMainDocumentRef(event.fireUser.uid);
       final user = await userUseCase.getUser(event.fireUser.uid);
       if (user == null) {
         yield currentState.update(

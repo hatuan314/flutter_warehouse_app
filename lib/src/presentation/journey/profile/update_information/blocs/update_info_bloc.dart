@@ -49,19 +49,16 @@ class UpdateInfoBloc extends Bloc<UpdateInfoEvent, UpdateInfoState> {
       createAt: DateTime.now().millisecondsSinceEpoch,
       lastUpdate: DateTime.now().millisecondsSinceEpoch,
     );
-    // final flag = await userUseCase.createUser(user);
-    // if (flag) {
-    //   await pref.saveSession();
-    //   userBloc.add(GetUserEvent());
-    //   if (event.isRegistration) {
-    //     await unitUc.setDefaultUnitList();
-    //   }
-    //   yield UpdateInfoState(viewState: ViewState.success);
-    // } else {
-    //   yield UpdateInfoState(viewState: ViewState.error);
-    // }
-    if (event.isRegistration) {
-      await unitUc.setDefaultUnitList();
+    final flag = await userUseCase.createUser(user);
+    if (flag) {
+      await pref.saveSession();
+      userBloc.add(GetUserEvent());
+      if (event.isRegistration) {
+        await unitUc.setDefaultUnitList();
+      }
+      yield UpdateInfoState(viewState: ViewState.success);
+    } else {
+      yield UpdateInfoState(viewState: ViewState.error);
     }
     loaderBloc.add(FinishLoading());
   }

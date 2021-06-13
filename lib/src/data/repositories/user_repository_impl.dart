@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutterwarehouseapp/common/extensions/list_extensions.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/user_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/models/user_model.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/user_entity.dart';
@@ -18,10 +20,9 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<UserEntity> getUser(String uid) async {
-    final DocumentSnapshot snapshot = await userDataSource.getUser(uid);
-    log('UserRepo - getUser: ${snapshot.data()}');
-    if (snapshot.data() != null) {
-      final UserEntity user = UserModel.fromJson(snapshot.data());
+    final QuerySnapshot snapshot = await userDataSource.getUser(uid);
+    if (snapshot.docs.isSafe) {
+      final UserEntity user = UserModel.fromJson(snapshot.docs[0].data());
       return user;
     }
     return null;

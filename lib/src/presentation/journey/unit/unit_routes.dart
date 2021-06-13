@@ -12,7 +12,8 @@ class UnitRoutes {
   static Map<String, WidgetBuilder> getAll() {
     return {
       RouteList.unitList: (context) => BlocProvider<UnitListBloc>(
-          create: (_) => locator<UnitListBloc>()..add(InitialUnitListEvent()),
+          // create: (_) => locator<UnitListBloc>()..add(InitialUnitListEvent()),
+          create: (_) => locator<UnitListBloc>(),
           child: UnitListScreen()),
       // RouteList.login: (context) => BlocProvider(
       //     create: (_) => locator<LoginBloc>(), child: LoginScreen()),

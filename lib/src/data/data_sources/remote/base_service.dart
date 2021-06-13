@@ -4,8 +4,7 @@ import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.da
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
 
 class BaseService {
-  Future<DocumentSnapshot> getDocumentSnapshot(
-      DocumentReference ref) async {
+  Future<DocumentSnapshot> getDocumentSnapshot(DocumentReference ref) async {
     DocumentSnapshot snapshot;
     try {
       snapshot = await ref.get();
@@ -29,10 +28,21 @@ class BaseService {
     }
   }
 
-  Future<QuerySnapshot> getDocumentSnapshotList(CollectionReference ref) async {
+  Future<QuerySnapshot> getQuerySnapshotList(CollectionReference ref) async {
     QuerySnapshot snapshot;
     try {
       return await ref.get();
+    } on FirebaseException catch (e) {
+      locator<SnackbarBloc>()
+          .add(ShowSnackbar(title: e.toString(), type: SnackBarType.error));
+      return null;
+    }
+  }
+
+  Future<DocumentReference> setDocumentRef(
+      {CollectionReference ref, Map<String, dynamic> request}) async {
+    try {
+      return await ref.add(request);
     } on FirebaseException catch (e) {
       locator<SnackbarBloc>()
           .add(ShowSnackbar(title: e.toString(), type: SnackBarType.error));

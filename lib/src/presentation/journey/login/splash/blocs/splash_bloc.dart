@@ -39,14 +39,18 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         Duration(seconds: DefaultConfig.splashScreenSecondTimeOut));
     yield SplashState(viewState: ViewState.loading);
     final bool isSession = await pref.getIsSession();
+
     if (isSession == null || isSession == false) {
       yield SplashState(viewState: ViewState.success, route: RouteList.login);
     } else {
       final String uid = setupFirebase.auth.currentUser.uid;
-      final user = await userUseCase.getUser(uid);
-      if (user == null) {
+      if (uid == null) {
         yield SplashState(viewState: ViewState.success, route: RouteList.login);
-      } else {
+      }
+
+      if (uid != null) {
+        setupFirebase.setMainDocumentRef(uid);
+        final user = await userUseCase.getUser(uid);
         userBloc.user = user;
         yield SplashState(viewState: ViewState.success, route: RouteList.main);
       }

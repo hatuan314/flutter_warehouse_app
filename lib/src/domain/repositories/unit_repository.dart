@@ -7,7 +7,5 @@ abstract class UnitRepository {
 
   Future<void> setDefaultUnitList();
 
-  Future<void> synchronizedUnitLocalList();
-
-  void synchronizedUnitCloudList(List<UnitEntity> units);
+  Future<void> setUnitLocal(UnitEntity unit);
 }
