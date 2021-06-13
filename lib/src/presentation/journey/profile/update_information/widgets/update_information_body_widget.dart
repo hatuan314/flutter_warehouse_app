@@ -22,8 +22,10 @@ class UpdateProfileBodyWidget extends StatelessWidget {
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final User fireUser;
+  final bool isRegistration;
 
-  UpdateProfileBodyWidget({Key key, this.fireUser}) : super(key: key);
+  UpdateProfileBodyWidget({Key key, this.fireUser, this.isRegistration})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +67,7 @@ class UpdateProfileBodyWidget extends StatelessWidget {
                       if (formKey.currentState.validate()) {
                         BlocProvider.of<UpdateInfoBloc>(context)
                             .add(CreateInfoEvent(
+                          isRegistration: isRegistration,
                           uid: fireUser.uid,
                           imageUri: null,
                           phone: fireUser.phoneNumber,

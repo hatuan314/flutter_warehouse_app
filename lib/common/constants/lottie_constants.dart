@@ -4,4 +4,5 @@ class LottieConstants {
   static const String categoryIcon ='$_path/categoryIcon.json';
   static const String distributorIcon ='$_path/distributorIcon.json';
   static const String unitIcon ='$_path/unitIcon.json';
+  static const String loadingIcon ='$_path/loadingIcon.json';
 }

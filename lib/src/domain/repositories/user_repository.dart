@@ -4,5 +4,5 @@ import 'package:flutterwarehouseapp/src/domain/entities/user_entity.dart';
 abstract class UserRepository {
   Future<bool> createUser(UserEntity userEntity);
 
-  Future<UserModel> getUser(String uid);
+  Future<UserEntity> getUser(String uid);
 }

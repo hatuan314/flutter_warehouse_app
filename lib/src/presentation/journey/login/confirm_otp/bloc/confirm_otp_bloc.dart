@@ -75,16 +75,16 @@ class ConfirmOtpBloc extends Bloc<ConfirmOtpEvent, ConfirmOtpState> {
             authState: AuthState.success,
             fireUser: event.fireUser,
             errorMsg: '',
-            route: RouteList.updateProfile);
+            isRegistration: true);
       } else {
         userBloc.user = user;
         await pref.saveSession();
         yield currentState.update(
-            activeResendBtn: false,
-            authState: AuthState.success,
-            fireUser: event.fireUser,
-            errorMsg: '',
-            route: RouteList.main);
+          activeResendBtn: false,
+          authState: AuthState.success,
+          fireUser: event.fireUser,
+          errorMsg: '',
+        );
       }
     }
   }

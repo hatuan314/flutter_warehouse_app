@@ -10,8 +10,10 @@ import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 
 class UpdateInformationScreen extends StatelessWidget {
   final User fireUser;
+  final bool isRegistration;
 
-  const UpdateInformationScreen({Key key, this.fireUser}) : super(key: key);
+  const UpdateInformationScreen({Key key, this.fireUser, this.isRegistration})
+      : super(key: key);
 
   Widget _appbar(BuildContext context) {
     return SafeArea(
@@ -52,7 +54,11 @@ class UpdateInformationScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _appbar(context),
-          Expanded(child: UpdateProfileBodyWidget(fireUser: fireUser,)),
+          Expanded(
+              child: UpdateProfileBodyWidget(
+            fireUser: fireUser,
+            isRegistration: isRegistration,
+          )),
         ],
       ),
     );

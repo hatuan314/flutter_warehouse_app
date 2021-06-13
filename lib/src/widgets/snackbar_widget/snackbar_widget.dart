@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutterwarehouseapp/common/constants/icon_constants.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 
@@ -93,19 +92,19 @@ class _TopSnackBarState<K extends Object> extends State<TopSnackBar>
     if (widget.type == SnackBarType.success) {
       return Container(
         key: const Key('success_container_icon_key'),
-        child: SvgPicture.asset(
-          IconConstants.snackBarSuccessIcon,
-          width: 32,
-          height: 32,
+        child: Icon(
+          Icons.check_circle_rounded,
+          size: 32,
+          color: AppColor.green,
         ),
       );
     } else {
       return Container(
         key: const Key('close_container_icon_key'),
-        child: SvgPicture.asset(
-          IconConstants.snackBarFailedIcon,
-          width: 32,
-          height: 32,
+        child: Icon(
+          Icons.cancel,
+          size: 32,
+          color: AppColor.errorColor,
         ),
       );
     }

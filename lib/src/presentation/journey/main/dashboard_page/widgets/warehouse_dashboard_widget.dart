@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/constants/lottie_constants.dart';
+import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 
 import 'dashboard_item_widget.dart';
 
@@ -27,6 +28,9 @@ class WarehouseDashboardWidget extends StatelessWidget {
           title: 'Nhà phân phối',
         ),WarehouseDashboardItemWidget(
           path: LottieConstants.unitIcon,
+          onPressed: () {
+            Navigator.pushNamed(context, RouteList.unitList);
+          },
           title: 'Đơn vị tính',
         ),
       ],

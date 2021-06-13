@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/common/constants/app_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/image_constants.dart';
+import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
+import 'package:flutterwarehouseapp/common/constants/lottie_constants.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/splash/blocs/splash_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/splash/blocs/splash_state.dart';
 import 'package:flutterwarehouseapp/src/presentation/view_state.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
+import 'package:lottie/lottie.dart';
 
 import 'splash_constants.dart';
 
@@ -73,9 +76,9 @@ class SplashScreen extends StatelessWidget {
               bottom: true,
                 child: Visibility(
                   visible: _visibleLoader(state),
-                  child: CircularProgressIndicator(
-                    valueColor:
-                    AlwaysStoppedAnimation<Color>(AppColor.primaryColor),
+                  child: Lottie.asset(
+                    LottieConstants.loadingIcon,
+                    width: LayoutConstants.loadingSize,
                   ),
                 )),
           )

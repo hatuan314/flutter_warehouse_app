@@ -9,4 +9,10 @@ class RouteList {
 
   /// Main
   static const String main = '/main';
+
+  /// Unit
+  static const String unitList = '/unit-list';
+
+  /// Dev
+  static const String devMode = '/devMode';
 }

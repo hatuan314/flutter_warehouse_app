@@ -1,16 +1,21 @@
 class DefaultConfig {
   static const splashScreenSecondTimeOut = 2;
-  static const mainCollection = 'cp_warehouse';
-  static const mainDocument = 'environment';
+  static const appName = 'cp_warehouse';
+  static const environment = 'environment';
   static const limitRequest = 10;
 
-  /// Collection
-  static const usersCollection = 'users';
+  /// Collections
+  // static const mainCollection = 'product';
+  static const mainCollection = 'develop';
+  static const unitsCollection = 'units';
+
+  /// Documents
+  static const profileDocument = 'profile';
 
   /// Field
 
   /// Storage
   static const expenseStorage = 'expense';
   static const profileStorage = 'profile';
-  static const storagePath = '$mainCollection/environments';
+  static const storagePath = '$appName/environments';
 }

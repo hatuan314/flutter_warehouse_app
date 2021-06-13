@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutterwarehouseapp/common/configs/local_db_setup.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
 import 'package:flutterwarehouseapp/common/utils/screen_utils.dart';
 import 'package:flutterwarehouseapp/route.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
-import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
-import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_data.dart';
-import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 import 'package:flutterwarehouseapp/src/widgets/loader_widget/loader_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/snackbar_widget/snackbar_widget.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final GlobalKey<NavigatorState> _navigator = GlobalKey<NavigatorState>();
 
-  List<BlocProvider> _getProviders() => [
+  final List<BlocProvider> _getProviders = [
         BlocProvider<LoaderBloc>(
             create: (BuildContext context) => locator<LoaderBloc>()),
         BlocProvider<SnackbarBloc>(
@@ -33,18 +35,11 @@ class MyApp extends StatelessWidget {
     return BlocListener<SnackbarBloc, SnackbarState>(
       listener: (context, state) {
         if (state is ShowSnackBarState) {
-          Fluttertoast.showToast(
-              msg: state.title,
-              toastLength: Toast.LENGTH_SHORT,
-              backgroundColor: state.type == SnackBarType.success
-                  ? AppColor.primaryColor
-                  : AppColor.red,
-              textColor: AppColor.white);
-          // TopSnackBar(
-          //   title: state.title,
-          //   type: state.type,
-          //   key: state.key,
-          // ).showWithNavigator(_navigator.currentState, context);
+          TopSnackBar(
+            title: state.title,
+            type: state.type,
+            key: state.key,
+          ).showWithNavigator(_navigator.currentState, context);
         }
       },
       child: widget,
@@ -54,8 +49,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: _getProviders(),
+      providers: _getProviders,
       child: MaterialApp(
+        navigatorKey: _navigator,
         debugShowCheckedModeBanner: false,
         title: 'Warehouse',
         builder: (context, widget) {
@@ -75,5 +71,11 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: Routes.generateRoute,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    locator<LocalDbSetup>().dispose();
+    super.dispose();
   }
 }

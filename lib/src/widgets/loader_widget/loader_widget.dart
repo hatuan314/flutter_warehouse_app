@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
+import 'package:flutterwarehouseapp/common/constants/lottie_constants.dart';
 import 'package:flutterwarehouseapp/common/utils/device_dimension_utils.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
+import 'package:lottie/lottie.dart';
 
 import 'loader_constants.dart';
 
@@ -39,9 +42,9 @@ class LoadingContainer extends StatelessWidget {
                           color: Colors.black.withOpacity(
                               LoaderConstants.loaderBackgroundOpacity),
                           child: Center(
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                  AppColor.primaryColor),
+                            child: Lottie.asset(
+                              LottieConstants.loadingIcon,
+                              width: LayoutConstants.loadingSize,
                             ),
                           ),
                         )
@@ -49,24 +52,25 @@ class LoadingContainer extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Padding(
-                                padding: EdgeInsets.only(
-                                    top: LoaderConstants.loaderPaddingTop),
-                                child: Container(
-                                  alignment: Alignment.topCenter,
-                                  color: Colors.transparent,
-                                  height: DeviceDimension.getProportionalWidth(
-                                      _queryData.size.width,
-                                      LoaderConstants.loaderWidth),
-                                  width: DeviceDimension.getProportionalWidth(
-                                      _queryData.size.height,
-                                      LoaderConstants.loaderHeight),
-                                  child: Center(
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                          AppColor.primaryColor),
-                                    ),
+                              padding: EdgeInsets.only(
+                                  top: LoaderConstants.loaderPaddingTop),
+                              child: Container(
+                                alignment: Alignment.topCenter,
+                                color: Colors.transparent,
+                                height: DeviceDimension.getProportionalWidth(
+                                    _queryData.size.width,
+                                    LoaderConstants.loaderWidth),
+                                width: DeviceDimension.getProportionalWidth(
+                                    _queryData.size.height,
+                                    LoaderConstants.loaderHeight),
+                                child: Center(
+                                  child: Lottie.asset(
+                                    LottieConstants.loadingIcon,
+                                    width: LayoutConstants.loadingSize,
                                   ),
-                                ))
+                                ),
+                              ),
+                            )
                           ],
                         ));
             },

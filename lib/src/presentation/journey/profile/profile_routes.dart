@@ -19,10 +19,12 @@ class ProfileRoute {
     return {
       RouteList.updateProfile: (context) {
         var fireUser = args[ArgumentConstants.fireUserArgument];
+        var isRegistration = args[ArgumentConstants.isRegistrationArgument];
         return BlocProvider(
           create: (_) => locator<UpdateInfoBloc>(),
           child: UpdateInformationScreen(
             fireUser: fireUser,
+            isRegistration: isRegistration,
           ),
         );
       }

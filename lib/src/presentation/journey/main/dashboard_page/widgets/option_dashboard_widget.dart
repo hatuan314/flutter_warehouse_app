@@ -4,6 +4,7 @@ import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/local/app_preference.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/dev_mode_screen.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,7 +50,13 @@ class OptionDashboardWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _optionItemWidget(title: 'Trợ giúp & hỗ trợ', icon: Icons.support),
+            _optionItemWidget(
+              title: 'Trợ giúp & hỗ trợ',
+              icon: Icons.support,
+              onTap: () {
+                Navigator.pushNamed(context, RouteList.devMode);
+              },
+            ),
             _optionItemWidget(title: 'Chia sẻ', icon: Icons.share),
             _optionItemWidget(
                 title: 'Đánh giá', icon: Icons.rate_review_outlined),

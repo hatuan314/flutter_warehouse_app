@@ -9,30 +9,30 @@ abstract class ConfirmOtpState extends Equatable {}
 class ConfirmOtpInitialState extends ConfirmOtpState {
   final AuthState authState;
   final bool activeResendBtn;
+  final bool isRegistration;
   final User fireUser;
   final String errorMsg;
-  final String route;
 
   ConfirmOtpInitialState(
       {@required this.activeResendBtn,
       @required this.authState,
       this.fireUser,
       this.errorMsg = '',
-      this.route = ''});
+      this.isRegistration = false});
 
   ConfirmOtpInitialState update({
     bool activeResendBtn,
     String errorMsg,
     AuthState authState,
     User fireUser,
-    String route,
+    bool isRegistration,
   }) =>
       ConfirmOtpInitialState(
         activeResendBtn: activeResendBtn ?? this.activeResendBtn,
         errorMsg: errorMsg ?? this.errorMsg,
         authState: authState ?? this.authState,
         fireUser: fireUser ?? this.fireUser,
-        route: route ?? this.route,
+        isRegistration: isRegistration ?? this.isRegistration,
       );
 
   @override
@@ -41,5 +41,6 @@ class ConfirmOtpInitialState extends ConfirmOtpState {
         this.errorMsg,
         this.authState,
         this.fireUser,
+        this.isRegistration,
       ];
 }

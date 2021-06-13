@@ -50,8 +50,17 @@ class ConfirmOtpBodyWidget extends StatelessWidget {
           ));
         }
         if (state.authState == AuthState.success) {
-          Navigator.pushReplacementNamed(context, state.route,
-              arguments: {ArgumentConstants.fireUserArgument: state.fireUser});
+          if (state.isRegistration) {
+            Navigator.pushReplacementNamed(context, RouteList.updateProfile,
+                arguments: {
+                  ArgumentConstants.fireUserArgument: state.fireUser,
+                  ArgumentConstants.isRegistrationArgument: true
+                });
+          } else {
+            Navigator.pushReplacementNamed(context, RouteList.main, arguments: {
+              ArgumentConstants.fireUserArgument: state.fireUser
+            });
+          }
         }
       }
     }, builder: (context, state) {

@@ -13,6 +13,7 @@ class LayoutConstants {
   static double paddingHorizontal20 = 20.w;
 
   static double appBarIconBtnSize = 40.w;
+  static double loadingSize = 100.w;
   static double buttonHeight = 48.h;
   static double smallIconBtnSize = 24.w;
   static double avatarSize = 80.w;

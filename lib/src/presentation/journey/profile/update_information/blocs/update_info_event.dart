@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 abstract class UpdateInfoEvent {}
 
 class CreateInfoEvent extends UpdateInfoEvent {
+  final bool isRegistration;
   final String uid;
   final String imageUri;
   final String phone;
@@ -14,5 +15,6 @@ class CreateInfoEvent extends UpdateInfoEvent {
       @required this.imageUri,
       @required this.phone,
       @required this.email,
-      @required this.fullName});
+      @required this.fullName,
+      this.isRegistration});
 }

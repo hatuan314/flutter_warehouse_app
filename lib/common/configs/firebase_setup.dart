@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,18 +10,19 @@ class SetupFirebaseDatabase {
   FirebaseApp app;
   FirebaseDatabase database;
   FirebaseAuth auth;
-  CollectionReference userCollection;
+  DocumentReference documentRef;
 
-  init() async {
+  Future<void> init() async {
     app = await Firebase.initializeApp();
     database = FirebaseDatabase(app: app);
+    var path = Directory.current.path;
     database.setPersistenceEnabled(true);
     database.setPersistenceCacheSizeBytes(10000000);
     auth = FirebaseAuth.instance;
-
-    userCollection = FirebaseFirestore.instance
+    documentRef = FirebaseFirestore.instance
+        .collection(DefaultConfig.appName)
+        .doc(DefaultConfig.environment)
         .collection(DefaultConfig.mainCollection)
-        .doc(DefaultConfig.mainDocument)
-        .collection(DefaultConfig.usersCollection);
+        .doc(auth.currentUser.uid);
   }
 }

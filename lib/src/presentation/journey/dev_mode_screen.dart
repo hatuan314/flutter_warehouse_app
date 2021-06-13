@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/constants/argument_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
+import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
+import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 
@@ -44,6 +47,30 @@ class DevModeScreen extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Update Profile',
+                  style: ThemeText.body2.copyWith(
+                      fontWeight: FontWeight.w500, color: AppColor.white),
+                ),
+              ),
+            ),
+            RaisedButton(
+              onPressed: () {
+                locator<SnackbarBloc>().add(ShowSnackbar(
+                    title: 'Test Snackbar', type: SnackBarType.error));
+              },
+              child: Center(
+                child: Text(
+                  'SnackBar',
+                  style: ThemeText.body2.copyWith(
+                      fontWeight: FontWeight.w500, color: AppColor.white),
+                ),
+              ),
+            ),
+            RaisedButton(
+              onPressed: () {
+              },
+              child: Center(
+                child: Text(
+                  'Isolate',
                   style: ThemeText.body2.copyWith(
                       fontWeight: FontWeight.w500, color: AppColor.white),
                 ),
