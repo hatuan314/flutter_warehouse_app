@@ -20,7 +20,7 @@ class UnitUseCase {
     }
     if (units.isNotSafe) {
       // Set and get default units
-      await unitRepo.setDefaultUnitList();
+      await setDefaultUnitList();
       units = await unitRepo.getUnitLocalList();
       return units;
     }

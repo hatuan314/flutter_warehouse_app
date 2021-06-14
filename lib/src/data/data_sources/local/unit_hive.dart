@@ -13,10 +13,10 @@ class UnitLocalDataSource {
 
   Future<List<UnitEntity>> getUnitList() async {
     Box unitBox = await Hive.openBox<UnitEntity>(DefaultConfig.unitsCollection);
-    log('>>>>>UnitHive - getUnitList - unit: ${unitBox.length}');
-    int lenght = unitBox.length;
-    List<UnitEntity> units= [];
-    for(int index = 0; index < lenght; index++) {
+    log('>>>>>UnitHive - getUnitList - unit: ${unitBox?.length}');
+    int length = unitBox.length;
+    List<UnitEntity> units = [];
+    for(int index = 0; index < length; index++) {
       final UnitEntity unit = unitBox.getAt(index) as UnitEntity;
       units.add(unit);
     }
