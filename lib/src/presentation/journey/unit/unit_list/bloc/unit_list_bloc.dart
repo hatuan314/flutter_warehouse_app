@@ -24,6 +24,9 @@ class UnitListBloc extends Bloc<UnitListEvent, UnitListState> {
     if (event is InitialUnitListEvent) {
       yield* _mapInitialUnitListEventToState(event);
     }
+    if (event is RemoveAllUnitsEvent) {
+      yield* _mapRemoveAllUnitsEventToState();
+    }
   }
 
   Stream<UnitListState> _mapInitialUnitListEventToState(
@@ -32,5 +35,11 @@ class UnitListBloc extends Bloc<UnitListEvent, UnitListState> {
     List<UnitEntity> units = await unitUc.getUnitList();
     log('>>>>>>>>UnitListBloc - getUnitList - length: ${units.length}');
     yield state.copyWith(viewState: ViewState.initial, units: units);
+  }
+
+  Stream<UnitListState> _mapRemoveAllUnitsEventToState() async* {
+    yield state.copyWith(viewState: ViewState.loading);
+    await unitUc.removeAllUnits();
+    yield state.copyWith(viewState: ViewState.initial, units: []);
   }
 }

@@ -7,5 +7,9 @@ abstract class UnitRepository {
 
   Future<void> setDefaultUnitList();
 
+  Future<void> setUnitListLocal(List<UnitEntity> units);
+
   Future<void> setUnitLocal(UnitEntity unit);
+
+  Future<void> removeAll();
 }

@@ -3,12 +3,16 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+
+import 'package:flutterwarehouseapp/common/extensions/list_extensions.dart';
 import 'package:flutterwarehouseapp/common/configs/default_env.dart';
 import 'package:flutterwarehouseapp/common/configs/local_db_setup.dart';
 import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/unit_entity.dart';
+import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/unit/unit_list/bloc/unit_list_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/unit/unit_list/bloc/unit_list_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/unit/unit_list/bloc/unit_list_state.dart';
@@ -43,57 +47,50 @@ class UnitListScreen extends StatelessWidget {
   }
 
   Widget _bodyWidget(UnitListState state) {
-    // if (state.viewState == ViewState.initial) {
-    //   return WatchBoxBuilder(
-    //       box: locator<LocalDbSetup>().unitBox,
-    //       builder: (context, unitsBox) {
-    //         log('UnitListScreen - units: ${unitsBox.length}');
-    //         if (unitsBox.length == 0) {
-    //           BlocProvider.of<UnitListBloc>(context)
-    //               .add(InitialUnitListEvent());
-    //         }
-    //         return ListView.builder(
-    //             itemCount: unitsBox.length,
-    //             itemBuilder: (context, index) {
-    //               UnitEntity unit = unitsBox.getAt(index) as UnitEntity;
-    //               return AnimationConfiguration.staggeredList(
-    //                 position: index,
-    //                 duration: const Duration(milliseconds: 375),
-    //                 child: AnimationWidget(
-    //                   index: index,
-    //                   child: _unitItemWidget(unit),
-    //                 ),
-    //               );
-    //             });
-    //       });
-    // }
-    // if (state.viewState == ViewState.loading) {
-    //   return LoadingContainer(child: SizedBox());
-    // }
-    // return EmptyWidget();
-    return ValueListenableBuilder(
-        valueListenable: Hive.box<UnitEntity>(DefaultConfig.unitsCollection).listenable(),
-        builder: (context, unitsBox, _) {
-          log('UnitListScreen - units: ${unitsBox.length}');
-          if (unitsBox.length == 0) {
-            BlocProvider.of<UnitListBloc>(context)
-                .add(InitialUnitListEvent());
-          }
-          return ListView.builder(
-              itemCount: unitsBox.length,
-              itemBuilder: (context, index) {
-                UnitEntity unit = unitsBox.getAt(index) as UnitEntity;
-                log("${unit.name}");
-                return AnimationConfiguration.staggeredList(
-                  position: index,
-                  duration: const Duration(milliseconds: 375),
-                  child: AnimationWidget(
-                    index: index,
-                    child: _unitItemWidget(unit),
-                  ),
-                );
-              });
-        });
+    if (state.viewState == ViewState.initial) {
+      if (state.units.isNotSafe) {
+        return EmptyWidget();
+      }
+      return ListView.builder(
+          itemCount: state.units.length,
+          itemBuilder: (context, index) {
+            return AnimationConfiguration.staggeredList(
+              position: index,
+              duration: const Duration(milliseconds: 375),
+              child: AnimationWidget(
+                index: index,
+                child: _unitItemWidget(state.units[index]),
+              ),
+            );
+          });
+    }
+    if (state.viewState == ViewState.loading) {
+      return LoadingContainer(child: SizedBox());
+    }
+    return EmptyWidget();
+    // return ValueListenableBuilder(
+    //     valueListenable: Hive.box<UnitEntity>(DefaultConfig.unitsCollection).listenable(),
+    //     builder: (context, unitsBox, _) {
+    //       log('UnitListScreen - units: ${unitsBox.length}');
+    //       if (unitsBox.length == 0) {
+    //         BlocProvider.of<UnitListBloc>(context)
+    //             .add(InitialUnitListEvent());
+    //       }
+    //       return ListView.builder(
+    //           itemCount: unitsBox.length,
+    //           itemBuilder: (context, index) {
+    //             UnitEntity unit = unitsBox.getAt(index) as UnitEntity;
+    //             log("${unit.name}");
+    //             return AnimationConfiguration.staggeredList(
+    //               position: index,
+    //               duration: const Duration(milliseconds: 375),
+    //               child: AnimationWidget(
+    //                 index: index,
+    //                 child: _unitItemWidget(unit),
+    //               ),
+    //             );
+    //           });
+    //     });
   }
 
   @override
@@ -104,6 +101,15 @@ class UnitListScreen extends StatelessWidget {
         onLeading: () {
           Navigator.of(context).pop();
         },
+        actions: [
+          IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                locator<SnackbarBloc>().add(ShowSnackbar(
+                    title: StringConstants.developmentTxt,
+                    type: SnackBarType.warning));
+              })
+        ],
         title: StringConstants.unitTxt,
         child: _bodyWidget(state),
       );

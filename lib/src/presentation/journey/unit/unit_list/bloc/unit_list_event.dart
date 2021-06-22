@@ -9,3 +9,9 @@ class InitialUnitListEvent extends UnitListEvent {
   List<Object> get props => [];
 
 }
+
+class RemoveAllUnitsEvent extends UnitListEvent {
+  @override
+  List<Object> get props => [];
+
+}

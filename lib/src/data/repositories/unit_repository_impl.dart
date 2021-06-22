@@ -53,4 +53,14 @@ class UnitRepositoryImpl implements UnitRepository {
   Future<void> setUnitLocal(UnitEntity unit) async {
     await unitLds.setUnit(unit);
   }
+
+  @override
+  Future<void> setUnitListLocal(List<UnitEntity> units) async {
+    await unitLds.setUnitList(units);
+  }
+
+  @override
+  Future<void> removeAll() async {
+    await unitLds.removeAll();
+  }
 }

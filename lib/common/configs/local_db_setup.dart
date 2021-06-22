@@ -12,8 +12,8 @@ class LocalDbSetup {
         await path_provider.getApplicationDocumentsDirectory();
     Hive.init(appDocumentDirectory.path);
     Hive.registerAdapter(UnitEntityAdapter());
+    unitBox = await Hive.openBox(DefaultConfig.unitsCollection);
   }
-
 
   void dispose() {
     unitBox.compact();

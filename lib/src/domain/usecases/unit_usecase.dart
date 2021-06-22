@@ -10,24 +10,36 @@ class UnitUseCase {
   UnitUseCase({@required this.unitRepo});
 
   Future<List<UnitEntity>> getUnitList() async {
-    List<UnitEntity> units = await unitRepo.getUnitCloudList();
+    List<UnitEntity> units = await unitRepo.getUnitLocalList();
     if (units.isSafe) {
-      // synchronized local
-      for (final UnitEntity unit in units) {
-        await unitRepo.setUnitLocal(unit);
-      }
       return units;
     }
     if (units.isNotSafe) {
-      // Set and get default units
+      units = await getUnitListCloud();
+      return units;
+    }
+    return [];
+  }
+
+  Future<List<UnitEntity>> getUnitListCloud() async {
+    List<UnitEntity> units = await unitRepo.getUnitCloudList();
+    if (units.isNotSafe) {
       await setDefaultUnitList();
       units = await unitRepo.getUnitLocalList();
       return units;
     }
-    return units;
+    if (units.isSafe) {
+      await unitRepo.setUnitListLocal(units);
+      return units;
+    }
+    return [];
   }
 
   Future<void> setDefaultUnitList() {
     return unitRepo.setDefaultUnitList();
+  }
+
+  Future<void> removeAllUnits() {
+    return unitRepo.removeAll();
   }
 }

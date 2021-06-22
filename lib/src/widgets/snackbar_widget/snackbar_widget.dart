@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 
@@ -21,7 +20,7 @@ class TopSnackBar<T extends Object> extends StatefulWidget {
   TopSnackBarStatusCallBack onStatusChanged;
 
   TopSnackBar(
-      {Key key, this.context, this.title, this.type = SnackBarType.error})
+      {Key key, this.context, this.title, this.type = SnackBarType.warning})
       : super(key: key) {
     onStatusChanged = onStatusChanged ?? (status) {};
   }
@@ -98,13 +97,23 @@ class _TopSnackBarState<K extends Object> extends State<TopSnackBar>
           color: AppColor.green,
         ),
       );
-    } else {
+    }
+    if (widget.type == SnackBarType.error) {
       return Container(
         key: const Key('close_container_icon_key'),
         child: Icon(
           Icons.cancel,
           size: 32,
           color: AppColor.errorColor,
+        ),
+      );
+    } else {
+      return Container(
+        key: const Key('warning_container_icon_key'),
+        child: Icon(
+          Icons.warning_rounded,
+          size: 32,
+          color: AppColor.primaryColor,
         ),
       );
     }
@@ -115,7 +124,9 @@ class _TopSnackBarState<K extends Object> extends State<TopSnackBar>
       widget.title ?? '',
       softWrap: true,
       key: const ValueKey('snackbar_title_key'),
-      style: Theme.of(context).snackBarTheme.contentTextStyle,
+      style: Theme.of(context)
+          .snackBarTheme
+          .contentTextStyle,
     );
   }
 

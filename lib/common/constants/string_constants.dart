@@ -3,4 +3,5 @@ class StringConstants {
   static const String errorInvalidEmail = 'Email không hợp lệ';
   static const String emptyField = 'Trường này không được để trống';
   static const String unitTxt = 'Đơn vị tính';
+  static const String developmentTxt = 'Đang phát triển';
 }
