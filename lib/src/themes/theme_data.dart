@@ -11,7 +11,6 @@ ThemeData appTheme(BuildContext context) {
       fontFamily: 'QS',
       primaryColor: AppColor.primaryColor,
       buttonTheme: ButtonThemeData(
-        //update and enhance in screens where necessary
         buttonColor: AppColor.primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(LayoutConstants.roundedRadius),

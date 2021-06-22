@@ -73,6 +73,7 @@ class ConfirmOtpBodyWidget extends StatelessWidget {
               appContext: context,
               textStyle: ThemeText.headline4,
               length: 6,
+              autoFocus: true,
               keyboardType: TextInputType.number,
               obscureText: false,
               animationType: AnimationType.fade,

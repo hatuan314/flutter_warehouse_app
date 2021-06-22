@@ -54,7 +54,7 @@ class UpdateInfoBloc extends Bloc<UpdateInfoEvent, UpdateInfoState> {
       await pref.saveSession();
       userBloc.add(GetUserEvent());
       if (event.isRegistration) {
-        await unitUc.setDefaultUnitList();
+        await unitUc.getUnitList();
       }
       yield UpdateInfoState(viewState: ViewState.success);
     } else {

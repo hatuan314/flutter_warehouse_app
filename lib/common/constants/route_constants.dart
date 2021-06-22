@@ -13,6 +13,10 @@ class RouteList {
   /// Unit
   static const String unitList = '/unit-list';
 
+  /// Distributor
+  static const String distributorList = '/distributor-list';
+  static const String addDistributor = '/add-distributor';
+
   /// Dev
   static const String devMode = '/devMode';
 }

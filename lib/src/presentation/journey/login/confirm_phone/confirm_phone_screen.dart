@@ -52,9 +52,9 @@ class LoginScreen extends StatelessWidget {
                       Navigator.pushNamed(context, RouteList.confirmOtp,
                           arguments: {
                             ArgumentConstants.verificationIdArgument:
-                            state.verificationId,
+                                state.verificationId,
                             ArgumentConstants.phoneArgument:
-                            phoneController.text
+                                phoneController.text
                           });
                     }
                   }, builder: (context, state) {
@@ -71,9 +71,11 @@ class LoginScreen extends StatelessWidget {
                           height: LayoutConstants.paddingVertical20,
                         ),
                         TextFormWidget(
+                          autoFocus: true,
                           handlerOnSubmitted: (phone) =>
                               _onLogin(context, phone),
                           controller: phoneController,
+                          keyboardType: TextInputType.phone,
                           hintText: LoginConstants.hintPhoneTxt,
                           validator: (value) {
                             return ValidatorUtils.validatePhoneNumber(value);

@@ -1,4 +1,5 @@
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
+import 'package:flutterwarehouseapp/common/extensions/string_extensions.dart';
 
 class ValidatorUtils {
   static String _validatePhone = r'0\d{8,}';
@@ -22,6 +23,13 @@ class ValidatorUtils {
         value.isEmpty ||
         !_expEmail.hasMatch(value)) {
       return StringConstants.errorInvalidEmail;
+    }
+    return null;
+  }
+
+  static String validateEmptyField(String value) {
+    if (value.isNotSafe) {
+      return StringConstants.emptyField;
     }
     return null;
   }

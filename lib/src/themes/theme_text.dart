@@ -42,7 +42,7 @@ class ThemeText {
   static TextStyle subtitle1 = TextStyle(
     fontSize: 18.sp,
     color: AppColor.textColor,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w600,
   );
 
   static TextStyle subtitle2 = TextStyle(

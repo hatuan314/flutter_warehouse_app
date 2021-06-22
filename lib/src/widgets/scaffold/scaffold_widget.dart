@@ -7,6 +7,7 @@ class ScaffoldWidget extends StatelessWidget {
   final String title;
   final Function onLeading;
   final Widget child;
+  final Widget floatingActionButton;
   final List<Widget> actions;
 
   const ScaffoldWidget({
@@ -16,6 +17,7 @@ class ScaffoldWidget extends StatelessWidget {
     this.onLeading,
     this.child,
     this.actions,
+    this.floatingActionButton,
   }) : super(key: key);
 
   @override
@@ -42,6 +44,8 @@ class ScaffoldWidget extends StatelessWidget {
         actions: actions,
       ),
       body: child,
+      floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 }
