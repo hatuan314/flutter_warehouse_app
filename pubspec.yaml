@@ -46,6 +46,7 @@ dependencies:
   rxdart: ^0.25.0
   path_provider: ^1.6.28
   flutter_staggered_animations: ^0.1.3
+  awesome_dialog: ^1.3.2
 
 dev_dependencies:
   flutter_test:

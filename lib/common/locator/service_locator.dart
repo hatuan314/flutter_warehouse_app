@@ -15,6 +15,7 @@ import 'package:flutterwarehouseapp/src/domain/usecases/user_usecase.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/user_bloc/user_bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/bloc/add_distributor_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/confirm_otp/bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/confirm_phone/blocs/blocs.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/splash/blocs/splash_bloc.dart';
@@ -63,6 +64,7 @@ void setup() {
   locator.registerFactory<UnitListBloc>(() => UnitListBloc(
         unitUc: locator<UnitUseCase>(),
       ));
+  locator.registerFactory<AddDistributorBloc>(() => AddDistributorBloc());
 
   /// UseCases
   locator.registerFactory<UserUseCase>(() => UserUseCase(
