@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:flutterwarehouseapp/common/extensions/screen_utils_extensions.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 
@@ -27,6 +29,8 @@ class ScaffoldWidget extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColor.primaryColor,
         elevation: 0,
+        titleSpacing: 0,
+        leadingWidth: 48.w,
         leading: isLeading
             ? IconButton(
                 onPressed: onLeading,
