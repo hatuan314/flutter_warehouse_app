@@ -1,12 +1,22 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 
 import 'package:flutterwarehouseapp/common/extensions/string_extensions.dart';
+import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/bloc/add_distributor_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/bloc/add_distributor_state.dart';
 import 'package:flutterwarehouseapp/src/presentation/view_state.dart';
 
 class AddDistributorBloc
     extends Bloc<AddDistributorEvent, AddDistributorState> {
+  final SnackbarBloc snackbarBloc;
+  final LoaderBloc loaderBloc;
+
+  AddDistributorBloc({@required this.snackbarBloc, @required this.loaderBloc});
+
   @override
   AddDistributorState get initialState =>
       InitialAddDistributorState(viewState: ViewState.initial);
@@ -16,7 +26,7 @@ class AddDistributorBloc
       AddDistributorEvent event) async* {
     switch (event.runtimeType) {
       case PopAddDistributorEvent:
-        yield* _mapPopAddDistributorEvent(event);
+        yield* _mapPopAddDistributorEventToState(event);
         break;
       case CancelPopAddDistributorEvent:
         yield InitialAddDistributorState(viewState: ViewState.initial);
@@ -24,7 +34,7 @@ class AddDistributorBloc
     }
   }
 
-  Stream<AddDistributorState> _mapPopAddDistributorEvent(
+  Stream<AddDistributorState> _mapPopAddDistributorEventToState(
       PopAddDistributorEvent event) async* {
     final bool flag = isShowPopDialog(
       name: event.name,

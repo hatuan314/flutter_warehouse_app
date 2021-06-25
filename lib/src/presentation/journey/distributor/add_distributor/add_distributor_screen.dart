@@ -13,8 +13,10 @@ import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_dis
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 import 'package:flutterwarehouseapp/src/widgets/button/button_widget.dart';
+import 'package:flutterwarehouseapp/src/widgets/internet_widget/check_internet_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/scaffold/scaffold_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/view_state_widget/empty_widget.dart';
+import 'package:flutterwarehouseapp/src/widgets/view_state_widget/no_internet_widget.dart';
 
 class AddDistributorScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -75,8 +77,7 @@ class AddDistributorScreen extends StatelessWidget {
                 children: [
                   Text(
                     AddDistributorConstants.titlePopDialog,
-                    style: ThemeText.headline6
-                        .copyWith(color: AppColor.red),
+                    style: ThemeText.headline6.copyWith(color: AppColor.red),
                   ),
                   SizedBox(
                     height: LayoutConstants.paddingVertical15,
@@ -118,7 +119,8 @@ class AddDistributorScreen extends StatelessWidget {
           ));
         },
         title: StringConstants.addDistributorTxt,
-        child: _bodyWidget(),
+        child: InternetWidget(child: _bodyWidget()),
+        // child: NoInternetWidget(),
       );
     });
   }

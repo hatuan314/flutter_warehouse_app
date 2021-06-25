@@ -22,6 +22,7 @@ import 'package:flutterwarehouseapp/src/presentation/journey/login/splash/blocs/
 import 'package:flutterwarehouseapp/src/presentation/journey/main/bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/profile/update_information/blocs/update_info_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/unit/unit_list/bloc/unit_list_bloc.dart';
+import 'package:flutterwarehouseapp/src/widgets/internet_widget/bloc/internet_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 GetIt locator = GetIt.instance;
@@ -30,6 +31,9 @@ void setup() {
   /// Blocs
   locator.registerLazySingleton<LoaderBloc>(() => LoaderBloc());
   locator.registerLazySingleton<SnackbarBloc>(() => SnackbarBloc());
+  locator.registerFactory<InternetBloc>(() => InternetBloc(
+    snackbarBloc: locator<SnackbarBloc>(),
+  ));
   locator.registerFactory(() => SplashBloc(
         pref: locator<AppPreference>(),
         setupFirebase: locator<SetupFirebaseDatabase>(),
@@ -64,7 +68,10 @@ void setup() {
   locator.registerFactory<UnitListBloc>(() => UnitListBloc(
         unitUc: locator<UnitUseCase>(),
       ));
-  locator.registerFactory<AddDistributorBloc>(() => AddDistributorBloc());
+  locator.registerFactory<AddDistributorBloc>(() => AddDistributorBloc(
+        snackbarBloc: locator<SnackbarBloc>(),
+        loaderBloc: locator<LoaderBloc>(),
+      ));
 
   /// UseCases
   locator.registerFactory<UserUseCase>(() => UserUseCase(

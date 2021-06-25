@@ -7,4 +7,5 @@ class StringConstants {
   static const String addDistributorTxt = 'Thêm nhà phân phối';
   static const String createTxt = 'Tạo';
   static const String developmentTxt = 'Đang phát triển';
+  static const String noInternetTxt = 'Không có kết nối internet';
 }

@@ -5,6 +5,7 @@ import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/add_distributor_screen.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/bloc/add_distributor_bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/bloc/add_distributor_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_list/distributor_list_screen.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/profile/update_information/blocs/update_info_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/profile/update_information/update_information_screen.dart';
@@ -14,7 +15,8 @@ class DistributorRoute {
     return {
       RouteList.distributorList: (context) => DistributorListScreen(),
       RouteList.addDistributor: (context) => BlocProvider(
-          create: (_) => locator<AddDistributorBloc>(),
+          create: (_) =>
+              locator<AddDistributorBloc>(),
           child: AddDistributorScreen()),
     };
   }

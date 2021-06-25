@@ -107,7 +107,18 @@ class _TopSnackBarState<K extends Object> extends State<TopSnackBar>
           color: AppColor.errorColor,
         ),
       );
-    } else {
+    }
+    if (widget.type == SnackBarType.disconnect) {
+      return Container(
+        key: const Key('disconnect_container_icon_key'),
+        child: Icon(
+          Icons.wifi_off_sharp,
+          size: 32,
+          color: AppColor.errorColor,
+        ),
+      );
+    }
+    else {
       return Container(
         key: const Key('warning_container_icon_key'),
         child: Icon(

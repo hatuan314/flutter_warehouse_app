@@ -16,4 +16,5 @@ class PopAddDistributorEvent extends AddDistributorEvent {
   });
 }
 
+
 class CancelPopAddDistributorEvent extends AddDistributorEvent {}
