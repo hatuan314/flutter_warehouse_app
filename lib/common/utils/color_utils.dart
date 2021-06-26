@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/src/data/colors.dart';
+import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 
 class ColorUtils {
   static int parseInt(Color color) {
@@ -13,6 +14,9 @@ class ColorUtils {
   }
 
   static Color convertColor(int value) {
+    if (value == null) {
+      return AppColor.primaryColor;
+    }
     return Color(value);
   }
 
