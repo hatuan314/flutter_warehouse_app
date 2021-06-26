@@ -13,6 +13,7 @@ import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_dis
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 import 'package:flutterwarehouseapp/src/widgets/button/button_widget.dart';
+import 'package:flutterwarehouseapp/src/widgets/dialog/common_dialog.dart';
 import 'package:flutterwarehouseapp/src/widgets/internet_widget/check_internet_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/scaffold/scaffold_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/view_state_widget/empty_widget.dart';
@@ -75,32 +76,15 @@ class AddDistributorScreen extends StatelessWidget {
         listener: (context, state) {
       if (state is PopAddDistributorState) {
         if (state.isShowDialog) {
-          AwesomeDialog(
-            context: context,
-            animType: AnimType.SCALE,
+          CommonDialog(
+            context,
             dialogType: DialogType.WARNING,
-            body: Center(
-              child: Column(
-                children: [
-                  Text(
-                    AddDistributorConstants.titlePopDialog,
-                    style: ThemeText.headline6.copyWith(color: AppColor.red),
-                  ),
-                  SizedBox(
-                    height: LayoutConstants.paddingVertical15,
-                  ),
-                  Text(
-                    AddDistributorConstants.contentPopDialog,
-                    style: ThemeText.body2,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-            btnOkOnPress: () {
+            title: AddDistributorConstants.titlePopDialog,
+            content: AddDistributorConstants.contentPopDialog,
+            onAccept: () {
               Navigator.of(context).pop();
             },
-            btnCancelOnPress: () {
+            onCancel: () {
               BlocProvider.of<AddDistributorBloc>(context)
                   .add(CancelPopAddDistributorEvent());
             },
