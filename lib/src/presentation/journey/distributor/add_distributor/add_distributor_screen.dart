@@ -27,7 +27,7 @@ class AddDistributorScreen extends StatelessWidget {
   final TextEditingController _firstEmailController = TextEditingController();
   final TextEditingController _secondEmailController = TextEditingController();
 
-  Widget _bodyWidget() {
+  Widget _bodyWidget(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: LayoutConstants.paddingHorizontalApp,
@@ -52,7 +52,14 @@ class AddDistributorScreen extends StatelessWidget {
                   title: StringConstants.createTxt,
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
-                      log('message');
+                      BlocProvider.of<AddDistributorBloc>(context)
+                          .add(CreateDistributorEvent(
+                        name: _nameController.text.trim(),
+                        firstPhone: _firstPhoneController.text.trim(),
+                        secondPhone: _secondPhoneController.text.trim(),
+                        firstEmail: _firstEmailController.text.trim(),
+                        secondEmail: _secondEmailController.text.trim(),
+                      ));
                     }
                   }),
             ],
@@ -90,8 +97,6 @@ class AddDistributorScreen extends StatelessWidget {
                 ],
               ),
             ),
-            // title: 'This is Ignored',
-            // desc: 'This is also Ignored',
             btnOkOnPress: () {
               Navigator.of(context).pop();
             },
@@ -104,6 +109,9 @@ class AddDistributorScreen extends StatelessWidget {
         if (!state.isShowDialog) {
           Navigator.of(context).pop();
         }
+      }
+      if (state is CreateDistributorSuccessState) {
+        Navigator.of(context).pop();
       }
     }, builder: (context, snapshot) {
       return ScaffoldWidget(
@@ -119,7 +127,7 @@ class AddDistributorScreen extends StatelessWidget {
           ));
         },
         title: StringConstants.addDistributorTxt,
-        child: InternetWidget(child: _bodyWidget()),
+        child: InternetWidget(child: _bodyWidget(context)),
         // child: NoInternetWidget(),
       );
     });

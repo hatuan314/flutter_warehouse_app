@@ -8,7 +8,7 @@ part of 'distributor_entity.dart';
 
 class DistributorEntityAdapter extends TypeAdapter<DistributorEntity> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
   DistributorEntity read(BinaryReader reader) {
@@ -23,13 +23,14 @@ class DistributorEntityAdapter extends TypeAdapter<DistributorEntity> {
       color: fields[3] as int,
       createAt: fields[4] as DateTime,
       lastUpdate: fields[5] as DateTime,
+      document: fields[6] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, DistributorEntity obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class DistributorEntityAdapter extends TypeAdapter<DistributorEntity> {
       ..writeByte(4)
       ..write(obj.createAt)
       ..writeByte(5)
-      ..write(obj.lastUpdate);
+      ..write(obj.lastUpdate)
+      ..writeByte(6)
+      ..write(obj.document);
   }
 
   @override

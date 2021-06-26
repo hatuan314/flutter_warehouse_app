@@ -33,6 +33,8 @@ class ScaffoldWidget extends StatelessWidget {
         leadingWidth: 48.w,
         leading: isLeading
             ? IconButton(
+          padding: EdgeInsets.zero,
+                alignment: Alignment.center,
                 onPressed: onLeading,
                 icon: Icon(
                   Icons.arrow_back_ios,

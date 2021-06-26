@@ -17,10 +17,11 @@ class UnitModel extends UnitEntity {
   UnitModel.fromJson(Map<String, dynamic> json, {String id}) {
     this.id = id;
     name = json['name'];
-    createAt =
-        json['create_at'] != null ? DateTime.parse(json['create_at']) : null;
+    createAt = json['create_at'] != null
+        ? DateTime.fromMillisecondsSinceEpoch(json['create_at'])
+        : null;
     lastUpdate = json['last_update'] != null
-        ? DateTime.parse(json['last_update'])
+        ? DateTime.fromMillisecondsSinceEpoch(json['last_update'])
         : null;
   }
 

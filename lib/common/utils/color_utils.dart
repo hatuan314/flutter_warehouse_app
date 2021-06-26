@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutterwarehouseapp/src/data/colors.dart';
 
 class ColorUtils {
   static int parseInt(Color color) {
@@ -11,5 +14,11 @@ class ColorUtils {
 
   static Color convertColor(int value) {
     return Color(value);
+  }
+
+  static Color randColor() {
+    var rng = new Random();
+    int index = rng.nextInt(colors.length);
+    return colors[index];
   }
 }

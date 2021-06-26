@@ -1,15 +1,20 @@
 import 'package:flutterwarehouseapp/common/configs/firebase_setup.dart';
 import 'package:flutterwarehouseapp/common/configs/local_db_setup.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/local/app_preference.dart';
+import 'package:flutterwarehouseapp/src/data/data_sources/local/distributor_hive.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/local/pref.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/local/unit_hive.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/base_service.dart';
+import 'package:flutterwarehouseapp/src/data/data_sources/remote/distributor_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/unit_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/user_datasource.dart';
+import 'package:flutterwarehouseapp/src/data/repositories/distributor_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/unit_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/user_repository_impl.dart';
+import 'package:flutterwarehouseapp/src/domain/repositories/distributor_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/unit_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/user_repository.dart';
+import 'package:flutterwarehouseapp/src/domain/usecases/distributor_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/unit_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/user_usecase.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
@@ -32,8 +37,8 @@ void setup() {
   locator.registerLazySingleton<LoaderBloc>(() => LoaderBloc());
   locator.registerLazySingleton<SnackbarBloc>(() => SnackbarBloc());
   locator.registerFactory<InternetBloc>(() => InternetBloc(
-    snackbarBloc: locator<SnackbarBloc>(),
-  ));
+        snackbarBloc: locator<SnackbarBloc>(),
+      ));
   locator.registerFactory(() => SplashBloc(
         pref: locator<AppPreference>(),
         setupFirebase: locator<SetupFirebaseDatabase>(),
@@ -69,6 +74,7 @@ void setup() {
         unitUc: locator<UnitUseCase>(),
       ));
   locator.registerFactory<AddDistributorBloc>(() => AddDistributorBloc(
+        distributorUc: locator<DistributorUseCase>(),
         snackbarBloc: locator<SnackbarBloc>(),
         loaderBloc: locator<LoaderBloc>(),
       ));
@@ -80,6 +86,9 @@ void setup() {
   locator.registerFactory<UnitUseCase>(() => UnitUseCase(
         unitRepo: locator<UnitRepository>(),
       ));
+  locator.registerFactory<DistributorUseCase>(() => DistributorUseCase(
+        distributorRepo: locator<DistributorRepository>(),
+      ));
 
   /// Repositories
   locator.registerFactory<UserRepository>(() => UserRepositoryImpl(
@@ -89,6 +98,11 @@ void setup() {
         unitDs: locator<UnitDataSource>(),
         unitLds: locator<UnitLocalDataSource>(),
       ));
+  locator
+      .registerFactory<DistributorRepository>(() => DistributorRepositoryImpl(
+            distributorDs: locator<DistributorDataSource>(),
+            distributorHive: locator<DistributorHive>(),
+          ));
 
   /// DataSource
   locator.registerLazySingleton<UserDataSource>(() => UserDataSource(
@@ -99,12 +113,19 @@ void setup() {
         setup: locator<SetupFirebaseDatabase>(),
         service: locator<BaseService>(),
       ));
+  locator
+      .registerLazySingleton<DistributorDataSource>(() => DistributorDataSource(
+            setup: locator<SetupFirebaseDatabase>(),
+            service: locator<BaseService>(),
+          ));
   locator.registerLazySingleton<Pref>(() => LocalPref());
   locator.registerLazySingleton<AppPreference>(() => AppPreference(
         pref: locator<Pref>(),
       ));
   locator.registerLazySingleton<UnitLocalDataSource>(
       () => UnitLocalDataSource(database: locator<LocalDbSetup>()));
+  locator.registerLazySingleton<DistributorHive>(
+      () => DistributorHive(locator<LocalDbSetup>()));
 
   /// Utils
   locator.registerLazySingleton<SetupFirebaseDatabase>(

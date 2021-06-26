@@ -8,4 +8,6 @@ class StringConstants {
   static const String createTxt = 'Tạo';
   static const String developmentTxt = 'Đang phát triển';
   static const String noInternetTxt = 'Không có kết nối internet';
+  static const String createFailureTxt = 'Tạo thất bại';
+  static const String createSuccessTxt = 'Tạo thành công';
 }

@@ -8,6 +8,7 @@ class DefaultConfig {
   // static const mainCollection = 'product';
   static const mainCollection = 'develop';
   static const unitsCollection = 'units';
+  static const distributorsCollection = 'distributors';
   static const profileCollection = 'profile';
 
   /// Documents

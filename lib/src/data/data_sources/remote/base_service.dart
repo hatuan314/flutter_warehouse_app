@@ -49,4 +49,24 @@ class BaseService {
       return null;
     }
   }
+
+  Future<void> updateDocument(
+      {CollectionReference ref, Map<String, dynamic> request, String document}) async {
+    try {
+      return ref.doc(document).update(request);
+    } on FirebaseException catch (e) {
+      locator<SnackbarBloc>()
+          .add(ShowSnackbar(title: e.toString(), type: SnackBarType.error));
+    }
+  }
+
+  Future<void> deleteDocument(
+      {CollectionReference ref, String document}) async {
+    try {
+      return ref.doc(document).delete();
+    } on FirebaseException catch (e) {
+      locator<SnackbarBloc>()
+          .add(ShowSnackbar(title: e.toString(), type: SnackBarType.error));
+    }
+  }
 }

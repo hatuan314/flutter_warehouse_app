@@ -22,10 +22,11 @@ class DistributorModel extends DistributorEntity {
     phones = json['phones'].cast<String>();
     emails = json['emails'].cast<String>();
     color = json['color'];
-    createAt =
-        json['create_at'] != null ? DateTime.parse(json['create_at']) : null;
+    createAt = json['create_at'] != null
+        ? DateTime.fromMillisecondsSinceEpoch(json['create_at'])
+        : null;
     lastUpdate = json['last_update'] != null
-        ? DateTime.parse(json['last_update'])
+        ? DateTime.fromMillisecondsSinceEpoch(json['last_update'])
         : null;
   }
 

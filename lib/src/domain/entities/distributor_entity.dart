@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 
 part 'distributor_entity.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 1)
 class DistributorEntity {
   @HiveField(0)
   String name;
@@ -17,14 +17,18 @@ class DistributorEntity {
   DateTime createAt;
   @HiveField(5)
   DateTime lastUpdate;
+  @HiveField(6)
+  String document;
 
-  DistributorEntity(
-      {this.name,
-      this.phones,
-      this.emails,
-      this.color,
-      this.createAt,
-      this.lastUpdate});
+  DistributorEntity({
+    this.name,
+    this.phones,
+    this.emails,
+    this.color,
+    this.createAt,
+    this.lastUpdate,
+    this.document,
+  });
 
   DistributorModel toModel() {
     return DistributorModel(
