@@ -19,6 +19,8 @@ class LayoutConstants {
   static double loadingSize = 100.w;
   static double buttonHeight = 48.h;
   static double smallIconBtnSize = 24.w;
+  static double smallIconCircleBtnSize = 30.w;
   static double avatarSize = 80.w;
   static double iconSize = 18.w;
+  static double iconSmallSize = 15.w;
 }

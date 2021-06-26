@@ -24,8 +24,7 @@ class DistributorRepositoryImpl implements DistributorRepository {
 
   @override
   Future<List<DistributorEntity>> getDistributorLocalList() {
-    // TODO: implement getDistributorLocalList
-    throw UnimplementedError();
+    return distributorHive.getAllDistributors();
   }
 
   @override
@@ -59,5 +58,10 @@ class DistributorRepositoryImpl implements DistributorRepository {
   Future<void> update({int index, DistributorEntity distributor}) {
     // TODO: implement update
     throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> setDistributorLocalList(List<DistributorEntity> distributorList) {
+    return distributorHive.setDistributorList(distributorList);
   }
 }

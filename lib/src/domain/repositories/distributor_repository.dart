@@ -6,6 +6,7 @@ abstract class DistributorRepository {
   Future<List<DistributorEntity>> getDistributorLocalList();
 
   Future<bool> setDistributor(DistributorEntity distributor);
+  Future<bool> setDistributorLocalList(List<DistributorEntity> distributorList);
 
   Future<void> remove({int index, String document});
 

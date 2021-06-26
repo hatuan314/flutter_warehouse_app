@@ -9,9 +9,12 @@ class AppColor {
 
   static const Color white = Colors.white;
   static const Color grey = Colors.grey;
+  static Color grey100 = Colors.grey[100];
   static Color black25 = Colors.black.withAlpha(64);
   static const Color red = Colors.red;
   static const Color transparent = Colors.transparent;
   static const Color paleGrey = Color(0xfff4f4f5);
   static const Color green = Colors.green;
+  static const Color blue = Colors.blue;
+  static const Color deepPurpleAccent = Colors.deepPurpleAccent;
 }
