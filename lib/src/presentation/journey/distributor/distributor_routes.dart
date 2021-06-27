@@ -6,6 +6,7 @@ import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/add_distributor_screen.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/bloc/add_distributor_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/bloc/add_distributor_event.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_detail/distributor_detail_screen.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_list/bloc/distributor_list_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_list/bloc/distributor_list_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_list/distributor_list_screen.dart';
@@ -29,15 +30,10 @@ class DistributorRoute {
       RouteSettings settings) {
     final args = settings.arguments as Map<String, dynamic>;
     return {
-      RouteList.updateProfile: (context) {
-        var fireUser = args[ArgumentConstants.fireUserArgument];
-        var isRegistration = args[ArgumentConstants.isRegistrationArgument];
-        return BlocProvider(
-          create: (_) => locator<UpdateInfoBloc>(),
-          child: UpdateInformationScreen(
-            fireUser: fireUser,
-            isRegistration: isRegistration,
-          ),
+      RouteList.distributorDetail: (context) {
+        var distributor = args[ArgumentConstants.distributorDetailArg];
+        return DistributorDetailScreen(
+          distributor: distributor,
         );
       }
       // RouteList.confirmOtp: (context) {

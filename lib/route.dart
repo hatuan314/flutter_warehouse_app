@@ -69,48 +69,16 @@ class Routes {
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                 create: (_) => locator<MainBloc>(), child: MainScreen()));
+      case RouteList.distributorDetail:
+        return MaterialPageRoute(
+          builder:
+              DistributorRoute.getRoutesWithSettings(settings)[settings.name],
+          settings: settings,
+        );
       case RouteList.devMode:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                 create: (_) => locator<MainBloc>(), child: DevModeScreen()));
-      // case RouteList.loginVerifyCode:
-      // case RouteList.createDevicePIN:
-      // case RouteList.createProfile:
-      //   return MaterialPageRoute(
-      //       builder: LoginRoutes.getRoutesWithSettings(settings)[settings.name],
-      //       settings: settings);
-      // case RouteList.enterPIN:
-      //   if (settings.arguments != null) {
-      //     return MaterialPageRoute(
-      //         builder:
-      //         LoginRoutes.getRoutesWithSettings(settings)[settings.name],
-      //         settings: settings);
-      //   }
-      //   return PageRouteBuilder(
-      //       pageBuilder: (context, animation, secondaryAnimation) =>
-      //           BlocProvider(
-      //               create: (_) => Injector.resolve<EnterPinBloc>()
-      //                 ..add(EnterPinInitialEvent()),
-      //               child: EnterPINScreen()));
-      // case RouteList.categoriesList:
-      //   return MaterialPageRoute(
-      //       builder:
-      //       PersonalRoutes.getRoutesWithSettings(settings)[settings.name],
-      //       settings: settings);
-      // case RouteList.addGoal:
-      //   return MaterialPageRoute<GoalDetailEntity>(
-      //       builder: GoalRoutes.getRoutesWithSettings(settings)[settings.name],
-      //       settings: settings);
-      // case RouteList.personalExpense:
-      // case RouteList.whoPaid:
-      // case RouteList.forWho:
-      // case RouteList.showImage:
-      // case RouteList.showItemImage:
-      // case RouteList.debt:
-      //   return MaterialPageRoute(
-      //       builder: TransactionRoutes.getRoutesWithSettings(
-      //           settings)[settings.name],
-      //       settings: settings);
     }
   }
 }

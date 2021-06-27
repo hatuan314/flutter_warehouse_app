@@ -4,10 +4,16 @@ class LayoutConstants {
   static const double roundedRadius = 10.0;
 
   static double paddingVerticalApp = paddingVertical15;
+  static double paddingVertical5 = 5.h;
   static double paddingVertical10 = 10.h;
   static double paddingVertical15 = 15.h;
   static double paddingVertical20 = 20.h;
+  static double paddingVertical30 = 30.h;
+  static double paddingVertical40 = 40.h;
   static double paddingVertical50 = 50.h;
+  static double paddingVertical60 = 60.h;
+  static double paddingVertical70 = 70.h;
+  static double paddingVertical80 = 80.h;
 
   static double paddingHorizontalApp = paddingHorizontal15;
   static double paddingHorizontal10 = 10.w;

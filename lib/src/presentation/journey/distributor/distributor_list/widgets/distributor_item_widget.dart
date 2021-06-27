@@ -1,10 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
-import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
+import 'package:flutterwarehouseapp/common/constants/argument_constants.dart';
+import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
+import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
 import 'package:flutterwarehouseapp/common/extensions/list_extensions.dart';
 import 'package:flutterwarehouseapp/common/extensions/string_extensions.dart';
 import 'package:flutterwarehouseapp/common/utils/color_utils.dart';
@@ -29,7 +29,7 @@ class DistributorItemWidget extends StatelessWidget {
     return Container(
       width: LayoutConstants.smallIconCircleBtnSize,
       height: LayoutConstants.smallIconCircleBtnSize,
-      child: new FloatingActionButton(
+      child: FloatingActionButton(
         elevation: 0.0,
         child: Icon(
           icon,
@@ -38,11 +38,12 @@ class DistributorItemWidget extends StatelessWidget {
         ),
         backgroundColor: backgroundColor,
         onPressed: onPressed,
+        heroTag: null,
       ),
     );
   }
 
-  Widget _dashboardWidget() {
+  Widget _dashboardWidget(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -88,13 +89,10 @@ class DistributorItemWidget extends StatelessWidget {
         _iconButton(
           icon: Icons.info,
           onPressed: () {
-            if (distributor.defaultEmail.isSafe) {
-              UrlLauncher.launch('mailto: ${distributor.defaultEmail}');
-            } else {
-              locator<SnackbarBloc>().add(ShowSnackbar(
-                  title: DistributorConstants.emailEmptyTxt,
-                  type: SnackBarType.warning));
-            }
+            Navigator.pushNamed(context, RouteList.distributorDetail,
+                arguments: {
+                  ArgumentConstants.distributorDetailArg: distributor
+                });
           },
           backgroundColor: AppColor.grey,
         ),
@@ -115,28 +113,21 @@ class DistributorItemWidget extends StatelessWidget {
     );
   }
 
-  Widget _titleWidget() {
+  Widget _leadingWidget() {
     return Container(
+      width: DistributorListConstants.avatarSize,
       height: DistributorListConstants.avatarSize,
-      color: AppColor.grey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            distributor.name,
-            style: ThemeText.subtitle1,
-          ),
-          // SizedBox(
-          //   height: 3,
-          // ),
-          // distributor.phones.isSafe
-          //     ? Text(
-          //   distributor?.phones[0],
-          //   style: ThemeText.caption,
-          // )
-          //     : SizedBox(),
-        ],
+      decoration: BoxDecoration(
+        color: ColorUtils.convertColor(distributor.color),
+        shape: BoxShape.circle,
+      ),
+      alignment: Alignment.center,
+      child: Text(
+        NameUtils.getSortName(distributor.name),
+        style: ThemeText.body1.copyWith(
+          fontWeight: FontWeight.w600,
+          color: AppColor.white,
+        ),
       ),
     );
   }
@@ -174,27 +165,12 @@ class DistributorItemWidget extends StatelessWidget {
                     : SizedBox(),
                 tilePadding: EdgeInsets.zero,
                 // childrenPadding: EdgeInsets.zero,
-                leading: Container(
-                  width: DistributorListConstants.avatarSize,
-                  height: DistributorListConstants.avatarSize,
-                  decoration: BoxDecoration(
-                    color: ColorUtils.convertColor(distributor.color),
-                    shape: BoxShape.circle,
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    NameUtils.getSortName(distributor.name),
-                    style: ThemeText.body1.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: AppColor.white,
-                    ),
-                  ),
-                ),
+                leading: _leadingWidget(),
                 children: [
                   Padding(
                     padding:
                         EdgeInsets.only(top: LayoutConstants.paddingVertical10),
-                    child: _dashboardWidget(),
+                    child: _dashboardWidget(context),
                   )
                 ],
               ),

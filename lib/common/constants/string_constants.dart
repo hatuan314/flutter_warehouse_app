@@ -10,4 +10,7 @@ class StringConstants {
   static const String noInternetTxt = 'Không có kết nối internet';
   static const String createFailureTxt = 'Tạo thất bại';
   static const String createSuccessTxt = 'Tạo thành công';
+  static const String phoneNumberTxt = 'Số điện thoại';
+  static const String emailTxt = 'Email';
+  static const String changeTxt = 'Thay đổi';
 }

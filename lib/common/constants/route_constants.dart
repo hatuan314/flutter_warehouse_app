@@ -16,6 +16,7 @@ class RouteList {
   /// Distributor
   static const String distributorList = '/distributor-list';
   static const String addDistributor = '/add-distributor';
+  static const String distributorDetail = '/distributor-detail';
 
   /// Dev
   static const String devMode = '/devMode';
