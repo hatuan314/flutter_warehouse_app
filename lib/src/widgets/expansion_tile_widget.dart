@@ -5,6 +5,7 @@
 // @dart = 2.8
 
 import 'package:flutter/material.dart';
+import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 
 const Duration _kExpand = Duration(milliseconds: 200);
 
@@ -211,7 +212,6 @@ class _ExpansionTileWidgetState extends State<ExpansionTileWidget>
   }
 
   Widget _buildChildren(BuildContext context, Widget child) {
-
     return Container(
       decoration: BoxDecoration(
         color: _backgroundColor.value ?? Colors.transparent,

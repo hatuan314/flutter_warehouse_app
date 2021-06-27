@@ -1,5 +1,7 @@
-import 'package:flutterwarehouseapp/src/data/models/distributor_model.dart';
 import 'package:hive/hive.dart';
+
+import 'package:flutterwarehouseapp/src/data/models/distributor_model.dart';
+import 'package:flutterwarehouseapp/common/extensions/string_extensions.dart';
 
 part 'distributor_entity.g.dart';
 
@@ -39,5 +41,25 @@ class DistributorEntity {
       createAt: createAt,
       lastUpdate: lastUpdate,
     );
+  }
+
+  String get defaultEmail {
+    for(final String email in emails) {
+      if (email.isSafe) {
+
+        return email;
+      }
+    }
+    return '';
+  }
+
+  String get defaultPhone {
+    for(final String phone in phones) {
+      if (phone.isSafe) {
+
+        return phone;
+      }
+    }
+    return '';
   }
 }
