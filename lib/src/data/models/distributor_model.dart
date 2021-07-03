@@ -8,6 +8,7 @@ class DistributorModel extends DistributorEntity {
     int color,
     DateTime createAt,
     DateTime lastUpdate,
+    String document,
   }) : super(
           name: name,
           phones: phones,
@@ -15,6 +16,7 @@ class DistributorModel extends DistributorEntity {
           color: color,
           createAt: createAt,
           lastUpdate: lastUpdate,
+          document: document,
         );
 
   DistributorModel.fromJson(Map<String, dynamic> json) {
@@ -28,6 +30,7 @@ class DistributorModel extends DistributorEntity {
     lastUpdate = json['last_update'] != null
         ? DateTime.fromMillisecondsSinceEpoch(json['last_update'])
         : null;
+    document = json['document'] != null ? json['document'] : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -38,6 +41,7 @@ class DistributorModel extends DistributorEntity {
     data['color'] = this.color;
     data['create_at'] = this.createAt.millisecondsSinceEpoch;
     data['last_update'] = this.lastUpdate.millisecondsSinceEpoch;
+    data['document'] = this.document;
     return data;
   }
 }

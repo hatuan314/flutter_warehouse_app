@@ -45,6 +45,7 @@ class UnitListScreen extends StatelessWidget {
         return EmptyWidget();
       }
       return ListView.builder(
+        padding: EdgeInsets.zero,
           itemCount: state.units.length,
           itemBuilder: (context, index) {
             return AnimationConfiguration.staggeredList(
@@ -73,7 +74,7 @@ class UnitListScreen extends StatelessWidget {
         },
         actions: [
           IconButton(
-              icon: Icon(Icons.add),
+              icon: Icon(Icons.add, color: AppColor.white,),
               onPressed: () {
                 locator<SnackbarBloc>().add(ShowSnackbar(
                     title: StringConstants.developmentTxt,

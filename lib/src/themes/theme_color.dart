@@ -6,12 +6,14 @@ class AppColor {
   static const Color hintColor = grey;
   static const Color backgroundColor = white;
   static const Color errorColor = Colors.red;
+  static Color lineColor = Colors.grey[200];
 
   static const Color white = Colors.white;
   static const Color grey = Colors.grey;
   static Color grey100 = Colors.grey[100];
   static Color black25 = Colors.black.withAlpha(64);
   static Color black= Colors.black;
+  static Color blackOpacity05= Colors.black.withOpacity(0.5);
   static const Color red = Colors.red;
   static const Color transparent = Colors.transparent;
   static const Color paleGrey = Color(0xfff4f4f5);

@@ -13,4 +13,5 @@ class StringConstants {
   static const String phoneNumberTxt = 'Số điện thoại';
   static const String emailTxt = 'Email';
   static const String changeTxt = 'Thay đổi';
+  static const String updateSuccessMsg = 'Cập nhật thành công';
 }

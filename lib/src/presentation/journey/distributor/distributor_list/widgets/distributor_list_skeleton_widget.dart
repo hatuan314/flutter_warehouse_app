@@ -74,6 +74,7 @@ class DistributorListSkeletonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        padding: EdgeInsets.zero,
         itemCount: 10,
         physics: NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {

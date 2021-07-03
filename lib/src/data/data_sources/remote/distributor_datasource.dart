@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/configs/default_env.dart';
@@ -32,10 +34,10 @@ class DistributorDataSource {
     );
   }
 
-  Future<void> removeDistributor(DistributorModel distributor) async {
+  Future<void> removeDistributor(String document) async {
     await service.deleteDocument(
       ref: setup.mainDoc.collection(DefaultConfig.distributorsCollection),
-      document: distributor.document,
+      document: document,
     );
   }
 }

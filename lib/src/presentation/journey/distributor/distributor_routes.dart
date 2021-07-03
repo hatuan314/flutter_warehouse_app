@@ -5,13 +5,12 @@ import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/add_distributor_screen.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/bloc/add_distributor_bloc.dart';
-import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/bloc/add_distributor_event.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_detail/bloc/distributor_detail_bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_detail/bloc/distributor_detail_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_detail/distributor_detail_screen.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_list/bloc/distributor_list_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_list/bloc/distributor_list_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_list/distributor_list_screen.dart';
-import 'package:flutterwarehouseapp/src/presentation/journey/profile/update_information/blocs/update_info_bloc.dart';
-import 'package:flutterwarehouseapp/src/presentation/journey/profile/update_information/update_information_screen.dart';
 
 class DistributorRoute {
   static Map<String, WidgetBuilder> getAll() {
@@ -31,9 +30,15 @@ class DistributorRoute {
     final args = settings.arguments as Map<String, dynamic>;
     return {
       RouteList.distributorDetail: (context) {
-        var distributor = args[ArgumentConstants.distributorDetailArg];
-        return DistributorDetailScreen(
-          distributor: distributor,
+        var distributorJson = args[ArgumentConstants.distributorDetailArg];
+        var index = args[ArgumentConstants.distributorIndexArg];
+        return BlocProvider<DistributorDetailBloc>(
+          create: (_) => locator<DistributorDetailBloc>()
+            ..add(
+              InitialDistributorDetailEvent(distributorJson: distributorJson, index: index),
+            ),
+          child: DistributorDetailScreen(
+          ),
         );
       }
       // RouteList.confirmOtp: (context) {

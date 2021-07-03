@@ -2,6 +2,7 @@ import 'package:flutterwarehouseapp/common/extensions/screen_utils_extensions.da
 
 class LayoutConstants {
   static const double roundedRadius = 10.0;
+  static const double roundedRadius20 = 20.0;
 
   static double paddingVerticalApp = paddingVertical15;
   static double paddingVertical5 = 5.h;

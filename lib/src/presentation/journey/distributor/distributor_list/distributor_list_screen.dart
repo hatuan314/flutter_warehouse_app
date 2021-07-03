@@ -5,6 +5,7 @@ import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_list/bloc/distributor_list_bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_list/bloc/distributor_list_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_list/bloc/distributor_list_state.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_list/widgets/distributor_item_widget.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_list/widgets/distributor_list_skeleton_widget.dart';
@@ -21,6 +22,7 @@ class DistributorListScreen extends StatelessWidget {
     }
     if (state.viewState == ViewState.initial) {
       return ListView.builder(
+          padding: EdgeInsets.zero,
           itemCount: state.distributorList.length,
           itemBuilder: (context, index) {
             return AnimationConfiguration.staggeredList(
@@ -30,6 +32,11 @@ class DistributorListScreen extends StatelessWidget {
                 index: index,
                 child: DistributorItemWidget(
                   distributor: state.distributorList[index],
+                  index: index,
+                  refreshCallBack: () {
+                    BlocProvider.of<DistributorListBloc>(context)
+                        .add(InitialDistributorListEvent());
+                  },
                 ),
               ),
             );

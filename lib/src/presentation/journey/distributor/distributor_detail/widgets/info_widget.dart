@@ -124,7 +124,7 @@ class InfoWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(height: LayoutConstants.paddingVertical70,),
-                Text(distributor?.name, style: ThemeText.headline6,),
+                Text('${distributor?.name}', style: ThemeText.headline6,),
                 SizedBox(height: LayoutConstants.paddingVertical5,),
                 Text(distributor.defaultPhone, style: ThemeText.body2,),
                 SizedBox(height: LayoutConstants.paddingVertical5,),

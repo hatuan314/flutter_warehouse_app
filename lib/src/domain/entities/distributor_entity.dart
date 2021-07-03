@@ -40,13 +40,13 @@ class DistributorEntity {
       color: color,
       createAt: createAt,
       lastUpdate: lastUpdate,
+      document: document,
     );
   }
 
   String get defaultEmail {
-    for(final String email in emails) {
+    for (final String email in emails) {
       if (email.isSafe) {
-
         return email;
       }
     }
@@ -54,12 +54,31 @@ class DistributorEntity {
   }
 
   String get defaultPhone {
-    for(final String phone in phones) {
+    for (final String phone in phones) {
       if (phone.isSafe) {
-
         return phone;
       }
     }
     return '';
+  }
+
+  void setPhones({String currentPhone, String newPhone}) {
+    for (int index = 0; index < phones.length; index++) {
+      if (phones[index] == currentPhone) {
+        phones[index] = newPhone;
+        lastUpdate = DateTime.now();
+        return;
+      }
+    }
+  }
+
+  void setEmails({String currentEmail, String newEmail}) {
+    for (int index = 0; index < phones.length; index++) {
+      if (emails[index] == currentEmail) {
+        emails[index] = newEmail;
+        lastUpdate = DateTime.now();
+        return;
+      }
+    }
   }
 }

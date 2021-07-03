@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
@@ -20,9 +22,15 @@ import 'package:flutterwarehouseapp/src/widgets/expansion_tile_widget.dart';
 
 class DistributorItemWidget extends StatelessWidget {
   final DistributorEntity distributor;
+  final int index;
+  final Function refreshCallBack;
 
-  const DistributorItemWidget({Key key, @required this.distributor})
-      : super(key: key);
+  const DistributorItemWidget({
+    Key key,
+    @required this.distributor,
+    @required this.index,
+    @required this.refreshCallBack,
+  }) : super(key: key);
 
   Widget _iconButton(
       {IconData icon, Function onPressed, Color backgroundColor}) {
@@ -89,10 +97,17 @@ class DistributorItemWidget extends StatelessWidget {
         _iconButton(
           icon: Icons.info,
           onPressed: () {
+            log('>>>>>>DistributorItemWidget - document: ${distributor.document}');
             Navigator.pushNamed(context, RouteList.distributorDetail,
                 arguments: {
-                  ArgumentConstants.distributorDetailArg: distributor
-                });
+                  ArgumentConstants.distributorDetailArg:
+                      distributor.toModel().toJson(),
+                  ArgumentConstants.distributorIndexArg: index,
+                }).then((value) {
+                  if (value) {
+                    refreshCallBack();
+                  }
+            });
           },
           backgroundColor: AppColor.grey,
         ),

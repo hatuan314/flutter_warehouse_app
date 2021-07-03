@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutterwarehouseapp/common/extensions/list_extensions.dart';
+import 'package:flutterwarehouseapp/common/extensions/string_extensions.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/local/distributor_hive.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/distributor_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/models/distributor_model.dart';
@@ -39,22 +40,26 @@ class DistributorRepositoryImpl implements DistributorRepository {
   }
 
   @override
-  Future<void> remove({int index, String document}) {
-    // TODO: implement remove
-    throw UnimplementedError();
+  Future<void> remove({int index, String document}) async {
+    if (document.isNotSafe) {
+      await distributorHive.removeDistributor(index);
+      return;
+    }
+    await distributorDs.removeDistributor(document).then((value) async {
+      await distributorHive.removeDistributor(index);
+    });
   }
 
   @override
   Future<bool> setDistributor(DistributorEntity distributor) async {
     // Step 1: Add distributor to cloud database
-    DocumentReference ref =
-        await distributorDs.setDistributor(distributor.toModel());
-    if (ref == null) {
+    String document = await setDistributorCloud(distributor);
+    if (document.isNotSafe) {
       return false;
     }
-    if (ref != null) {
+    if (document.isSafe) {
       // Step 2: Add distributor to local database
-      distributor.document = ref.id;
+      distributor.document = document;
       int key = await distributorHive.setDistributor(distributor);
       if (key != null) {
         log('>>>>DistributorRepo - addDistributor - local: $key');
@@ -66,13 +71,27 @@ class DistributorRepositoryImpl implements DistributorRepository {
   }
 
   @override
-  Future<void> update({int index, DistributorEntity distributor}) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<void> update({int index, DistributorEntity distributor}) async {
+    await distributorDs.updateDistributor(distributor).then((value) async {
+      await distributorHive.updateDistributor(
+        index: index,
+        distributor: distributor,
+      );
+    });
   }
 
   @override
-  Future<bool> setDistributorLocalList(List<DistributorEntity> distributorList) {
+  Future<bool> setDistributorLocalList(
+      List<DistributorEntity> distributorList) {
     return distributorHive.setDistributorList(distributorList);
+  }
+
+  @override
+  Future<String> setDistributorCloud(DistributorEntity distributor) async {
+    DocumentReference ref = await distributorDs.setDistributor(distributor.toModel());
+    if (ref != null) {
+      return ref.id;
+    }
+    return '';
   }
 }
