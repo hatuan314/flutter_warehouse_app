@@ -31,4 +31,5 @@ class LayoutConstants {
   static double avatarSize = 80.w;
   static double iconSize = 18.w;
   static double iconSmallSize = 15.w;
+  static double iconSmallSize8 = 8.w;
 }

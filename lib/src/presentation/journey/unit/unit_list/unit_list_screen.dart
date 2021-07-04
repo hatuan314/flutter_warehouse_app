@@ -17,27 +17,10 @@ import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 import 'package:flutterwarehouseapp/src/widgets/animation_widget/animation_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/loader_widget/loader_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/scaffold/scaffold_widget.dart';
+import 'package:flutterwarehouseapp/src/widgets/unit_item_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/view_state_widget/empty_widget.dart';
 
 class UnitListScreen extends StatelessWidget {
-  Widget _unitItemWidget(UnitEntity unit) {
-    return Container(
-      margin:
-          EdgeInsets.symmetric(horizontal: LayoutConstants.paddingHorizontal15),
-      padding:
-          EdgeInsets.symmetric(vertical: LayoutConstants.paddingHorizontal15),
-      decoration: BoxDecoration(
-          border: Border(
-              bottom: BorderSide(
-        color: AppColor.black25,
-        width: 1,
-      ))),
-      child: Text(
-        '${unit?.name}',
-        style: ThemeText.body2,
-      ),
-    );
-  }
 
   Widget _bodyWidget(UnitListState state) {
     if (state.viewState == ViewState.initial) {
@@ -53,7 +36,7 @@ class UnitListScreen extends StatelessWidget {
               duration: const Duration(milliseconds: 375),
               child: AnimationWidget(
                 index: index,
-                child: _unitItemWidget(state.units[index]),
+                child: UnitItemWidget(name: state.units[index].name,),
               ),
             );
           });

@@ -122,7 +122,7 @@ class _TopSnackBarState<K extends Object> extends State<TopSnackBar>
       return Container(
         key: const Key('warning_container_icon_key'),
         child: Icon(
-          Icons.warning_rounded,
+          Icons.build_circle,
           size: 32,
           color: AppColor.primaryColor,
         ),

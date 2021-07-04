@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/catagory/category_routes.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/dev_mode_screen.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_routes.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/login_routes.dart';
@@ -50,6 +51,7 @@ class Routes {
         ...ProfileRoute.getAll(),
         ...UnitRoutes.getAll(),
         ...DistributorRoute.getAll(),
+        ...CategoryRoute.getAll(),
       };
 
   static Map<String, WidgetBuilder> getAll() => _getCombinedRoutes();

@@ -22,8 +22,11 @@ class WarehouseDashboardWidget extends StatelessWidget {
           path: LottieConstants.productIcon,
           title: 'Mặt hàng',
         ),WarehouseDashboardItemWidget(
+          onPressed: () {
+            Navigator.pushNamed(context, RouteList.categoryList);
+          },
           path: LottieConstants.categoryIcon,
-          title: 'Danh mục',
+          title: StringConstants.categoryTxt,
         ),WarehouseDashboardItemWidget(
           onPressed: () {
             Navigator.pushNamed(context, RouteList.distributorList);

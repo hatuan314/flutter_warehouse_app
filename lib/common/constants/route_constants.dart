@@ -18,6 +18,10 @@ class RouteList {
   static const String addDistributor = '/add-distributor';
   static const String distributorDetail = '/distributor-detail';
 
+  /// Category
+  static const String categoryList = '/category-list';
+  static const String createCategory = '/create-category';
+
   /// Dev
   static const String devMode = '/devMode';
 }
