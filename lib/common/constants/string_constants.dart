@@ -15,4 +15,6 @@ class StringConstants {
   static const String changeTxt = 'Thay đổi';
   static const String updateSuccessMsg = 'Cập nhật thành công';
   static const String deleteTxt = 'Xóa';
+  static const String cancelTxt = 'Hủy';
+  static const String okTxt = 'Đồng ý';
 }

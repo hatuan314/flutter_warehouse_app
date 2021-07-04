@@ -25,6 +25,7 @@ class LayoutConstants {
   static double appBarIconBtnSize = 40.w;
   static double loadingSize = 100.w;
   static double buttonHeight = 48.h;
+  static double buttonDialogHeight = 36.h;
   static double smallIconBtnSize = 24.w;
   static double smallIconCircleBtnSize = 30.w;
   static double avatarSize = 80.w;
