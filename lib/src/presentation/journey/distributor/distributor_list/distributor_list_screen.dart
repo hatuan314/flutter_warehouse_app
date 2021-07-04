@@ -37,6 +37,13 @@ class DistributorListScreen extends StatelessWidget {
                     BlocProvider.of<DistributorListBloc>(context)
                         .add(InitialDistributorListEvent());
                   },
+                  onDelete: () {
+                    BlocProvider.of<DistributorListBloc>(context)
+                        .add(RemoveDistributorEvent(
+                      index: index,
+                      distributor: state.distributorList[index],
+                    ));
+                  },
                 ),
               ),
             );

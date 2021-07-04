@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,6 +8,7 @@ import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
 import 'package:flutterwarehouseapp/common/utils/connectivity_utils.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_constants.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_detail/bloc/distributor_detail_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_detail/bloc/distributor_detail_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_detail/bloc/distributor_detail_state.dart';
@@ -16,6 +18,7 @@ import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distrib
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_detail/widgets/info_widget.dart';
 import 'package:flutterwarehouseapp/src/presentation/view_state.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
+import 'package:flutterwarehouseapp/src/widgets/dialog/common_dialog.dart';
 
 class DistributorDetailScreen extends StatelessWidget {
   Widget _bodyWidget(BuildContext context, DistributorDetailState state) {
@@ -75,8 +78,17 @@ class DistributorDetailScreen extends StatelessWidget {
                 onPressed: () {
                   ConnectivityUtils.checkConnectInternet().then((value) {
                     if (value) {
-                      BlocProvider.of<DistributorDetailBloc>(context)
-                          .add(DeleteDistributorEvent());
+                      CommonDialog(
+                        context,
+                        title: StringConstants.deleteTxt,
+                        dialogType: DialogType.WARNING,
+                        content: DistributorConstants.contentDeleteDialogTxt,
+                        onCancel: () {},
+                        onAccept: () {
+                          BlocProvider.of<DistributorDetailBloc>(context)
+                              .add(DeleteDistributorEvent());
+                        },
+                      )..show();
                     } else {
                       locator<SnackbarBloc>().add(ShowSnackbar(
                         title: StringConstants.noInternetTxt,

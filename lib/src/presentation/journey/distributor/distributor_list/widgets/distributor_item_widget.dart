@@ -1,6 +1,10 @@
 import 'dart:developer';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
+import 'package:flutterwarehouseapp/common/utils/connectivity_utils.dart';
+import 'package:flutterwarehouseapp/src/widgets/dialog/common_dialog.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 import 'package:flutterwarehouseapp/common/constants/argument_constants.dart';
@@ -24,12 +28,14 @@ class DistributorItemWidget extends StatelessWidget {
   final DistributorEntity distributor;
   final int index;
   final Function refreshCallBack;
+  final Function onDelete;
 
   const DistributorItemWidget({
     Key key,
     @required this.distributor,
     @required this.index,
     @required this.refreshCallBack,
+    @required this.onDelete,
   }) : super(key: key);
 
   Widget _iconButton(
@@ -104,9 +110,9 @@ class DistributorItemWidget extends StatelessWidget {
                       distributor.toModel().toJson(),
                   ArgumentConstants.distributorIndexArg: index,
                 }).then((value) {
-                  if (value) {
-                    refreshCallBack();
-                  }
+              if (value) {
+                refreshCallBack();
+              }
             });
           },
           backgroundColor: AppColor.grey,
@@ -114,13 +120,23 @@ class DistributorItemWidget extends StatelessWidget {
         _iconButton(
           icon: Icons.delete,
           onPressed: () {
-            if (distributor.defaultPhone.isSafe) {
-              UrlLauncher.launch('sms: ${distributor.defaultPhone}');
-            } else {
-              locator<SnackbarBloc>().add(ShowSnackbar(
-                  title: DistributorConstants.phoneEmptyTxt,
-                  type: SnackBarType.warning));
-            }
+            ConnectivityUtils.checkConnectInternet().then((value) {
+              if (value) {
+                CommonDialog(
+                  context,
+                  dialogType: DialogType.WARNING,
+                  title: StringConstants.deleteTxt,
+                  content: DistributorConstants.contentDeleteDialogTxt,
+                  onCancel: () {},
+                  onAccept: onDelete,
+                )..show();
+              } else {
+                locator<SnackbarBloc>().add(ShowSnackbar(
+                  title: StringConstants.noInternetTxt,
+                  type: SnackBarType.disconnect,
+                ));
+              }
+            });
           },
           backgroundColor: AppColor.red,
         ),

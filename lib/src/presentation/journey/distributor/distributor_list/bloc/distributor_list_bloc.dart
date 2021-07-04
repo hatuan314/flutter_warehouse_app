@@ -32,6 +32,18 @@ class DistributorListBloc
     if (event is InitialDistributorListEvent) {
       yield* _mapInitialDistributorListEventToState();
     }
+    if (event is RemoveDistributorEvent) {
+      yield* _mapDeleteDistributorEventToState(event);
+    }
+  }
+
+  Stream<DistributorListState> _mapDeleteDistributorEventToState(
+      RemoveDistributorEvent event) async* {
+    loaderBloc.add(StartLoading());
+    await distributorUc.removeDistributor(
+        index: event.index, document: event.distributor.document);
+    add(InitialDistributorListEvent());
+    loaderBloc.add(FinishLoading());
   }
 
   Stream<DistributorListState> _mapInitialDistributorListEventToState() async* {
