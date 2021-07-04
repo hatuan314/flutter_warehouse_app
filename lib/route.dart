@@ -77,6 +77,11 @@ class Routes {
               DistributorRoute.getRoutesWithSettings(settings)[settings.name],
           settings: settings,
         );
+      case RouteList.createCategory:
+        return MaterialPageRoute(
+          builder: CategoryRoute.getRoutesWithSettings(settings)[settings.name],
+          settings: settings,
+        );
       case RouteList.devMode:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
