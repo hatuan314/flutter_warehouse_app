@@ -21,6 +21,8 @@ class DistributorEntity {
   DateTime lastUpdate;
   @HiveField(6)
   String document;
+  @HiveField(7)
+  bool isSync = true;
 
   DistributorEntity({
     this.name,
@@ -30,6 +32,7 @@ class DistributorEntity {
     this.createAt,
     this.lastUpdate,
     this.document,
+    this.isSync = true,
   });
 
   DistributorModel toModel() {
@@ -41,6 +44,7 @@ class DistributorEntity {
       createAt: createAt,
       lastUpdate: lastUpdate,
       document: document,
+      isSync: isSync,
     );
   }
 

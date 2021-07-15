@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutterwarehouseapp/common/extensions/list_extensions.dart';
 import 'package:flutterwarehouseapp/common/extensions/string_extensions.dart';
+import 'package:flutterwarehouseapp/common/utils/connectivity_utils.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/local/distributor_hive.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/distributor_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/models/distributor_model.dart';
@@ -52,20 +51,19 @@ class DistributorRepositoryImpl implements DistributorRepository {
 
   @override
   Future<bool> setDistributor(DistributorEntity distributor) async {
-    // Step 1: Add distributor to cloud database
-    String document = await setDistributorCloud(distributor);
-    if (document.isNotSafe) {
-      return false;
-    }
-    if (document.isSafe) {
-      // Step 2: Add distributor to local database
-      distributor.document = document;
-      int key = await distributorHive.setDistributor(distributor);
-      if (key != null) {
-        log('>>>>DistributorRepo - addDistributor - local: $key');
-        return true;
+    bool isConnect = await ConnectivityUtils.checkConnectInternet();
+    if (isConnect) {
+      String document = await setDistributorCloud(distributor);
+      if (document.isSafe) {
+        distributor.document = document;
+        distributor.isSync = true;
       }
-      return false;
+    } else {
+      distributor.isSync = false;
+    }
+    int key = await distributorHive.setDistributor(distributor);
+    if (key != null) {
+      return true;
     }
     return false;
   }
@@ -81,8 +79,7 @@ class DistributorRepositoryImpl implements DistributorRepository {
   }
 
   @override
-  Future<bool> setDistributorLocalList(
-      List<DistributorEntity> distributorList) {
+  Future<bool> setDistributorLocalList(List<DistributorEntity> distributorList) {
     return distributorHive.setDistributorList(distributorList);
   }
 

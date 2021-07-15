@@ -24,13 +24,14 @@ class DistributorEntityAdapter extends TypeAdapter<DistributorEntity> {
       createAt: fields[4] as DateTime,
       lastUpdate: fields[5] as DateTime,
       document: fields[6] as String,
+      isSync: fields[7] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, DistributorEntity obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class DistributorEntityAdapter extends TypeAdapter<DistributorEntity> {
       ..writeByte(5)
       ..write(obj.lastUpdate)
       ..writeByte(6)
-      ..write(obj.document);
+      ..write(obj.document)
+      ..writeByte(7)
+      ..write(obj.isSync);
   }
 
   @override

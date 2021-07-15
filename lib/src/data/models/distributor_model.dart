@@ -9,6 +9,7 @@ class DistributorModel extends DistributorEntity {
     DateTime createAt,
     DateTime lastUpdate,
     String document,
+    bool isSync,
   }) : super(
           name: name,
           phones: phones,
@@ -17,6 +18,7 @@ class DistributorModel extends DistributorEntity {
           createAt: createAt,
           lastUpdate: lastUpdate,
           document: document,
+      isSync: isSync,
         );
 
   DistributorModel.fromJson(Map<String, dynamic> json) {
@@ -31,6 +33,7 @@ class DistributorModel extends DistributorEntity {
         ? DateTime.fromMillisecondsSinceEpoch(json['last_update'])
         : null;
     document = json['document'] != null ? json['document'] : null;
+    isSync = json['sync'];
   }
 
   Map<String, dynamic> toJson() {
@@ -42,6 +45,7 @@ class DistributorModel extends DistributorEntity {
     data['create_at'] = this.createAt.millisecondsSinceEpoch;
     data['last_update'] = this.lastUpdate.millisecondsSinceEpoch;
     data['document'] = this.document;
+    data['sync'] = this.isSync;
     return data;
   }
 }
