@@ -22,13 +22,14 @@ class CategoryEntityAdapter extends TypeAdapter<CategoryEntity> {
       color: fields[2] as int,
       createTime: fields[3] as DateTime,
       lastUpdate: fields[4] as DateTime,
+      isSync: fields[5] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, CategoryEntity obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.document)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class CategoryEntityAdapter extends TypeAdapter<CategoryEntity> {
       ..writeByte(3)
       ..write(obj.createTime)
       ..writeByte(4)
-      ..write(obj.lastUpdate);
+      ..write(obj.lastUpdate)
+      ..writeByte(5)
+      ..write(obj.isSync);
   }
 
   @override

@@ -9,6 +9,7 @@ class DefaultConfig {
   static const mainCollection = 'develop';
   static const unitsCollection = 'units';
   static const distributorsCollection = 'distributors';
+  static const categoriesCollection = 'categories';
   static const profileCollection = 'profile';
 
   /// Documents

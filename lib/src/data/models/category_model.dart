@@ -7,25 +7,23 @@ class CategoryModel extends CategoryEntity {
     int color,
     DateTime createAt,
     DateTime lastUpdate,
+    bool isSync,
   }) : super(
           document: document,
           name: name,
           color: color,
           createTime: createAt,
           lastUpdate: lastUpdate,
+          isSync: isSync,
         );
 
-  factory CategoryModel.fromJson(Map<String, dynamic> json) =>
-      CategoryModel(
+  factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
         document: json['document'],
         name: json['name'],
         color: json['color'],
-        createAt: json['create_at'] != null
-            ? DateTime.fromMillisecondsSinceEpoch(json['create_at'])
-            : null,
-        lastUpdate: json['last_update'] != null
-            ? DateTime.fromMillisecondsSinceEpoch(json['last_update'])
-            : null,
+        createAt: json['create_at'] != null ? DateTime.fromMillisecondsSinceEpoch(json['create_at']) : null,
+        lastUpdate: json['last_update'] != null ? DateTime.fromMillisecondsSinceEpoch(json['last_update']) : null,
+        isSync: json['sync'],
       );
 
   Map<String, dynamic> toJson() {
@@ -33,7 +31,9 @@ class CategoryModel extends CategoryEntity {
     json['document'] = document;
     json['name'] = name;
     json['color'] = color;
-    json['create_at'] = createTime;
-    json['last_update'] = lastUpdate;
+    json['create_at'] = this.createTime.millisecondsSinceEpoch;
+    json['last_update'] = this.lastUpdate.millisecondsSinceEpoch;
+    json['sync'] = isSync;
+    return json;
   }
 }

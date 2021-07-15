@@ -4,6 +4,7 @@ import 'package:flutterwarehouseapp/common/constants/argument_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/catagory/category_list/category_list_screen.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/catagory/create_category/bloc/create_category_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/catagory/create_category/create_category_screen.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/add_distributor_screen.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/bloc/add_distributor_bloc.dart';
@@ -18,7 +19,9 @@ class CategoryRoute {
   static Map<String, WidgetBuilder> getAll() {
     return {
       RouteList.categoryList: (context) => CategoryListScreen(),
-      RouteList.createCategory: (context) => CreateCategoryScreen(title: null),
+      RouteList.createCategory: (context) => BlocProvider(
+          create: (_) => locator<CreateCategoryBloc>(),
+          child: CreateCategoryScreen(title: null)),
     };
   }
 
