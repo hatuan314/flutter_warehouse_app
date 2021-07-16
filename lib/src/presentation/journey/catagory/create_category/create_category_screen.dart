@@ -30,7 +30,7 @@ class CreateCategoryScreen extends StatelessWidget {
     }
     return BlocConsumer<CreateCategoryBloc, CreateCategoryState>(listener: (context, state) {
       if (state.viewState == ViewState.success) {
-        Navigator.of(context).pop();
+        Navigator.of(context).pop(true);
       }
     }, builder: (context, state) {
       return ScaffoldWidget(

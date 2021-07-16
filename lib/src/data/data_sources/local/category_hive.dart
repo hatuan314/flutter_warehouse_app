@@ -21,4 +21,21 @@ class CategoryHive {
       return null;
     }
   }
+
+  Future<void> setCategories(List<CategoryEntity> categories) async {
+    try {
+      await database.categoryBox.addAll(categories);
+    } on HiveError catch (e) {
+      locator<SnackbarBloc>().add(ShowSnackbar(
+          title: StringConstants.createFailureTxt, type: SnackBarType.error));
+    }
+  }
+
+  Future<List<CategoryEntity>> getAllCategories() async {
+    List<CategoryEntity> categories = [];
+    if (database.categoryBox.isNotEmpty) {
+      categories.addAll(database.categoryBox.values.toList());
+    }
+    return categories;
+  }
 }

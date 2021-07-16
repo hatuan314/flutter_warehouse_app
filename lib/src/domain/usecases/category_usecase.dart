@@ -22,4 +22,15 @@ class CategoryUseCase {
     bool flag = await categoryRepo.setCategoryLocal(category);
     return flag;
   }
+
+  Future<List<CategoryEntity>> getCategoryList() async {
+    List<CategoryEntity> categoryList = await categoryRepo.getCategoryListLocal();
+    if (categoryList.isEmpty) {
+      categoryList = await categoryRepo.getCategoryListCloud();
+      if (categoryList.isNotEmpty) {
+        await categoryRepo.setCategoriesLocal(categoryList);
+      }
+    }
+    return categoryList;
+  }
 }

@@ -3,17 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 import 'package:flutterwarehouseapp/common/extensions/list_extensions.dart';
-import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
-import 'package:flutterwarehouseapp/src/domain/entities/unit_entity.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/unit/unit_list/bloc/unit_list_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/unit/unit_list/bloc/unit_list_state.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/unit/unit_list/widgets/body_widget.dart';
 import 'package:flutterwarehouseapp/src/presentation/view_state.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
-import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 import 'package:flutterwarehouseapp/src/widgets/animation_widget/animation_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/loader_widget/loader_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/scaffold/scaffold_widget.dart';
@@ -65,7 +63,7 @@ class UnitListScreen extends StatelessWidget {
               })
         ],
         title: StringConstants.unitTxt,
-        child: _bodyWidget(state),
+        child: BodyWidget(state: state),
       );
     });
   }

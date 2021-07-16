@@ -25,6 +25,7 @@ import 'package:flutterwarehouseapp/src/domain/usecases/user_usecase.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/user_bloc/user_bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/catagory/category_list/bloc/category_list_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/catagory/create_category/bloc/create_category_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/bloc/add_distributor_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_detail/bloc/distributor_detail_bloc.dart';
@@ -97,10 +98,15 @@ void setup() {
         loaderBloc: locator<LoaderBloc>(),
       ));
   locator.registerFactory<CreateCategoryBloc>(() => CreateCategoryBloc(
-    categoryUC: locator<CategoryUseCase>(),
-    snackbarBloc: locator<SnackbarBloc>(),
-    loaderBloc: locator<LoaderBloc>(),
-  ));
+        categoryUC: locator<CategoryUseCase>(),
+        snackbarBloc: locator<SnackbarBloc>(),
+        loaderBloc: locator<LoaderBloc>(),
+      ));
+  locator.registerFactory<CategoryListBloc>(() => CategoryListBloc(
+        categoryUC: locator<CategoryUseCase>(),
+        snackbarBloc: locator<SnackbarBloc>(),
+        loaderBloc: locator<LoaderBloc>(),
+      ));
 
   /// UseCases
   locator.registerFactory<UserUseCase>(() => UserUseCase(
@@ -113,8 +119,8 @@ void setup() {
         distributorRepo: locator<DistributorRepository>(),
       ));
   locator.registerFactory<CategoryUseCase>(() => CategoryUseCase(
-    categoryRepo: locator<CategoryRepository>(),
-  ));
+        categoryRepo: locator<CategoryRepository>(),
+      ));
 
   /// Repositories
   locator.registerFactory<UserRepository>(() => UserRepositoryImpl(

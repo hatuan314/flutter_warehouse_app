@@ -17,4 +17,9 @@ class CategoryDataSource {
       request: category.toJson(),
     );
   }
+
+  Future<QuerySnapshot> getCategoryList() async {
+    return service.getQuerySnapshotList(
+        setup.mainDoc.collection(DefaultConfig.categoriesCollection));
+  }
 }

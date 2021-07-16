@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutterwarehouseapp/src/data/data_sources/local/category_hive.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/category_datasource.dart';
+import 'package:flutterwarehouseapp/src/data/models/category_model.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/category_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/category_repository.dart';
 
@@ -22,5 +23,29 @@ class CategoryRepositoryImpl implements CategoryRepository {
   Future<bool> setCategoryLocal(CategoryEntity category) async {
     int key = await categoryHive.setCategory(category);
     return key != null;
+  }
+
+  @override
+  Future<List<CategoryEntity>> getCategoryListCloud() async{
+    List<CategoryEntity> categories = [];
+    QuerySnapshot snapshot = await categoryDS.getCategoryList();
+    if (snapshot.size != 0) {
+      for(final QueryDocumentSnapshot doc in snapshot.docs) {
+        CategoryEntity category = CategoryModel.fromJson(doc.data());
+        categories.add(category);
+      }
+    }
+    return categories;
+  }
+
+  @override
+  Future<List<CategoryEntity>> getCategoryListLocal() {
+    return categoryHive.getAllCategories();
+  }
+
+  @override
+  Future<bool> setCategoriesLocal(List<CategoryEntity> categories) {
+    // TODO: implement setCategoriesLocal
+    throw UnimplementedError();
   }
 }
