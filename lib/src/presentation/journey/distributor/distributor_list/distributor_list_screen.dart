@@ -65,7 +65,11 @@ class DistributorListScreen extends StatelessWidget {
         child: _bodyWidget(state),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.of(context).pushNamed(RouteList.addDistributor);
+            Navigator.of(context).pushNamed(RouteList.addDistributor).then((value) {
+              if (value == true) {
+                BlocProvider.of<DistributorListBloc>(context).add(InitialDistributorListEvent());
+              }
+            });
           },
           child: Icon(
             Icons.add,

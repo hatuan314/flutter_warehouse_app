@@ -95,7 +95,7 @@ class AddDistributorScreen extends StatelessWidget {
         }
       }
       if (state is CreateDistributorSuccessState) {
-        Navigator.of(context).pop();
+        Navigator.of(context).pop(true);
       }
     }, builder: (context, snapshot) {
       return ScaffoldWidget(
