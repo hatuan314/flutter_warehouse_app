@@ -22,6 +22,9 @@ class RouteList {
   static const String categoryList = '/category-list';
   static const String createCategory = '/create-category';
 
+  /// Invoice
+  static const String invoiceTab = '/invoice-tab';
+
   /// Dev
   static const String devMode = '/devMode';
 }

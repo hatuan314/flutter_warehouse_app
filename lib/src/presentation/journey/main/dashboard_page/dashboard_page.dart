@@ -10,17 +10,19 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: AppColor.transparent,
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: LayoutConstants.paddingHorizontal15),
-        child: Column(
-          children: [
-            UserWidget(),
-            SizedBox(height: 8,),
-            WarehouseDashboardWidget(),
-            SizedBox(height: 8,),
-            OptionDashboardWidget()
-          ],
+      child: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: LayoutConstants.paddingHorizontal15),
+          child: Column(
+            children: [
+              UserWidget(),
+              SizedBox(height: 8,),
+              WarehouseDashboardWidget(),
+              SizedBox(height: 8,),
+              OptionDashboardWidget()
+            ],
+          ),
         ),
       ),
     );

@@ -1,19 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/invoice/invoice_tab/invoice_tab.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/dashboard_page/dashboard_page.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/main_constants.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 
 class MainScreen extends StatelessWidget {
-  List<Widget> _pages = [
+  final List<Widget> _pages = [
     Center(
       child: Text(MainConstants.reportTxt),
     ),
-    Center(
-      child: Text(MainConstants.invoiceTxt),
-    ),
+    InvoiceTab(),
     Center(
       child: Text(MainConstants.productTxt),
     ),
@@ -25,7 +24,7 @@ class MainScreen extends StatelessWidget {
     return BlocBuilder<MainBloc, MainState>(builder: (context, state) {
       return Scaffold(
         backgroundColor: AppColor.paleGrey,
-        body: SafeArea(top: true, child: _pages.elementAt(state.selectedIndex)),
+        body: _pages.elementAt(state.selectedIndex),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(

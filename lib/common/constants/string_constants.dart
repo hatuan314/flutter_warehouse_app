@@ -18,4 +18,5 @@ class StringConstants {
   static const String cancelTxt = 'Hủy';
   static const String okTxt = 'Đồng ý';
   static const String categoryTxt = 'Danh mục';
+  static const String invoiceTitle = 'Hóa đơn';
 }

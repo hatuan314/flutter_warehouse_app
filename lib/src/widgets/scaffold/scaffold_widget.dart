@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutterwarehouseapp/common/extensions/screen_utils_extensions.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
-import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 
 import 'appbar_widget.dart';
 
@@ -12,6 +10,7 @@ class ScaffoldWidget extends StatelessWidget {
   final Function onLeading;
   final Widget child;
   final Widget floatingActionButton;
+  final Widget tabBar;
   final List<Widget> actions;
 
   const ScaffoldWidget({
@@ -22,6 +21,7 @@ class ScaffoldWidget extends StatelessWidget {
     this.child,
     this.actions,
     this.floatingActionButton,
+    this.tabBar,
   }) : super(key: key);
 
   @override
@@ -53,9 +53,11 @@ class ScaffoldWidget extends StatelessWidget {
       body: Column(
         children: [
           AppbarWidget(
+            isLeading: isLeading ?? true,
             onLeading: onLeading,
             title: '$title',
             actions: actions,
+            tabBar: tabBar ?? SizedBox.shrink(),
           ),
           Expanded(child: child),
         ],
