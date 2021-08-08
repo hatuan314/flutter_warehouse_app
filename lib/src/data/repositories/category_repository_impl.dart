@@ -44,8 +44,7 @@ class CategoryRepositoryImpl implements CategoryRepository {
   }
 
   @override
-  Future<bool> setCategoriesLocal(List<CategoryEntity> categories) {
-    // TODO: implement setCategoriesLocal
-    throw UnimplementedError();
+  Future<void> setCategoriesLocal(List<CategoryEntity> categories) async {
+    await categoryHive.setCategories(categories);
   }
 }

@@ -5,7 +5,7 @@ abstract class CategoryRepository {
 
   Future<bool> setCategoryLocal(CategoryEntity category);
 
-  Future<bool> setCategoriesLocal(List<CategoryEntity> categories);
+  Future<void> setCategoriesLocal(List<CategoryEntity> categories);
 
   Future<List<CategoryEntity>> getCategoryListCloud();
 
