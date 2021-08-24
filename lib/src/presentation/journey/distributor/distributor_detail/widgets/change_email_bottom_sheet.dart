@@ -40,7 +40,7 @@ class ChangeEmailBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     textEditingController.text = email;
-    return BottomSheerWidget(
+    return BottomSheetWidget(
       title: DistributorDetailConstants.changeEmailTxt,
       child: _bodyWidget(context),
     );

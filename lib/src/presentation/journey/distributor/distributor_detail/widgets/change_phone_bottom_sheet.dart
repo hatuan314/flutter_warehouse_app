@@ -40,7 +40,7 @@ class ChangePhoneBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     textEditingController.text = this.phone;
-    return BottomSheerWidget(
+    return BottomSheetWidget(
       title: DistributorDetailConstants.changePhoneTxt,
       child: _bodyWidget(context),
     );

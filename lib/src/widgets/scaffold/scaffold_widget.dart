@@ -28,28 +28,6 @@ class ScaffoldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.white,
-      // appBar: AppBar(
-      //   backgroundColor: AppColor.primaryColor,
-      //   elevation: 0,
-      //   titleSpacing: 0,
-      //   // leadingWidth: 48.w,
-      //   leading: isLeading
-      //       ? IconButton(
-      //     padding: EdgeInsets.zero,
-      //           onPressed: onLeading,
-      //           icon: Icon(
-      //             Icons.arrow_back_ios,
-      //             color: AppColor.white,
-      //           ),
-      //         )
-      //       : SizedBox(),
-      //   title: Text(
-      //     '$title',
-      //     style: ThemeText.subtitle1.copyWith(color: AppColor.white),
-      //   ),
-      //   centerTitle: false,
-      //   actions: actions,
-      // ),
       body: Column(
         children: [
           AppbarWidget(

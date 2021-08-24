@@ -19,4 +19,6 @@ class StringConstants {
   static const String okTxt = 'Đồng ý';
   static const String categoryTxt = 'Danh mục';
   static const String invoiceTitle = 'Hóa đơn';
+  static const String importTxt = 'Nhập hàng';
+  static const String exportTxt = 'Bán hàng';
 }

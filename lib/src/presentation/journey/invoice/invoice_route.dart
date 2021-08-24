@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/create_invoice_screen.dart';
 
 class InvoiceRoutes {
   static Map<String, WidgetBuilder> getAll() {
     return {
+      RouteList.createInvoice: (context) => CreateInvoiceScreen(),
       // RouteList.distributorList: (context) => BlocProvider(
       //     create: (_) => locator<DistributorListBloc>()
       //       ..add(InitialDistributorListEvent()),
@@ -14,8 +16,7 @@ class InvoiceRoutes {
     };
   }
 
-  static Map<String, WidgetBuilder> getRoutesWithSettings(
-      RouteSettings settings) {
+  static Map<String, WidgetBuilder> getRoutesWithSettings(RouteSettings settings) {
     final args = settings.arguments as Map<String, dynamic>;
     return {
       // RouteList.distributorDetail: (context) {

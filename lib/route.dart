@@ -6,6 +6,7 @@ import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/catagory/category_routes.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/dev_mode_screen.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_routes.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/invoice/invoice_route.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/login_routes.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/main_screen.dart';
@@ -27,8 +28,7 @@ class Routes {
     return navigatorKey.currentState.pushNamed(routeName, arguments: arguments);
   }
 
-  Future<dynamic> navigateAndRemove(String routeName,
-      {dynamic arguments}) async {
+  Future<dynamic> navigateAndRemove(String routeName, {dynamic arguments}) async {
     return navigatorKey.currentState.pushNamedAndRemoveUntil(
       routeName,
       (Route<dynamic> route) => false,
@@ -36,10 +36,8 @@ class Routes {
     );
   }
 
-  Future<dynamic> navigateAndReplace(String routeName,
-      {dynamic arguments}) async {
-    return navigatorKey.currentState
-        .pushReplacementNamed(routeName, arguments: arguments);
+  Future<dynamic> navigateAndReplace(String routeName, {dynamic arguments}) async {
+    return navigatorKey.currentState.pushReplacementNamed(routeName, arguments: arguments);
   }
 
   dynamic pop({dynamic result}) {
@@ -52,6 +50,7 @@ class Routes {
         ...UnitRoutes.getAll(),
         ...DistributorRoute.getAll(),
         ...CategoryRoute.getAll(),
+        ...InvoiceRoutes.getAll(),
       };
 
   static Map<String, WidgetBuilder> getAll() => _getCombinedRoutes();
@@ -60,21 +59,15 @@ class Routes {
     switch (settings.name) {
       case RouteList.confirmOtp:
         return MaterialPageRoute(
-            builder: LoginRoutes.getRoutesWithSettings(settings)[settings.name],
-            settings: settings);
+            builder: LoginRoutes.getRoutesWithSettings(settings)[settings.name], settings: settings);
       case RouteList.updateProfile:
         return MaterialPageRoute(
-            builder:
-                ProfileRoute.getRoutesWithSettings(settings)[settings.name],
-            settings: settings);
+            builder: ProfileRoute.getRoutesWithSettings(settings)[settings.name], settings: settings);
       case RouteList.main:
-        return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                create: (_) => locator<MainBloc>(), child: MainScreen()));
+        return MaterialPageRoute(builder: (_) => BlocProvider(create: (_) => locator<MainBloc>(), child: MainScreen()));
       case RouteList.distributorDetail:
         return MaterialPageRoute(
-          builder:
-              DistributorRoute.getRoutesWithSettings(settings)[settings.name],
+          builder: DistributorRoute.getRoutesWithSettings(settings)[settings.name],
           settings: settings,
         );
       case RouteList.createCategory:
@@ -84,8 +77,7 @@ class Routes {
         );
       case RouteList.devMode:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                create: (_) => locator<MainBloc>(), child: DevModeScreen()));
+            builder: (_) => BlocProvider(create: (_) => locator<MainBloc>(), child: DevModeScreen()));
     }
   }
 }

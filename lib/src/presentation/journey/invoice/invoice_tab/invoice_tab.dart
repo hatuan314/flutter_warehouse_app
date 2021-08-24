@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
+import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
@@ -33,12 +34,7 @@ class InvoiceTab extends StatelessWidget {
           padding: EdgeInsets.only(bottom: LayoutConstants.paddingVertical10),
           child: FloatingActionButton(
             onPressed: () {
-              locator<SnackbarBloc>().add(ShowSnackbar(title: 'Developing', type: SnackBarType.warning));
-              // Navigator.of(context).pushNamed(RouteList.addDistributor).then((value) {
-              //   if (value == true) {
-              //     BlocProvider.of<DistributorListBloc>(context).add(InitialDistributorListEvent());
-              //   }
-              // });
+              Navigator.of(context).pushNamed(RouteList.createInvoice);
             },
             child: Icon(
               Icons.add,

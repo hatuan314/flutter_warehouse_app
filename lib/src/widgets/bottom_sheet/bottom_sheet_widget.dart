@@ -3,11 +3,12 @@ import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 
-class BottomSheerWidget extends StatelessWidget {
+class BottomSheetWidget extends StatelessWidget {
   final String title;
   final Widget child;
+  final EdgeInsets bodyPadding;
 
-  const BottomSheerWidget({Key key, @required this.title, @required this.child})
+  const BottomSheetWidget({Key key, @required this.title, @required this.child, this.bodyPadding})
       : super(key: key);
 
   @override
@@ -41,7 +42,7 @@ class BottomSheerWidget extends StatelessWidget {
           centerTitle: true,
         ),
         body: Padding(
-          padding: EdgeInsets.only(top: LayoutConstants.paddingVertical20),
+          padding: bodyPadding ?? EdgeInsets.only(top: LayoutConstants.paddingVertical20),
           child: child,
         ),
       ),
