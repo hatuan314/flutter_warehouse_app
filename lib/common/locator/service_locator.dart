@@ -30,6 +30,8 @@ import 'package:flutterwarehouseapp/src/presentation/journey/catagory/create_cat
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/bloc/add_distributor_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_detail/bloc/distributor_detail_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_list/bloc/distributor_list_bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/invoice/add_item_of_invoice/bloc/add_ioi_bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/bloc/create_invoice_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/confirm_otp/bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/confirm_phone/blocs/blocs.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/splash/blocs/splash_bloc.dart';
@@ -107,6 +109,11 @@ void setup() {
         snackbarBloc: locator<SnackbarBloc>(),
         loaderBloc: locator<LoaderBloc>(),
       ));
+  locator.registerFactory<CreateInvoiceBloc>(() => CreateInvoiceBloc());
+  locator.registerFactory<AddIoiBloc>(() => AddIoiBloc(
+    loaderBloc: locator<LoaderBloc>(),
+    unitUc: locator<UnitUseCase>(),
+  ));
 
   /// UseCases
   locator.registerFactory<UserUseCase>(() => UserUseCase(

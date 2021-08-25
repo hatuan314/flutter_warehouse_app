@@ -1,49 +1,23 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
-import 'package:flutterwarehouseapp/common/extensions/list_extensions.dart';
+import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/unit_entity.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/unit/unit_list/bloc/unit_list_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/unit/unit_list/bloc/unit_list_state.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/unit/unit_list/widgets/body_widget.dart';
-import 'package:flutterwarehouseapp/src/presentation/view_state.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
-import 'package:flutterwarehouseapp/src/widgets/animation_widget/animation_widget.dart';
-import 'package:flutterwarehouseapp/src/widgets/loader_widget/loader_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/scaffold/scaffold_widget.dart';
-import 'package:flutterwarehouseapp/src/widgets/unit_item_widget.dart';
-import 'package:flutterwarehouseapp/src/widgets/view_state_widget/empty_widget.dart';
 
 class UnitListScreen extends StatelessWidget {
+  final String currentRoute;
 
-  Widget _bodyWidget(UnitListState state) {
-    if (state.viewState == ViewState.initial) {
-      if (state.units.isNotSafe) {
-        return EmptyWidget();
-      }
-      return ListView.builder(
-        padding: EdgeInsets.zero,
-          itemCount: state.units.length,
-          itemBuilder: (context, index) {
-            return AnimationConfiguration.staggeredList(
-              position: index,
-              duration: const Duration(milliseconds: 375),
-              child: AnimationWidget(
-                index: index,
-                child: UnitItemWidget(name: state.units[index].name,),
-              ),
-            );
-          });
-    }
-    if (state.viewState == ViewState.loading) {
-      return LoadingContainer(child: SizedBox());
-    }
-    return EmptyWidget();
-  }
+  const UnitListScreen({Key key, @required this.currentRoute}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,16 +29,27 @@ class UnitListScreen extends StatelessWidget {
         },
         actions: [
           IconButton(
-              icon: Icon(Icons.add, color: AppColor.white,),
+              icon: Icon(
+                Icons.add,
+                color: AppColor.white,
+              ),
               onPressed: () {
-                locator<SnackbarBloc>().add(ShowSnackbar(
-                    title: StringConstants.developmentTxt,
-                    type: SnackBarType.warning));
+                locator<SnackbarBloc>()
+                    .add(ShowSnackbar(title: StringConstants.developmentTxt, type: SnackBarType.warning));
               })
         ],
         title: StringConstants.unitTxt,
-        child: BodyWidget(state: state),
+        child: BodyWidget(
+          state: state,
+          onPressUnit: (value) => _onPressedUnit(context, value),
+        ),
       );
     });
+  }
+
+  void _onPressedUnit(BuildContext context, UnitEntity unit) {
+    if (currentRoute == RouteList.addItemOfInvoice) {
+      Navigator.pop(context, jsonEncode(unit.toModel().toJson()));
+    }
   }
 }

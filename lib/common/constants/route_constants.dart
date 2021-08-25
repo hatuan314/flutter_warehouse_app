@@ -24,6 +24,7 @@ class RouteList {
 
   /// Invoice
   static const String createInvoice = '/create_invoice';
+  static const String addItemOfInvoice = '/add_item_of_invoice';
 
   /// Dev
   static const String devMode = '/devMode';

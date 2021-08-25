@@ -6,6 +6,7 @@ class StringConstants {
   static const String distributorTxt = 'Nhà phân phối';
   static const String addDistributorTxt = 'Thêm nhà phân phối';
   static const String createTxt = 'Tạo';
+  static const String addTxt = 'Thêm';
   static const String developmentTxt = 'Đang phát triển';
   static const String noInternetTxt = 'Không có kết nối internet';
   static const String createFailureTxt = 'Tạo thất bại';
@@ -21,4 +22,6 @@ class StringConstants {
   static const String invoiceTitle = 'Hóa đơn';
   static const String importTxt = 'Nhập hàng';
   static const String exportTxt = 'Bán hàng';
+  static const String quantityTxt = 'Số lượng';
+
 }

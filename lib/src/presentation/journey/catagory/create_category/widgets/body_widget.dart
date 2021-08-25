@@ -7,6 +7,7 @@ import 'package:flutterwarehouseapp/src/presentation/journey/catagory/category_c
 import 'package:flutterwarehouseapp/src/presentation/journey/catagory/create_category/bloc/create_category_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/catagory/create_category/bloc/create_category_state.dart';
 import 'package:flutterwarehouseapp/src/presentation/view_state.dart';
+import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/widgets/button/button_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/text_form/text_form_widget.dart';
 
@@ -29,6 +30,7 @@ class BodyWidget extends StatelessWidget {
             autoFocus: true,
             controller: nameController,
             hintText: CategoryConstants.nameTxt,
+            backgroundColor: AppColor.white,
             validator: (value) {
               ValidatorUtils.validateEmptyField(value);
             },

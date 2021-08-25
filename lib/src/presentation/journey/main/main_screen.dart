@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterwarehouseapp/src/presentation/journey/invoice/invoice_tab/invoice_tab.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/main/invoice_page/invoice_tab.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/dashboard_page/dashboard_page.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/main_constants.dart';

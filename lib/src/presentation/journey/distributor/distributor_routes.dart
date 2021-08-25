@@ -15,20 +15,22 @@ import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distrib
 class DistributorRoute {
   static Map<String, WidgetBuilder> getAll() {
     return {
-      RouteList.distributorList: (context) => BlocProvider(
-          create: (_) => locator<DistributorListBloc>()
-            ..add(InitialDistributorListEvent()),
-          child: DistributorListScreen()),
-      RouteList.addDistributor: (context) => BlocProvider(
-          create: (_) => locator<AddDistributorBloc>(),
-          child: AddDistributorScreen()),
+      RouteList.addDistributor: (context) =>
+          BlocProvider(create: (_) => locator<AddDistributorBloc>(), child: AddDistributorScreen()),
     };
   }
 
-  static Map<String, WidgetBuilder> getRoutesWithSettings(
-      RouteSettings settings) {
+  static Map<String, WidgetBuilder> getRoutesWithSettings(RouteSettings settings) {
     final args = settings.arguments as Map<String, dynamic>;
     return {
+      RouteList.distributorList: (context) {
+        var currentRoute = args[ArgumentConstants.currentRouteArg];
+        return BlocProvider(
+            create: (_) => locator<DistributorListBloc>()..add(InitialDistributorListEvent()),
+            child: DistributorListScreen(
+              currentRoute: currentRoute,
+            ));
+      },
       RouteList.distributorDetail: (context) {
         var distributorJson = args[ArgumentConstants.distributorDetailArg];
         var index = args[ArgumentConstants.distributorIndexArg];
@@ -37,8 +39,7 @@ class DistributorRoute {
             ..add(
               InitialDistributorDetailEvent(distributorJson: distributorJson, index: index),
             ),
-          child: DistributorDetailScreen(
-          ),
+          child: DistributorDetailScreen(),
         );
       }
       // RouteList.confirmOtp: (context) {

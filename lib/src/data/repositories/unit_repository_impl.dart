@@ -63,4 +63,9 @@ class UnitRepositoryImpl implements UnitRepository {
   Future<void> removeAll() async {
     await unitLds.removeAll();
   }
+
+  @override
+  UnitEntity getFirstUnit() {
+    return unitLds.getFirstUnit();
+  }
 }

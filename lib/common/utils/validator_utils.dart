@@ -34,5 +34,6 @@ class ValidatorUtils {
     return null;
   }
 
+  static bool isNullEmpty(Object o) => o == null || "" == o;
 
 }

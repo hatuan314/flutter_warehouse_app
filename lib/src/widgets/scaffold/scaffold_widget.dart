@@ -8,6 +8,7 @@ class ScaffoldWidget extends StatelessWidget {
   final bool isLeading;
   final String title;
   final Function onLeading;
+  final Color backgroundColor;
   final Widget child;
   final Widget floatingActionButton;
   final Widget tabBar;
@@ -18,6 +19,7 @@ class ScaffoldWidget extends StatelessWidget {
     this.isLeading = false,
     this.title,
     this.onLeading,
+    this.backgroundColor,
     this.child,
     this.actions,
     this.floatingActionButton,
@@ -27,7 +29,7 @@ class ScaffoldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.white,
+      backgroundColor: backgroundColor ?? AppColor.white,
       body: Column(
         children: [
           AppbarWidget(

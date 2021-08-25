@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutterwarehouseapp/common/extensions/list_extensions.dart';
+import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/unit_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/unit_repository.dart';
 
@@ -8,6 +9,15 @@ class UnitUseCase {
   final UnitRepository unitRepo;
 
   UnitUseCase({@required this.unitRepo});
+
+  Future<UnitEntity> getFirstUnit() async {
+    UnitEntity unit = unitRepo.getFirstUnit();
+    if (ValidatorUtils.isNullEmpty(unit)) {
+      List<UnitEntity> unitList = await getUnitList();
+      unit = unitList.first;
+    }
+    return unit;
+  }
 
   Future<List<UnitEntity>> getUnitList() async {
     List<UnitEntity> units = await unitRepo.getUnitLocalList();

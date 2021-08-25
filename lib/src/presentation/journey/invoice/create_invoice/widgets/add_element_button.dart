@@ -6,10 +6,10 @@ import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 import 'package:flutterwarehouseapp/src/widgets/dash_widget/dotted_border.dart';
 import 'package:flutterwarehouseapp/src/widgets/touchable_widget.dart';
 
-class AddElementButton extends StatelessWidget {
+class AddItemButton extends StatelessWidget {
   final Function onPressed;
 
-  const AddElementButton({Key key, this.onPressed}) : super(key: key);
+  const AddItemButton({Key key, this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

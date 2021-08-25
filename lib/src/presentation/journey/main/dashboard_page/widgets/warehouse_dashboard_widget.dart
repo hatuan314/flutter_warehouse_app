@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterwarehouseapp/common/constants/argument_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/lottie_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
@@ -21,22 +22,27 @@ class WarehouseDashboardWidget extends StatelessWidget {
         WarehouseDashboardItemWidget(
           path: LottieConstants.productIcon,
           title: 'Mặt hàng',
-        ),WarehouseDashboardItemWidget(
+        ),
+        WarehouseDashboardItemWidget(
           onPressed: () {
             Navigator.pushNamed(context, RouteList.categoryList);
           },
           path: LottieConstants.categoryIcon,
           title: StringConstants.categoryTxt,
-        ),WarehouseDashboardItemWidget(
+        ),
+        WarehouseDashboardItemWidget(
           onPressed: () {
-            Navigator.pushNamed(context, RouteList.distributorList);
+            Navigator.pushNamed(context, RouteList.distributorList,
+                arguments: {ArgumentConstants.currentRouteArg: RouteList.main});
           },
           path: LottieConstants.distributorIcon,
           title: StringConstants.distributorTxt,
-        ),WarehouseDashboardItemWidget(
+        ),
+        WarehouseDashboardItemWidget(
           path: LottieConstants.unitIcon,
           onPressed: () {
-            Navigator.pushNamed(context, RouteList.unitList);
+            Navigator.pushNamed(context, RouteList.unitList,
+                arguments: {ArgumentConstants.currentRouteArg: RouteList.main});
           },
           title: StringConstants.unitTxt,
         ),

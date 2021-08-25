@@ -35,7 +35,6 @@ class TouchableWidget extends StatelessWidget {
           ),
       child: Stack(children: <Widget>[
         Container(
-          padding: padding ?? EdgeInsets.all(10),
           child: Center(
             child: child,
           ),

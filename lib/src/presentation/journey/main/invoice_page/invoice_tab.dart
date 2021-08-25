@@ -18,6 +18,7 @@ class InvoiceTab extends StatelessWidget {
     return DefaultTabController(
       length: InvoiceTabConstants.totalTab,
       child: ScaffoldWidget(
+        backgroundColor: AppColor.paleGrey,
         isLeading: false,
         title: StringConstants.invoiceTitle,
         actions: [

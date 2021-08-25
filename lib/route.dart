@@ -65,9 +65,15 @@ class Routes {
             builder: ProfileRoute.getRoutesWithSettings(settings)[settings.name], settings: settings);
       case RouteList.main:
         return MaterialPageRoute(builder: (_) => BlocProvider(create: (_) => locator<MainBloc>(), child: MainScreen()));
+      case RouteList.distributorList:
       case RouteList.distributorDetail:
         return MaterialPageRoute(
           builder: DistributorRoute.getRoutesWithSettings(settings)[settings.name],
+          settings: settings,
+        );
+      case RouteList.unitList:
+        return MaterialPageRoute(
+          builder: UnitRoutes.getRoutesWithSettings(settings)[settings.name],
           settings: settings,
         );
       case RouteList.createCategory:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
+import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 import 'package:flutterwarehouseapp/src/widgets/text_form/text_form_constants.dart';
@@ -10,7 +11,7 @@ class SelectionWidget extends StatelessWidget {
   final IconData icon;
   final Function onPressed;
 
-  const SelectionWidget({Key key, @required this.title, @required this.icon, this.titleColor, @required this.onPressed})
+  const SelectionWidget({Key key, @required this.title, this.icon, this.titleColor, @required this.onPressed})
       : super(key: key);
 
   @override
@@ -31,13 +32,20 @@ class SelectionWidget extends StatelessWidget {
             color: AppColor.white),
         child: Row(
           children: [
-            Icon(
-              icon,
-              color: AppColor.grey,
-            ),
-            SizedBox(
-              width: LayoutConstants.paddingHorizontal10,
-            ),
+            ValidatorUtils.isNullEmpty(icon)
+                ? SizedBox.shrink()
+                : Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        icon,
+                        color: AppColor.grey,
+                      ),
+                      SizedBox(
+                        width: LayoutConstants.paddingHorizontal10,
+                      ),
+                    ],
+                  ),
             Text(
               title,
               style: ThemeText.body1.copyWith(color: titleColor ?? AppColor.textColor),

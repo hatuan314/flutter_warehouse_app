@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
+import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/invoice/add_item_of_invoice/add_ioi_screen.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/invoice/add_item_of_invoice/bloc/add_ioi_bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/invoice/add_item_of_invoice/bloc/add_ioi_event.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/bloc/create_invoice_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/create_invoice_screen.dart';
 
 class InvoiceRoutes {
   static Map<String, WidgetBuilder> getAll() {
     return {
-      RouteList.createInvoice: (context) => CreateInvoiceScreen(),
+      RouteList.createInvoice: (context) => BlocProvider(
+          create: (_) => locator<CreateInvoiceBloc>(),
+          child: CreateInvoiceScreen()),
+      RouteList.addItemOfInvoice: (context) => BlocProvider(
+          create: (_) => locator<AddIoiBloc>()..add(InitialAddIoiEvent()),
+          child: AddIoiScreen()),
       // RouteList.distributorList: (context) => BlocProvider(
       //     create: (_) => locator<DistributorListBloc>()
       //       ..add(InitialDistributorListEvent()),

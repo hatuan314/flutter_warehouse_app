@@ -20,7 +20,7 @@ class TextFormWidget extends TextFormField {
           autofocus: autoFocus,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: ThemeText.body2.copyWith(
+            hintStyle: ThemeText.body1.copyWith(
               color: AppColor.hintColor,
             ),
             errorStyle: ThemeText.caption.copyWith(
