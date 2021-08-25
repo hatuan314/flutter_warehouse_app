@@ -20,12 +20,17 @@ import 'package:flutterwarehouseapp/src/widgets/text_form/text_form_widget.dart'
 class AddItemOfInvoiceBodyWidget extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController qtyController = TextEditingController();
-  final TextEditingController amountController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AddIoiBloc, AddIoiState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is AddToBillState) {
+            Navigator.of(context).pop(jsonEncode(state.itemBill.toJson()));
+          }
+        },
         builder: (context, state) {
           if (state is WaitingAddIoiState) {
             return Padding(
@@ -33,77 +38,67 @@ class AddItemOfInvoiceBodyWidget extends StatelessWidget {
                 horizontal: LayoutConstants.paddingHorizontalApp,
                 vertical: LayoutConstants.paddingVerticalApp,
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextFormWidget(
-                    controller: nameController,
-                    hintText: AddItemOfInvoiceConstants.itemNameHintTxt,
-                    backgroundColor: AppColor.white,
-                    validator: (value) {
-                      if (ValidatorUtils.isNullEmpty(value)) {
-                        return StringConstants.emptyField;
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: LayoutConstants.paddingVertical15,
-                  ),
-                  SelectionWidget(
-                    title: ValidatorUtils.isNullEmpty(state.selectUnit) ? StringConstants.unitTxt : state.selectUnit,
-                    onPressed: () => _onPressedSelectUnit(context),
-                    titleColor: ValidatorUtils.isNullEmpty(state.selectUnit) ? AppColor.hintColor : AppColor.textColor,
-                  ),
-                  SizedBox(
-                    height: LayoutConstants.paddingVertical15,
-                  ),
-                  TextFormWidget(
-                    controller: qtyController,
-                    hintText: StringConstants.quantityTxt,
-                    keyboardType: TextInputType.number,
-                    backgroundColor: AppColor.white,
-                    validator: (value) {
-                      if (ValidatorUtils.isNullEmpty(value)) {
-                        return StringConstants.emptyField;
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: LayoutConstants.paddingVertical15,
-                  ),
-                  TextFormWidget(
-                    controller: qtyController,
-                    hintText:
-                        '${AddItemOfInvoiceConstants.amountHintTxt}${ValidatorUtils.isNullEmpty(state.selectUnit) ? 'Sản phẩm' : state.selectUnit}',
-                    keyboardType: TextInputType.number,
-                    backgroundColor: AppColor.white,
-                    validator: (value) {
-                      if (ValidatorUtils.isNullEmpty(value)) {
-                        return StringConstants.emptyField;
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: LayoutConstants.paddingVertical20,
-                  ),
-                  ButtonWidget(
-                      title: StringConstants.addTxt,
-                      onPressed: () {
-                        // if (_formKey.currentState.validate()) {
-                        //   BlocProvider.of<AddDistributorBloc>(context)
-                        //       .add(CreateDistributorEvent(
-                        //     name: _nameController.text.trim(),
-                        //     firstPhone: _firstPhoneController.text.trim(),
-                        //     secondPhone: _secondPhoneController.text.trim(),
-                        //     firstEmail: _firstEmailController.text.trim(),
-                        //     secondEmail: _secondEmailController.text.trim(),
-                        //   ));
-                        // }
-                      })
-                ],
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextFormWidget(
+                      controller: nameController,
+                      hintText: AddItemOfInvoiceConstants.itemNameHintTxt,
+                      backgroundColor: AppColor.white,
+                      validator: (value) {
+                        if (ValidatorUtils.isNullEmpty(value)) {
+                          return StringConstants.emptyField;
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: LayoutConstants.paddingVertical15,
+                    ),
+                    SelectionWidget(
+                      title: ValidatorUtils.isNullEmpty(state.selectUnit) ? StringConstants.unitTxt : state.selectUnit,
+                      onPressed: () => _onPressedSelectUnit(context),
+                      titleColor:
+                          ValidatorUtils.isNullEmpty(state.selectUnit) ? AppColor.hintColor : AppColor.textColor,
+                    ),
+                    SizedBox(
+                      height: LayoutConstants.paddingVertical15,
+                    ),
+                    TextFormWidget(
+                      controller: qtyController,
+                      hintText: StringConstants.quantityTxt,
+                      keyboardType: TextInputType.number,
+                      backgroundColor: AppColor.white,
+                      validator: (value) {
+                        if (ValidatorUtils.isNullEmpty(value)) {
+                          return StringConstants.emptyField;
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: LayoutConstants.paddingVertical15,
+                    ),
+                    TextFormWidget.withFormatMoney(
+                      controller: priceController,
+                      hintText:
+                          '${AddItemOfInvoiceConstants.amountHintTxt}${ValidatorUtils.isNullEmpty(state.selectUnit) ? 'Sản phẩm' : state.selectUnit}',
+                      backgroundColor: AppColor.white,
+                      validator: (value) {
+                        if (ValidatorUtils.isNullEmpty(value)) {
+                          return StringConstants.emptyField;
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: LayoutConstants.paddingVertical20,
+                    ),
+                    ButtonWidget(title: StringConstants.addTxt, onPressed: () => _onPressedAddBtn(context))
+                  ],
+                ),
               ),
             );
           }
@@ -116,5 +111,15 @@ class AddItemOfInvoiceBodyWidget extends StatelessWidget {
         arguments: {ArgumentConstants.currentRouteArg: RouteList.addItemOfInvoice}).then((unitJson) {
       BlocProvider.of<AddIoiBloc>(context).add(SelectUnitEvent(UnitModel.fromJson(jsonDecode(unitJson))));
     });
+  }
+
+  void _onPressedAddBtn(BuildContext context) {
+    if (_formKey.currentState.validate()) {
+      BlocProvider.of<AddIoiBloc>(context).add(AddItemEvent(
+        name: nameController.text.trim(),
+        qty: qtyController.text.trim(),
+        price: priceController.text.trim(),
+      ));
+    }
   }
 }

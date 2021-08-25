@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 abstract class AddIoiState extends Equatable {}
 
 class WaitingAddIoiState extends AddIoiState {
@@ -10,4 +11,13 @@ class WaitingAddIoiState extends AddIoiState {
 
   @override
   List<Object> get props => [this.selectUnit];
+}
+
+class AddToBillState extends AddIoiState {
+  final ItemBillEntity itemBill;
+
+  AddToBillState(this.itemBill);
+
+  @override
+  List<Object> get props => [this.itemBill];
 }

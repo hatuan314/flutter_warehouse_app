@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/unit_entity.dart';
 
 abstract class AddIoiEvent {}
@@ -12,9 +13,8 @@ class SelectUnitEvent extends AddIoiEvent {
 
 class AddItemEvent extends AddIoiEvent {
   final String name;
-  final String unit;
-  final int qty;
-  final int amount;
+  final String qty;
+  final String price;
 
-  AddItemEvent(this.name, this.unit, this.qty, this.amount);
+  AddItemEvent({@required this.name,@required this.qty,@required this.price});
 }

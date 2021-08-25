@@ -13,7 +13,6 @@ import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invo
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/bloc/create_invoice_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/bloc/create_invoice_state.dart';
 import 'package:flutterwarehouseapp/src/widgets/button/button_widget.dart';
-import 'package:flutterwarehouseapp/src/widgets/view_state_widget/empty_widget.dart';
 
 import 'create_invoice_form_widget.dart';
 
@@ -34,6 +33,7 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
                   CreateInvoiceFormWidget(
                     distributorName: state?.distributorName ?? '',
                     selectBill: state?.selectBill ?? BillEnum.Export,
+                    itemBillList: state?.itemBillList ?? [],
                     onSelectDistributor: () => _onSelectDistributor(context),
                     onSelectBillType: (value) => _onSelectBillType(context, value),
                   ),
