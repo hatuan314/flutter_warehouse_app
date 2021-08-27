@@ -20,8 +20,10 @@ import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 import 'add_element_button.dart';
 import 'invoice_images_widget.dart';
 import 'select_bill_type_bottom_sheet.dart';
+import 'total_amount_widget.dart';
 
 class CreateInvoiceFormWidget extends StatelessWidget {
+  final int totalAmountBill;
   final String distributorName;
   final BillEnum selectBill;
   final List<ItemBillEntity> itemBillList;
@@ -30,6 +32,7 @@ class CreateInvoiceFormWidget extends StatelessWidget {
 
   const CreateInvoiceFormWidget({
     Key key,
+    this.totalAmountBill,
     this.distributorName,
     this.selectBill,
     this.itemBillList,
@@ -85,17 +88,25 @@ class CreateInvoiceFormWidget extends StatelessWidget {
         SizedBox(
           height: LayoutConstants.paddingVertical15,
         ),
-        itemBillList.isNotSafe ? SizedBox() : ListView.builder(
-          padding: EdgeInsets.zero,
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: itemBillList.length,
-          itemBuilder: (context, index) => ItemBillWidget(
-              itemBill: itemBillList[index],
-          ),
-        ),
-        itemBillList.isNotSafe ? SizedBox() : SizedBox(
-          height: LayoutConstants.paddingVertical15,
+        itemBillList.isNotSafe ? SizedBox() : Column(
+          children: [
+            ListView.builder(
+              padding: EdgeInsets.zero,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: itemBillList.length,
+              itemBuilder: (context, index) => ItemBillWidget(
+                  itemBill: itemBillList[index],
+              ),
+            ),
+            SizedBox(
+              height: LayoutConstants.paddingVertical15,
+            ),
+            TotalAmountWidget(totalAmount: totalAmountBill,),
+            SizedBox(
+              height: LayoutConstants.paddingVertical15,
+            ),
+          ],
         ),
         AddItemButton(
           onPressed: () => _onPressedAddItemBtn(context),

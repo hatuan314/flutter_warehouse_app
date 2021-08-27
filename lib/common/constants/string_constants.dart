@@ -23,5 +23,5 @@ class StringConstants {
   static const String importTxt = 'Nhập hàng';
   static const String exportTxt = 'Bán hàng';
   static const String quantityTxt = 'Số lượng';
-
+  static const String totalAmountTxt = 'Tổng tiền';
 }

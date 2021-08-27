@@ -59,5 +59,10 @@
       <string>https</string>
       <string>http</string>
     </array>
+    <key>NSPhotoLibraryUsageDescription</key>
+	<string>Camera permission is requested to allow employees to create avatar for patient.</string>
+	<key>NSCameraUsageDescription</key>
+    <string>Camera permission is requested to allow employees to create avatar for patient.</string>
+
 </dict>
 </plist>

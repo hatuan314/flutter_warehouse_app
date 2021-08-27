@@ -31,6 +31,7 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
               child: Column(
                 children: [
                   CreateInvoiceFormWidget(
+                    totalAmountBill: state?.totalAmountBill,
                     distributorName: state?.distributorName ?? '',
                     selectBill: state?.selectBill ?? BillEnum.Export,
                     itemBillList: state?.itemBillList ?? [],

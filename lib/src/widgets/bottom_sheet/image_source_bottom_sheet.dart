@@ -11,8 +11,8 @@ class ImageSourceBottomSheet extends StatelessWidget {
         isExpanded: true,
         child: Column(
           children: [
-            UnitItemWidget(name: ImageSourceBottomSheetConstant.cameraTxt),
-            UnitItemWidget(name: ImageSourceBottomSheetConstant.galleryTxt),
+            UnitItemWidget(icon: Icon(Icons.camera_alt_outlined), name: ImageSourceBottomSheetConstant.cameraTxt),
+            UnitItemWidget(icon: Icon(Icons.image), name: ImageSourceBottomSheetConstant.galleryTxt),
           ],
         ));
   }
