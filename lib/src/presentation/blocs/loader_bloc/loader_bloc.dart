@@ -20,5 +20,7 @@ class LoaderBloc extends Bloc<LoaderEvent, LoaderState> {
 
   Stream<LoaderState> _loading(StartLoading event) async* {
     yield Loading(isTopLoading: event.isTopLoading);
+    // await Future.delayed(Duration(seconds: 30));
+    // yield Loaded();
   }
 }

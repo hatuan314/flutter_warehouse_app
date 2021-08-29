@@ -20,6 +20,7 @@ import 'package:flutterwarehouseapp/src/domain/repositories/unit_repository.dart
 import 'package:flutterwarehouseapp/src/domain/repositories/user_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/category_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/distributor_usecase.dart';
+import 'package:flutterwarehouseapp/src/domain/usecases/image_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/unit_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/user_usecase.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
@@ -109,11 +110,15 @@ void setup() {
         snackbarBloc: locator<SnackbarBloc>(),
         loaderBloc: locator<LoaderBloc>(),
       ));
-  locator.registerFactory<CreateInvoiceBloc>(() => CreateInvoiceBloc());
+  locator.registerFactory<CreateInvoiceBloc>(() => CreateInvoiceBloc(
+        loaderBloc: locator<LoaderBloc>(),
+        snackbarBloc: locator<SnackbarBloc>(),
+        imageUC: locator<ImageUseCase>(),
+      ));
   locator.registerFactory<AddIoiBloc>(() => AddIoiBloc(
-    loaderBloc: locator<LoaderBloc>(),
-    unitUc: locator<UnitUseCase>(),
-  ));
+        loaderBloc: locator<LoaderBloc>(),
+        unitUc: locator<UnitUseCase>(),
+      ));
 
   /// UseCases
   locator.registerFactory<UserUseCase>(() => UserUseCase(
@@ -128,6 +133,7 @@ void setup() {
   locator.registerFactory<CategoryUseCase>(() => CategoryUseCase(
         categoryRepo: locator<CategoryRepository>(),
       ));
+  locator.registerFactory<ImageUseCase>(() => ImageUseCase());
 
   /// Repositories
   locator.registerFactory<UserRepository>(() => UserRepositoryImpl(

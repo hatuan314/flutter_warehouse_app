@@ -16,28 +16,39 @@ import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invo
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/widgets/selection_widget.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'add_element_button.dart';
-import 'invoice_images_widget.dart';
+import 'invoice_image_list_widget.dart';
 import 'select_bill_type_bottom_sheet.dart';
 import 'total_amount_widget.dart';
 
 class CreateInvoiceFormWidget extends StatelessWidget {
   final int totalAmountBill;
+  final int imageQty;
   final String distributorName;
   final BillEnum selectBill;
   final List<ItemBillEntity> itemBillList;
+  final List<PickedFile> imageFiles;
   final Function onSelectDistributor;
+  final Function onSelectInvoiceImage;
   final Function(BillEnum) onSelectBillType;
+  final Function onPressedGallery;
+  final Function onPressedCamera;
 
   const CreateInvoiceFormWidget({
     Key key,
     this.totalAmountBill,
+    this.imageQty,
     this.distributorName,
     this.selectBill,
     this.itemBillList,
+    this.imageFiles,
     this.onSelectDistributor,
+    this.onSelectInvoiceImage,
     this.onSelectBillType,
+    this.onPressedGallery,
+    this.onPressedCamera,
   }) : super(key: key);
 
   @override
@@ -88,26 +99,30 @@ class CreateInvoiceFormWidget extends StatelessWidget {
         SizedBox(
           height: LayoutConstants.paddingVertical15,
         ),
-        itemBillList.isNotSafe ? SizedBox() : Column(
-          children: [
-            ListView.builder(
-              padding: EdgeInsets.zero,
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: itemBillList.length,
-              itemBuilder: (context, index) => ItemBillWidget(
-                  itemBill: itemBillList[index],
+        itemBillList.isNotSafe
+            ? SizedBox()
+            : Column(
+                children: [
+                  ListView.builder(
+                    padding: EdgeInsets.zero,
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: itemBillList.length,
+                    itemBuilder: (context, index) => ItemBillWidget(
+                      itemBill: itemBillList[index],
+                    ),
+                  ),
+                  SizedBox(
+                    height: LayoutConstants.paddingVertical15,
+                  ),
+                  TotalAmountWidget(
+                    totalAmount: totalAmountBill,
+                  ),
+                  SizedBox(
+                    height: LayoutConstants.paddingVertical15,
+                  ),
+                ],
               ),
-            ),
-            SizedBox(
-              height: LayoutConstants.paddingVertical15,
-            ),
-            TotalAmountWidget(totalAmount: totalAmountBill,),
-            SizedBox(
-              height: LayoutConstants.paddingVertical15,
-            ),
-          ],
-        ),
         AddItemButton(
           onPressed: () => _onPressedAddItemBtn(context),
         ),
@@ -121,15 +136,24 @@ class CreateInvoiceFormWidget extends StatelessWidget {
         SizedBox(
           height: LayoutConstants.paddingVertical15,
         ),
-        InvoiceImagesWidget(),
+        InvoiceImageListWidget(
+          imageFiles: ValidatorUtils.isNullEmptyList(this.imageFiles) ? [] : imageFiles,
+          imageLinks: [],
+          imageQty: imageQty,
+          onSelected: onSelectInvoiceImage,
+          onPressedGallery: onPressedGallery,
+          onPressedCamera: onPressedCamera,
+        ),
       ],
     );
   }
 
   void _onPressedAddItemBtn(BuildContext context) {
     Navigator.pushNamed(context, RouteList.addItemOfInvoice).then((value) {
-      final ItemBillEntity itemBill = ItemBillEntity.fromJson(jsonDecode(value));
-      BlocProvider.of<CreateInvoiceBloc>(context).add(AddItemBillEvent(itemBill));
+      if(ValidatorUtils.isNullEmpty(value)) {
+        final ItemBillEntity itemBill = ItemBillEntity.fromJson(jsonDecode(value));
+        BlocProvider.of<CreateInvoiceBloc>(context).add(AddItemBillEvent(itemBill));
+      }
     });
   }
 }

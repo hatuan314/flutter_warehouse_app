@@ -10,7 +10,10 @@ class UnitLocalDataSource {
   UnitLocalDataSource({@required this.database});
 
   UnitEntity getFirstUnit() {
-    return database.unitBox.getAt(0);
+    if (database.unitBox.isNotEmpty) {
+      return database.unitBox.getAt(0);
+    }
+    return null;
   }
 
   Future<List<UnitEntity>> getUnitList() async {

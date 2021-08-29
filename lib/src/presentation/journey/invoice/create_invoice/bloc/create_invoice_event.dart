@@ -21,3 +21,9 @@ class AddItemBillEvent extends CreateInvoiceEvent {
 
   AddItemBillEvent(this.itemBill);
 }
+
+class OpenGalleryEvent extends CreateInvoiceEvent {}
+
+class OpenCameraEvent extends CreateInvoiceEvent {}
+
+class OnCreateEvent extends CreateInvoiceEvent {}

@@ -118,13 +118,23 @@ class _TopSnackBarState<K extends Object> extends State<TopSnackBar>
         ),
       );
     }
+    if (widget.type == SnackBarType.warning) {
+      return Container(
+        key: const Key('warning_container_icon_key'),
+        child: Icon(
+          Icons.error,
+          size: 32,
+          color: AppColor.primaryColor,
+        ),
+      );
+    }
     else {
       return Container(
         key: const Key('warning_container_icon_key'),
         child: Icon(
           Icons.build_circle,
           size: 32,
-          color: AppColor.primaryColor,
+          color: AppColor.blue,
         ),
       );
     }

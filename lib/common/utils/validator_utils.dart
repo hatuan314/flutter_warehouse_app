@@ -36,4 +36,6 @@ class ValidatorUtils {
 
   static bool isNullEmpty(Object o) => o == null || "" == o;
 
+  static bool isNullEmptyList<T>(List<T> t) => t == null || [] == t || t.isEmpty;
+
 }

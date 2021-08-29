@@ -7,6 +7,7 @@ import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/enums/bill_enum.dart';
+import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/data/models/distributor_model.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/distributor_entity.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/bloc/create_invoice_bloc.dart';
@@ -31,12 +32,16 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
               child: Column(
                 children: [
                   CreateInvoiceFormWidget(
+                    imageQty: state?.imageQty ?? 0,
                     totalAmountBill: state?.totalAmountBill,
                     distributorName: state?.distributorName ?? '',
                     selectBill: state?.selectBill ?? BillEnum.Export,
-                    itemBillList: state?.itemBillList ?? [],
+                    itemBillList: ValidatorUtils.isNullEmptyList(state?.itemBillList) ? [] : state?.itemBillList,
+                    imageFiles: state?.imageFiles ?? [],
                     onSelectDistributor: () => _onSelectDistributor(context),
                     onSelectBillType: (value) => _onSelectBillType(context, value),
+                    onPressedGallery: () => _onOpenGallery(context),
+                    onPressedCamera: () => _onOpenCamera(context),
                   ),
                   SizedBox(
                     height: LayoutConstants.paddingVertical20,
@@ -73,5 +78,13 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
 
   void _onSelectBillType(BuildContext context, BillEnum bill) {
     BlocProvider.of<CreateInvoiceBloc>(context).add(SelectBillTypeEvent(bill));
+  }
+
+  void _onOpenGallery(BuildContext context) {
+    BlocProvider.of<CreateInvoiceBloc>(context).add(OpenGalleryEvent());
+  }
+
+  void _onOpenCamera(BuildContext context) {
+    BlocProvider.of<CreateInvoiceBloc>(context).add(OpenCameraEvent());
   }
 }

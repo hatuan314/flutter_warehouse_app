@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/src/widgets/bottom_sheet/bottom_sheet_widget.dart';
+import 'package:flutterwarehouseapp/src/widgets/touchable_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/unit_item_widget.dart';
 
 class ImageSourceBottomSheet extends StatelessWidget {
+  final Function onPressedGallery;
+  final Function onPressedCamera;
+
+  const ImageSourceBottomSheet({
+    Key key,
+    this.onPressedGallery,
+    this.onPressedCamera,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BottomSheetWidget(
@@ -11,8 +21,19 @@ class ImageSourceBottomSheet extends StatelessWidget {
         isExpanded: true,
         child: Column(
           children: [
-            UnitItemWidget(icon: Icon(Icons.camera_alt_outlined), name: ImageSourceBottomSheetConstant.cameraTxt),
-            UnitItemWidget(icon: Icon(Icons.image), name: ImageSourceBottomSheetConstant.galleryTxt),
+            TouchableWidget(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  onPressedCamera();
+                },
+                child: UnitItemWidget(
+                    icon: Icon(Icons.camera_alt_outlined), name: ImageSourceBottomSheetConstant.cameraTxt)),
+            TouchableWidget(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  onPressedGallery();
+                },
+                child: UnitItemWidget(icon: Icon(Icons.image), name: ImageSourceBottomSheetConstant.galleryTxt)),
           ],
         ));
   }
