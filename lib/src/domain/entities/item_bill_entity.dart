@@ -1,22 +1,45 @@
-class ItemBillEntity {
-  String name;
-  int qty;
-  int price;
-  int totalPrice;
+import 'package:hive/hive.dart';
 
-  ItemBillEntity({this.name, this.qty, this.price, this.totalPrice});
+import 'package:flutterwarehouseapp/src/data/models/item_bill_model.dart';
+
+part 'item_bill_entity.g.dart';
+
+@HiveType(typeId: 4)
+class ItemBillEntity {
+  @HiveField(0)
+  String name;
+  @HiveField(1)
+  int qty;
+  @HiveField(2)
+  int price;
+  @HiveField(3)
+  int totalPrice;
+  @HiveField(4)
+  String unit;
+
+  ItemBillEntity({this.name, this.qty, this.price, this.totalPrice, this.unit});
 
   factory ItemBillEntity.fromJson(Map<String, dynamic> json) => ItemBillEntity(
     name: json['name'],
     qty: json['qty'],
     price: json['price'],
-    totalPrice: json['totalPrice'],
+    totalPrice: json['total_price'],
+    unit: json['unit'],
   );
 
   Map<String, dynamic> toJson() => {
     'name': name,
     'qty': qty,
     'price': price,
-    'totalPrice': totalPrice
+    'total_price': totalPrice,
+    'unit': unit,
   };
+
+  ItemBillModel toModel() => ItemBillModel(
+    name: name,
+    qty: qty,
+    price: price,
+    totalPrice: totalPrice,
+    unit: unit,
+  );
 }

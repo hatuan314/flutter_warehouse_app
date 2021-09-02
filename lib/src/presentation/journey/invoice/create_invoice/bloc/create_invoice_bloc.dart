@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/common/enums/bill_enum.dart';
 import 'package:flutterwarehouseapp/common/extensions/list_extensions.dart';
+import 'package:flutterwarehouseapp/common/utils/bill_utils.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/distributor_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/image_usecase.dart';
+import 'package:flutterwarehouseapp/src/domain/usecases/invoice_usecase.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/bloc/create_invoice_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/bloc/create_invoice_state.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/create_invoice_constants.dart';
 import 'package:flutterwarehouseapp/src/presentation/view_state.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -18,6 +22,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
   final LoaderBloc loaderBloc;
   final SnackbarBloc snackbarBloc;
   final ImageUseCase imageUC;
+  final InvoiceUseCase invoiceUC;
 
   DistributorEntity selectDistributor;
   BillEnum selectBill = BillEnum.Export;
@@ -26,7 +31,12 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
   int totalAmountBill = 0;
   int _imageQty = 0;
 
-  CreateInvoiceBloc({@required this.loaderBloc, @required this.snackbarBloc, @required this.imageUC});
+  CreateInvoiceBloc({
+    @required this.loaderBloc,
+    @required this.snackbarBloc,
+    @required this.imageUC,
+    @required this.invoiceUC,
+  });
 
   @override
   CreateInvoiceState get initialState => WaitingCreateInvoiceState(
@@ -104,10 +114,11 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     var currentState = state;
     if (currentState is WaitingCreateInvoiceState) {
       yield currentState.copyWith(viewState: ViewState.loading);
-      final PickedFile image =
-          await imageUC.getImageFile(ImageSource.gallery);
-      imageFiles.add(image);
-      _imageQty = _setImageQty();
+      final PickedFile image = await imageUC.getImageFile(ImageSource.gallery);
+      if (!ValidatorUtils.isNullEmpty(image)) {
+        imageFiles.add(image);
+        _imageQty = _setImageQty();
+      }
       yield currentState.copyWith(viewState: ViewState.initial, imageFiles: imageFiles, imageQty: _imageQty);
     }
   }
@@ -120,8 +131,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     var currentState = state;
     if (currentState is WaitingCreateInvoiceState) {
       yield currentState.copyWith(viewState: ViewState.loading);
-      final PickedFile image =
-      await imageUC.getImageFile(ImageSource.camera);
+      final PickedFile image = await imageUC.getImageFile(ImageSource.camera);
       if (!ValidatorUtils.isNullEmpty(image)) {
         imageFiles.add(image);
         _imageQty = _setImageQty();
@@ -152,10 +162,30 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     if (currentState is WaitingCreateInvoiceState) {
       if (!flag) {
         yield currentState;
+      } else {
+        loaderBloc.add(StartLoading());
+        List itemsJsonArray = invoiceUC.getItemBillJsonArray(itemBillList);
+        BillEntity bill = BillEntity(
+          distributorName: selectDistributor.name,
+          type: BillUtils.convertToString(selectBill),
+          items: itemsJsonArray,
+          totalAmount: totalAmountBill,
+          locale: 'vi',
+          createAt: DateTime.now().millisecondsSinceEpoch,
+          lastUpdate: DateTime.now().millisecondsSinceEpoch,
+        );
+        bool flag = await invoiceUC.createInvoice(bill);
+        if (flag) {
+          snackbarBloc
+              .add(ShowSnackbar(title: CreateInvoiceConstants.createInvoiceSuccessMsg, type: SnackBarType.success));
+          yield CreateInvoiceSuccessState();
+        } else {
+          snackbarBloc
+              .add(ShowSnackbar(title: CreateInvoiceConstants.createInvoiceFailedMsg, type: SnackBarType.error));
+          yield currentState;
+        }
+        loaderBloc.add(FinishLoading());
       }
-    } else {
-
     }
   }
-
 }

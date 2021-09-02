@@ -3,24 +3,35 @@ import 'package:flutterwarehouseapp/common/configs/local_db_setup.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/local/app_preference.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/local/category_hive.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/local/distributor_hive.dart';
+import 'package:flutterwarehouseapp/src/data/data_sources/local/invoice_hive.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/local/pref.dart';
+import 'package:flutterwarehouseapp/src/data/data_sources/local/product_hive.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/local/unit_hive.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/base_service.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/category_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/distributor_datasource.dart';
+import 'package:flutterwarehouseapp/src/data/data_sources/remote/invoice_datasource.dart';
+import 'package:flutterwarehouseapp/src/data/data_sources/remote/product_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/unit_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/user_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/category_repository_impl.dart';
+import 'package:flutterwarehouseapp/src/data/repositories/common_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/distributor_repository_impl.dart';
+import 'package:flutterwarehouseapp/src/data/repositories/invoice_repository_impl.dart';
+import 'package:flutterwarehouseapp/src/data/repositories/product_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/unit_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/user_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/category_repository.dart';
+import 'package:flutterwarehouseapp/src/domain/repositories/common_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/distributor_repository.dart';
+import 'package:flutterwarehouseapp/src/domain/repositories/invoice_repository.dart';
+import 'package:flutterwarehouseapp/src/domain/repositories/product_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/unit_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/user_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/category_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/distributor_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/image_usecase.dart';
+import 'package:flutterwarehouseapp/src/domain/usecases/invoice_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/unit_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/user_usecase.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
@@ -48,9 +59,7 @@ void setup() {
   /// Blocs
   locator.registerLazySingleton<LoaderBloc>(() => LoaderBloc());
   locator.registerLazySingleton<SnackbarBloc>(() => SnackbarBloc());
-  locator.registerFactory<InternetBloc>(() => InternetBloc(
-        snackbarBloc: locator<SnackbarBloc>(),
-      ));
+  locator.registerFactory<InternetBloc>(() => InternetBloc());
   locator.registerFactory(() => SplashBloc(
         pref: locator<AppPreference>(),
         setupFirebase: locator<SetupFirebaseDatabase>(),
@@ -114,6 +123,7 @@ void setup() {
         loaderBloc: locator<LoaderBloc>(),
         snackbarBloc: locator<SnackbarBloc>(),
         imageUC: locator<ImageUseCase>(),
+        invoiceUC: locator<InvoiceUseCase>(),
       ));
   locator.registerFactory<AddIoiBloc>(() => AddIoiBloc(
         loaderBloc: locator<LoaderBloc>(),
@@ -134,8 +144,10 @@ void setup() {
         categoryRepo: locator<CategoryRepository>(),
       ));
   locator.registerFactory<ImageUseCase>(() => ImageUseCase());
+  locator.registerFactory<InvoiceUseCase>(() => InvoiceUseCase(invoiceRepo: locator<InvoiceRepository>()));
 
   /// Repositories
+  locator.registerFactory<CommonRepository>(() => CommonRepositoryImpl());
   locator.registerFactory<UserRepository>(() => UserRepositoryImpl(
         userDataSource: locator<UserDataSource>(),
       ));
@@ -146,10 +158,22 @@ void setup() {
   locator.registerFactory<DistributorRepository>(() => DistributorRepositoryImpl(
         distributorDs: locator<DistributorDataSource>(),
         distributorHive: locator<DistributorHive>(),
+        commonRepo: locator<CommonRepository>(),
       ));
   locator.registerFactory<CategoryRepository>(() => CategoryRepositoryImpl(
         categoryDS: locator<CategoryDataSource>(),
         categoryHive: locator<CategoryHive>(),
+        commonRepo: locator<CommonRepository>(),
+      ));
+  locator.registerFactory<InvoiceRepository>(() => InvoiceRepositoryImpl(
+        invoiceDs: locator<InvoiceDataSource>(),
+        invoiceHive: locator<InvoiceHive>(),
+        commonRepo: locator<CommonRepository>(),
+      ));
+  locator.registerFactory<ProductRepository>(() => ProductRepositoryImpl(
+        productDs: locator<ProductDataSource>(),
+        productHive: locator<ProductHive>(),
+        commonRepo: locator<CommonRepository>(),
       ));
 
   /// DataSource
@@ -169,6 +193,14 @@ void setup() {
         setup: locator<SetupFirebaseDatabase>(),
         service: locator<BaseService>(),
       ));
+  locator.registerLazySingleton<InvoiceDataSource>(() => InvoiceDataSource(
+        setup: locator<SetupFirebaseDatabase>(),
+        service: locator<BaseService>(),
+      ));
+  locator.registerLazySingleton<ProductDataSource>(() => ProductDataSource(
+        setup: locator<SetupFirebaseDatabase>(),
+        service: locator<BaseService>(),
+      ));
   locator.registerLazySingleton<Pref>(() => LocalPref());
   locator.registerLazySingleton<AppPreference>(() => AppPreference(
         pref: locator<Pref>(),
@@ -176,6 +208,8 @@ void setup() {
   locator.registerLazySingleton<UnitLocalDataSource>(() => UnitLocalDataSource(database: locator<LocalDbSetup>()));
   locator.registerLazySingleton<DistributorHive>(() => DistributorHive(locator<LocalDbSetup>()));
   locator.registerLazySingleton<CategoryHive>(() => CategoryHive(locator<LocalDbSetup>()));
+  locator.registerLazySingleton<InvoiceHive>(() => InvoiceHive(locator<LocalDbSetup>()));
+  locator.registerLazySingleton<ProductHive>(() => ProductHive(locator<LocalDbSetup>()));
 
   /// Utils
   locator.registerLazySingleton<SetupFirebaseDatabase>(() => SetupFirebaseDatabase());

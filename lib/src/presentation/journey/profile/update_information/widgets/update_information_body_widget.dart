@@ -61,21 +61,26 @@ class UpdateProfileBodyWidget extends StatelessWidget {
               ),
               SafeArea(
                 bottom: true,
-                child: ButtonWidget(
-                    title: UpdateInformationConstants.startTxt,
-                    onPressed: () {
-                      if (formKey.currentState.validate()) {
-                        BlocProvider.of<UpdateInfoBloc>(context)
-                            .add(CreateInfoEvent(
-                          isRegistration: isRegistration,
-                          uid: fireUser.uid,
-                          imageUri: null,
-                          phone: fireUser.phoneNumber,
-                          email: emailController.text.trim(),
-                          fullName: fullNameController.text.trim(),
-                        ));
-                      }
-                    }),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    bottom: LayoutConstants.paddingVerticalApp
+                  ),
+                  child: ButtonWidget(
+                      title: UpdateInformationConstants.startTxt,
+                      onPressed: () {
+                        if (formKey.currentState.validate()) {
+                          BlocProvider.of<UpdateInfoBloc>(context)
+                              .add(CreateInfoEvent(
+                            isRegistration: isRegistration,
+                            uid: fireUser.uid,
+                            imageUri: null,
+                            phone: fireUser.phoneNumber,
+                            email: emailController.text.trim(),
+                            fullName: fullNameController.text.trim(),
+                          ));
+                        }
+                      }),
+                ),
               )
             ],
           ),

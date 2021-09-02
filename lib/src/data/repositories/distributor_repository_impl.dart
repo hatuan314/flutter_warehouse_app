@@ -1,35 +1,32 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutterwarehouseapp/common/extensions/list_extensions.dart';
 import 'package:flutterwarehouseapp/common/extensions/string_extensions.dart';
 import 'package:flutterwarehouseapp/common/utils/connectivity_utils.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/local/distributor_hive.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/distributor_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/models/distributor_model.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/distributor_entity.dart';
+import 'package:flutterwarehouseapp/src/domain/repositories/common_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/distributor_repository.dart';
 
 class DistributorRepositoryImpl implements DistributorRepository {
   final DistributorDataSource distributorDs;
   final DistributorHive distributorHive;
+  final CommonRepository commonRepo;
 
   DistributorRepositoryImpl({
     @required this.distributorDs,
     @required this.distributorHive,
+    @required this.commonRepo,
   });
 
   @override
   Future<List<DistributorEntity>> getDistributorCloudList() async {
     final QuerySnapshot snapshot = await distributorDs.getDistributorList();
-    List<DistributorModel> distributorList = [];
-    if (snapshot.docs.isSafe) {
-      snapshot.docs.forEach((doc) {
-        DistributorModel distributor = DistributorModel.fromJson(doc.data());
-        distributor.document = doc.id;
-        distributorList.add(distributor);
-      });
-    }
+    List<DistributorModel> distributorList = commonRepo.getCloudDataList<DistributorModel>(snapshot);
     return distributorList;
   }
 

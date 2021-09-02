@@ -1,3 +1,4 @@
+import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/distributor_entity.dart';
 
 class DistributorModel extends DistributorEntity {
@@ -23,8 +24,8 @@ class DistributorModel extends DistributorEntity {
 
   DistributorModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
-    phones = json['phones'].cast<String>();
-    emails = json['emails'].cast<String>();
+    phones = ValidatorUtils.isNullEmpty(json['phones']) ? [] : json['phones'].cast<String>();
+    emails = ValidatorUtils.isNullEmpty(json['emails']) ? [] : json['emails'].cast<String>();
     color = json['color'];
     createAt = json['create_at'] != null
         ? DateTime.fromMillisecondsSinceEpoch(json['create_at'])

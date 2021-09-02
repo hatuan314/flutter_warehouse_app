@@ -11,6 +11,8 @@ class DefaultConfig {
   static const distributorsCollection = 'distributors';
   static const categoriesCollection = 'categories';
   static const profileCollection = 'profile';
+  static const billCollection = 'bills';
+  static const productCollection = 'products';
 
   /// Documents
   static const profileDocument = 'profile';

@@ -21,7 +21,11 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CreateInvoiceBloc, CreateInvoiceState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is CreateInvoiceSuccessState) {
+            Navigator.of(context).pop(true);
+          }
+        },
         builder: (context, state) {
           if (state is WaitingCreateInvoiceState) {
             return SingleChildScrollView(
@@ -49,16 +53,7 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
                   ButtonWidget(
                       title: StringConstants.createTxt,
                       onPressed: () {
-                        // if (_formKey.currentState.validate()) {
-                        //   BlocProvider.of<AddDistributorBloc>(context)
-                        //       .add(CreateDistributorEvent(
-                        //     name: _nameController.text.trim(),
-                        //     firstPhone: _firstPhoneController.text.trim(),
-                        //     secondPhone: _secondPhoneController.text.trim(),
-                        //     firstEmail: _firstEmailController.text.trim(),
-                        //     secondEmail: _secondEmailController.text.trim(),
-                        //   ));
-                        // }
+                        BlocProvider.of<CreateInvoiceBloc>(context).add(OnCreateEvent());
                       })
                 ],
               ),

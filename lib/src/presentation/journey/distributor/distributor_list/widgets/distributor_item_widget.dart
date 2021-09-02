@@ -72,7 +72,7 @@ class DistributorItemWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      distributor.name,
+                      distributor?.name ?? '',
                       style: ThemeText.subtitle1,
                     ),
                     distributor.phones.isSafe

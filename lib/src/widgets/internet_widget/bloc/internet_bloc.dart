@@ -9,9 +9,6 @@ import 'internet_event.dart';
 import 'internet_state.dart';
 
 class InternetBloc extends Bloc<InternetEvent, InternetState> {
-  final SnackbarBloc snackbarBloc;
-
-  InternetBloc({@required this.snackbarBloc});
 
   @override
   InternetState get initialState => ConnectState();
@@ -23,9 +20,6 @@ class InternetBloc extends Bloc<InternetEvent, InternetState> {
       if (flag) {
         yield ConnectState();
       } else {
-        snackbarBloc.add(ShowSnackbar(
-            title: StringConstants.noInternetTxt,
-            type: SnackBarType.disconnect));
         yield DisconnectState();
       }
     }

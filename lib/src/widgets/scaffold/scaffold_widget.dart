@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 
@@ -42,7 +43,10 @@ class ScaffoldWidget extends StatelessWidget {
           Expanded(child: child),
         ],
       ),
-      floatingActionButton: floatingActionButton,
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: LayoutConstants.paddingVerticalApp),
+        child: floatingActionButton,
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }

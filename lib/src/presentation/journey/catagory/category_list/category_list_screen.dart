@@ -12,28 +12,9 @@ import 'package:flutterwarehouseapp/src/presentation/journey/catagory/category_l
 import 'package:flutterwarehouseapp/src/presentation/journey/catagory/category_list/widgets/category_list_body_widget.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/catagory/create_category/create_category_constants.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
-import 'package:flutterwarehouseapp/src/widgets/animation_widget/animation_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/scaffold/scaffold_widget.dart';
-import 'package:flutterwarehouseapp/src/widgets/unit_item_widget.dart';
-import 'package:flutterwarehouseapp/src/widgets/view_state_widget/empty_widget.dart';
 
 class CategoryListScreen extends StatelessWidget {
-  Widget _bodyWidget(BuildContext context) {
-    // return ListView.builder(
-    //     padding: EdgeInsets.zero,
-    //     itemCount: 10,
-    //     itemBuilder: (context, index) {
-    //       return AnimationConfiguration.staggeredList(
-    //         position: index,
-    //         duration: const Duration(milliseconds: 375),
-    //         child: AnimationWidget(
-    //           index: index,
-    //           child: UnitItemWidget(name: 'Test 1', color: AppColor.primaryColor,),
-    //         ),
-    //       );
-    //     });
-    return EmptyWidget();
-  }
 
   @override
   Widget build(BuildContext context) {

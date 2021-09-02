@@ -56,3 +56,8 @@ class WaitingCreateInvoiceState extends CreateInvoiceState {
         this.imageQty,
       ];
 }
+
+class CreateInvoiceSuccessState extends CreateInvoiceState {
+  @override
+  List<Object> get props => [];
+}

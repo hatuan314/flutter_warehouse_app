@@ -1,4 +1,8 @@
 import 'package:connectivity/connectivity.dart';
+import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
+import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
+import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
 
 class ConnectivityUtils {
   static Future<bool> checkConnectInternet() async {
@@ -9,6 +13,9 @@ class ConnectivityUtils {
     if (connectivityResult == ConnectivityResult.wifi) {
       return true;
     }
+    locator<SnackbarBloc>().add(ShowSnackbar(
+        title: StringConstants.noInternetTxt,
+        type: SnackBarType.disconnect));
     return false;
   }
 }

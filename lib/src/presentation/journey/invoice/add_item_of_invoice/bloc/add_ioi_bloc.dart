@@ -60,6 +60,7 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
       qty: qty,
       price: price,
       totalPrice: totalPrice,
+      unit: _selectUnit.name
     );
     yield AddToBillState(itemBill);
   }

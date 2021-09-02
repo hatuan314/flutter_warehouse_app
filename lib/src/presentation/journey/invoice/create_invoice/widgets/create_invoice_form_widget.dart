@@ -150,7 +150,7 @@ class CreateInvoiceFormWidget extends StatelessWidget {
 
   void _onPressedAddItemBtn(BuildContext context) {
     Navigator.pushNamed(context, RouteList.addItemOfInvoice).then((value) {
-      if(ValidatorUtils.isNullEmpty(value)) {
+      if(!ValidatorUtils.isNullEmpty(value)) {
         final ItemBillEntity itemBill = ItemBillEntity.fromJson(jsonDecode(value));
         BlocProvider.of<CreateInvoiceBloc>(context).add(AddItemBillEvent(itemBill));
       }
