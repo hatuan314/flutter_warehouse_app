@@ -36,6 +36,7 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
               child: Column(
                 children: [
                   CreateInvoiceFormWidget(
+                    enableSelectDistributor: state?.enableSelectDistributor ?? false,
                     imageQty: state?.imageQty ?? 0,
                     totalAmountBill: state?.totalAmountBill,
                     distributorName: state?.distributorName ?? '',

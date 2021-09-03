@@ -9,6 +9,7 @@ abstract class CreateInvoiceState extends Equatable {}
 
 class WaitingCreateInvoiceState extends CreateInvoiceState {
   final ViewState viewState;
+  final bool enableSelectDistributor;
   final int totalAmountBill;
   final int imageQty;
   final String distributorName;
@@ -18,6 +19,7 @@ class WaitingCreateInvoiceState extends CreateInvoiceState {
 
   WaitingCreateInvoiceState({
     @required this.viewState,
+    @required this.enableSelectDistributor,
     @required this.totalAmountBill,
     @required this.distributorName,
     @required this.selectBill,
@@ -28,6 +30,7 @@ class WaitingCreateInvoiceState extends CreateInvoiceState {
 
   WaitingCreateInvoiceState copyWith({
     ViewState viewState,
+    bool enableSelectDistributor,
     int totalAmountBill,
     int imageQty,
     String distributorName,
@@ -36,6 +39,7 @@ class WaitingCreateInvoiceState extends CreateInvoiceState {
     List<PickedFile> imageFiles,
   }) =>
       WaitingCreateInvoiceState(
+        enableSelectDistributor: enableSelectDistributor ?? this.enableSelectDistributor,
         distributorName: distributorName ?? this.distributorName,
         totalAmountBill: totalAmountBill ?? this.totalAmountBill,
         selectBill: selectBill ?? this.selectBill,
@@ -48,6 +52,7 @@ class WaitingCreateInvoiceState extends CreateInvoiceState {
   @override
   List<Object> get props => [
         this.viewState,
+        this.enableSelectDistributor,
         this.totalAmountBill,
         this.distributorName,
         this.selectBill,

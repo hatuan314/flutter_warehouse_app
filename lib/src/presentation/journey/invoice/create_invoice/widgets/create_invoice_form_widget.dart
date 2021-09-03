@@ -24,6 +24,7 @@ import 'select_bill_type_bottom_sheet.dart';
 import 'total_amount_widget.dart';
 
 class CreateInvoiceFormWidget extends StatelessWidget {
+  final bool enableSelectDistributor;
   final int totalAmountBill;
   final int imageQty;
   final String distributorName;
@@ -38,6 +39,7 @@ class CreateInvoiceFormWidget extends StatelessWidget {
 
   const CreateInvoiceFormWidget({
     Key key,
+    this.enableSelectDistributor,
     this.totalAmountBill,
     this.imageQty,
     this.distributorName,
@@ -57,17 +59,17 @@ class CreateInvoiceFormWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SelectionWidget(
+        enableSelectDistributor ? SelectionWidget(
           icon: Icons.store,
           title: ValidatorUtils.isNullEmpty(distributorName)
               ? CreateInvoiceConstants.selectDistributorTxt
               : distributorName,
           titleColor: ValidatorUtils.isNullEmpty(distributorName) ? AppColor.grey : AppColor.textColor,
           onPressed: onSelectDistributor,
-        ),
-        SizedBox(
+        ) : SizedBox.shrink(),
+        enableSelectDistributor ? SizedBox(
           height: LayoutConstants.paddingVertical15,
-        ),
+        ) : SizedBox.shrink(),
         SelectionWidget(
           onPressed: () {
             showModalBottomSheet<String>(

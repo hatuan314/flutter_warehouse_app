@@ -30,6 +30,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
   List<PickedFile> imageFiles = [];
   int totalAmountBill = 0;
   int _imageQty = 0;
+  bool _enableSelectDistributor = false;
 
   CreateInvoiceBloc({
     @required this.loaderBloc,
@@ -41,6 +42,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
   @override
   CreateInvoiceState get initialState => WaitingCreateInvoiceState(
         viewState: ViewState.initial,
+        enableSelectDistributor: _enableSelectDistributor,
         totalAmountBill: totalAmountBill,
         distributorName: '',
         selectBill: BillEnum.Export,
@@ -85,7 +87,14 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     selectBill = event.bill;
     var currentState = state;
     if (currentState is WaitingCreateInvoiceState) {
-      yield currentState.copyWith(selectBill: selectBill);
+      if (selectBill == BillEnum.Export) {
+        _enableSelectDistributor = false;
+        selectDistributor = null;
+      } else {
+        _enableSelectDistributor = true;
+      }
+      yield currentState.copyWith(
+          selectBill: selectBill, enableSelectDistributor: _enableSelectDistributor, distributorName: '');
     }
   }
 
