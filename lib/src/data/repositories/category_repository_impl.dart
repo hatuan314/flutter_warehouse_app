@@ -9,19 +9,16 @@ import 'package:flutterwarehouseapp/src/data/models/category_model.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/category_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/hive_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/category_repository.dart';
-import 'package:flutterwarehouseapp/src/domain/repositories/common_repository.dart';
 
 import 'mixin_repository.dart';
 
 class CategoryRepositoryImpl extends CategoryRepository with MixinRepository {
   final CategoryDataSource categoryDS;
   final CategoryHive categoryHive;
-  final CommonRepository commonRepo;
 
   CategoryRepositoryImpl({
     @required this.categoryDS,
     @required this.categoryHive,
-    @required this.commonRepo,
   });
 
   @override

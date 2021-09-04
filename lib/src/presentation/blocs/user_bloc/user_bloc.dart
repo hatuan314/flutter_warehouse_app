@@ -16,6 +16,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   final LoaderBloc loaderBloc;
   final SnackbarBloc snackbarBloc;
   UserEntity user;
+  String locale = 'vi';
 
   UserBloc({
     @required this.setupFirebase,

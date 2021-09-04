@@ -10,15 +10,13 @@ import 'package:flutterwarehouseapp/src/data/models/bill_model.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/mixin_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/hive_entity.dart';
-import 'package:flutterwarehouseapp/src/domain/repositories/common_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/invoice_repository.dart';
 
 class InvoiceRepositoryImpl extends InvoiceRepository with MixinRepository {
   final InvoiceHive invoiceHive;
   final InvoiceDataSource invoiceDs;
-  final CommonRepository commonRepo;
 
-  InvoiceRepositoryImpl({@required this.invoiceHive, @required this.invoiceDs, @required this.commonRepo});
+  InvoiceRepositoryImpl({@required this.invoiceHive, @required this.invoiceDs});
 
   @override
   Future<List<BillEntity>> getBillListCloud() async {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/configs/default_env.dart';
@@ -22,6 +24,7 @@ class UserDataSource {
   }
 
   Future<QuerySnapshot> getUser(String uid) async {
+    log('>>>>>>>>>>>UserDataSource.getUser.path: ${setup.mainDoc.path}');
     return service.getQuerySnapshotList(
         setup.mainDoc.collection(DefaultConfig.profileCollection));
   }

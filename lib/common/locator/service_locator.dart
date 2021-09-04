@@ -15,14 +15,12 @@ import 'package:flutterwarehouseapp/src/data/data_sources/remote/product_datasou
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/unit_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/user_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/category_repository_impl.dart';
-import 'package:flutterwarehouseapp/src/data/repositories/common_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/distributor_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/invoice_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/product_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/unit_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/user_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/category_repository.dart';
-import 'package:flutterwarehouseapp/src/domain/repositories/common_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/distributor_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/invoice_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/product_repository.dart';
@@ -123,8 +121,10 @@ void setup() {
   locator.registerFactory<CreateInvoiceBloc>(() => CreateInvoiceBloc(
         loaderBloc: locator<LoaderBloc>(),
         snackbarBloc: locator<SnackbarBloc>(),
+        userBloc: locator<UserBloc>(),
         imageUC: locator<ImageUseCase>(),
         invoiceUC: locator<InvoiceUseCase>(),
+      productUC: locator<ProductUseCase>(),
       ));
   locator.registerFactory<AddIoiBloc>(() => AddIoiBloc(
         loaderBloc: locator<LoaderBloc>(),
@@ -151,7 +151,6 @@ void setup() {
       ));
 
   /// Repositories
-  locator.registerFactory<CommonRepository>(() => CommonRepositoryImpl());
   locator.registerFactory<UserRepository>(() => UserRepositoryImpl(
         userDataSource: locator<UserDataSource>(),
       ));
@@ -162,22 +161,18 @@ void setup() {
   locator.registerFactory<DistributorRepository>(() => DistributorRepositoryImpl(
         distributorDs: locator<DistributorDataSource>(),
         distributorHive: locator<DistributorHive>(),
-        commonRepo: locator<CommonRepository>(),
       ));
   locator.registerFactory<CategoryRepository>(() => CategoryRepositoryImpl(
         categoryDS: locator<CategoryDataSource>(),
         categoryHive: locator<CategoryHive>(),
-        commonRepo: locator<CommonRepository>(),
       ));
   locator.registerFactory<InvoiceRepository>(() => InvoiceRepositoryImpl(
         invoiceDs: locator<InvoiceDataSource>(),
         invoiceHive: locator<InvoiceHive>(),
-        commonRepo: locator<CommonRepository>(),
       ));
   locator.registerFactory<ProductRepository>(() => ProductRepositoryImpl(
         productDs: locator<ProductDataSource>(),
         productHive: locator<ProductHive>(),
-        commonRepo: locator<CommonRepository>(),
       ));
 
   /// DataSource

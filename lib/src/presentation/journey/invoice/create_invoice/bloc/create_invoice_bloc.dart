@@ -7,11 +7,14 @@ import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/distributor_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/product_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/image_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/invoice_usecase.dart';
+import 'package:flutterwarehouseapp/src/domain/usecases/product_usecase.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
+import 'package:flutterwarehouseapp/src/presentation/blocs/user_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/bloc/create_invoice_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/bloc/create_invoice_state.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/create_invoice_constants.dart';
@@ -21,8 +24,10 @@ import 'package:image_picker/image_picker.dart';
 class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
   final LoaderBloc loaderBloc;
   final SnackbarBloc snackbarBloc;
+  final UserBloc userBloc;
   final ImageUseCase imageUC;
   final InvoiceUseCase invoiceUC;
+  final ProductUseCase productUC;
 
   DistributorEntity selectDistributor;
   BillEnum selectBill = BillEnum.Export;
@@ -35,8 +40,10 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
   CreateInvoiceBloc({
     @required this.loaderBloc,
     @required this.snackbarBloc,
+    @required this.userBloc,
     @required this.imageUC,
     @required this.invoiceUC,
+    @required this.productUC,
   });
 
   @override
@@ -180,12 +187,17 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
           type: BillUtils.convertToString(selectBill),
           items: itemsJsonArray,
           totalAmount: totalAmountBill,
-          locale: 'vi',
+          locale: userBloc.locale,
           createAt: DateTime.now().millisecondsSinceEpoch,
           lastUpdate: DateTime.now().millisecondsSinceEpoch,
         );
         bool flag = await invoiceUC.createInvoice(bill);
         if (flag) {
+          List<ProductEntity> productList =
+              productUC.getProductListFormItemBill(itemBillList: itemBillList, locale: userBloc.locale);
+          if (selectBill == BillEnum.Import) {
+            await productUC.setProductList(productList);
+          }
           snackbarBloc
               .add(ShowSnackbar(title: CreateInvoiceConstants.createInvoiceSuccessMsg, type: SnackBarType.success));
           yield CreateInvoiceSuccessState();

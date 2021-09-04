@@ -17,28 +17,25 @@ class ProductEntityAdapter extends TypeAdapter<ProductEntity> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ProductEntity(
-      document: fields[0] as String,
       name: fields[1] as String,
       category: fields[2] as String,
       distributor: fields[3] as String,
-      customer: fields[12] as String,
       qty: fields[4] as int,
       importPrice: fields[5] as int,
       exportPrice: fields[6] as int,
       locale: fields[7] as String,
       createAt: fields[8] as int,
       lastUpdate: fields[9] as int,
-      unit: fields[11] as String,
-      isSync: fields[10] as bool,
-    );
+      unit: fields[10] as String,
+    )..hiveJson = fields[0] as String;
   }
 
   @override
   void write(BinaryWriter writer, ProductEntity obj) {
     writer
-      ..writeByte(13)
+      ..writeByte(11)
       ..writeByte(0)
-      ..write(obj.document)
+      ..write(obj.hiveJson)
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)
@@ -58,11 +55,7 @@ class ProductEntityAdapter extends TypeAdapter<ProductEntity> {
       ..writeByte(9)
       ..write(obj.lastUpdate)
       ..writeByte(10)
-      ..write(obj.isSync)
-      ..writeByte(11)
-      ..write(obj.unit)
-      ..writeByte(12)
-      ..write(obj.customer);
+      ..write(obj.unit);
   }
 
   @override

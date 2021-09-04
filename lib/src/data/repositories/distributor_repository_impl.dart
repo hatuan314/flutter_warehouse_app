@@ -12,18 +12,15 @@ import 'package:flutterwarehouseapp/src/data/models/distributor_model.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/mixin_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/distributor_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/hive_entity.dart';
-import 'package:flutterwarehouseapp/src/domain/repositories/common_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/distributor_repository.dart';
 
 class DistributorRepositoryImpl extends DistributorRepository with MixinRepository {
   final DistributorDataSource distributorDs;
   final DistributorHive distributorHive;
-  final CommonRepository commonRepo;
 
   DistributorRepositoryImpl({
     @required this.distributorDs,
     @required this.distributorHive,
-    @required this.commonRepo,
   });
 
   @override
