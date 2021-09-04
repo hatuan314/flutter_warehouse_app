@@ -28,6 +28,8 @@ class BillEntity {
   String document;
   @HiveField(8)
   bool isSync;
+  @HiveField(9)
+  String customer;
 
   BillEntity({
     this.distributorName,
@@ -39,6 +41,7 @@ class BillEntity {
     this.createAt,
     this.lastUpdate,
     this.isSync,
+    this.customer,
   });
 
   BillModel toModel() {
@@ -50,6 +53,7 @@ class BillEntity {
       locale: locale,
       createAt: createAt,
       lastUpdate: lastUpdate,
+        customer: customer,
     );
   }
 }

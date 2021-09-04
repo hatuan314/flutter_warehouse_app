@@ -30,11 +30,11 @@ class ItemBillWidget extends StatelessWidget {
             children: [
               Text(
                 '${StringConstants.quantityTxt}: ${NumberUtils.convertNumber(itemBill.qty, 'vi')}',
-                style: ThemeText.body2.copyWith(color: AppColor.hintColor),
+                style: ThemeText.caption.copyWith(color: AppColor.hintColor),
               ),
               Text(
                 '${CurrencyUtils.convertFormatMoney(itemBill.totalPrice, 'vi')}',
-                style: ThemeText.body2.copyWith(color: AppColor.hintColor),
+                style: ThemeText.caption.copyWith(color: AppColor.hintColor),
               ),
             ],
           )

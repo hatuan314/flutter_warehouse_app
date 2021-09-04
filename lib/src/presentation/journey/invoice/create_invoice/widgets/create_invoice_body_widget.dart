@@ -18,57 +18,60 @@ import 'package:flutterwarehouseapp/src/widgets/button/button_widget.dart';
 import 'create_invoice_form_widget.dart';
 
 class CreateInvoiceBodyWidget extends StatelessWidget {
+  final TextEditingController _customerController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CreateInvoiceBloc, CreateInvoiceState>(
-        listener: (context, state) {
-          if (state is CreateInvoiceSuccessState) {
-            Navigator.of(context).pop(true);
-          }
-        },
-        builder: (context, state) {
-          if (state is WaitingCreateInvoiceState) {
-            return SingleChildScrollView(
-              padding: EdgeInsets.symmetric(
-                vertical: LayoutConstants.paddingVerticalApp,
-                horizontal: LayoutConstants.paddingHorizontalApp,
+    return BlocConsumer<CreateInvoiceBloc, CreateInvoiceState>(listener: (context, state) {
+      if (state is CreateInvoiceSuccessState) {
+        Navigator.of(context).pop(true);
+      }
+    }, builder: (context, state) {
+      if (state is WaitingCreateInvoiceState) {
+        return SingleChildScrollView(
+          padding: EdgeInsets.symmetric(
+            vertical: LayoutConstants.paddingVerticalApp,
+            horizontal: LayoutConstants.paddingHorizontalApp,
+          ),
+          child: Column(
+            children: [
+              CreateInvoiceFormWidget(
+                customerController: _customerController,
+                enableSelectDistributor: state?.enableSelectDistributor ?? false,
+                imageQty: state?.imageQty ?? 0,
+                totalAmountBill: state?.totalAmountBill,
+                distributorName: state?.distributorName ?? '',
+                selectBill: state?.selectBill ?? BillEnum.Export,
+                itemBillList: ValidatorUtils.isNullEmptyList(state?.itemBillList) ? [] : state?.itemBillList,
+                imageFiles: state?.imageFiles ?? [],
+                onSelectDistributor: () => _onSelectDistributor(context),
+                onSelectBillType: (value) => _onSelectBillType(context, value),
+                onPressedGallery: () => _onOpenGallery(context),
+                onPressedCamera: () => _onOpenCamera(context),
               ),
-              child: Column(
-                children: [
-                  CreateInvoiceFormWidget(
-                    enableSelectDistributor: state?.enableSelectDistributor ?? false,
-                    imageQty: state?.imageQty ?? 0,
-                    totalAmountBill: state?.totalAmountBill,
-                    distributorName: state?.distributorName ?? '',
-                    selectBill: state?.selectBill ?? BillEnum.Export,
-                    itemBillList: ValidatorUtils.isNullEmptyList(state?.itemBillList) ? [] : state?.itemBillList,
-                    imageFiles: state?.imageFiles ?? [],
-                    onSelectDistributor: () => _onSelectDistributor(context),
-                    onSelectBillType: (value) => _onSelectBillType(context, value),
-                    onPressedGallery: () => _onOpenGallery(context),
-                    onPressedCamera: () => _onOpenCamera(context),
-                  ),
-                  SizedBox(
-                    height: LayoutConstants.paddingVertical20,
-                  ),
-                  ButtonWidget(
-                      title: StringConstants.createTxt,
-                      onPressed: () {
-                        BlocProvider.of<CreateInvoiceBloc>(context).add(OnCreateEvent());
-                      })
-                ],
+              SizedBox(
+                height: LayoutConstants.paddingVertical20,
               ),
-            );
-          }
-          return SizedBox();
-        });
+              ButtonWidget(
+                  title: StringConstants.createTxt,
+                  onPressed: () {
+                    BlocProvider.of<CreateInvoiceBloc>(context).add(OnCreateEvent(
+                      customer: _customerController.text.trim(),
+                    ));
+                  })
+            ],
+          ),
+        );
+      }
+      return SizedBox();
+    });
   }
 
   void _onSelectDistributor(BuildContext context) {
     Navigator.pushNamed(context, RouteList.distributorList,
         arguments: {ArgumentConstants.currentRouteArg: RouteList.createInvoice}).then((distributorJson) {
-          DistributorEntity distributor = DistributorModel.fromJson(jsonDecode(distributorJson));
-          BlocProvider.of<CreateInvoiceBloc>(context).add(SelectDistributorEvent(distributor));
+      DistributorEntity distributor = DistributorModel.fromJson(jsonDecode(distributorJson));
+      BlocProvider.of<CreateInvoiceBloc>(context).add(SelectDistributorEvent(distributor));
     });
   }
 

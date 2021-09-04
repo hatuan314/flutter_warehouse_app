@@ -19,6 +19,7 @@ import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'add_element_button.dart';
+import 'customer_field_widget.dart';
 import 'invoice_image_list_widget.dart';
 import 'select_bill_type_bottom_sheet.dart';
 import 'total_amount_widget.dart';
@@ -36,6 +37,7 @@ class CreateInvoiceFormWidget extends StatelessWidget {
   final Function(BillEnum) onSelectBillType;
   final Function onPressedGallery;
   final Function onPressedCamera;
+  final TextEditingController customerController;
 
   const CreateInvoiceFormWidget({
     Key key,
@@ -51,6 +53,7 @@ class CreateInvoiceFormWidget extends StatelessWidget {
     this.onSelectBillType,
     this.onPressedGallery,
     this.onPressedCamera,
+    this.customerController,
   }) : super(key: key);
 
   @override
@@ -66,10 +69,10 @@ class CreateInvoiceFormWidget extends StatelessWidget {
               : distributorName,
           titleColor: ValidatorUtils.isNullEmpty(distributorName) ? AppColor.grey : AppColor.textColor,
           onPressed: onSelectDistributor,
-        ) : SizedBox.shrink(),
-        enableSelectDistributor ? SizedBox(
+        ) : CustomerFieldWidget(controller: customerController,),
+        SizedBox(
           height: LayoutConstants.paddingVertical15,
-        ) : SizedBox.shrink(),
+        ),
         SelectionWidget(
           onPressed: () {
             showModalBottomSheet<String>(

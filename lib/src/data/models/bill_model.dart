@@ -9,14 +9,16 @@ class BillModel extends BillEntity {
     String locale,
     int createAt,
     int lastUpdate,
+    String customer,
   }) : super(
           distributorName: distributorName,
           type: type,
-    items: items,
+          items: items,
           totalAmount: totalAmount,
           locale: locale,
           createAt: createAt,
           lastUpdate: lastUpdate,
+          customer: customer,
         );
 
   factory BillModel.fromJson(
@@ -30,6 +32,7 @@ class BillModel extends BillEntity {
       locale: json['locale'],
       createAt: json['create_at'],
       lastUpdate: json['last_update'],
+      customer: json['customer'],
     );
   }
 
@@ -42,6 +45,7 @@ class BillModel extends BillEntity {
       'locale': locale,
       'create_at': createAt,
       'last_update': lastUpdate,
+      'customer': customer,
     };
   }
 }

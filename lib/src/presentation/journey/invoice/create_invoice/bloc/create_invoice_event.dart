@@ -26,4 +26,8 @@ class OpenGalleryEvent extends CreateInvoiceEvent {}
 
 class OpenCameraEvent extends CreateInvoiceEvent {}
 
-class OnCreateEvent extends CreateInvoiceEvent {}
+class OnCreateEvent extends CreateInvoiceEvent {
+  final String customer;
+
+  OnCreateEvent({this.customer});
+}

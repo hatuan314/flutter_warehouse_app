@@ -7,4 +7,5 @@ class CreateInvoiceConstants {
   static const String invoiceImage = 'Ảnh hóa đơn';
   static const createInvoiceFailedMsg = 'Thêm hóa đơn thất bại';
   static const createInvoiceSuccessMsg = 'Thêm hóa đơn thành công';
+  static const String customerNameTxt = 'Tên khách hàng';
 }

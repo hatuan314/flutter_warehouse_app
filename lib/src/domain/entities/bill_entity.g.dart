@@ -26,13 +26,14 @@ class BillEntityAdapter extends TypeAdapter<BillEntity> {
       createAt: fields[5] as int,
       lastUpdate: fields[6] as int,
       isSync: fields[8] as bool,
+      customer: fields[9] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, BillEntity obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.distributorName)
       ..writeByte(1)
@@ -50,7 +51,9 @@ class BillEntityAdapter extends TypeAdapter<BillEntity> {
       ..writeByte(7)
       ..write(obj.document)
       ..writeByte(8)
-      ..write(obj.isSync);
+      ..write(obj.isSync)
+      ..writeByte(9)
+      ..write(obj.customer);
   }
 
   @override

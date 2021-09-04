@@ -21,12 +21,14 @@ class ProductEntityAdapter extends TypeAdapter<ProductEntity> {
       name: fields[1] as String,
       category: fields[2] as String,
       distributor: fields[3] as String,
+      customer: fields[12] as String,
       qty: fields[4] as int,
       importPrice: fields[5] as int,
       exportPrice: fields[6] as int,
       locale: fields[7] as String,
       createAt: fields[8] as int,
       lastUpdate: fields[9] as int,
+      unit: fields[11] as String,
       isSync: fields[10] as bool,
     );
   }
@@ -34,7 +36,7 @@ class ProductEntityAdapter extends TypeAdapter<ProductEntity> {
   @override
   void write(BinaryWriter writer, ProductEntity obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.document)
       ..writeByte(1)
@@ -56,7 +58,11 @@ class ProductEntityAdapter extends TypeAdapter<ProductEntity> {
       ..writeByte(9)
       ..write(obj.lastUpdate)
       ..writeByte(10)
-      ..write(obj.isSync);
+      ..write(obj.isSync)
+      ..writeByte(11)
+      ..write(obj.unit)
+      ..writeByte(12)
+      ..write(obj.customer);
   }
 
   @override

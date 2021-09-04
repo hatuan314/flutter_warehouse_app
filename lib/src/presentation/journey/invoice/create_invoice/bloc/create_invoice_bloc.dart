@@ -70,7 +70,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         yield* _mapOpenCameraEventToState();
         break;
       case OnCreateEvent:
-        yield* _mapOnCreateEvent();
+        yield* _mapOnCreateEvent(event);
         break;
     }
   }
@@ -150,12 +150,12 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
   }
 
   bool _checkValidator() {
-    if (ValidatorUtils.isNullEmpty(selectDistributor)) {
-      snackbarBloc.add(ShowSnackbar(title: 'Vui lòng chọn nhà phân phối', type: SnackBarType.warning));
-      return false;
-    }
     if (ValidatorUtils.isNullEmpty(selectBill)) {
       snackbarBloc.add(ShowSnackbar(title: 'Vui lòng chọn kiểu hóa đơn', type: SnackBarType.warning));
+      return false;
+    }
+    if (selectBill == BillEnum.Import && ValidatorUtils.isNullEmpty(selectDistributor)) {
+      snackbarBloc.add(ShowSnackbar(title: 'Vui lòng chọn nhà phân phối', type: SnackBarType.warning));
       return false;
     }
     if (ValidatorUtils.isNullEmptyList(itemBillList)) {
@@ -165,7 +165,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     return true;
   }
 
-  Stream<CreateInvoiceState> _mapOnCreateEvent() async* {
+  Stream<CreateInvoiceState> _mapOnCreateEvent(OnCreateEvent event) async* {
     bool flag = _checkValidator();
     var currentState = state;
     if (currentState is WaitingCreateInvoiceState) {
@@ -175,7 +175,8 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         loaderBloc.add(StartLoading());
         List itemsJsonArray = invoiceUC.getItemBillJsonArray(itemBillList);
         BillEntity bill = BillEntity(
-          distributorName: selectDistributor.name,
+          customer: event.customer,
+          distributorName: selectDistributor?.name ?? '',
           type: BillUtils.convertToString(selectBill),
           items: itemsJsonArray,
           totalAmount: totalAmountBill,

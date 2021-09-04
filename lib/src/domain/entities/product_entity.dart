@@ -27,29 +27,37 @@ class ProductEntity {
   int lastUpdate;
   @HiveField(10)
   bool isSync;
+  @HiveField(11)
+  String unit;
+  @HiveField(12)
+  String customer;
 
   ProductEntity(
       {this.document,
       this.name,
       this.category,
       this.distributor,
+      this.customer,
       this.qty,
       this.importPrice,
       this.exportPrice,
       this.locale,
       this.createAt,
       this.lastUpdate,
+      this.unit,
       this.isSync});
 
   ProductModel toModel() => ProductModel(
-    name: name,
-    category: category,
-    distributor: distributor,
-    qty: qty,
-    importPrice: importPrice,
-    exportPrice: exportPrice,
-    locale: locale,
-    createAt: createAt,
-    lastUpdate: lastUpdate,
-  );
+        name: name,
+        category: category,
+        customer: customer,
+        distributor: distributor,
+        qty: qty,
+        importPrice: importPrice,
+        exportPrice: exportPrice,
+        locale: locale,
+        createAt: createAt,
+        lastUpdate: lastUpdate,
+        unit: unit,
+      );
 }

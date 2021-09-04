@@ -29,7 +29,7 @@ class SelectionWidget extends StatelessWidget {
               width: 1,
             ),
             borderRadius: BorderRadius.all(Radius.circular(LayoutConstants.roundedRadius)),
-            color: AppColor.white),
+            color: AppColor.paleGrey),
         child: Row(
           children: [
             ValidatorUtils.isNullEmpty(icon)
