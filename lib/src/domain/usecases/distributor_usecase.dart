@@ -30,11 +30,11 @@ class DistributorUseCase {
   Future<void> updateDistributor(
       {int index, DistributorEntity distributor}) async {
     // Step 1: Check document property is Safe
-    if (distributor.document.isNotSafe) {
+    if (distributor.hive.document.isNotSafe) {
       // Step 1.1: If document property is not safe.
       // Add distributor to cloud DB and get document
       String document = await distributorRepo.setDistributorCloud(distributor);
-      distributor.document = document;
+      distributor.hive.document = document;
     }
     // Step 2: Update distributor inside local DB
     await distributorRepo.update(index: index, distributor: distributor);

@@ -7,20 +7,23 @@ import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/local/invoice_hive.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/invoice_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/models/bill_model.dart';
+import 'package:flutterwarehouseapp/src/data/repositories/mixin_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/bill_entity.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/hive_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/common_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/invoice_repository.dart';
 
-class InvoiceRepositoryImpl extends InvoiceRepository {
+class InvoiceRepositoryImpl extends InvoiceRepository with MixinRepository {
   final InvoiceHive invoiceHive;
   final InvoiceDataSource invoiceDs;
   final CommonRepository commonRepo;
 
-  InvoiceRepositoryImpl({@required this.invoiceHive,@required  this.invoiceDs,@required  this.commonRepo});
+  InvoiceRepositoryImpl({@required this.invoiceHive, @required this.invoiceDs, @required this.commonRepo});
+
   @override
   Future<List<BillEntity>> getBillListCloud() async {
     QuerySnapshot snapshot = await invoiceDs.getBillList();
-    List<BillEntity> bills = commonRepo.getCloudDataList<BillModel>(snapshot);
+    List<BillEntity> bills = getCloudDataList<BillModel>(snapshot);
     return bills;
   }
 
@@ -31,8 +34,7 @@ class InvoiceRepositoryImpl extends InvoiceRepository {
   }
 
   @override
-  Future<void> remove({int index, String document}) async {
-  }
+  Future<void> remove({int index, String document}) async {}
 
   @override
   Future<bool> setBill(BillEntity bill) async {
@@ -40,14 +42,14 @@ class InvoiceRepositoryImpl extends InvoiceRepository {
     if (isConnect) {
       String document = await setBillCloud(bill);
       if (!ValidatorUtils.isNullEmpty(document)) {
-        bill.document = document;
-        bill.isSync = true;
+        bill.hive = HiveEntity(document: document, isSync: true);
+      } else {
+        bill.hive = HiveEntity.normal();
       }
     } else {
-      bill.isSync = false;
+      bill.hive = HiveEntity.normal();
     }
     int key = await invoiceHive.setInvoice(bill);
-    log('>>>>>>>>>>>>>InvoiceRepository.setBill.key: $key');
     if (key != null) {
       return true;
     }
@@ -74,5 +76,4 @@ class InvoiceRepositoryImpl extends InvoiceRepository {
     // TODO: implement update
     throw UnimplementedError();
   }
-
 }

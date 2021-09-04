@@ -17,25 +17,24 @@ class BillEntityAdapter extends TypeAdapter<BillEntity> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return BillEntity(
-      distributorName: fields[0] as String,
+      distributor: fields[0] as String,
       type: fields[1] as String,
       items: (fields[2] as List)?.cast<dynamic>(),
       totalAmount: fields[3] as int,
       locale: fields[4] as String,
-      document: fields[7] as String,
+      hiveJson: fields[7] as String,
       createAt: fields[5] as int,
       lastUpdate: fields[6] as int,
-      isSync: fields[8] as bool,
-      customer: fields[9] as String,
+      customer: fields[8] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, BillEntity obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(9)
       ..writeByte(0)
-      ..write(obj.distributorName)
+      ..write(obj.distributor)
       ..writeByte(1)
       ..write(obj.type)
       ..writeByte(2)
@@ -49,10 +48,8 @@ class BillEntityAdapter extends TypeAdapter<BillEntity> {
       ..writeByte(6)
       ..write(obj.lastUpdate)
       ..writeByte(7)
-      ..write(obj.document)
+      ..write(obj.hiveJson)
       ..writeByte(8)
-      ..write(obj.isSync)
-      ..writeByte(9)
       ..write(obj.customer);
   }
 

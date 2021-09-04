@@ -41,7 +41,7 @@ class DistributorListBloc
       RemoveDistributorEvent event) async* {
     loaderBloc.add(StartLoading());
     await distributorUc.removeDistributor(
-        index: event.index, document: event.distributor.document);
+        index: event.index, document: event.distributor.hive.document);
     add(InitialDistributorListEvent());
     loaderBloc.add(FinishLoading());
   }

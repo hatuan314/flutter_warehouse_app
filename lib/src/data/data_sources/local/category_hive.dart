@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutterwarehouseapp/common/configs/local_db_setup.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
@@ -23,6 +25,9 @@ class CategoryHive {
   }
 
   Future<void> setCategories(List<CategoryEntity> categories) async {
+    for(final CategoryEntity category in categories) {
+      log('CategoryHive.setCategories.toJson: ${category.hiveJson}');
+    }
     try {
       await database.categoryBox.addAll(categories);
     } on HiveError catch (e) {
@@ -37,5 +42,15 @@ class CategoryHive {
       categories.addAll(database.categoryBox.values.toList());
     }
     return categories;
+  }
+
+  Future updateByIndex(CategoryEntity category, int index) async {
+    category.setHiveJson();
+    database.categoryBox.putAt(index, category);
+  }
+
+  Future updateByKey(CategoryEntity category, int key) async {
+    category.setHiveJson();
+    database.categoryBox.put(key, category);
   }
 }

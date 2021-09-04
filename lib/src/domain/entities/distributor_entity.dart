@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutterwarehouseapp/src/domain/entities/hive_entity.dart';
 import 'package:hive/hive.dart';
 
 import 'package:flutterwarehouseapp/src/data/models/distributor_model.dart';
@@ -20,9 +23,8 @@ class DistributorEntity {
   @HiveField(5)
   DateTime lastUpdate;
   @HiveField(6)
-  String document;
-  @HiveField(7)
-  bool isSync = true;
+  String hiveJson;
+  HiveEntity hive;
 
   DistributorEntity({
     this.name,
@@ -31,8 +33,7 @@ class DistributorEntity {
     this.color,
     this.createAt,
     this.lastUpdate,
-    this.document,
-    this.isSync = true,
+    this.hiveJson,
   });
 
   DistributorModel toModel() {
@@ -43,8 +44,6 @@ class DistributorEntity {
       color: color,
       createAt: createAt,
       lastUpdate: lastUpdate,
-      document: document,
-      isSync: isSync,
     );
   }
 
@@ -84,5 +83,9 @@ class DistributorEntity {
         return;
       }
     }
+  }
+
+  void setHiveJson() {
+    this.hiveJson = jsonEncode(hive.toJson());
   }
 }

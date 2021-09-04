@@ -176,7 +176,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         List itemsJsonArray = invoiceUC.getItemBillJsonArray(itemBillList);
         BillEntity bill = BillEntity(
           customer: event.customer,
-          distributorName: selectDistributor?.name ?? '',
+          distributor: selectDistributor?.name ?? '',
           type: BillUtils.convertToString(selectBill),
           items: itemsJsonArray,
           totalAmount: totalAmountBill,

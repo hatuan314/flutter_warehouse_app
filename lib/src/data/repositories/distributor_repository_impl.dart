@@ -5,14 +5,17 @@ import 'package:flutter/material.dart';
 
 import 'package:flutterwarehouseapp/common/extensions/string_extensions.dart';
 import 'package:flutterwarehouseapp/common/utils/connectivity_utils.dart';
+import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/local/distributor_hive.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/distributor_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/models/distributor_model.dart';
+import 'package:flutterwarehouseapp/src/data/repositories/mixin_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/distributor_entity.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/hive_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/common_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/distributor_repository.dart';
 
-class DistributorRepositoryImpl implements DistributorRepository {
+class DistributorRepositoryImpl extends DistributorRepository with MixinRepository {
   final DistributorDataSource distributorDs;
   final DistributorHive distributorHive;
   final CommonRepository commonRepo;
@@ -26,7 +29,7 @@ class DistributorRepositoryImpl implements DistributorRepository {
   @override
   Future<List<DistributorEntity>> getDistributorCloudList() async {
     final QuerySnapshot snapshot = await distributorDs.getDistributorList();
-    List<DistributorModel> distributorList = commonRepo.getCloudDataList<DistributorModel>(snapshot);
+    List<DistributorModel> distributorList = getCloudDataList<DistributorModel>(snapshot);
     return distributorList;
   }
 
@@ -52,14 +55,15 @@ class DistributorRepositoryImpl implements DistributorRepository {
     if (isConnect) {
       String document = await setDistributorCloud(distributor);
       if (document.isSafe) {
-        distributor.document = document;
-        distributor.isSync = true;
+        distributor.hive = HiveEntity(document: document, isSync: true);
+      } else {
+        distributor.hive = HiveEntity.normal();
       }
     } else {
-      distributor.isSync = false;
+      distributor.hive = HiveEntity.normal();
     }
     int key = await distributorHive.setDistributor(distributor);
-    if (key != null) {
+    if (ValidatorUtils.isNullEmpty(key)) {
       return true;
     }
     return false;

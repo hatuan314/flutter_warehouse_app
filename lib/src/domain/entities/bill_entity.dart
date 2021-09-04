@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutterwarehouseapp/src/domain/entities/hive_entity.dart';
 import 'package:hive/hive.dart';
 
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
@@ -10,11 +13,10 @@ part 'bill_entity.g.dart';
 @HiveType(typeId: 3)
 class BillEntity {
   @HiveField(0)
-  String distributorName;
+  String distributor;
   @HiveField(1)
   String type;
   @HiveField(2)
-  // List<ItemBillEntity> products;
   List items;
   @HiveField(3)
   int totalAmount;
@@ -25,35 +27,38 @@ class BillEntity {
   @HiveField(6)
   int lastUpdate;
   @HiveField(7)
-  String document;
+  String hiveJson;
   @HiveField(8)
-  bool isSync;
-  @HiveField(9)
   String customer;
+  HiveEntity hive;
 
   BillEntity({
-    this.distributorName,
+    this.distributor,
     this.type,
     this.items,
     this.totalAmount,
     this.locale,
-    this.document,
+    this.hiveJson,
     this.createAt,
     this.lastUpdate,
-    this.isSync,
     this.customer,
+    this.hive,
   });
 
   BillModel toModel() {
     return BillModel(
-      distributorName: distributorName,
+      distributor: distributor,
       type: type,
       items: items,
       totalAmount: totalAmount,
       locale: locale,
       createAt: createAt,
       lastUpdate: lastUpdate,
-        customer: customer,
+      customer: customer,
     );
+  }
+
+  void setHiveJson() {
+    this.hiveJson = jsonEncode(hive.toJson());
   }
 }

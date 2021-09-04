@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutterwarehouseapp/src/data/models/category_model.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/hive_entity.dart';
 import 'package:hive/hive.dart';
 
 part 'category_entity.g.dart';
@@ -6,7 +9,7 @@ part 'category_entity.g.dart';
 @HiveType(typeId: 2)
 class CategoryEntity {
   @HiveField(0)
-  String document;
+  String hiveJson;
   @HiveField(1)
   String name;
   @HiveField(2)
@@ -15,18 +18,22 @@ class CategoryEntity {
   DateTime createTime;
   @HiveField(4)
   DateTime lastUpdate;
-  @HiveField(5)
-  bool isSync = true;
+  HiveEntity hive;
 
   CategoryEntity(
-      {this.document, this.name, this.color, this.createTime, this.lastUpdate, this.isSync = true});
+      {this.name, this.color, this.createTime, this.lastUpdate});
 
-  CategoryModel toModel() => CategoryModel(
-    document: document,
-    name: name,
-    color: color,
-    createAt: createTime,
-    lastUpdate: lastUpdate,
-    isSync: isSync,
-  );
+  void setHiveJson() {
+    this.hiveJson = jsonEncode(hive.toJson());
+  }
+
+  CategoryModel toModel() {
+
+   return CategoryModel(
+      name: name,
+      color: color,
+      createAt: createTime,
+      lastUpdate: lastUpdate,
+    );
+  }
 }

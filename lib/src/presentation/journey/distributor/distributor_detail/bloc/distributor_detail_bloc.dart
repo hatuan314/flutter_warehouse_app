@@ -63,7 +63,7 @@ class DistributorDetailBloc
     yield state.copyWith(viewState: ViewState.loading);
     loaderBloc.add(StartLoading());
     await distributorUc.removeDistributor(
-        index: distributorIndex, document: this.distributor.document);
+        index: distributorIndex, document: this.distributor.hive.document);
     yield DeleteDistributorSuccessState();
     loaderBloc.add(FinishLoading());
   }

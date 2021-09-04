@@ -2,7 +2,7 @@ import 'package:flutterwarehouseapp/src/domain/entities/bill_entity.dart';
 
 class BillModel extends BillEntity {
   BillModel({
-    String distributorName,
+    String distributor,
     String type,
     List items,
     int totalAmount,
@@ -11,7 +11,7 @@ class BillModel extends BillEntity {
     int lastUpdate,
     String customer,
   }) : super(
-          distributorName: distributorName,
+          distributor: distributor,
           type: type,
           items: items,
           totalAmount: totalAmount,
@@ -25,7 +25,7 @@ class BillModel extends BillEntity {
     Map<String, dynamic> json,
   ) {
     return BillModel(
-      distributorName: json['distributor'],
+      distributor: json['distributor'],
       type: json['type'],
       items: json['items'],
       totalAmount: json['total_amount'],
@@ -38,7 +38,7 @@ class BillModel extends BillEntity {
 
   Map<String, dynamic> toJson() {
     return {
-      'distributor': distributorName,
+      'distributor': distributor,
       'type': type,
       'items': items,
       'total_amount': totalAmount,

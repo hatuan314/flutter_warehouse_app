@@ -30,7 +30,7 @@ class DistributorDataSource {
     await service.updateDocument(
       ref: setup.mainDoc.collection(DefaultConfig.distributorsCollection),
       request: distributor.toJson(),
-      document: distributor.document,
+      document: distributor.hive.document,
     );
   }
 

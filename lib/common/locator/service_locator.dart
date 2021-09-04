@@ -32,6 +32,7 @@ import 'package:flutterwarehouseapp/src/domain/usecases/category_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/distributor_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/image_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/invoice_usecase.dart';
+import 'package:flutterwarehouseapp/src/domain/usecases/product_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/unit_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/user_usecase.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
@@ -145,6 +146,9 @@ void setup() {
       ));
   locator.registerFactory<ImageUseCase>(() => ImageUseCase());
   locator.registerFactory<InvoiceUseCase>(() => InvoiceUseCase(invoiceRepo: locator<InvoiceRepository>()));
+  locator.registerFactory<ProductUseCase>(() => ProductUseCase(
+        productRepo: locator<ProductRepository>(),
+      ));
 
   /// Repositories
   locator.registerFactory<CommonRepository>(() => CommonRepositoryImpl());

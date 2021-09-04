@@ -17,21 +17,19 @@ class CategoryEntityAdapter extends TypeAdapter<CategoryEntity> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return CategoryEntity(
-      document: fields[0] as String,
       name: fields[1] as String,
       color: fields[2] as int,
       createTime: fields[3] as DateTime,
       lastUpdate: fields[4] as DateTime,
-      isSync: fields[5] as bool,
-    );
+    )..hiveJson = fields[0] as String;
   }
 
   @override
   void write(BinaryWriter writer, CategoryEntity obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(5)
       ..writeByte(0)
-      ..write(obj.document)
+      ..write(obj.hiveJson)
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)
@@ -39,9 +37,7 @@ class CategoryEntityAdapter extends TypeAdapter<CategoryEntity> {
       ..writeByte(3)
       ..write(obj.createTime)
       ..writeByte(4)
-      ..write(obj.lastUpdate)
-      ..writeByte(5)
-      ..write(obj.isSync);
+      ..write(obj.lastUpdate);
   }
 
   @override
