@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/utils/currency_utils.dart';
+import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/category_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/unit_entity.dart';
@@ -12,13 +14,15 @@ import 'package:flutterwarehouseapp/src/presentation/journey/invoice/add_item_of
 class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
   final LoaderBloc loaderBloc;
   final UnitUseCase unitUc;
+
+  String _errorName;
   UnitEntity _selectUnit;
   CategoryEntity _selectCategory;
 
   AddIoiBloc({@required this.loaderBloc, @required this.unitUc});
 
   @override
-  AddIoiState get initialState => WaitingAddIoiState(selectUnit: '', selectCategory: '');
+  AddIoiState get initialState => WaitingAddIoiState(selectUnit: '', selectCategory: '', errorName: null);
 
   @override
   Stream<AddIoiState> mapEventToState(AddIoiEvent event) async* {
@@ -65,17 +69,25 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
   }
 
   Stream<AddIoiState> _mapAddItemEventToState(AddItemEvent event) async* {
-    int qty = int.parse(event.qty);
-    int price = int.parse(CurrencyUtils.cleanPriceText(event.price, '₫'));
-    int totalPrice = qty * price;
-    final ItemBillEntity itemBill = ItemBillEntity(
-      name: event.name,
-      category: _selectCategory?.name ?? '',
-      qty: qty,
-      price: price,
-      totalPrice: totalPrice,
-      unit: _selectUnit?.name ?? '',
-    );
-    yield AddToBillState(itemBill);
+    var currentState = state;
+    if (currentState is WaitingAddIoiState) {
+      if (ValidatorUtils.isNullEmpty(event.name)) {
+        _errorName = StringConstants.emptyField;
+        yield currentState.copyWith(errorName: _errorName);
+      } else {
+        int qty = int.parse(event.qty);
+        int price = int.parse(CurrencyUtils.cleanPriceText(event.price, '₫'));
+        int totalPrice = qty * price;
+        final ItemBillEntity itemBill = ItemBillEntity(
+          name: event.name,
+          category: _selectCategory?.name ?? '',
+          qty: qty,
+          price: price,
+          totalPrice: totalPrice,
+          unit: _selectUnit?.name ?? '',
+        );
+        yield AddToBillState(itemBill);
+      }
+    }
   }
 }

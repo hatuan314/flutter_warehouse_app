@@ -6,19 +6,26 @@ abstract class AddIoiState extends Equatable {}
 class WaitingAddIoiState extends AddIoiState {
   final String selectUnit;
   final String selectCategory;
+  final String errorName;
 
   WaitingAddIoiState({
     this.selectUnit,
     this.selectCategory,
+    this.errorName,
   });
 
-  WaitingAddIoiState copyWith({String selectUnit, String selectCategory}) => WaitingAddIoiState(
+  WaitingAddIoiState copyWith({String selectUnit, String selectCategory, String errorName}) => WaitingAddIoiState(
         selectUnit: selectUnit ?? this.selectUnit,
         selectCategory: selectCategory ?? this.selectCategory,
+        errorName: errorName ?? this.errorName,
       );
 
   @override
-  List<Object> get props => [this.selectUnit, this.selectCategory];
+  List<Object> get props => [
+        this.selectUnit,
+        this.selectCategory,
+        this.errorName,
+      ];
 }
 
 class AddToBillState extends AddIoiState {

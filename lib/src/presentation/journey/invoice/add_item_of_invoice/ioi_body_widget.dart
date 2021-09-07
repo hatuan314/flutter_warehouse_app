@@ -15,7 +15,10 @@ import 'package:flutterwarehouseapp/src/presentation/journey/invoice/add_item_of
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/add_item_of_invoice/bloc/add_ioi_state.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/widgets/selection_widget.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
+import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 import 'package:flutterwarehouseapp/src/widgets/button/button_widget.dart';
+import 'package:flutterwarehouseapp/src/widgets/text_form/autocomplete_textfield.dart';
+import 'package:flutterwarehouseapp/src/widgets/text_form/text_form_constants.dart';
 import 'package:flutterwarehouseapp/src/widgets/text_form/text_form_widget.dart';
 
 class AddItemOfInvoiceBodyWidget extends StatelessWidget {
@@ -42,15 +45,36 @@ class AddItemOfInvoiceBodyWidget extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TextFormWidget(
-                  controller: nameController,
-                  hintText: AddItemOfInvoiceConstants.itemNameHintTxt,
-                  validator: (value) {
-                    if (ValidatorUtils.isNullEmpty(value)) {
-                      return StringConstants.emptyField;
-                    }
-                    return null;
-                  },
+                // TextFormWidget(
+                //   controller: nameController,
+                //   hintText: AddItemOfInvoiceConstants.itemNameHintTxt,
+                //   validator: (value) {
+                //     if (ValidatorUtils.isNullEmpty(value)) {
+                //       return StringConstants.emptyField;
+                //     }
+                //     return null;
+                //   },
+                // ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AutoCompleteTextField(
+                      hintText: AddItemOfInvoiceConstants.itemNameHintTxt,
+                      controller: nameController,
+                      suggestions: [],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: TextFormConstants.paddingHorizontal).copyWith(
+                        top: LayoutConstants.paddingVertical5
+                      ),
+                      child: Text(
+                        state?.errorName ?? '',
+                        style: ThemeText.caption.copyWith(
+                          color: AppColor.errorColor,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
                 SizedBox(
                   height: LayoutConstants.paddingVertical15,
@@ -125,6 +149,16 @@ class AddItemOfInvoiceBodyWidget extends StatelessWidget {
     });
   }
 
+  void _onPressedSelectCategory(BuildContext context) {
+    Navigator.pushNamed(context, RouteList.categoryList,
+        arguments: {ArgumentConstants.currentRouteArg: RouteList.addItemOfInvoice}).then((categoryJson) {
+      if (!ValidatorUtils.isNullEmpty(categoryJson)) {
+        BlocProvider.of<AddIoiBloc>(context)
+            .add(SelectCategoryEvent(category: CategoryModel.fromJson(jsonDecode(categoryJson))));
+      }
+    });
+  }
+
   void _onPressedAddBtn(BuildContext context) {
     if (_formKey.currentState.validate()) {
       BlocProvider.of<AddIoiBloc>(context).add(AddItemEvent(
@@ -133,15 +167,5 @@ class AddItemOfInvoiceBodyWidget extends StatelessWidget {
         price: priceController.text.trim(),
       ));
     }
-  }
-
-  void _onPressedSelectCategory(BuildContext context) {
-    Navigator.pushNamed(context, RouteList.categoryList,
-        arguments: {ArgumentConstants.currentRouteArg: RouteList.addItemOfInvoice}).then((categoryJson) {
-          if (!ValidatorUtils.isNullEmpty(categoryJson)) {
-        BlocProvider.of<AddIoiBloc>(context)
-            .add(SelectCategoryEvent(category: CategoryModel.fromJson(jsonDecode(categoryJson))));
-      }
-    });
   }
 }
