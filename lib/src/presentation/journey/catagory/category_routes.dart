@@ -20,8 +20,6 @@ import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distrib
 class CategoryRoute {
   static Map<String, WidgetBuilder> getAll() {
     return {
-      RouteList.categoryList: (context) => BlocProvider(
-          create: (_) => locator<CategoryListBloc>()..add(InitialCategoryListEvent()), child: CategoryListScreen()),
       RouteList.createCategory: (context) =>
           BlocProvider(create: (_) => locator<CreateCategoryBloc>(), child: CreateCategoryScreen(title: null)),
     };
@@ -36,6 +34,15 @@ class CategoryRoute {
         return CreateCategoryScreen(
           title: title,
           category: category,
+        );
+      },
+      RouteList.categoryList: (context) {
+        var currentRoute = args[ArgumentConstants.currentRouteArg];
+        return BlocProvider(
+          create: (_) => locator<CategoryListBloc>()..add(InitialCategoryListEvent()),
+          child: CategoryListScreen(
+            currentRoute: currentRoute,
+          ),
         );
       }
     };

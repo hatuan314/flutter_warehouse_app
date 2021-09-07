@@ -77,6 +77,7 @@ class Routes {
           settings: settings,
         );
       case RouteList.createCategory:
+      case RouteList.categoryList:
         return MaterialPageRoute(
           builder: CategoryRoute.getRoutesWithSettings(settings)[settings.name],
           settings: settings,

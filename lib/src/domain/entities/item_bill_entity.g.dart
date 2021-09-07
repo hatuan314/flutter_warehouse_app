@@ -22,13 +22,14 @@ class ItemBillEntityAdapter extends TypeAdapter<ItemBillEntity> {
       price: fields[2] as int,
       totalPrice: fields[3] as int,
       unit: fields[4] as String,
+      category: fields[5] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, ItemBillEntity obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class ItemBillEntityAdapter extends TypeAdapter<ItemBillEntity> {
       ..writeByte(3)
       ..write(obj.totalPrice)
       ..writeByte(4)
-      ..write(obj.unit);
+      ..write(obj.unit)
+      ..writeByte(5)
+      ..write(obj.category);
   }
 
   @override

@@ -13,7 +13,7 @@ class AddIoiScreen extends StatelessWidget {
         Navigator.of(context).pop();
       },
       title: AddItemOfInvoiceConstants.addItemTitle,
-      child: AddItemOfInvoiceBodyWidget(),
+      child: SingleChildScrollView(child: AddItemOfInvoiceBodyWidget()),
     );
   }
 

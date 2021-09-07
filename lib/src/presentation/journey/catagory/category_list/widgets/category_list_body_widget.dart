@@ -5,13 +5,19 @@ import 'package:flutterwarehouseapp/common/utils/color_utils.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/category_entity.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/widgets/animation_widget/animation_widget.dart';
+import 'package:flutterwarehouseapp/src/widgets/touchable_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/unit_item_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/view_state_widget/empty_widget.dart';
 
 class CategoryListBodyWidget extends StatelessWidget {
   final List<CategoryEntity> categories;
+  final Function(CategoryEntity) onPressed;
 
-  const CategoryListBodyWidget({Key key, @required this.categories}) : super(key: key);
+  const CategoryListBodyWidget({
+    Key key,
+    @required this.categories,
+    @required this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +33,12 @@ class CategoryListBodyWidget extends StatelessWidget {
             duration: const Duration(milliseconds: 375),
             child: AnimationWidget(
               index: index,
-              child: UnitItemWidget(
-                color: ColorUtils.convertColor(categories[index].color),
-                name: categories[index].name,
+              child: TouchableWidget(
+                onPressed: () => onPressed(categories[index]),
+                child: UnitItemWidget(
+                  color: ColorUtils.convertColor(categories[index].color),
+                  name: categories[index].name,
+                ),
               ),
             ),
           );

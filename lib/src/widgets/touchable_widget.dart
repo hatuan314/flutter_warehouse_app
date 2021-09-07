@@ -6,7 +6,6 @@ class TouchableWidget extends StatelessWidget {
   final Function onLongPressed;
   final Widget child;
   final BorderRadiusGeometry borderRadiusEffect;
-  final EdgeInsetsGeometry padding;
   final EdgeInsetsGeometry margin;
   final double width;
   final double height;
@@ -17,7 +16,6 @@ class TouchableWidget extends StatelessWidget {
     @required this.child,
     this.decoration,
     this.borderRadiusEffect,
-    this.padding,
     this.margin,
     this.width,
     this.height,

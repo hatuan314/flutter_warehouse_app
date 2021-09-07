@@ -20,6 +20,7 @@ class ProductUseCase {
     for (final ItemBillEntity itemBill in itemBillList) {
       final ProductEntity product = ProductEntity(
         name: itemBill.name,
+        category: itemBill.category,
         qty: itemBill.qty,
         importPrice: itemBill.price,
         exportPrice: itemBill.price,

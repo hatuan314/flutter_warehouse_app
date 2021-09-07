@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/category_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/unit_entity.dart';
 
 abstract class AddIoiEvent {}
@@ -16,5 +17,11 @@ class AddItemEvent extends AddIoiEvent {
   final String qty;
   final String price;
 
-  AddItemEvent({@required this.name,@required this.qty,@required this.price});
+  AddItemEvent({@required this.name, @required this.qty, @required this.price});
+}
+
+class SelectCategoryEvent extends AddIoiEvent {
+  final CategoryEntity category;
+
+  SelectCategoryEvent({@required this.category});
 }

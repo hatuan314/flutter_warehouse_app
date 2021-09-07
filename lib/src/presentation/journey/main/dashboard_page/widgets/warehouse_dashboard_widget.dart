@@ -25,7 +25,7 @@ class WarehouseDashboardWidget extends StatelessWidget {
         ),
         WarehouseDashboardItemWidget(
           onPressed: () {
-            Navigator.pushNamed(context, RouteList.categoryList);
+            Navigator.pushNamed(context, RouteList.categoryList, arguments: {ArgumentConstants.currentRouteArg: ''});
           },
           path: LottieConstants.categoryIcon,
           title: StringConstants.categoryTxt,
