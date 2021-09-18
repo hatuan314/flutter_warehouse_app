@@ -3,6 +3,7 @@ import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/data/models/bill_model.dart';
 import 'package:flutterwarehouseapp/src/data/models/category_model.dart';
 import 'package:flutterwarehouseapp/src/data/models/distributor_model.dart';
+import 'package:flutterwarehouseapp/src/data/models/product_model.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/hive_entity.dart';
 
 mixin MixinRepository {
@@ -27,6 +28,12 @@ mixin MixinRepository {
           BillModel bill = BillModel.fromJson(doc.data());
           bill.hive = HiveEntity(document: doc.id, isSync: true);
           values.add(bill as T);
+        }
+      } else if (T == ProductModel) {
+        for (final QueryDocumentSnapshot doc in snapshot.docs) {
+          ProductModel product = ProductModel.fromJson(doc.data());
+          product.hive = HiveEntity(document: doc.id, isSync: true);
+          values.add(product as T);
         }
       }
     }

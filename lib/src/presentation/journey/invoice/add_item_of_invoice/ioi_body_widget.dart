@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/data/models/category_model.dart';
 import 'package:flutterwarehouseapp/src/data/models/unit_model.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/product_entity.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/add_item_of_invoice/add_item_constants.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/add_item_of_invoice/bloc/add_ioi_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/add_item_of_invoice/bloc/add_ioi_event.dart';
@@ -45,28 +47,45 @@ class AddItemOfInvoiceBodyWidget extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // TextFormWidget(
-                //   controller: nameController,
-                //   hintText: AddItemOfInvoiceConstants.itemNameHintTxt,
-                //   validator: (value) {
-                //     if (ValidatorUtils.isNullEmpty(value)) {
-                //       return StringConstants.emptyField;
-                //     }
-                //     return null;
-                //   },
-                // ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AutoCompleteTextField(
+                    AutoCompleteTextField<ProductEntity>(
+                      key: GlobalKey(debugLabel: 'product_list_key'),
                       hintText: AddItemOfInvoiceConstants.itemNameHintTxt,
                       controller: nameController,
-                      suggestions: [],
+                      suggestions: state.productList,
+                      itemSubmitted: (value) {
+                        log('>>>>>>>IoiBodyWidget.itemSubmitted.value: ${value.toModel().toJson()}');
+                      },
+                      itemSorter: (a, b) => a.qty == b.qty
+                          ? 0
+                          : a.qty > b.qty
+                              ? -1
+                              : 1,
+                      itemFilter: (suggestion, input) => suggestion.name.toLowerCase().startsWith(input.toLowerCase()),
+                      itemBuilder: (context, suggestion) => Container(
+                        padding: EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              suggestion?.name,
+                              style: ThemeText.body1.copyWith(fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              suggestion?.category ?? '',
+                              style: ThemeText.caption,
+                            ),
+                          ],
+                        ),
+                      ),
+                      // itemSubmitted: (item) => setState(() => selected = item),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: TextFormConstants.paddingHorizontal).copyWith(
-                        top: LayoutConstants.paddingVertical5
-                      ),
+                      padding: EdgeInsets.symmetric(horizontal: TextFormConstants.paddingHorizontal)
+                          .copyWith(top: LayoutConstants.paddingVertical5),
                       child: Text(
                         state?.errorName ?? '',
                         style: ThemeText.caption.copyWith(

@@ -18,4 +18,9 @@ class ProductDataSource {
       request: product.toJson(),
     );
   }
+
+  Future<QuerySnapshot> getProductList() async {
+    return service.getQuerySnapshotList(
+        setup.mainDoc.collection(DefaultConfig.productCollection));
+  }
 }

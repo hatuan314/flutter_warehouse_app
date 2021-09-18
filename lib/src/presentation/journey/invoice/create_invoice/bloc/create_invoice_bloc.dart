@@ -55,6 +55,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         selectBill: BillEnum.Export,
         itemBillList: [],
         imageFiles: [],
+
         imageQty: _imageQty,
       );
 

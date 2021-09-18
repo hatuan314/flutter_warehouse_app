@@ -4,11 +4,14 @@ import 'package:flutterwarehouseapp/common/utils/connectivity_utils.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/local/product_hive.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/product_datasource.dart';
+import 'package:flutterwarehouseapp/src/data/models/product_model.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/hive_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/product_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/product_repository.dart';
 
-class ProductRepositoryImpl implements ProductRepository {
+import 'mixin_repository.dart';
+
+class ProductRepositoryImpl extends ProductRepository with MixinRepository {
   final ProductDataSource productDs;
   final ProductHive productHive;
 
@@ -40,5 +43,22 @@ class ProductRepositoryImpl implements ProductRepository {
       return ref.id;
     }
     return '';
+  }
+
+  @override
+  Future<List<ProductEntity>> getAllProductCloudList() async {
+    final QuerySnapshot snapshot = await productDs.getProductList();
+    List<ProductModel> productList = getCloudDataList(snapshot);
+    return productList;
+  }
+
+  @override
+  Future<List<ProductEntity>> getAllProductLocalList() {
+    return productHive.getAllProductList();
+  }
+
+  @override
+  Future addProductLocalList(List<ProductEntity> productList) async {
+    await productHive.setProductList(productList);
   }
 }

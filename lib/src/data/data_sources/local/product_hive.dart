@@ -25,4 +25,13 @@ class ProductHive {
   Future setProductList(List<ProductEntity> products) async {
     database.productBox.addAll(products);
   }
+
+  Future<List<ProductEntity>> getAllProductList() async {
+    List<ProductEntity> productList = [];
+    if (database.productBox.isNotEmpty) {
+      productList.addAll(database.productBox.values.toList());
+    }
+    return productList;
+  }
+
 }

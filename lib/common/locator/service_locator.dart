@@ -124,11 +124,12 @@ void setup() {
         userBloc: locator<UserBloc>(),
         imageUC: locator<ImageUseCase>(),
         invoiceUC: locator<InvoiceUseCase>(),
-      productUC: locator<ProductUseCase>(),
+        productUC: locator<ProductUseCase>(),
       ));
   locator.registerFactory<AddIoiBloc>(() => AddIoiBloc(
         loaderBloc: locator<LoaderBloc>(),
         unitUc: locator<UnitUseCase>(),
+        productUc: locator<ProductUseCase>(),
       ));
 
   /// UseCases
