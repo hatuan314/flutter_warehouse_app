@@ -363,9 +363,9 @@ class AutoCompleteTextFieldState<T> extends State<AutoCompleteTextField> {
                                         textField.controller.text = newText;
                                         textField.focusNode.unfocus();
                                         itemSubmitted(suggestion);
-                                        if (clearOnSubmit) {
-                                          clear();
-                                        }
+                                        // if (clearOnSubmit) {
+                                        //   clear();
+                                        // }
                                       } else {
                                         String newText = suggestion.toString();
                                         textField.controller.text = newText;

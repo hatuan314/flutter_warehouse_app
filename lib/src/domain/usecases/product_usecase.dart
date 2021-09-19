@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/distributor_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/product_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/product_repository.dart';
@@ -15,6 +16,7 @@ class ProductUseCase {
 
   List<ProductEntity> getProductListFormItemBill({
     List<ItemBillEntity> itemBillList,
+    DistributorEntity distributor,
     String locale,
   }) {
     List<ProductEntity> productList = [];
@@ -29,6 +31,7 @@ class ProductUseCase {
         createAt: DateTime.now().millisecondsSinceEpoch,
         lastUpdate: DateTime.now().millisecondsSinceEpoch,
         unit: itemBill.unit,
+        distributor: distributor.name,
       );
       productList.add(product);
     }
@@ -42,8 +45,7 @@ class ProductUseCase {
   }
 
   Future<List<ProductEntity>> getProductList() async {
-    List<ProductEntity> productList =
-    await productRepo.getAllProductLocalList();
+    List<ProductEntity> productList = await productRepo.getAllProductLocalList();
     if (ValidatorUtils.isNullEmptyList(productList)) {
       productList = await productRepo.getAllProductCloudList();
       productRepo.addProductLocalList(productList);

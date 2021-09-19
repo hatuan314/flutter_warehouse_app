@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,9 +54,7 @@ class AddItemOfInvoiceBodyWidget extends StatelessWidget {
                       hintText: AddItemOfInvoiceConstants.itemNameHintTxt,
                       controller: nameController,
                       suggestions: state.productList,
-                      itemSubmitted: (value) {
-                        log('>>>>>>>IoiBodyWidget.itemSubmitted.value: ${value.toModel().toJson()}');
-                      },
+                      itemSubmitted: (value) => _onItemSubmitted(context, value),
                       itemSorter: (a, b) => a.qty == b.qty
                           ? 0
                           : a.qty > b.qty
@@ -186,5 +183,10 @@ class AddItemOfInvoiceBodyWidget extends StatelessWidget {
         price: priceController.text.trim(),
       ));
     }
+  }
+
+  void _onItemSubmitted(BuildContext context, ProductEntity value) {
+    nameController.text = value.name;
+    BlocProvider.of<AddIoiBloc>(context).add(SelectProductEvent(value));
   }
 }

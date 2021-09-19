@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
@@ -19,8 +21,8 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
   final ProductUseCase productUc;
 
   String _errorName;
-  UnitEntity _selectUnit;
-  CategoryEntity _selectCategory;
+  String _selectUnit;
+  String _selectCategory;
   List<ProductEntity> _productList;
 
   AddIoiBloc({
@@ -61,27 +63,30 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
   Stream<AddIoiState> _mapInitialAddIoiEventToState() async* {
     loaderBloc.add(StartLoading());
     var currentState = state;
-    _selectUnit = await unitUc.getFirstUnit();
+    UnitEntity unit = await unitUc.getFirstUnit();
+    _selectUnit = unit?.name ?? '';
     _productList = await productUc.getProductList();
     if (currentState is WaitingAddIoiState) {
-      yield currentState.copyWith(selectUnit: _selectUnit.name, productList: _productList);
+      yield currentState.copyWith(selectUnit: _selectUnit, productList: _productList);
     }
     loaderBloc.add(FinishLoading());
   }
 
   Stream<AddIoiState> _mapSelectUnitEventToState(SelectUnitEvent event) async* {
     var currentState = state;
-    _selectUnit = event.unit;
+    UnitEntity unit = event.unit;
+    _selectUnit = unit?.name ?? '';
     if (currentState is WaitingAddIoiState) {
-      yield currentState.copyWith(selectUnit: _selectUnit.name);
+      yield currentState.copyWith(selectUnit: _selectUnit);
     }
   }
 
   Stream<AddIoiState> _mapSelectCategoryEventToState(SelectCategoryEvent event) async* {
     var currentState = state;
-    _selectCategory = event.category;
+    CategoryEntity category = event.category;
+    _selectCategory = category?.name;
     if (currentState is WaitingAddIoiState) {
-      yield currentState.copyWith(selectCategory: _selectCategory.name);
+      yield currentState.copyWith(selectCategory: _selectCategory);
     }
   }
 
@@ -97,11 +102,11 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
         int totalPrice = qty * price;
         final ItemBillEntity itemBill = ItemBillEntity(
           name: event.name,
-          category: _selectCategory?.name ?? '',
+          category: _selectCategory ?? '',
           qty: qty,
           price: price,
           totalPrice: totalPrice,
-          unit: _selectUnit?.name ?? '',
+          unit: _selectUnit ?? '',
         );
         yield AddToBillState(itemBill);
       }
@@ -112,7 +117,9 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
     var currentState = state;
     if (currentState is WaitingAddIoiState) {
       ProductEntity product = event.product;
-      yield currentState.copyWith(selectCategory: product.category);
+      _selectCategory = product.category;
+      _selectUnit = product.unit;
+      yield currentState.copyWith(selectCategory: _selectCategory, selectUnit: _selectUnit);
     }
   }
 }

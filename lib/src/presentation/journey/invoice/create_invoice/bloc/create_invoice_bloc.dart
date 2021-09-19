@@ -55,7 +55,6 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         selectBill: BillEnum.Export,
         itemBillList: [],
         imageFiles: [],
-
         imageQty: _imageQty,
       );
 
@@ -194,8 +193,11 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         );
         bool flag = await invoiceUC.createInvoice(bill);
         if (flag) {
-          List<ProductEntity> productList =
-              productUC.getProductListFormItemBill(itemBillList: itemBillList, locale: userBloc.locale);
+          List<ProductEntity> productList = productUC.getProductListFormItemBill(
+            itemBillList: itemBillList,
+            locale: userBloc.locale,
+            distributor: selectDistributor,
+          );
           if (selectBill == BillEnum.Import) {
             await productUC.setProductList(productList);
           }

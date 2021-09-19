@@ -35,6 +35,7 @@ class WaitingAddIoiState extends AddIoiState {
         this.selectUnit,
         this.selectCategory,
         this.errorName,
+        this.productList,
       ];
 }
 
