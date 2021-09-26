@@ -23,6 +23,7 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
   String _errorName;
   String _selectUnit;
   String _selectCategory;
+  ProductEntity _selectProduct;
   List<ProductEntity> _productList;
 
   AddIoiBloc({
@@ -108,6 +109,14 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
           totalPrice: totalPrice,
           unit: _selectUnit ?? '',
         );
+        int index = productUc.getProductIndex(
+            productList: _productList,
+            currentProduct: ProductEntity(
+              name: itemBill?.name ?? '',
+              category: itemBill?.category ?? '',
+              distributor: ValidatorUtils.isNullEmpty(_selectProduct) ? '' : _selectProduct?.distributor,
+            ));
+        itemBill.index = index;
         yield AddToBillState(itemBill);
       }
     }
@@ -116,9 +125,9 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
   Stream<AddIoiState> _mapSelectProductEventToState(SelectProductEvent event) async* {
     var currentState = state;
     if (currentState is WaitingAddIoiState) {
-      ProductEntity product = event.product;
-      _selectCategory = product.category;
-      _selectUnit = product.unit;
+      _selectProduct = event.product;
+      _selectCategory = _selectProduct.category;
+      _selectUnit = _selectProduct.unit;
       yield currentState.copyWith(selectCategory: _selectCategory, selectUnit: _selectUnit);
     }
   }

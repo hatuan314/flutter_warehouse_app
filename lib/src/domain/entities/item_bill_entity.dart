@@ -6,6 +6,7 @@ part 'item_bill_entity.g.dart';
 
 @HiveType(typeId: 4)
 class ItemBillEntity {
+  int index;
   @HiveField(0)
   String name;
   @HiveField(1)
@@ -26,6 +27,7 @@ class ItemBillEntity {
     this.totalPrice,
     this.unit,
     this.category,
+    this.index,
   });
 
   factory ItemBillEntity.fromJson(Map<String, dynamic> json) => ItemBillEntity(
@@ -34,7 +36,8 @@ class ItemBillEntity {
         price: json['price'],
         totalPrice: json['total_price'],
         unit: json['unit'],
-      category: json['category'],
+        category: json['category'],
+    index: json['index'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -43,7 +46,8 @@ class ItemBillEntity {
         'price': price,
         'total_price': totalPrice,
         'unit': unit,
-    'category': category,
+        'category': category,
+        'index': index,
       };
 
   ItemBillModel toModel() => ItemBillModel(
@@ -52,6 +56,6 @@ class ItemBillEntity {
         price: price,
         totalPrice: totalPrice,
         unit: unit,
-      category: category,
+        category: category,
       );
 }

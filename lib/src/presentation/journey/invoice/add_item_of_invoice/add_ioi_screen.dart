@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/add_item_of_invoice/add_item_constants.dart';
 import 'package:flutterwarehouseapp/src/widgets/scaffold/scaffold_widget.dart';
 
-import 'ioi_body_widget.dart';
+import 'widgets/ioi_body_widget.dart';
 
 class AddIoiScreen extends StatelessWidget {
   @override

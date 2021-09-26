@@ -38,6 +38,10 @@ class ProductUseCase {
     return productList;
   }
 
+  Future setProduct(ProductEntity product) async {
+    await createProduct(product);
+  }
+
   Future setProductList(List<ProductEntity> productList) async {
     for (final ProductEntity product in productList) {
       await createProduct(product);
@@ -51,5 +55,17 @@ class ProductUseCase {
       productRepo.addProductLocalList(productList);
     }
     return productList;
+  }
+
+  int getProductIndex({List<ProductEntity> productList, ProductEntity currentProduct}) {
+    for (int index = 0; index < productList.length; index++) {
+      ProductEntity product = productList[index];
+      if (product.name == currentProduct.name &&
+          product.distributor == currentProduct.distributor &&
+          product.category == currentProduct.category) {
+        return index;
+      }
+    }
+    return -1;
   }
 }

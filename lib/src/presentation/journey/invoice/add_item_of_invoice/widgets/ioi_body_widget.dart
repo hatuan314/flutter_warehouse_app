@@ -22,6 +22,8 @@ import 'package:flutterwarehouseapp/src/widgets/text_form/autocomplete_textfield
 import 'package:flutterwarehouseapp/src/widgets/text_form/text_form_constants.dart';
 import 'package:flutterwarehouseapp/src/widgets/text_form/text_form_widget.dart';
 
+import 'product_suggest_item_widget.dart';
+
 class AddItemOfInvoiceBodyWidget extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController qtyController = TextEditingController();
@@ -61,24 +63,9 @@ class AddItemOfInvoiceBodyWidget extends StatelessWidget {
                               ? -1
                               : 1,
                       itemFilter: (suggestion, input) => suggestion.name.toLowerCase().startsWith(input.toLowerCase()),
-                      itemBuilder: (context, suggestion) => Container(
-                        padding: EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              suggestion?.name,
-                              style: ThemeText.body1.copyWith(fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              suggestion?.category ?? '',
-                              style: ThemeText.caption,
-                            ),
-                          ],
-                        ),
+                      itemBuilder: (context, product) => ProductSuggestItemWidget(
+                        product: product,
                       ),
-                      // itemSubmitted: (item) => setState(() => selected = item),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: TextFormConstants.paddingHorizontal)

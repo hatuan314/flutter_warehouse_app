@@ -19,7 +19,7 @@ class InvoiceUseCase {
     List dataList = [];
     if (!ValidatorUtils.isNullEmptyList(itemList)) {
       for (final ItemBillEntity item in itemList) {
-        dataList.add(json.encode(item.toJson()));
+        dataList.add(json.encode(item.toModel().toJson()));
       }
     }
     return dataList;

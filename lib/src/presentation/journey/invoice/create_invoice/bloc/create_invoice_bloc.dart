@@ -32,6 +32,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
   DistributorEntity selectDistributor;
   BillEnum selectBill = BillEnum.Export;
   List<ItemBillEntity> itemBillList = [];
+  List<ProductEntity> productList = [];
   List<PickedFile> imageFiles = [];
   int totalAmountBill = 0;
   int _imageQty = 0;
@@ -61,6 +62,9 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
   @override
   Stream<CreateInvoiceState> mapEventToState(CreateInvoiceEvent event) async* {
     switch (event.runtimeType) {
+      case InitialCreateInvoiceEvent:
+        yield* _mapInitialCreateInvoiceEventToState();
+        break;
       case SelectDistributorEvent:
         yield* _mapSelectDistributorEventToState(event);
         break;
@@ -79,6 +83,16 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
       case OnCreateEvent:
         yield* _mapOnCreateEvent(event);
         break;
+    }
+  }
+
+  Stream<CreateInvoiceState> _mapInitialCreateInvoiceEventToState() async* {
+    var currentState = state;
+    if (currentState is WaitingCreateInvoiceState) {
+      loaderBloc.add(StartLoading());
+      productList = await productUC.getProductList();
+      loaderBloc.add(FinishLoading());
+      yield currentState.copyWith();
     }
   }
 
@@ -199,7 +213,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
             distributor: selectDistributor,
           );
           if (selectBill == BillEnum.Import) {
-            await productUC.setProductList(productList);
+            await importProductList();
           }
           snackbarBloc
               .add(ShowSnackbar(title: CreateInvoiceConstants.createInvoiceSuccessMsg, type: SnackBarType.success));
@@ -212,5 +226,28 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         loaderBloc.add(FinishLoading());
       }
     }
+  }
+
+  Future importProductList() async {
+    for (final ItemBillEntity itemBill in itemBillList) {
+      ProductEntity product = ProductEntity(
+        name: itemBill.name,
+        category: itemBill.category,
+        qty: itemBill.qty,
+        importPrice: itemBill.price,
+        exportPrice: itemBill.price,
+        locale: userBloc.locale,
+        createAt: DateTime.now().millisecondsSinceEpoch,
+        lastUpdate: DateTime.now().millisecondsSinceEpoch,
+        unit: itemBill.unit,
+        distributor: selectDistributor.name,
+      );
+      if (itemBill.index == -1) {
+        productUC.setProduct(product);
+      } else {
+
+      }
+    }
+    await productUC.setProductList(productList);
   }
 }
