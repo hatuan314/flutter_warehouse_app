@@ -8,4 +8,5 @@ class ArgumentConstants {
   static const String createCategoryTitleArg = 'CREATE_CATEGORY_TITLE';
   static const String categoryDetailArg = 'CATEGORY_DETAIL';
   static const String currentRouteArg = 'CURRENT_ROUTE';
+  static const String distributorArg = 'DISTRIBUTOR';
 }

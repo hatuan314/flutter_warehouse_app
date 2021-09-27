@@ -37,6 +37,7 @@ class CreateInvoiceFormWidget extends StatelessWidget {
   final Function(BillEnum) onSelectBillType;
   final Function onPressedGallery;
   final Function onPressedCamera;
+  final Function onPressedAddItemBtn;
   final TextEditingController customerController;
 
   const CreateInvoiceFormWidget({
@@ -53,6 +54,7 @@ class CreateInvoiceFormWidget extends StatelessWidget {
     this.onSelectBillType,
     this.onPressedGallery,
     this.onPressedCamera,
+    this.onPressedAddItemBtn,
     this.customerController,
   }) : super(key: key);
 
@@ -129,7 +131,7 @@ class CreateInvoiceFormWidget extends StatelessWidget {
                 ],
               ),
         AddItemButton(
-          onPressed: () => _onPressedAddItemBtn(context),
+          onPressed: onPressedAddItemBtn,
         ),
         SizedBox(
           height: LayoutConstants.paddingVertical15,
@@ -151,14 +153,5 @@ class CreateInvoiceFormWidget extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  void _onPressedAddItemBtn(BuildContext context) {
-    Navigator.pushNamed(context, RouteList.addItemOfInvoice).then((value) {
-      if(!ValidatorUtils.isNullEmpty(value)) {
-        final ItemBillEntity itemBill = ItemBillEntity.fromJson(jsonDecode(value));
-        BlocProvider.of<CreateInvoiceBloc>(context).add(AddItemBillEvent(itemBill));
-      }
-    });
   }
 }

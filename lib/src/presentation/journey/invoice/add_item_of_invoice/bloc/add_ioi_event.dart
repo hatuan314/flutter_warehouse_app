@@ -5,7 +5,11 @@ import 'package:flutterwarehouseapp/src/domain/entities/unit_entity.dart';
 
 abstract class AddIoiEvent {}
 
-class InitialAddIoiEvent extends AddIoiEvent {}
+class InitialAddIoiEvent extends AddIoiEvent {
+  final String distributor;
+
+  InitialAddIoiEvent(this.distributor);
+}
 
 class SelectUnitEvent extends AddIoiEvent {
   final UnitEntity unit;

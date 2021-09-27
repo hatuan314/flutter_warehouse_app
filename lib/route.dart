@@ -82,6 +82,11 @@ class Routes {
           builder: CategoryRoute.getRoutesWithSettings(settings)[settings.name],
           settings: settings,
         );
+      case RouteList.addItemOfInvoice:
+        return MaterialPageRoute(
+          builder: InvoiceRoutes.getRoutesWithSettings(settings)[settings.name],
+          settings: settings,
+        );
       case RouteList.devMode:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(create: (_) => locator<MainBloc>(), child: DevModeScreen()));

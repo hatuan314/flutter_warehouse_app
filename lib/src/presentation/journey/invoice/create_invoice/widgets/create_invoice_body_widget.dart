@@ -7,12 +7,17 @@ import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/enums/bill_enum.dart';
+import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/data/models/distributor_model.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/distributor_entity.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
+import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/bloc/create_invoice_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/bloc/create_invoice_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/bloc/create_invoice_state.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/create_invoice_constants.dart';
 import 'package:flutterwarehouseapp/src/widgets/button/button_widget.dart';
 
 import 'create_invoice_form_widget.dart';
@@ -48,6 +53,7 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
                 onSelectBillType: (value) => _onSelectBillType(context, value),
                 onPressedGallery: () => _onOpenGallery(context),
                 onPressedCamera: () => _onOpenCamera(context),
+                onPressedAddItemBtn: () => _onPressedAddItemBtn(context, selectBill: state?.selectBill ?? BillEnum.Export, distributor: state?.distributorName),
               ),
               SizedBox(
                 height: LayoutConstants.paddingVertical20,
@@ -85,5 +91,27 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
 
   void _onOpenCamera(BuildContext context) {
     BlocProvider.of<CreateInvoiceBloc>(context).add(OpenCameraEvent());
+  }
+
+  void _onPressedAddItemBtn(BuildContext context, {BillEnum selectBill, String distributor,}) {
+    if (selectBill == BillEnum.Export) {
+      Navigator.pushNamed(context, RouteList.addItemOfInvoice).then((value) {
+        if (!ValidatorUtils.isNullEmpty(value)) {
+          final ItemBillEntity itemBill = ItemBillEntity.fromJson(jsonDecode(value));
+          BlocProvider.of<CreateInvoiceBloc>(context).add(AddItemBillEvent(itemBill));
+        }
+      });
+    } else if (selectBill == BillEnum.Import) {
+      if (ValidatorUtils.isNullEmpty(distributor)) {
+        locator<SnackbarBloc>().add(ShowSnackbar(title: CreateInvoiceConstants.unselectDistributor, type: SnackBarType.error));
+      } else {
+        Navigator.pushNamed(context, RouteList.addItemOfInvoice, arguments: {ArgumentConstants.distributorArg: distributor}).then((value) {
+          if (!ValidatorUtils.isNullEmpty(value)) {
+            final ItemBillEntity itemBill = ItemBillEntity.fromJson(jsonDecode(value));
+            BlocProvider.of<CreateInvoiceBloc>(context).add(AddItemBillEvent(itemBill));
+          }
+        });
+      }
+    }
   }
 }

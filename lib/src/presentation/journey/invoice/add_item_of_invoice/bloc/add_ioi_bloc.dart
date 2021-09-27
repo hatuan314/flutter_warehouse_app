@@ -24,7 +24,7 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
   String _selectUnit;
   String _selectCategory;
   ProductEntity _selectProduct;
-  List<ProductEntity> _productList;
+  List<ProductEntity> _productList = [];
 
   AddIoiBloc({
     @required this.loaderBloc,
@@ -44,7 +44,7 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
   Stream<AddIoiState> mapEventToState(AddIoiEvent event) async* {
     switch (event.runtimeType) {
       case InitialAddIoiEvent:
-        yield* _mapInitialAddIoiEventToState();
+        yield* _mapInitialAddIoiEventToState(event);
         break;
       case SelectUnitEvent:
         yield* _mapSelectUnitEventToState(event);
@@ -61,12 +61,22 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
     }
   }
 
-  Stream<AddIoiState> _mapInitialAddIoiEventToState() async* {
+  Stream<AddIoiState> _mapInitialAddIoiEventToState(InitialAddIoiEvent event) async* {
     loaderBloc.add(StartLoading());
     var currentState = state;
     UnitEntity unit = await unitUc.getFirstUnit();
     _selectUnit = unit?.name ?? '';
-    _productList = await productUc.getProductList();
+    List<ProductEntity> productList = await productUc.getProductList();
+    log('>>>>>>>>>distributor: ${event.distributor}');
+    if (ValidatorUtils.isNullEmpty(event.distributor)) {
+      _productList.addAll(productList);
+    } else {
+      for (final ProductEntity product in productList) {
+        if (product.distributor == event.distributor) {
+          _productList.add(product);
+        }
+      }
+    }
     if (currentState is WaitingAddIoiState) {
       yield currentState.copyWith(selectUnit: _selectUnit, productList: _productList);
     }
