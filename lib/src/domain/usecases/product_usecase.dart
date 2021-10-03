@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterwarehouseapp/common/constants/enum_constants.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/distributor_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
@@ -38,8 +39,17 @@ class ProductUseCase {
     return productList;
   }
 
-  Future setProduct(ProductEntity product) async {
-    await createProduct(product);
+  Future updateProduct({ProductEntity product, ProductListState productListState = ProductListState.Add, int index}) async {
+    List<ProductEntity> productList = await getProductList();
+    ProductEntity currentProduct = productList[index];
+    if (productListState == ProductListState.Add) {
+      currentProduct.qty += product.qty;
+      await productRepo.updateProduct(product: currentProduct, index: index);
+    }
+    if (productListState == ProductListState.Reduce) {
+      currentProduct.qty -= product.qty;
+    }
+    await productRepo.updateProduct(product: currentProduct, index: index);
   }
 
   Future setProductList(List<ProductEntity> productList) async {
@@ -69,3 +79,5 @@ class ProductUseCase {
     return -1;
   }
 }
+
+

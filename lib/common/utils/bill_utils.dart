@@ -1,5 +1,5 @@
+import 'package:flutterwarehouseapp/common/constants/enum_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
-import 'package:flutterwarehouseapp/common/enums/bill_enum.dart';
 
 class BillUtils {
   static convertToString(BillEnum type) {

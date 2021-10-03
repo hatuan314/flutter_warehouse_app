@@ -34,4 +34,9 @@ class ProductHive {
     return productList;
   }
 
+  Future<void> updateProduct(
+      {int index, ProductEntity product}) async {
+    await database.productBox.putAt(index, product);
+  }
+
 }

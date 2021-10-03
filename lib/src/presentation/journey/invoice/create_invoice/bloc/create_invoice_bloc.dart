@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterwarehouseapp/common/enums/bill_enum.dart';
+import 'package:flutterwarehouseapp/common/constants/enum_constants.dart';
 import 'package:flutterwarehouseapp/common/extensions/list_extensions.dart';
 import 'package:flutterwarehouseapp/common/utils/bill_utils.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
@@ -32,7 +32,6 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
   DistributorEntity selectDistributor;
   BillEnum selectBill = BillEnum.Export;
   List<ItemBillEntity> itemBillList = [];
-  List<ProductEntity> productList = [];
   List<PickedFile> imageFiles = [];
   int totalAmountBill = 0;
   int _imageQty = 0;
@@ -90,7 +89,6 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     var currentState = state;
     if (currentState is WaitingCreateInvoiceState) {
       loaderBloc.add(StartLoading());
-      productList = await productUC.getProductList();
       loaderBloc.add(FinishLoading());
       yield currentState.copyWith();
     }
@@ -213,8 +211,9 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
             distributor: selectDistributor,
           );
           if (selectBill == BillEnum.Import) {
-            await importProductList();
+            await addProductList();
           }
+          if (selectBill == BillEnum.Export) {}
           snackbarBloc
               .add(ShowSnackbar(title: CreateInvoiceConstants.createInvoiceSuccessMsg, type: SnackBarType.success));
           yield CreateInvoiceSuccessState();
@@ -228,7 +227,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     }
   }
 
-  Future importProductList() async {
+  Future addProductList() async {
     for (final ItemBillEntity itemBill in itemBillList) {
       ProductEntity product = ProductEntity(
         name: itemBill.name,
@@ -242,12 +241,28 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         unit: itemBill.unit,
         distributor: selectDistributor.name,
       );
-      if (itemBill.index == -1) {
-        productUC.setProduct(product);
+      if (itemBill.index < 0) {
+        productUC.createProduct(product);
       } else {
-
+        productUC.updateProduct(product: product, productListState: ProductListState.Add, index: itemBill.index);
       }
     }
-    await productUC.setProductList(productList);
+  }
+
+  Future removeProductList() async {
+    for (final ItemBillEntity itemBill in itemBillList) {
+      ProductEntity product = ProductEntity(
+        name: itemBill.name,
+        category: itemBill.category,
+        qty: itemBill.qty,
+        importPrice: itemBill.price,
+        exportPrice: itemBill.price,
+        locale: userBloc.locale,
+        createAt: DateTime.now().millisecondsSinceEpoch,
+        lastUpdate: DateTime.now().millisecondsSinceEpoch,
+        unit: itemBill.unit,
+        distributor: selectDistributor.name,
+      );
+    }
   }
 }

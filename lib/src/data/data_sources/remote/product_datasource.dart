@@ -23,4 +23,12 @@ class ProductDataSource {
     return service.getQuerySnapshotList(
         setup.mainDoc.collection(DefaultConfig.productCollection));
   }
+
+  Future updateProduct(ProductModel product) async {
+    await service.updateDocument(
+      ref: setup.mainDoc.collection(DefaultConfig.productCollection),
+      request: product.toJson(),
+      document: product.hive.document,
+    );
+  }
 }

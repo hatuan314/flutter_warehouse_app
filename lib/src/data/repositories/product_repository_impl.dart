@@ -61,4 +61,10 @@ class ProductRepositoryImpl extends ProductRepository with MixinRepository {
   Future addProductLocalList(List<ProductEntity> productList) async {
     await productHive.setProductList(productList);
   }
+
+  @override
+  Future updateProduct({ProductEntity product, int index}) async {
+    await productDs.updateProduct(product.toModel());
+    await productHive.updateProduct(index: index, product: product);
+  }
 }

@@ -1,1 +1,0 @@
-enum BillEnum {Import, Export}

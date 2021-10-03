@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterwarehouseapp/common/enums/bill_enum.dart';
+import 'package:flutterwarehouseapp/common/constants/enum_constants.dart';
 import 'package:flutterwarehouseapp/common/utils/bill_utils.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/create_invoice_constants.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';

@@ -10,4 +10,6 @@ abstract class ProductRepository {
   Future<List<ProductEntity>> getAllProductCloudList();
 
   Future<List<ProductEntity>> getAllProductLocalList();
+
+  Future updateProduct({ProductEntity product, int index});
 }

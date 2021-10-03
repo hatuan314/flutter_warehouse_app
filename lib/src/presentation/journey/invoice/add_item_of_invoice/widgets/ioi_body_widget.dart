@@ -21,6 +21,7 @@ import 'package:flutterwarehouseapp/src/widgets/button/button_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/text_form/autocomplete_textfield.dart';
 import 'package:flutterwarehouseapp/src/widgets/text_form/text_form_constants.dart';
 import 'package:flutterwarehouseapp/src/widgets/text_form/text_form_widget.dart';
+import 'package:intl/intl.dart';
 
 import 'product_suggest_item_widget.dart';
 
@@ -174,6 +175,7 @@ class AddItemOfInvoiceBodyWidget extends StatelessWidget {
 
   void _onItemSubmitted(BuildContext context, ProductEntity value) {
     nameController.text = value.name;
+    priceController.text = NumberFormat("#.###").format(value.importPrice);
     BlocProvider.of<AddIoiBloc>(context).add(SelectProductEvent(value));
   }
 }
