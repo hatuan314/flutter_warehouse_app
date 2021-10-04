@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/common/constants/argument_constants.dart';
+import 'package:flutterwarehouseapp/common/constants/enum_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
@@ -26,10 +27,13 @@ import 'package:intl/intl.dart';
 import 'product_suggest_item_widget.dart';
 
 class AddItemOfInvoiceBodyWidget extends StatelessWidget {
+  final BillEnum billType;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController qtyController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  AddItemOfInvoiceBodyWidget({Key key, this.billType}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -68,16 +72,18 @@ class AddItemOfInvoiceBodyWidget extends StatelessWidget {
                         product: product,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: TextFormConstants.paddingHorizontal)
-                          .copyWith(top: LayoutConstants.paddingVertical5),
-                      child: Text(
-                        state?.errorName ?? '',
-                        style: ThemeText.caption.copyWith(
-                          color: AppColor.errorColor,
-                        ),
-                      ),
-                    )
+                    ValidatorUtils.isNullEmpty(state?.errorName)
+                        ? SizedBox.shrink()
+                        : Padding(
+                            padding: EdgeInsets.symmetric(horizontal: TextFormConstants.paddingHorizontal)
+                                .copyWith(top: LayoutConstants.paddingVertical5),
+                            child: Text(
+                              state?.errorName ?? '',
+                              style: ThemeText.caption.copyWith(
+                                color: AppColor.errorColor,
+                              ),
+                            ),
+                          )
                   ],
                 ),
                 SizedBox(
@@ -123,7 +129,7 @@ class AddItemOfInvoiceBodyWidget extends StatelessWidget {
                 TextFormWidget.withFormatMoney(
                   controller: priceController,
                   hintText:
-                      '${AddItemOfInvoiceConstants.amountHintTxt}${ValidatorUtils.isNullEmpty(state.selectUnit) ? 'Sản phẩm' : state.selectUnit}',
+                      '${billType == BillEnum.Export ? AddItemOfInvoiceConstants.salePriceHintTxt : AddItemOfInvoiceConstants.importPriceHintTxt}${ValidatorUtils.isNullEmpty(state.selectUnit) ? 'Sản phẩm' : state.selectUnit}',
                   validator: (value) {
                     if (ValidatorUtils.isNullEmpty(value)) {
                       return StringConstants.emptyField;

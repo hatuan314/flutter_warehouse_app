@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/common/constants/argument_constants.dart';
+import 'package:flutterwarehouseapp/common/constants/enum_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
@@ -14,9 +15,7 @@ class InvoiceRoutes {
   static Map<String, WidgetBuilder> getAll() {
     return {
       RouteList.createInvoice: (context) =>
-          BlocProvider(
-              create: (_) => locator<CreateInvoiceBloc>(),
-              child: CreateInvoiceScreen()),
+          BlocProvider(create: (_) => locator<CreateInvoiceBloc>(), child: CreateInvoiceScreen()),
       // RouteList.distributorList: (context) => BlocProvider(
       //     create: (_) => locator<DistributorListBloc>()
       //       ..add(InitialDistributorListEvent()),
@@ -30,17 +29,21 @@ class InvoiceRoutes {
   static Map<String, WidgetBuilder> getRoutesWithSettings(RouteSettings settings) {
     final args = settings.arguments as Map<String, dynamic>;
     return {
-
       RouteList.addItemOfInvoice: (context) {
         var distributor;
+        var billType;
         if (ValidatorUtils.isNullEmpty(args)) {
           distributor = '';
+          billType = BillEnum.Export;
         } else {
           distributor = args[ArgumentConstants.distributorArg] ?? '';
+          billType = args[ArgumentConstants.invoiceTypeArg];
         }
-        return BlocProvider(create: (_) =>
-        locator<AddIoiBloc>()
-          ..add(InitialAddIoiEvent(distributor)), child: AddIoiScreen());
+        return BlocProvider(
+            create: (_) => locator<AddIoiBloc>()..add(InitialAddIoiEvent(distributor)),
+            child: AddIoiScreen(
+              billType: billType,
+            ));
       },
       // RouteList.distributorDetail: (context) {
       //   var distributorJson = args[ArgumentConstants.distributorDetailArg];

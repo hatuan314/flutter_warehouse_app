@@ -9,4 +9,5 @@ class ArgumentConstants {
   static const String categoryDetailArg = 'CATEGORY_DETAIL';
   static const String currentRouteArg = 'CURRENT_ROUTE';
   static const String distributorArg = 'DISTRIBUTOR';
+  static const String invoiceTypeArg = 'INVOICE_TYPE';
 }

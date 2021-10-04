@@ -53,7 +53,8 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
                 onSelectBillType: (value) => _onSelectBillType(context, value),
                 onPressedGallery: () => _onOpenGallery(context),
                 onPressedCamera: () => _onOpenCamera(context),
-                onPressedAddItemBtn: () => _onPressedAddItemBtn(context, selectBill: state?.selectBill ?? BillEnum.Export, distributor: state?.distributorName),
+                onPressedAddItemBtn: () => _onPressedAddItemBtn(context,
+                    selectBill: state?.selectBill ?? BillEnum.Export, distributor: state?.distributorName),
               ),
               SizedBox(
                 height: LayoutConstants.paddingVertical20,
@@ -93,9 +94,15 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
     BlocProvider.of<CreateInvoiceBloc>(context).add(OpenCameraEvent());
   }
 
-  void _onPressedAddItemBtn(BuildContext context, {BillEnum selectBill, String distributor,}) {
+  void _onPressedAddItemBtn(
+    BuildContext context, {
+    BillEnum selectBill,
+    String distributor,
+  }) {
     if (selectBill == BillEnum.Export) {
-      Navigator.pushNamed(context, RouteList.addItemOfInvoice).then((value) {
+      Navigator.pushNamed(context, RouteList.addItemOfInvoice, arguments: {
+        ArgumentConstants.invoiceTypeArg: selectBill,
+      }).then((value) {
         if (!ValidatorUtils.isNullEmpty(value)) {
           final ItemBillEntity itemBill = ItemBillEntity.fromJson(jsonDecode(value));
           BlocProvider.of<CreateInvoiceBloc>(context).add(AddItemBillEvent(itemBill));
@@ -103,9 +110,13 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
       });
     } else if (selectBill == BillEnum.Import) {
       if (ValidatorUtils.isNullEmpty(distributor)) {
-        locator<SnackbarBloc>().add(ShowSnackbar(title: CreateInvoiceConstants.unselectDistributor, type: SnackBarType.error));
+        locator<SnackbarBloc>()
+            .add(ShowSnackbar(title: CreateInvoiceConstants.unselectDistributor, type: SnackBarType.error));
       } else {
-        Navigator.pushNamed(context, RouteList.addItemOfInvoice, arguments: {ArgumentConstants.distributorArg: distributor}).then((value) {
+        Navigator.pushNamed(context, RouteList.addItemOfInvoice, arguments: {
+          ArgumentConstants.distributorArg: distributor,
+          ArgumentConstants.invoiceTypeArg: selectBill,
+        }).then((value) {
           if (!ValidatorUtils.isNullEmpty(value)) {
             final ItemBillEntity itemBill = ItemBillEntity.fromJson(jsonDecode(value));
             BlocProvider.of<CreateInvoiceBloc>(context).add(AddItemBillEvent(itemBill));
