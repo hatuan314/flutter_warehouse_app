@@ -58,7 +58,6 @@ class ProductUseCase {
             ShowSnackbar(title: CreateInvoiceConstants.saleNumberMoreThanCurrentNumberMsg, type: SnackBarType.error));
       } else {
         currentProduct.qty -= product.qty;
-        log('>>>>>>>>>ProductUseCase.updateProduct.currentProduct.qty: ${currentProduct.qty}');
         await productRepo.updateProduct(product: currentProduct, index: index);
       }
     }

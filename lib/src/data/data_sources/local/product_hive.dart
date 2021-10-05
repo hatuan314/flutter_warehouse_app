@@ -38,7 +38,6 @@ class ProductHive {
 
   Future<void> updateProduct(
       {int index, ProductEntity product}) async {
-    log('>>>>>>>>ProductHive.updateProduct');
     await database.productBox.putAt(index, product);
   }
 

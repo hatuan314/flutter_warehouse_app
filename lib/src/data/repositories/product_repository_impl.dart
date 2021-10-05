@@ -33,7 +33,6 @@ class ProductRepositoryImpl extends ProductRepository with MixinRepository {
       productEntity.hive = HiveEntity.normal();
     }
     productEntity.setHiveJson();
-    log('>>>>>>>ProductRepositoryImpl.addProduct.product: ${productEntity.hiveJson}');
     int key = await productHive.setProduct(productEntity);
     if (!ValidatorUtils.isNullEmpty(key)) {
       return true;
