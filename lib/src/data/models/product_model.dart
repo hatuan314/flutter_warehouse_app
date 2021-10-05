@@ -1,3 +1,4 @@
+import 'package:flutterwarehouseapp/src/domain/entities/hive_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/product_entity.dart';
 
 class ProductModel extends ProductEntity {
@@ -12,6 +13,7 @@ class ProductModel extends ProductEntity {
     int createAt,
     int lastUpdate,
     String unit,
+    HiveEntity hive,
   }) : super(
           name: name,
           category: category,
@@ -23,6 +25,7 @@ class ProductModel extends ProductEntity {
           createAt: createAt,
           lastUpdate: lastUpdate,
           unit: unit,
+          hive: hive,
         );
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(

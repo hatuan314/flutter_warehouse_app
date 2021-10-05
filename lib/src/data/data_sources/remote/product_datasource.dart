@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/configs/default_env.dart';
@@ -25,6 +27,7 @@ class ProductDataSource {
   }
 
   Future updateProduct(ProductModel product) async {
+    log('>>>>>>>>>>>>>ProductDatasource.updateProduct.product.qty: ${product.qty}');
     await service.updateDocument(
       ref: setup.mainDoc.collection(DefaultConfig.productCollection),
       request: product.toJson(),

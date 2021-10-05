@@ -33,10 +33,12 @@ mixin MixinRepository {
         for (final QueryDocumentSnapshot doc in snapshot.docs) {
           ProductModel product = ProductModel.fromJson(doc.data());
           product.hive = HiveEntity(document: doc.id, isSync: true);
+          product.setHiveJson();
           values.add(product as T);
         }
       }
     }
     return values;
   }
+
 }

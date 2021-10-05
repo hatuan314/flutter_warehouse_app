@@ -57,9 +57,15 @@ class ProductEntity {
         createAt: createAt,
         lastUpdate: lastUpdate,
         unit: unit,
+        hive: hive,
       );
 
   void setHiveJson() {
     this.hiveJson = jsonEncode(hive.toJson());
+  }
+
+  void setHive() {
+    Map<String, dynamic> json = jsonDecode(this.hiveJson);
+    this.hive = HiveEntity.fromJson(json);
   }
 }

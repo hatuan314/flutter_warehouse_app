@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/utils/connectivity_utils.dart';
@@ -30,10 +32,13 @@ class ProductRepositoryImpl extends ProductRepository with MixinRepository {
     } else {
       productEntity.hive = HiveEntity.normal();
     }
+    productEntity.setHiveJson();
+    log('>>>>>>>ProductRepositoryImpl.addProduct.product: ${productEntity.hiveJson}');
     int key = await productHive.setProduct(productEntity);
     if (!ValidatorUtils.isNullEmpty(key)) {
       return true;
     }
+    return false;
   }
 
   @override
@@ -64,6 +69,7 @@ class ProductRepositoryImpl extends ProductRepository with MixinRepository {
 
   @override
   Future updateProduct({ProductEntity product, int index}) async {
+    product.setHive();
     await productDs.updateProduct(product.toModel());
     await productHive.updateProduct(index: index, product: product);
   }

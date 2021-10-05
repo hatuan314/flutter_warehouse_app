@@ -205,15 +205,12 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         );
         bool flag = await invoiceUC.createInvoice(bill);
         if (flag) {
-          List<ProductEntity> productList = productUC.getProductListFormItemBill(
-            itemBillList: itemBillList,
-            locale: userBloc.locale,
-            distributor: selectDistributor,
-          );
           if (selectBill == BillEnum.Import) {
             await addProductList();
           }
-          if (selectBill == BillEnum.Export) {}
+          if (selectBill == BillEnum.Export) {
+            await reduceProductList(event.customer);
+          }
           snackbarBloc
               .add(ShowSnackbar(title: CreateInvoiceConstants.createInvoiceSuccessMsg, type: SnackBarType.success));
           yield CreateInvoiceSuccessState();
@@ -246,6 +243,24 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
       } else {
         productUC.updateProduct(product: product, productListState: ProductListState.Add, index: itemBill.index);
       }
+    }
+  }
+
+  Future reduceProductList(String customer) async {
+    for (final ItemBillEntity itemBill in itemBillList) {
+      ProductEntity product = ProductEntity(
+        name: itemBill.name,
+        category: itemBill.category,
+        qty: itemBill.qty,
+        importPrice: itemBill.price,
+        exportPrice: itemBill.price,
+        locale: userBloc.locale,
+        createAt: DateTime.now().millisecondsSinceEpoch,
+        lastUpdate: DateTime.now().millisecondsSinceEpoch,
+        unit: itemBill.unit,
+        distributor: customer,
+      );
+      productUC.updateProduct(product: product, productListState: ProductListState.Reduce, index: itemBill.index);
     }
   }
 

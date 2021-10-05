@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutterwarehouseapp/common/configs/local_db_setup.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
@@ -36,6 +38,7 @@ class ProductHive {
 
   Future<void> updateProduct(
       {int index, ProductEntity product}) async {
+    log('>>>>>>>>ProductHive.updateProduct');
     await database.productBox.putAt(index, product);
   }
 

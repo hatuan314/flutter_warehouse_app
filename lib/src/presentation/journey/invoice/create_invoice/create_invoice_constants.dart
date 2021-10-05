@@ -9,4 +9,6 @@ class CreateInvoiceConstants {
   static const String createInvoiceSuccessMsg = 'Thêm hóa đơn thành công';
   static const String customerNameTxt = 'Tên khách hàng';
   static const String unselectDistributor = 'Chưa chọn nhà phân phối';
+
+  static const String saleNumberMoreThanCurrentNumberMsg = 'Số lượng bán ra nhiều số lượng hiện có';
 }
