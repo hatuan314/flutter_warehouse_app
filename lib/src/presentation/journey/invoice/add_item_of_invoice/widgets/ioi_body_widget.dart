@@ -7,9 +7,11 @@ import 'package:flutterwarehouseapp/common/constants/enum_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
+import 'package:flutterwarehouseapp/common/utils/currency_utils.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/data/models/category_model.dart';
 import 'package:flutterwarehouseapp/src/data/models/unit_model.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/product_entity.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/add_item_of_invoice/add_item_constants.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/add_item_of_invoice/bloc/add_ioi_bloc.dart';
@@ -32,11 +34,27 @@ class AddItemOfInvoiceBodyWidget extends StatelessWidget {
   final TextEditingController qtyController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final ItemBillEntity itemBill;
 
-  AddItemOfInvoiceBodyWidget({Key key, this.billType}) : super(key: key);
+  AddItemOfInvoiceBodyWidget({
+    Key key,
+    this.billType,
+    this.itemBill,
+  }) : super(key: key);
+
+  void _initialData() {
+    if (!ValidatorUtils.isNullEmpty(itemBill)) {
+      nameController.text = itemBill?.name ?? '';
+      qtyController.text = itemBill?.qty.toString() ?? '';
+      priceController.text = ValidatorUtils.isNullEmpty(itemBill.price)
+          ? ''
+          : CurrencyUtils.convertFormatMoney(itemBill?.price ?? 0, 'vi');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    _initialData();
     return BlocConsumer<AddIoiBloc, AddIoiState>(listener: (context, state) {
       if (state is AddToBillState) {
         Navigator.of(context).pop(jsonEncode(state.itemBill.toJson()));
@@ -140,7 +158,9 @@ class AddItemOfInvoiceBodyWidget extends StatelessWidget {
                 SizedBox(
                   height: LayoutConstants.paddingVertical20,
                 ),
-                ButtonWidget(title: StringConstants.addTxt, onPressed: () => _onPressedAddBtn(context))
+                ButtonWidget(
+                    title: ValidatorUtils.isNullEmpty(itemBill) ? StringConstants.addTxt : StringConstants.updateTxt,
+                    onPressed: () => _onPressedAddBtn(context))
               ],
             ),
           ),
@@ -181,7 +201,7 @@ class AddItemOfInvoiceBodyWidget extends StatelessWidget {
 
   void _onItemSubmitted(BuildContext context, ProductEntity value) {
     nameController.text = value.name;
-    priceController.text = NumberFormat("#.###").format(value.importPrice);
+    priceController.text = CurrencyUtils.convertFormatMoney(value.importPrice, 'vi');
     BlocProvider.of<AddIoiBloc>(context).add(SelectProductEvent(value));
   }
 }

@@ -73,6 +73,9 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
       case AddItemBillEvent:
         yield* _mapAddItemBillEventToState(event);
         break;
+      case EditItemBillEvent:
+        yield* _mapEditItemBillEventToState(event);
+        break;
       case OpenGalleryEvent:
         yield* _mapOpenGalleryEventToState();
         break;
@@ -122,6 +125,17 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     if (currentState is WaitingCreateInvoiceState) {
       yield currentState.copyWith(viewState: ViewState.loading);
       itemBillList.add(event.itemBill);
+      totalAmountBill = setTotalAmountBill();
+      yield currentState.copyWith(
+          viewState: ViewState.initial, itemBillList: itemBillList, totalAmountBill: totalAmountBill);
+    }
+  }
+
+  Stream<CreateInvoiceState> _mapEditItemBillEventToState(EditItemBillEvent event) async* {
+    var currentState = state;
+    if (currentState is WaitingCreateInvoiceState) {
+      yield currentState.copyWith(viewState: ViewState.loading);
+      itemBillList[event.index] = event.itemBill;
       totalAmountBill = setTotalAmountBill();
       yield currentState.copyWith(
           viewState: ViewState.initial, itemBillList: itemBillList, totalAmountBill: totalAmountBill);

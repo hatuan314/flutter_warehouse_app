@@ -32,6 +32,7 @@ class CreateInvoiceFormWidget extends StatelessWidget {
   final Function onPressedGallery;
   final Function onPressedCamera;
   final Function onPressedAddItemBtn;
+  final Function(ItemBillEntity, int) onPressedItemBill;
   final TextEditingController customerController;
 
   const CreateInvoiceFormWidget({
@@ -49,6 +50,7 @@ class CreateInvoiceFormWidget extends StatelessWidget {
     this.onPressedGallery,
     this.onPressedCamera,
     this.onPressedAddItemBtn,
+    this.onPressedItemBill,
     this.customerController,
   }) : super(key: key);
 
@@ -111,6 +113,7 @@ class CreateInvoiceFormWidget extends StatelessWidget {
                     itemCount: itemBillList.length,
                     itemBuilder: (context, index) => ItemBillWidget(
                       itemBill: itemBillList[index],
+                      onPressed: () => onPressedItemBill(itemBillList[index], index),
                     ),
                   ),
                   SizedBox(

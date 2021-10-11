@@ -64,8 +64,13 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
   Stream<AddIoiState> _mapInitialAddIoiEventToState(InitialAddIoiEvent event) async* {
     loaderBloc.add(StartLoading());
     var currentState = state;
-    UnitEntity unit = await unitUc.getFirstUnit();
-    _selectUnit = unit?.name ?? '';
+    if (ValidatorUtils.isNullEmpty(event.itemBill)) {
+      UnitEntity unit = await unitUc.getFirstUnit();
+      _selectUnit = unit?.name ?? '';
+    } else {
+      _selectUnit = event.itemBill.unit;
+      _selectCategory = event.itemBill.category;
+    }
     List<ProductEntity> productList = await productUc.getProductList();
     log('>>>>>>>>>distributor: ${event.distributor}');
     if (ValidatorUtils.isNullEmpty(event.distributor)) {
@@ -77,8 +82,13 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
         }
       }
     }
+
     if (currentState is WaitingAddIoiState) {
-      yield currentState.copyWith(selectUnit: _selectUnit, productList: _productList);
+      yield currentState.copyWith(
+        selectUnit: _selectUnit,
+        productList: _productList,
+        selectCategory: _selectCategory,
+      );
     }
     loaderBloc.add(FinishLoading());
   }

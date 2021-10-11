@@ -17,7 +17,7 @@ class InvoiceHive {
   Future<int> setInvoice(BillEntity bill) async {
     try {
       int key = await database.billBox.add(bill);
-      log('>>>>>>>>>>InvoiceHive.setInvoice.error: $key');
+      log('>>>>>>>>>>InvoiceHive.setInvoice.key: $key');
       return key;
     } on HiveError catch (e) {
       log('>>>>>>>>>>InvoiceHive.setInvoice.error: ${e.message}');

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/category_entity.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/product_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/unit_entity.dart';
 
@@ -7,8 +8,9 @@ abstract class AddIoiEvent {}
 
 class InitialAddIoiEvent extends AddIoiEvent {
   final String distributor;
+  final ItemBillEntity itemBill;
 
-  InitialAddIoiEvent(this.distributor);
+  InitialAddIoiEvent({this.distributor, this.itemBill});
 }
 
 class SelectUnitEvent extends AddIoiEvent {
