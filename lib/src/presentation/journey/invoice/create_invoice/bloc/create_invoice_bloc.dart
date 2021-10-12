@@ -182,7 +182,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     }
   }
 
-  bool _checkValidator() {
+  Future<bool> _checkValidator() async {
     if (ValidatorUtils.isNullEmpty(selectBill)) {
       snackbarBloc.add(ShowSnackbar(title: 'Vui lòng chọn kiểu hóa đơn', type: SnackBarType.warning));
       return false;
@@ -195,17 +195,23 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
       snackbarBloc.add(ShowSnackbar(title: 'Vui lòng nhập danh sách mặt hàng', type: SnackBarType.warning));
       return false;
     }
+    if (selectBill == BillEnum.Export) {
+      bool flag = await checkLimitedProduct();
+      if (flag) {
+        return false;
+      }
+    }
     return true;
   }
 
   Stream<CreateInvoiceState> _mapOnCreateEvent(OnCreateEvent event) async* {
-    bool flag = _checkValidator();
+    loaderBloc.add(StartLoading());
+    bool flag = await _checkValidator();
     var currentState = state;
     if (currentState is WaitingCreateInvoiceState) {
       if (!flag) {
         yield currentState;
       } else {
-        loaderBloc.add(StartLoading());
         List itemsJsonArray = invoiceUC.getItemBillJsonArray(itemBillList);
         BillEntity bill = BillEntity(
           customer: event.customer,
@@ -233,9 +239,9 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
               .add(ShowSnackbar(title: CreateInvoiceConstants.createInvoiceFailedMsg, type: SnackBarType.error));
           yield currentState;
         }
-        loaderBloc.add(FinishLoading());
       }
     }
+    loaderBloc.add(FinishLoading());
   }
 
   Future addProductList() async {
@@ -266,7 +272,6 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         name: itemBill.name,
         category: itemBill.category,
         qty: itemBill.qty,
-        importPrice: itemBill.price,
         exportPrice: itemBill.price,
         locale: userBloc.locale,
         createAt: DateTime.now().millisecondsSinceEpoch,
@@ -278,20 +283,13 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     }
   }
 
-  Future removeProductList() async {
-    for (final ItemBillEntity itemBill in itemBillList) {
-      ProductEntity product = ProductEntity(
-        name: itemBill.name,
-        category: itemBill.category,
-        qty: itemBill.qty,
-        importPrice: itemBill.price,
-        exportPrice: itemBill.price,
-        locale: userBloc.locale,
-        createAt: DateTime.now().millisecondsSinceEpoch,
-        lastUpdate: DateTime.now().millisecondsSinceEpoch,
-        unit: itemBill.unit,
-        distributor: selectDistributor.name,
-      );
+  Future<bool> checkLimitedProduct() async {
+    for (int index = 0; index < itemBillList.length; index++) {
+      bool flag = await invoiceUC.isLimitedProductQty(itemBillList[index]);
+      if (flag) {
+        return true;
+      }
     }
+    return false;
   }
 }

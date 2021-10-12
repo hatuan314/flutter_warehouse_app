@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterwarehouseapp/common/constants/enum_constants.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/category_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/product_entity.dart';
@@ -23,8 +24,14 @@ class AddItemEvent extends AddIoiEvent {
   final String name;
   final String qty;
   final String price;
+  final BillEnum billType;
 
-  AddItemEvent({@required this.name, @required this.qty, @required this.price});
+  AddItemEvent({
+    @required this.name,
+    @required this.qty,
+    @required this.price,
+    @required this.billType,
+  });
 }
 
 class SelectCategoryEvent extends AddIoiEvent {
@@ -37,5 +44,4 @@ class SelectProductEvent extends AddIoiEvent {
   final ProductEntity product;
 
   SelectProductEvent(this.product);
-
 }

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterwarehouseapp/common/constants/enum_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/utils/currency_utils.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
@@ -9,6 +10,7 @@ import 'package:flutterwarehouseapp/src/domain/entities/category_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/product_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/unit_entity.dart';
+import 'package:flutterwarehouseapp/src/domain/usecases/invoice_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/product_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/unit_usecase.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
@@ -19,6 +21,7 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
   final LoaderBloc loaderBloc;
   final UnitUseCase unitUc;
   final ProductUseCase productUc;
+  final InvoiceUseCase invoiceUc;
 
   String _errorName;
   String _selectUnit;
@@ -30,6 +33,7 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
     @required this.loaderBloc,
     @required this.unitUc,
     @required this.productUc,
+    @required this.invoiceUc,
   });
 
   @override
@@ -137,7 +141,14 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
               distributor: ValidatorUtils.isNullEmpty(_selectProduct) ? '' : _selectProduct?.distributor,
             ));
         itemBill.index = index;
-        yield AddToBillState(itemBill);
+        if (event.billType == BillEnum.Export) {
+          bool flag = await invoiceUc.isLimitedProductQty(itemBill);
+          if (!flag) {
+            yield AddToBillState(itemBill);
+          }
+        } else {
+          yield AddToBillState(itemBill);
+        }
       }
     }
   }

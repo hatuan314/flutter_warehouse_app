@@ -130,6 +130,7 @@ void setup() {
         loaderBloc: locator<LoaderBloc>(),
         unitUc: locator<UnitUseCase>(),
         productUc: locator<ProductUseCase>(),
+        invoiceUc: locator<InvoiceUseCase>(),
       ));
 
   /// UseCases
@@ -146,7 +147,10 @@ void setup() {
         categoryRepo: locator<CategoryRepository>(),
       ));
   locator.registerFactory<ImageUseCase>(() => ImageUseCase());
-  locator.registerFactory<InvoiceUseCase>(() => InvoiceUseCase(invoiceRepo: locator<InvoiceRepository>()));
+  locator.registerFactory<InvoiceUseCase>(() => InvoiceUseCase(
+        invoiceRepo: locator<InvoiceRepository>(),
+        productRepo: locator<ProductRepository>(),
+      ));
   locator.registerFactory<ProductUseCase>(() => ProductUseCase(
         productRepo: locator<ProductRepository>(),
       ));

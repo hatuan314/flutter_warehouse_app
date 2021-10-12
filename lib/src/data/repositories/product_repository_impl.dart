@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/utils/connectivity_utils.dart';
@@ -72,4 +70,7 @@ class ProductRepositoryImpl extends ProductRepository with MixinRepository {
     await productDs.updateProduct(product.toModel());
     await productHive.updateProduct(index: index, product: product);
   }
+
+  @override
+  Future<ProductEntity> getProduct(int index) => productHive.getProduct(index);
 }

@@ -195,6 +195,7 @@ class AddItemOfInvoiceBodyWidget extends StatelessWidget {
         name: nameController.text.trim(),
         qty: qtyController.text.trim(),
         price: priceController.text.trim(),
+        billType: billType,
       ));
     }
   }

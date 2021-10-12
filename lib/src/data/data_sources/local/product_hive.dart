@@ -36,6 +36,14 @@ class ProductHive {
     return productList;
   }
 
+  Future<ProductEntity> getProduct(int index) async {
+    ProductEntity product;
+    if (database.productBox.isNotEmpty) {
+      product = database.productBox.getAt(index);
+    }
+    return product;
+  }
+
   Future<void> updateProduct(
       {int index, ProductEntity product}) async {
     await database.productBox.putAt(index, product);
