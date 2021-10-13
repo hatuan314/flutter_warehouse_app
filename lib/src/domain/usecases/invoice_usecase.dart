@@ -45,4 +45,51 @@ class InvoiceUseCase {
     }
     return false;
   }
+
+  Future<List<BillEntity>> getAllBills() async {
+    List<BillEntity> billList = await invoiceRepo.getBillListLocal();
+    if (ValidatorUtils.isNullEmptyList(billList)) {
+      billList = await invoiceRepo.getBillListCloud();
+      invoiceRepo.setBillLocalList(billList);
+    }
+    return billList;
+  }
+
+  Future<List<BillEntity>> getExportBillList() async {
+    List<BillEntity> billList = await invoiceRepo.getExportBillList();
+    if (ValidatorUtils.isNullEmptyList(billList)) {
+      List<BillEntity> allBills = await invoiceRepo.getBillListCloud();
+      bool flag = await invoiceRepo.setBillLocalList(allBills);
+      if (flag) {
+        billList = await invoiceRepo.getExportBillList();
+      } else {
+        billList = fillBillList(allBills, 'EXPORT');
+      }
+    }
+    return billList;
+  }
+
+  Future<List<BillEntity>> getImportBillList() async {
+    List<BillEntity> billList = await invoiceRepo.getImportBillList();
+    if (ValidatorUtils.isNullEmptyList(billList)) {
+      List<BillEntity> allBills = await invoiceRepo.getBillListCloud();
+      bool flag = await invoiceRepo.setBillLocalList(allBills);
+      if (flag) {
+        billList = await invoiceRepo.getImportBillList();
+      } else {
+        billList = fillBillList(allBills, 'IMPORT');
+      }
+    }
+    return billList;
+  }
+
+  List<BillEntity> fillBillList(List<BillEntity> allBills, String fillKey) {
+    List<BillEntity> fillBills = [];
+    for (final BillEntity bill in allBills) {
+      if (bill.type == fillKey) {
+        fillBills.add(bill);
+      }
+    }
+    return fillBills;
+  }
 }

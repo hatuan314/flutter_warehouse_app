@@ -26,9 +26,9 @@ class InvoiceRepositoryImpl extends InvoiceRepository with MixinRepository {
   }
 
   @override
-  Future<List<BillEntity>> getBillListLocal() {
-    // TODO: implement getBillListLocal
-    throw UnimplementedError();
+  Future<List<BillEntity>> getBillListLocal() async {
+    List<BillEntity> bills = await invoiceHive.getAllBills();
+    return bills;
   }
 
   @override
@@ -64,14 +64,23 @@ class InvoiceRepositoryImpl extends InvoiceRepository with MixinRepository {
   }
 
   @override
-  Future<bool> setBillLocalList(List<BillEntity> distributorList) {
-    // TODO: implement setBillLocalList
-    throw UnimplementedError();
+  Future<bool> setBillLocalList(List<BillEntity> billList) {
+    return invoiceHive.setBillList(billList);
   }
 
   @override
   Future<void> update({int index, BillEntity distributor}) {
     // TODO: implement update
     throw UnimplementedError();
+  }
+
+  @override
+  Future<List<BillEntity>> getExportBillList() async {
+    return invoiceHive.getExpectBill();
+  }
+
+  @override
+  Future<List<BillEntity>> getImportBillList() async {
+    return invoiceHive.getImportBill();
   }
 }

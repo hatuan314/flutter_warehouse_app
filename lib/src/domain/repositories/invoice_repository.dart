@@ -5,11 +5,15 @@ abstract class InvoiceRepository {
 
   Future<List<BillEntity>> getBillListLocal();
 
+  Future<List<BillEntity>> getExportBillList();
+
+  Future<List<BillEntity>> getImportBillList();
+
   Future<bool> setBill(BillEntity bill);
 
   Future<String> setBillCloud(BillEntity distributor);
 
-  Future<bool> setBillLocalList(List<BillEntity> distributorList);
+  Future<bool> setBillLocalList(List<BillEntity> billList);
 
   Future<void> remove({int index, String document});
 

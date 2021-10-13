@@ -10,4 +10,13 @@ class BillUtils {
         return StringConstants.exportTxt;
     }
   }
+
+  static convertToKey(BillEnum type) {
+    switch(type) {
+      case BillEnum.Import:
+        return 'IMPORT';
+      case BillEnum.Export:
+        return 'EXPORT';
+    }
+  }
 }

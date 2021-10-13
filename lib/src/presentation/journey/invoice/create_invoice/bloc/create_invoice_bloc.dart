@@ -216,7 +216,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         BillEntity bill = BillEntity(
           customer: event.customer,
           distributor: selectDistributor?.name ?? '',
-          type: BillUtils.convertToString(selectBill),
+          type: BillUtils.convertToKey(selectBill),
           items: itemsJsonArray,
           totalAmount: totalAmountBill,
           locale: userBloc.locale,

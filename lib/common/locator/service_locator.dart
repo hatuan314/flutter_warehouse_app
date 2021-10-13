@@ -47,6 +47,7 @@ import 'package:flutterwarehouseapp/src/presentation/journey/login/confirm_otp/b
 import 'package:flutterwarehouseapp/src/presentation/journey/login/confirm_phone/blocs/blocs.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/splash/blocs/splash_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/bloc/bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/main/invoice_page/bloc/invoice_page_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/profile/update_information/blocs/update_info_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/unit/unit_list/bloc/unit_list_bloc.dart';
 import 'package:flutterwarehouseapp/src/widgets/internet_widget/bloc/internet_bloc.dart';
@@ -132,6 +133,10 @@ void setup() {
         productUc: locator<ProductUseCase>(),
         invoiceUc: locator<InvoiceUseCase>(),
       ));
+  locator.registerFactory<InvoicePageBloc>(() => InvoicePageBloc(
+    loaderBloc: locator<LoaderBloc>(),
+    invoiceUc: locator<InvoiceUseCase>(),
+  ));
 
   /// UseCases
   locator.registerFactory<UserUseCase>(() => UserUseCase(

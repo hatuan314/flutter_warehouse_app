@@ -9,6 +9,8 @@ import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distrib
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/invoice_route.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/login/login_routes.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/bloc/bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/main/invoice_page/bloc/invoice_page_bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/main/invoice_page/bloc/invoice_page_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/main_screen.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/profile/profile_routes.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/unit/unit_routes.dart';
@@ -64,7 +66,11 @@ class Routes {
         return MaterialPageRoute(
             builder: ProfileRoute.getRoutesWithSettings(settings)[settings.name], settings: settings);
       case RouteList.main:
-        return MaterialPageRoute(builder: (_) => BlocProvider(create: (_) => locator<MainBloc>(), child: MainScreen()));
+        return MaterialPageRoute(
+            builder: (_) => MultiBlocProvider(providers: [
+                  BlocProvider<MainBloc>(create: (_) => locator<MainBloc>()),
+                  BlocProvider<InvoicePageBloc>(create: (_) => locator<InvoicePageBloc>()..add(InitialInvoiceEvent())),
+                ], child: MainScreen()));
       case RouteList.distributorList:
       case RouteList.distributorDetail:
         return MaterialPageRoute(
