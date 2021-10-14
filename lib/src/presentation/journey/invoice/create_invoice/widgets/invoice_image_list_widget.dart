@@ -13,7 +13,8 @@ class InvoiceImageListWidget extends StatelessWidget {
   final List<PickedFile> imageFiles;
   final List<String> imageLinks;
   final int imageQty;
-  final Function onSelected;
+  final Function(PickedFile) onSelectedLocal;
+  final Function(String) onSelectedUrl;
   final Function onPressedGallery;
   final Function onPressedCamera;
 
@@ -22,7 +23,8 @@ class InvoiceImageListWidget extends StatelessWidget {
     @required this.imageFiles,
     @required this.imageLinks,
     this.imageQty,
-    @required this.onSelected,
+    @required this.onSelectedLocal,
+    @required this.onSelectedUrl,
     this.onPressedGallery,
     this.onPressedCamera,
   }) : super(key: key);
@@ -44,14 +46,14 @@ class InvoiceImageListWidget extends StatelessWidget {
         if (!ValidatorUtils.isNullEmptyList(imageFiles) && index < imageFiles.length) {
           return InvoiceImageWidget(
             file: imageFiles[index],
-            onPressed: () => onSelected(imageFiles[index]),
+            onPressed: () => onSelectedLocal(imageFiles[index]),
           );
         }
         if (!ValidatorUtils.isNullEmptyList(imageLinks) && index >= imageFiles.length && index < imageLinks.length) {
 
           return InvoiceImageWidget(
             link: imageLinks[index - imageFiles.length],
-            onPressed: () => onSelected(imageLinks[index - imageFiles.length]),
+            onPressed: () => onSelectedUrl(imageLinks[index - imageFiles.length]),
           );
         }
         if (index == imageQty) {

@@ -3,10 +3,7 @@ import 'dart:convert';
 import 'package:flutterwarehouseapp/src/domain/entities/hive_entity.dart';
 import 'package:hive/hive.dart';
 
-import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/data/models/bill_model.dart';
-import 'package:flutterwarehouseapp/src/data/models/item_bill_model.dart';
-import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 
 part 'bill_entity.g.dart';
 
@@ -30,6 +27,12 @@ class BillEntity {
   String hiveJson;
   @HiveField(8)
   String customer;
+  @HiveField(9)
+  int billDate;
+  @HiveField(10)
+  List<String> images;
+  @HiveField(11)
+  String description;
   HiveEntity hive;
 
   BillEntity({
@@ -42,7 +45,10 @@ class BillEntity {
     this.createAt,
     this.lastUpdate,
     this.customer,
+    this.billDate,
     this.hive,
+    this.images,
+    this.description,
   });
 
   BillModel toModel() {
@@ -55,6 +61,9 @@ class BillEntity {
       createAt: createAt,
       lastUpdate: lastUpdate,
       customer: customer,
+      billDate: billDate,
+        images: images,
+        description: description,
     );
   }
 

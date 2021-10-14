@@ -25,4 +25,7 @@ class StringConstants {
   static const String exportTxt = 'Bán hàng';
   static const String quantityTxt = 'Số lượng';
   static const String totalAmountTxt = 'Tổng tiền';
+  static const String billDateTxt = 'Ngày xuất hóa đơn';
+  static const String billTypeTxt = 'Loại hóa đơn';
+  static const String noteTxt = 'Ghi chú';
 }

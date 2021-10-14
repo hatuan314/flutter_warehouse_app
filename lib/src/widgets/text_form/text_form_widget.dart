@@ -13,6 +13,7 @@ class TextFormWidget extends TextFormField {
     TextInputType keyboardType,
     @required String hintText,
     Color backgroundColor,
+    int maxLines,
     Function(String) handlerOnSubmitted,
     @required Function(String) validator,
   }) : super(
@@ -68,6 +69,7 @@ class TextFormWidget extends TextFormField {
           cursorColor: AppColor.textColor,
           validator: (value) => validator(value),
           onFieldSubmitted: (value) => handlerOnSubmitted(value),
+    maxLines: maxLines ?? 1,
         );
 
   TextFormWidget.withPrefixIcon({

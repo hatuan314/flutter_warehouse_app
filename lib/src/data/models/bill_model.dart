@@ -1,3 +1,4 @@
+import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/bill_entity.dart';
 
 class BillModel extends BillEntity {
@@ -10,6 +11,9 @@ class BillModel extends BillEntity {
     int createAt,
     int lastUpdate,
     String customer,
+    int billDate,
+    List<String> images,
+    String description,
   }) : super(
           distributor: distributor,
           type: type,
@@ -19,21 +23,26 @@ class BillModel extends BillEntity {
           createAt: createAt,
           lastUpdate: lastUpdate,
           customer: customer,
+          billDate: billDate,
+          images: images,
+          description: description,
         );
 
   factory BillModel.fromJson(
     Map<String, dynamic> json,
   ) {
     return BillModel(
-      distributor: json['distributor'],
-      type: json['type'],
-      items: json['items'],
-      totalAmount: json['total_amount'],
-      locale: json['locale'],
-      createAt: json['create_at'],
-      lastUpdate: json['last_update'],
-      customer: json['customer'],
-    );
+        distributor: json['distributor'],
+        type: json['type'],
+        items: json['items'],
+        totalAmount: json['total_amount'],
+        locale: json['locale'],
+        createAt: json['create_at'],
+        lastUpdate: json['last_update'],
+        customer: json['customer'],
+        billDate: ValidatorUtils.isNullEmpty(json['bill_date']) ? json['create_at'] : json['bill_date'],
+        images: ValidatorUtils.isNullEmpty(json['images']) ? [] : json['images'].cast<String>(),
+        description: ValidatorUtils.isNullEmpty(json['description']) ? '' : json['description']);
   }
 
   Map<String, dynamic> toJson() {
@@ -46,6 +55,9 @@ class BillModel extends BillEntity {
       'create_at': createAt,
       'last_update': lastUpdate,
       'customer': customer,
+      'bill_date': billDate,
+      'images': images,
+      'description': description,
     };
   }
 }

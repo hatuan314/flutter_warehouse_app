@@ -35,12 +35,18 @@ class InvoiceElementWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                billType == BillEnum.Export ? bill?.customer ?? '' : bill.distributor,
-                style: ThemeText.body2.copyWith(fontWeight: FontWeight.w600),
+              Row(
+                children: [
+                  Icon(billType == BillEnum.Export ? Icons.account_circle_rounded : Icons.store),
+                  Text(
+                    billType == BillEnum.Export ? bill?.customer ?? '' : bill.distributor,
+                    style: ThemeText.body2.copyWith(fontWeight: FontWeight.w600),
+                  ),
+                ],
               ),
+              SizedBox(height: LayoutConstants.paddingVertical5,),
               Text(
-                DateFormat('dd/MM/yyyy').format(DateTime.fromMillisecondsSinceEpoch(bill?.createAt)),
+                DateFormat('dd/MM/yyyy').format(DateTime.fromMillisecondsSinceEpoch(bill?.billDate ?? bill?.createAt)),
                 style: ThemeText.caption.copyWith(fontWeight: FontWeight.w500, color: AppColor.blue),
               ),
               SizedBox(height: LayoutConstants.paddingVertical10,),

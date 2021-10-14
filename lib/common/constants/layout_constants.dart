@@ -5,6 +5,7 @@ class LayoutConstants {
   static const double roundedRadius20 = 20.0;
 
   static double paddingVerticalApp = paddingVertical15;
+  static double paddingVerticalAppBottom = 58.h;
   static double paddingVertical5 = 5.h;
   static double paddingVertical10 = 10.h;
   static double paddingVertical15 = 15.h;

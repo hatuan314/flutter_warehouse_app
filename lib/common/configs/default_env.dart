@@ -22,5 +22,5 @@ class DefaultConfig {
   /// Storage
   static const expenseStorage = 'expense';
   static const profileStorage = 'profile';
-  static const storagePath = '$appName/environments';
+  static const storagePath = '$appName/$environment/$mainCollection';
 }

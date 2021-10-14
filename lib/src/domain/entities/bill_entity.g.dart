@@ -26,13 +26,16 @@ class BillEntityAdapter extends TypeAdapter<BillEntity> {
       createAt: fields[5] as int,
       lastUpdate: fields[6] as int,
       customer: fields[8] as String,
+      billDate: fields[9] as int,
+      images: (fields[10] as List)?.cast<String>(),
+      description: fields[11] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, BillEntity obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.distributor)
       ..writeByte(1)
@@ -50,7 +53,13 @@ class BillEntityAdapter extends TypeAdapter<BillEntity> {
       ..writeByte(7)
       ..write(obj.hiveJson)
       ..writeByte(8)
-      ..write(obj.customer);
+      ..write(obj.customer)
+      ..writeByte(9)
+      ..write(obj.billDate)
+      ..writeByte(10)
+      ..write(obj.images)
+      ..writeByte(11)
+      ..write(obj.description);
   }
 
   @override

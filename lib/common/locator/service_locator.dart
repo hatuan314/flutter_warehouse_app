@@ -10,18 +10,21 @@ import 'package:flutterwarehouseapp/src/data/data_sources/local/unit_hive.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/base_service.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/category_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/distributor_datasource.dart';
+import 'package:flutterwarehouseapp/src/data/data_sources/remote/image_storage_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/invoice_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/product_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/unit_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/user_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/category_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/distributor_repository_impl.dart';
+import 'package:flutterwarehouseapp/src/data/repositories/image_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/invoice_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/product_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/unit_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/data/repositories/user_repository_impl.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/category_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/distributor_repository.dart';
+import 'package:flutterwarehouseapp/src/domain/repositories/image_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/invoice_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/product_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/unit_repository.dart';
@@ -120,10 +123,10 @@ void setup() {
         loaderBloc: locator<LoaderBloc>(),
       ));
   locator.registerFactory<CreateInvoiceBloc>(() => CreateInvoiceBloc(
+        setupFirebase: locator<SetupFirebaseDatabase>(),
         loaderBloc: locator<LoaderBloc>(),
         snackbarBloc: locator<SnackbarBloc>(),
         userBloc: locator<UserBloc>(),
-        imageUC: locator<ImageUseCase>(),
         invoiceUC: locator<InvoiceUseCase>(),
         productUC: locator<ProductUseCase>(),
       ));
@@ -134,9 +137,9 @@ void setup() {
         invoiceUc: locator<InvoiceUseCase>(),
       ));
   locator.registerFactory<InvoicePageBloc>(() => InvoicePageBloc(
-    loaderBloc: locator<LoaderBloc>(),
-    invoiceUc: locator<InvoiceUseCase>(),
-  ));
+        loaderBloc: locator<LoaderBloc>(),
+        invoiceUc: locator<InvoiceUseCase>(),
+      ));
 
   /// UseCases
   locator.registerFactory<UserUseCase>(() => UserUseCase(
@@ -151,14 +154,15 @@ void setup() {
   locator.registerFactory<CategoryUseCase>(() => CategoryUseCase(
         categoryRepo: locator<CategoryRepository>(),
       ));
-  locator.registerFactory<ImageUseCase>(() => ImageUseCase());
   locator.registerFactory<InvoiceUseCase>(() => InvoiceUseCase(
         invoiceRepo: locator<InvoiceRepository>(),
         productRepo: locator<ProductRepository>(),
+        imageRepo: locator<ImageRepository>(),
       ));
   locator.registerFactory<ProductUseCase>(() => ProductUseCase(
         productRepo: locator<ProductRepository>(),
       ));
+  locator.registerFactory<ImageUseCase>(() => null);
 
   /// Repositories
   locator.registerFactory<UserRepository>(() => UserRepositoryImpl(
@@ -184,6 +188,8 @@ void setup() {
         productDs: locator<ProductDataSource>(),
         productHive: locator<ProductHive>(),
       ));
+  locator
+      .registerFactory<ImageRepository>(() => ImageRepositoryImpl(imageStorageDs: locator<ImageStorageDataSource>()));
 
   /// DataSource
   locator.registerLazySingleton<UserDataSource>(() => UserDataSource(
@@ -210,6 +216,7 @@ void setup() {
         setup: locator<SetupFirebaseDatabase>(),
         service: locator<BaseService>(),
       ));
+  locator.registerLazySingleton<ImageStorageDataSource>(() => ImageStorageDataSource());
   locator.registerLazySingleton<Pref>(() => LocalPref());
   locator.registerLazySingleton<AppPreference>(() => AppPreference(
         pref: locator<Pref>(),

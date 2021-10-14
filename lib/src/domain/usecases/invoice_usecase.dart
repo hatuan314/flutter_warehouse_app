@@ -1,23 +1,29 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutterwarehouseapp/common/configs/default_env.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/product_entity.dart';
+import 'package:flutterwarehouseapp/src/domain/repositories/image_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/invoice_repository.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/product_repository.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
+import 'package:image_picker/image_picker.dart';
 
 class InvoiceUseCase {
   final InvoiceRepository invoiceRepo;
   final ProductRepository productRepo;
+  final ImageRepository imageRepo;
 
   InvoiceUseCase({
     @required this.invoiceRepo,
     @required this.productRepo,
+    @required this.imageRepo,
   });
 
   Future<bool> createInvoice(BillEntity bill) async {
@@ -91,5 +97,27 @@ class InvoiceUseCase {
       }
     }
     return fillBills;
+  }
+
+  Future<List<String>> uploadImages({List<PickedFile> imageFiles, String uid}) async {
+    List<String> pathList = [];
+    List<Uint8List> imageUint8ListArray = [];
+    pathList = await imageRepo.uploadImages(
+      imageUint8ListArray: imageUint8ListArray,
+      uid: uid,
+      collection: DefaultConfig.billCollection,
+    );
+    if (ValidatorUtils.isNullEmptyList(pathList)) {
+      pathList = getImageLocalPaths(imageFiles);
+    }
+    return pathList;
+  }
+
+  List<String> getImageLocalPaths(List<PickedFile> imageFiles) {
+    List<String> pathList = [];
+    for (final PickedFile file in imageFiles) {
+      pathList.add(file.path);
+    }
+    return pathList;
   }
 }

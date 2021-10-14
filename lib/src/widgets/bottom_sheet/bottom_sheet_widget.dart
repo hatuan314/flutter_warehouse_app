@@ -9,10 +9,12 @@ class BottomSheetWidget extends StatelessWidget {
   final EdgeInsets bodyPadding;
   final bool isExpanded;
 
-  const BottomSheetWidget({Key key, @required this.title, @required this.child, this.bodyPadding, this.isExpanded = false}) : super(key: key);
+  const BottomSheetWidget(
+      {Key key, @required this.title, @required this.child, this.bodyPadding, this.isExpanded = false})
+      : super(key: key);
 
   Widget _buildBody(BuildContext context) {
-    if(isExpanded) {
+    if (isExpanded) {
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -78,7 +80,8 @@ class BottomSheetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(LayoutConstants.roundedRadius)),
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.vertical(top: Radius.circular(LayoutConstants.roundedRadius))),
       padding: EdgeInsets.symmetric(
         horizontal: LayoutConstants.paddingHorizontalApp,
         vertical: LayoutConstants.paddingVerticalApp,

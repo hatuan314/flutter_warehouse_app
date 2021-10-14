@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/constants/enum_constants.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/distributor_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
@@ -37,6 +38,13 @@ class OpenCameraEvent extends CreateInvoiceEvent {}
 
 class OnCreateEvent extends CreateInvoiceEvent {
   final String customer;
+  final String description;
 
-  OnCreateEvent({this.customer});
+  OnCreateEvent({this.customer, this.description});
+}
+
+class SelectBillDateEvent extends CreateInvoiceEvent {
+  final DateTime billDate;
+
+  SelectBillDateEvent({@required this.billDate});
 }

@@ -14,6 +14,7 @@ class WaitingCreateInvoiceState extends CreateInvoiceState {
   final int imageQty;
   final String distributorName;
   final BillEnum selectBill;
+  final DateTime selectBillDate;
   final List<ItemBillEntity> itemBillList;
   final List<PickedFile> imageFiles;
 
@@ -23,6 +24,7 @@ class WaitingCreateInvoiceState extends CreateInvoiceState {
     @required this.totalAmountBill,
     @required this.distributorName,
     @required this.selectBill,
+    @required this.selectBillDate,
     @required this.itemBillList,
     @required this.imageFiles,
     @required this.imageQty,
@@ -35,6 +37,7 @@ class WaitingCreateInvoiceState extends CreateInvoiceState {
     int imageQty,
     String distributorName,
     BillEnum selectBill,
+    DateTime selectBillDate,
     List<ItemBillEntity> itemBillList,
     List<PickedFile> imageFiles,
   }) =>
@@ -43,6 +46,7 @@ class WaitingCreateInvoiceState extends CreateInvoiceState {
         distributorName: distributorName ?? this.distributorName,
         totalAmountBill: totalAmountBill ?? this.totalAmountBill,
         selectBill: selectBill ?? this.selectBill,
+        selectBillDate: selectBillDate ?? this.selectBillDate,
         itemBillList: itemBillList ?? this.itemBillList,
         viewState: viewState ?? this.viewState,
         imageFiles: imageFiles ?? this.imageFiles,
@@ -59,6 +63,7 @@ class WaitingCreateInvoiceState extends CreateInvoiceState {
         this.itemBillList,
         this.imageFiles,
         this.imageQty,
+        this.selectBillDate,
       ];
 }
 

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +25,7 @@ import 'create_invoice_form_widget.dart';
 
 class CreateInvoiceBodyWidget extends StatelessWidget {
   final TextEditingController _customerController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +44,13 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
             children: [
               CreateInvoiceFormWidget(
                 customerController: _customerController,
+                noteController: _descriptionController,
                 enableSelectDistributor: state?.enableSelectDistributor ?? false,
                 imageQty: state?.imageQty ?? 0,
                 totalAmountBill: state?.totalAmountBill,
                 distributorName: state?.distributorName ?? '',
                 selectBill: state?.selectBill ?? BillEnum.Export,
+                selectBillDate: state?.selectBillDate ?? DateTime.now(),
                 itemBillList: ValidatorUtils.isNullEmptyList(state?.itemBillList) ? [] : state?.itemBillList,
                 imageFiles: state?.imageFiles ?? [],
                 onSelectDistributor: () => _onSelectDistributor(context),
@@ -62,6 +66,7 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
                   selectBill: state?.selectBill ?? BillEnum.Export,
                   distributor: state?.distributorName,
                 ),
+                onSelectedBillDate: (date) => _onSelectBillDate(context, date),
               ),
               SizedBox(
                 height: LayoutConstants.paddingVertical20,
@@ -71,8 +76,12 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
                   onPressed: () {
                     BlocProvider.of<CreateInvoiceBloc>(context).add(OnCreateEvent(
                       customer: _customerController.text.trim(),
+                      description: _descriptionController.text.trim(),
                     ));
-                  })
+                  }),
+              (Platform.isIOS) ? SizedBox(
+                height: LayoutConstants.paddingVerticalAppBottom,
+              ) : SizedBox.shrink(),
             ],
           ),
         );
@@ -173,5 +182,9 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
         });
       }
     }
+  }
+
+  void _onSelectBillDate(BuildContext context, DateTime date) {
+    BlocProvider.of<CreateInvoiceBloc>(context).add(SelectBillDateEvent(billDate: date));
   }
 }
