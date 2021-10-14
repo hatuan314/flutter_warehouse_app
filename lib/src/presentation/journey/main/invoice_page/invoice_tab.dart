@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/common/constants/enum_constants.dart';
@@ -5,10 +7,12 @@ import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
+import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/bill_entity.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/invoice_page/bloc/invoice_page_bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/main/invoice_page/bloc/invoice_page_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/invoice_page/bloc/invoice_page_state.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/invoice_page/widgets/invoice_widget.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
@@ -41,7 +45,13 @@ class InvoiceTab extends StatelessWidget {
             padding: EdgeInsets.only(bottom: LayoutConstants.paddingVertical10),
             child: FloatingActionButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(RouteList.createInvoice);
+                Navigator.of(context).pushNamed(RouteList.createInvoice).then((value) {
+                  if (!ValidatorUtils.isNullEmpty(value)) {
+                    var data = value as Map<String, dynamic>;
+                    var billType = data['bill_type'];
+                    BlocProvider.of<InvoicePageBloc>(context).add(RefreshInvoiceListEvent(billType));
+                  }
+                });
               },
               child: Icon(
                 Icons.add,

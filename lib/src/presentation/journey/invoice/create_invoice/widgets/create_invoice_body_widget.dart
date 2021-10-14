@@ -31,7 +31,7 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<CreateInvoiceBloc, CreateInvoiceState>(listener: (context, state) {
       if (state is CreateInvoiceSuccessState) {
-        Navigator.of(context).pop(true);
+        Navigator.of(context).pop({'bill_type': state.billType});
       }
     }, builder: (context, state) {
       if (state is WaitingCreateInvoiceState) {

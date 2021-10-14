@@ -240,7 +240,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
             title: CreateInvoiceConstants.createInvoiceSuccessMsg,
             type: SnackBarType.success,
           ));
-          yield CreateInvoiceSuccessState();
+          yield CreateInvoiceSuccessState(billType: selectBill);
         } else {
           snackbarBloc.add(ShowSnackbar(
             title: CreateInvoiceConstants.createInvoiceFailedMsg,

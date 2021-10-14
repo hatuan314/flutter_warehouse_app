@@ -68,6 +68,9 @@ class WaitingCreateInvoiceState extends CreateInvoiceState {
 }
 
 class CreateInvoiceSuccessState extends CreateInvoiceState {
+  final BillEnum billType;
+
+  CreateInvoiceSuccessState({@required this.billType});
   @override
-  List<Object> get props => [];
+  List<Object> get props => [this.billType];
 }

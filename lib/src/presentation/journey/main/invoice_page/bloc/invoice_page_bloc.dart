@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterwarehouseapp/common/constants/enum_constants.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/invoice_usecase.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
@@ -26,13 +27,32 @@ class InvoicePageBloc extends Bloc<InvoicePageEvent, InvoicePageState> {
       case InitialInvoiceEvent:
         yield* _mapInitialInvoicePageEventToState();
         break;
+      case RefreshInvoiceListEvent:
+        yield* _mapRefreshInvoiceListEventToState(event);
+        break;
     }
   }
 
   Stream<InvoicePageState> _mapInitialInvoicePageEventToState() async* {
     yield LoadingInvoicePageState();
-    List<BillEntity> exportBillList = await invoiceUc.getExportBillList();
-    List<BillEntity> importBillList = await invoiceUc.getImportBillList();
+    exportBillList = await invoiceUc.getExportBillList();
+    importBillList = await invoiceUc.getImportBillList();
+    log('>>>>>>>>>>InvoicePageBloc.InitialInvoicePageEventToState.exportBills: ${exportBillList.length}');
+    log('>>>>>>>>>>InvoicePageBloc.InitialInvoicePageEventToState.importBills: ${importBillList.length}');
     yield InitialInvoicePageState(exportBillList: exportBillList, importBillList: importBillList);
+  }
+
+  Stream<InvoicePageState> _mapRefreshInvoiceListEventToState(RefreshInvoiceListEvent event) async* {
+    var currentState = state;
+    if (currentState is InitialInvoicePageState) {
+      yield LoadingInvoicePageState();
+      if (event.billType == BillEnum.Export) {
+        exportBillList = await invoiceUc.getExportBillList();
+      }
+      if (event.billType == BillEnum.Import) {
+        importBillList = await invoiceUc.getImportBillList();
+      }
+      yield currentState.copyWith(exportBillList: exportBillList, importBillList: importBillList);
+    }
   }
 }
