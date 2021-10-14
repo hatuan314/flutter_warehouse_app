@@ -18,6 +18,8 @@ class LayoutConstants {
   static double paddingVertical80 = 80.h;
 
   static double paddingHorizontalApp = paddingHorizontal15;
+  static double paddingHorizontal3 = 3.w;
+  static double paddingHorizontal5 = 5.w;
   static double paddingHorizontal10 = 10.w;
   static double paddingHorizontal15 = 15.w;
   static double paddingHorizontal18 = 18.w;

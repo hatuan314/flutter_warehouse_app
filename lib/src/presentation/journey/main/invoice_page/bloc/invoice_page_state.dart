@@ -1,19 +1,27 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/bill_entity.dart';
 
-class InvoicePageState extends Equatable {
+abstract class InvoicePageState extends Equatable {}
+
+class InitialInvoicePageState extends InvoicePageState {
   final List<BillEntity> exportBillList;
   final List<BillEntity> importBillList;
 
-  InvoicePageState({this.exportBillList, this.importBillList});
+  InitialInvoicePageState({this.exportBillList, this.importBillList});
 
-  InvoicePageState copyWith({
+  InitialInvoicePageState copyWith({
     List<BillEntity> exportBillList,
     List<BillEntity> importBillList,
   }) =>
-      InvoicePageState(
+      InitialInvoicePageState(
           exportBillList: exportBillList ?? this.exportBillList, importBillList: importBillList ?? this.importBillList);
 
   @override
   List<Object> get props => [this.exportBillList, this.importBillList];
+}
+
+class LoadingInvoicePageState extends InvoicePageState {
+  @override
+  List<Object> get props => [];
+
 }

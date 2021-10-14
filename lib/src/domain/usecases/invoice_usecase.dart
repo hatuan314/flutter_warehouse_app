@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -72,6 +73,7 @@ class InvoiceUseCase {
         billList = fillBillList(allBills, 'EXPORT');
       }
     }
+    billList = sortByBillDate(billList);
     return billList;
   }
 
@@ -86,6 +88,7 @@ class InvoiceUseCase {
         billList = fillBillList(allBills, 'IMPORT');
       }
     }
+    billList = sortByBillDate(billList);
     return billList;
   }
 
@@ -119,5 +122,10 @@ class InvoiceUseCase {
       pathList.add(file.path);
     }
     return pathList;
+  }
+
+  List<BillEntity> sortByBillDate(List<BillEntity> billList) {
+    billList.sort((a, b) => b.billDate.compareTo(a.billDate));
+    return billList;
   }
 }

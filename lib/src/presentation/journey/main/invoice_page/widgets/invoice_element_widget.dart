@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/constants/enum_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
+import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/utils/currency_utils.dart';
+import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/bill_entity.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
@@ -13,6 +15,29 @@ class InvoiceElementWidget extends StatelessWidget {
   final BillEnum billType;
 
   const InvoiceElementWidget({Key key, this.bill, this.onPressed, this.billType}) : super(key: key);
+
+  String get _customerName {
+    if (billType == BillEnum.Export) {
+      if (ValidatorUtils.isNullEmpty(bill.customer)) {
+        return 'Hóa đơn ${DateFormat('dd/MM/yyyy').format(DateTime.fromMillisecondsSinceEpoch(bill?.billDate ?? bill?.createAt))}';
+      }
+      return bill.customer;
+    }
+    if (billType == BillEnum.Import) {
+      return bill.distributor;
+    }
+    return '';
+  }
+
+  Widget _descriptionWidget() {
+    if (ValidatorUtils.isNullEmpty(bill.description)) {
+      return SizedBox.shrink();
+    }
+    return Text(
+      '${StringConstants.noteTxt}: ${bill.description}',
+      style: ThemeText.caption.copyWith(fontStyle: FontStyle.italic),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +51,13 @@ class InvoiceElementWidget extends StatelessWidget {
         ),
         margin: EdgeInsets.symmetric(
           horizontal: LayoutConstants.paddingHorizontalApp,
-          vertical: LayoutConstants.paddingVerticalApp / 2,
-        ),
+        ).copyWith(bottom: LayoutConstants.paddingVerticalApp),
         elevation: 5,
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.symmetric(
+            vertical: LayoutConstants.paddingVerticalApp,
+            horizontal: LayoutConstants.paddingHorizontalApp,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,18 +65,23 @@ class InvoiceElementWidget extends StatelessWidget {
               Row(
                 children: [
                   Icon(billType == BillEnum.Export ? Icons.account_circle_rounded : Icons.store),
+                  SizedBox(width: LayoutConstants.paddingHorizontal5,),
                   Text(
-                    billType == BillEnum.Export ? bill?.customer ?? '' : bill.distributor,
+                    _customerName,
                     style: ThemeText.body2.copyWith(fontWeight: FontWeight.w600),
                   ),
                 ],
               ),
-              SizedBox(height: LayoutConstants.paddingVertical5,),
+              SizedBox(
+                height: LayoutConstants.paddingVertical5,
+              ),
               Text(
                 DateFormat('dd/MM/yyyy').format(DateTime.fromMillisecondsSinceEpoch(bill?.billDate ?? bill?.createAt)),
                 style: ThemeText.caption.copyWith(fontWeight: FontWeight.w500, color: AppColor.blue),
               ),
-              SizedBox(height: LayoutConstants.paddingVertical10,),
+              SizedBox(
+                height: LayoutConstants.paddingVertical10,
+              ),
               Row(
                 children: [
                   Expanded(
@@ -65,13 +97,13 @@ class InvoiceElementWidget extends StatelessWidget {
                         child: Text(
                           CurrencyUtils.convertFormatMoney(bill.totalAmount, 'vi'),
                           style: ThemeText.body2.copyWith(
-                            color: billType == BillEnum.Export ? AppColor.green : AppColor.red,
-                            fontWeight: FontWeight.bold
-                          ),
+                              color: billType == BillEnum.Export ? AppColor.green : AppColor.red,
+                              fontWeight: FontWeight.bold),
                         ),
                       )),
                 ],
               ),
+              _descriptionWidget(),
             ],
           ),
         ),

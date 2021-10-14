@@ -18,7 +18,7 @@ class InvoicePageBloc extends Bloc<InvoicePageEvent, InvoicePageState> {
   InvoicePageBloc({@required this.invoiceUc, @required this.loaderBloc});
 
   @override
-  InvoicePageState get initialState => InvoicePageState();
+  InvoicePageState get initialState => LoadingInvoicePageState();
 
   @override
   Stream<InvoicePageState> mapEventToState(InvoicePageEvent event) async* {
@@ -30,10 +30,9 @@ class InvoicePageBloc extends Bloc<InvoicePageEvent, InvoicePageState> {
   }
 
   Stream<InvoicePageState> _mapInitialInvoicePageEventToState() async* {
-    loaderBloc.add(StartLoading());
+    yield LoadingInvoicePageState();
     List<BillEntity> exportBillList = await invoiceUc.getExportBillList();
     List<BillEntity> importBillList = await invoiceUc.getImportBillList();
-    yield state.copyWith(exportBillList: exportBillList, importBillList: importBillList);
-    loaderBloc.add(FinishLoading());
+    yield InitialInvoicePageState(exportBillList: exportBillList, importBillList: importBillList);
   }
 }

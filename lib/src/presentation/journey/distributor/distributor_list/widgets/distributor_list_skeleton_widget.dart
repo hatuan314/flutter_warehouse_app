@@ -4,7 +4,6 @@ import 'package:flutterwarehouseapp/common/extensions/screen_utils_extensions.da
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/distributor_list/distributor_list_constants.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
 import 'package:flutterwarehouseapp/src/widgets/skeleton_widget.dart';
-import 'package:shimmer/shimmer.dart';
 
 class DistributorListSkeletonWidget extends StatelessWidget {
   Widget _itemWidget() {
