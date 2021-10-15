@@ -37,13 +37,15 @@ class ImageStorageDataSource {
     String uri = '';
     try {
       uri = await ref.getDownloadURL();
+      return ImageEntity(path: path, uri: uri);
     } on Exception catch (e) {
-      throw FirebaseException(
+      FirebaseException(
           plugin: 'CPWare',
           message:
           'ImageStorageDataSource - getImageUrl - error: ${e.toString()}');
+      return null;
     }
-    return ImageEntity(path: path, uri: uri);
+
   }
 
   Future<void> deleteImage(String path) async {

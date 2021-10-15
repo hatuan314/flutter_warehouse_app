@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/constants/enum_constants.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/image_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 import 'package:flutterwarehouseapp/src/presentation/view_state.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,7 +18,7 @@ class WaitingCreateInvoiceState extends CreateInvoiceState {
   final DateTime selectBillDate;
   final List<ItemBillEntity> itemBillList;
   final List<PickedFile> imageFiles;
-  final List<>
+  final List<ImageEntity> imageNetworkList;
 
   WaitingCreateInvoiceState({
     @required this.viewState,
@@ -29,6 +30,7 @@ class WaitingCreateInvoiceState extends CreateInvoiceState {
     @required this.itemBillList,
     @required this.imageFiles,
     @required this.imageQty,
+    @required this.imageNetworkList,
   });
 
   WaitingCreateInvoiceState copyWith({
@@ -41,6 +43,7 @@ class WaitingCreateInvoiceState extends CreateInvoiceState {
     DateTime selectBillDate,
     List<ItemBillEntity> itemBillList,
     List<PickedFile> imageFiles,
+    List<ImageEntity> imageNetworkList,
   }) =>
       WaitingCreateInvoiceState(
         enableSelectDistributor: enableSelectDistributor ?? this.enableSelectDistributor,
@@ -52,6 +55,7 @@ class WaitingCreateInvoiceState extends CreateInvoiceState {
         viewState: viewState ?? this.viewState,
         imageFiles: imageFiles ?? this.imageFiles,
         imageQty: imageQty ?? this.imageQty,
+        imageNetworkList: imageNetworkList ?? this.imageNetworkList,
       );
 
   @override
@@ -72,6 +76,7 @@ class CreateInvoiceSuccessState extends CreateInvoiceState {
   final BillEnum billType;
 
   CreateInvoiceSuccessState({@required this.billType});
+
   @override
   List<Object> get props => [this.billType];
 }

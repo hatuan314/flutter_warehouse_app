@@ -24,12 +24,13 @@ import 'package:flutterwarehouseapp/src/widgets/button/button_widget.dart';
 import 'create_invoice_form_widget.dart';
 
 class CreateInvoiceBodyWidget extends StatelessWidget {
+  final bool isEdit;
   final String customer;
   final String description;
   final TextEditingController _customerController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
-  CreateInvoiceBodyWidget({Key key, this.customer, this.description}) : super(key: key);
+  CreateInvoiceBodyWidget({Key key,this.isEdit, this.customer, this.description}) : super(key: key);
 
   void initialData() {
     if (!ValidatorUtils.isNullEmpty(customer)) {
@@ -67,6 +68,7 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
                 selectBillDate: state?.selectBillDate ?? DateTime.now(),
                 itemBillList: ValidatorUtils.isNullEmptyList(state?.itemBillList) ? [] : state?.itemBillList,
                 imageFiles: state?.imageFiles ?? [],
+                imageNetworkList: state?.imageNetworkList ?? [],
                 onSelectDistributor: () => _onSelectDistributor(context),
                 onSelectBillType: (value) => _onSelectBillType(context, value),
                 onPressedGallery: () => _onOpenGallery(context),
@@ -86,7 +88,7 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
                 height: LayoutConstants.paddingVertical20,
               ),
               ButtonWidget(
-                  title: StringConstants.createTxt,
+                  title: isEdit ? StringConstants.updateTxt : StringConstants.createTxt,
                   onPressed: () {
                     BlocProvider.of<CreateInvoiceBloc>(context).add(OnCreateEvent(
                       customer: _customerController.text.trim(),

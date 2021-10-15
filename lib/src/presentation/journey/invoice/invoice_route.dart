@@ -36,14 +36,30 @@ class InvoiceRoutes {
     return {
       RouteList.createInvoice: (context) {
         var billJson;
+        var isEdit;
+        var index;
         if (!ValidatorUtils.isNullEmpty(args)) {
           if (!ValidatorUtils.isNullEmpty(args[ArgumentConstants.billArg])) {
             billJson = args[ArgumentConstants.billArg];
           }
+          if (!ValidatorUtils.isNullEmpty(args[ArgumentConstants.isEditArg])) {
+            isEdit = args[ArgumentConstants.isEditArg];
+          } else {
+            isEdit = false;
+          }
+          index = args[ArgumentConstants.indexArg];
         }
-        return BlocProvider(create: (_) => locator<CreateInvoiceBloc>()..add(InitialCreateInvoiceEvent(
-          billJson: billJson,
-        )), child: CreateInvoiceScreen(billJson: billJson,));
+        return BlocProvider(
+            create: (_) => locator<CreateInvoiceBloc>()
+              ..add(InitialCreateInvoiceEvent(
+                billJson: billJson,
+                isEdit: isEdit,
+                index: index,
+              )),
+            child: CreateInvoiceScreen(
+              billJson: billJson,
+              isEdit: isEdit,
+            ));
       },
       RouteList.addItemOfInvoice: (context) {
         var distributor;

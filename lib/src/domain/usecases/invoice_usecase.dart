@@ -140,4 +140,8 @@ class InvoiceUseCase {
     }
     return itemBills;
   }
+
+  Future<void> updateInvoice({int index, BillEntity bill}) async {
+    await invoiceRepo.updateBill(index: index, bill: bill);
+  }
 }

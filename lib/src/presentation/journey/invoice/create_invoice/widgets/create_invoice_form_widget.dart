@@ -6,6 +6,7 @@ import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/extensions/list_extensions.dart';
 import 'package:flutterwarehouseapp/common/utils/bill_utils.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/image_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/create_invoice_constants.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/widgets/item_bill_widget.dart';
@@ -31,6 +32,7 @@ class CreateInvoiceFormWidget extends StatelessWidget {
   final BillEnum selectBill;
   final List<ItemBillEntity> itemBillList;
   final List<PickedFile> imageFiles;
+  final List<ImageEntity> imageNetworkList;
   final Function onSelectDistributor;
   final Function(PickedFile) onSelectInvoiceImageLocal;
   final Function(String) onSelectInvoiceImageUrl;
@@ -53,6 +55,7 @@ class CreateInvoiceFormWidget extends StatelessWidget {
     this.selectBillDate,
     this.itemBillList,
     this.imageFiles,
+    this.imageNetworkList,
     this.onSelectDistributor,
     this.onSelectInvoiceImageLocal,
     this.onSelectInvoiceImageUrl,
@@ -246,7 +249,7 @@ class CreateInvoiceFormWidget extends StatelessWidget {
         ),
         InvoiceImageListWidget(
           imageFiles: ValidatorUtils.isNullEmptyList(this.imageFiles) ? [] : imageFiles,
-          imageLinks: [],
+          imageLinks: ValidatorUtils.isNullEmptyList(this.imageNetworkList) ? [] : imageNetworkList,
           imageQty: imageQty,
           onSelectedLocal: onSelectInvoiceImageLocal,
           onSelectedUrl: onSelectInvoiceImageUrl,

@@ -43,10 +43,12 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
   BillEnum selectBill = BillEnum.Export;
   List<ItemBillEntity> itemBillList = [];
   List<PickedFile> imageFiles = [];
-  List<ImageEntity> imageBillList = [];
+  List<ImageEntity> imageNetworkList = [];
   int totalAmountBill = 0;
+  int index;
   int _imageQty = 0;
   bool _enableSelectDistributor = false;
+  bool _isEdit = false;
   DateTime selectBillDate = DateTime.now();
 
   CreateInvoiceBloc({
@@ -71,6 +73,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         itemBillList: [],
         imageFiles: [],
         imageQty: _imageQty,
+        imageNetworkList: [],
       );
 
   @override
@@ -110,6 +113,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     var currentState = state;
     if (currentState is WaitingCreateInvoiceState) {
       loaderBloc.add(StartLoading());
+      _isEdit = event.isEdit;
       BillEntity bill = BillModel.fromJson(jsonDecode(event.billJson));
       // Bill Type
       if (bill.type == 'IMPORT') {
@@ -129,7 +133,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
       // Total amount
       totalAmountBill = bill.totalAmount;
       // Images
-      imageBillList = await _getImageUrls(bill.images);
+      imageNetworkList = await _getImageUrls(bill.images);
       loaderBloc.add(FinishLoading());
       yield currentState.copyWith(
         selectBill: selectBill,
@@ -137,7 +141,8 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         distributorName: selectDistributor?.name ?? '',
         selectBillDate: selectBillDate,
         itemBillList: itemBillList,
-        totalAmountBill: totalAmountBill
+        totalAmountBill: totalAmountBill,
+        imageNetworkList: imageNetworkList,
       );
     }
   }
@@ -272,24 +277,48 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
           description: event?.description?.trim() ?? '',
           images: pathList,
         );
-        bool flag = await invoiceUC.createInvoice(bill);
-        if (flag) {
-          updateProductList(event?.customer ?? '');
-          snackbarBloc.add(ShowSnackbar(
-            title: CreateInvoiceConstants.createInvoiceSuccessMsg,
-            type: SnackBarType.success,
-          ));
-          yield CreateInvoiceSuccessState(billType: selectBill);
+        if (_isEdit) {
+          yield* _editInvoiceStream(bill, event?.customer ?? '');
         } else {
-          snackbarBloc.add(ShowSnackbar(
-            title: CreateInvoiceConstants.createInvoiceFailedMsg,
-            type: SnackBarType.error,
-          ));
-          yield currentState;
+          yield* _createInvoiceStream(bill, event?.customer ?? '');
         }
       }
     }
     loaderBloc.add(FinishLoading());
+  }
+
+  Stream<CreateInvoiceState> _editInvoiceStream(BillEntity bill, String customer) async* {
+    var currentState = state;
+    if (currentState is WaitingCreateInvoiceState) {
+      await invoiceUC.updateInvoice(index: index,bill: bill);
+      updateProductList(customer ?? '');
+      snackbarBloc.add(ShowSnackbar(
+        title: CreateInvoiceConstants.createInvoiceSuccessMsg,
+        type: SnackBarType.success,
+      ));
+      yield CreateInvoiceSuccessState(billType: selectBill);
+    }
+  }
+
+  Stream<CreateInvoiceState> _createInvoiceStream(BillEntity bill, String customer) async* {
+    var currentState = state;
+    if (currentState is WaitingCreateInvoiceState) {
+      bool flag = await invoiceUC.createInvoice(bill);
+      if (flag) {
+        updateProductList(customer ?? '');
+        snackbarBloc.add(ShowSnackbar(
+          title: CreateInvoiceConstants.createInvoiceSuccessMsg,
+          type: SnackBarType.success,
+        ));
+        yield CreateInvoiceSuccessState(billType: selectBill);
+      } else {
+        snackbarBloc.add(ShowSnackbar(
+          title: CreateInvoiceConstants.createInvoiceFailedMsg,
+          type: SnackBarType.error,
+        ));
+        yield currentState;
+      }
+    }
   }
 
   Future<void> updateProductList(String customer) async {
@@ -369,7 +398,9 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     List<ImageEntity> imageList = [];
     for (final String path in images) {
       ImageEntity imageEntity = await imageUC.getPhotoUri(ImageEntity(path: path));
-      imageList.add(imageEntity);
+      if (!ValidatorUtils.isNullEmpty(imageEntity)) {
+        imageList.add(imageEntity);
+      }
     }
     return imageList;
   }

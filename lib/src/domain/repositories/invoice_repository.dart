@@ -11,11 +11,11 @@ abstract class InvoiceRepository {
 
   Future<bool> setBill(BillEntity bill);
 
-  Future<String> setBillCloud(BillEntity distributor);
+  Future<String> setBillCloud(BillEntity bill);
 
   Future<bool> setBillLocalList(List<BillEntity> billList);
 
   Future<void> remove({int index, String document});
 
-  Future<void> update({int index, BillEntity distributor});
+  Future<void> updateBill({int index, BillEntity bill});
 }

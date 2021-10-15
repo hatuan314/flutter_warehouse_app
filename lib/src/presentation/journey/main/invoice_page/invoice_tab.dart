@@ -75,13 +75,13 @@ class InvoiceTab extends StatelessWidget {
                     isShowSkeleton: state is LoadingInvoicePageState,
                     billList: state is InitialInvoicePageState ? state?.exportBillList ?? [] : [],
                     billType: BillEnum.Export,
-                    onPressedBill: (bill) => _onPressedBill(context, bill),
+                    onPressedBill: (index, bill) => _onPressedBill(context, index, bill),
                   ),
                   InvoiceWidget(
                     isShowSkeleton: state is LoadingInvoicePageState,
                     billList: state is InitialInvoicePageState ? state?.importBillList ?? [] : [],
                     billType: BillEnum.Import,
-                    onPressedBill: (bill) => _onPressedBill(context, bill),
+                    onPressedBill: (index, bill) => _onPressedBill(context, index, bill),
                   ),
                 ]),
               ),
@@ -92,9 +92,11 @@ class InvoiceTab extends StatelessWidget {
     });
   }
 
-  void _onPressedBill(BuildContext context, BillEntity bill) {
+  void _onPressedBill(BuildContext context, int index, BillEntity bill) {
     Navigator.of(context).pushNamed(RouteList.createInvoice, arguments: {
       ArgumentConstants.billArg: jsonEncode(bill.toModel().toJson()),
+      ArgumentConstants.isEditArg: true,
+      ArgumentConstants.indexArg: index,
     }).then((value) {
       if (!ValidatorUtils.isNullEmpty(value)) {
         var data = value as Map<String, dynamic>;

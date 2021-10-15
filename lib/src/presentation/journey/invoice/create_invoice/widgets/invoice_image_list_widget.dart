@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/image_entity.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/widgets/add_invoice_image_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/bottom_sheet/image_source_bottom_sheet.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,7 +12,7 @@ import 'invoice_image_widget.dart';
 
 class InvoiceImageListWidget extends StatelessWidget {
   final List<PickedFile> imageFiles;
-  final List<String> imageLinks;
+  final List<ImageEntity> imageLinks;
   final int imageQty;
   final Function(PickedFile) onSelectedLocal;
   final Function(String) onSelectedUrl;
@@ -52,8 +53,8 @@ class InvoiceImageListWidget extends StatelessWidget {
         if (!ValidatorUtils.isNullEmptyList(imageLinks) && index >= imageFiles.length && index < imageLinks.length) {
 
           return InvoiceImageWidget(
-            link: imageLinks[index - imageFiles.length],
-            onPressed: () => onSelectedUrl(imageLinks[index - imageFiles.length]),
+            link: imageLinks[index - imageFiles.length].uri,
+            onPressed: () => onSelectedUrl(imageLinks[index - imageFiles.length].uri),
           );
         }
         if (index == imageQty) {

@@ -7,8 +7,14 @@ abstract class CreateInvoiceEvent {}
 
 class InitialCreateInvoiceEvent extends CreateInvoiceEvent {
   final String billJson;
+  final bool isEdit;
+  final int index;
 
-  InitialCreateInvoiceEvent({@required this.billJson});
+  InitialCreateInvoiceEvent({
+    @required this.billJson,
+    this.isEdit = false,
+    this.index,
+  });
 }
 
 class SelectDistributorEvent extends CreateInvoiceEvent {

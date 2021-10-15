@@ -17,7 +17,7 @@ import 'invoice_element_widget.dart';
 class InvoiceWidget extends StatelessWidget {
   final bool isShowSkeleton;
   final List<BillEntity> billList;
-  final Function(BillEntity) onPressedBill;
+  final Function(int, BillEntity) onPressedBill;
   final BillEnum billType;
 
   const InvoiceWidget({Key key, this.isShowSkeleton, this.billList, this.onPressedBill, this.billType})
@@ -49,7 +49,7 @@ class InvoiceWidget extends StatelessWidget {
           index: index,
           child: InvoiceElementWidget(
             bill: billList[index],
-            onPressed: () => onPressedBill(billList[index]),
+            onPressed: () => onPressedBill(index, billList[index]),
             billType: billType,
           ),
         ),
