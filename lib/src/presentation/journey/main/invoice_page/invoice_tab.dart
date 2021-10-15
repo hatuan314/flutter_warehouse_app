@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterwarehouseapp/common/constants/argument_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/enum_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
@@ -44,15 +46,7 @@ class InvoiceTab extends StatelessWidget {
           floatingActionButton: Padding(
             padding: EdgeInsets.only(bottom: LayoutConstants.paddingVertical10),
             child: FloatingActionButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(RouteList.createInvoice).then((value) {
-                  if (!ValidatorUtils.isNullEmpty(value)) {
-                    var data = value as Map<String, dynamic>;
-                    var billType = data['bill_type'];
-                    BlocProvider.of<InvoicePageBloc>(context).add(RefreshInvoiceListEvent(billType));
-                  }
-                });
-              },
+              onPressed: () => _onCreateInvoice(context),
               child: Icon(
                 Icons.add,
                 size: LayoutConstants.smallIconBtnSize,
@@ -98,5 +92,25 @@ class InvoiceTab extends StatelessWidget {
     });
   }
 
-  void _onPressedBill(BuildContext context, BillEntity bill) {}
+  void _onPressedBill(BuildContext context, BillEntity bill) {
+    Navigator.of(context).pushNamed(RouteList.createInvoice, arguments: {
+      ArgumentConstants.billArg: jsonEncode(bill.toModel().toJson()),
+    }).then((value) {
+      if (!ValidatorUtils.isNullEmpty(value)) {
+        var data = value as Map<String, dynamic>;
+        var billType = data[ArgumentConstants.invoiceTypeArg];
+        BlocProvider.of<InvoicePageBloc>(context).add(RefreshInvoiceListEvent(billType));
+      }
+    });
+  }
+
+  _onCreateInvoice(BuildContext context) {
+    Navigator.of(context).pushNamed(RouteList.createInvoice).then((value) {
+      if (!ValidatorUtils.isNullEmpty(value)) {
+        var data = value as Map<String, dynamic>;
+        var billType = data[ArgumentConstants.invoiceTypeArg];
+        BlocProvider.of<InvoicePageBloc>(context).add(RefreshInvoiceListEvent(billType));
+      }
+    });
+  }
 }

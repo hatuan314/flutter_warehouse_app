@@ -1,4 +1,5 @@
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
+import 'package:flutterwarehouseapp/src/data/models/model_field_constants.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/distributor_entity.dart';
 
 class DistributorModel extends DistributorEntity {
@@ -19,26 +20,24 @@ class DistributorModel extends DistributorEntity {
         );
 
   DistributorModel.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
+    name = json[ModelFieldConstants.distributor_name] as String;
     phones = ValidatorUtils.isNullEmpty(json['phones']) ? [] : json['phones'].cast<String>();
     emails = ValidatorUtils.isNullEmpty(json['emails']) ? [] : json['emails'].cast<String>();
     color = json['color'];
-    createAt = json['create_at'] != null
-        ? DateTime.fromMillisecondsSinceEpoch(json['create_at'])
-        : null;
-    lastUpdate = json['last_update'] != null
-        ? DateTime.fromMillisecondsSinceEpoch(json['last_update'])
-        : null;
+    createAt =
+        json[ModelFieldConstants.create_at] != null ? DateTime.fromMillisecondsSinceEpoch(json[ModelFieldConstants.create_at]) : null;
+    lastUpdate =
+        json[ModelFieldConstants.last_update] != null ? DateTime.fromMillisecondsSinceEpoch(json[ModelFieldConstants.last_update]) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
+    data[ModelFieldConstants.distributor_name] = this.name;
     data['phones'] = this.phones;
     data['emails'] = this.emails;
     data['color'] = this.color;
-    data['create_at'] = this.createAt.millisecondsSinceEpoch;
-    data['last_update'] = this.lastUpdate.millisecondsSinceEpoch;
+    data[ModelFieldConstants.create_at] = this.createAt.millisecondsSinceEpoch;
+    data[ModelFieldConstants.last_update] = this.lastUpdate.millisecondsSinceEpoch;
     return data;
   }
 }

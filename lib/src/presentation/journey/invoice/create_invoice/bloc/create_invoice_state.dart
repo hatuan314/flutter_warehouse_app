@@ -17,6 +17,7 @@ class WaitingCreateInvoiceState extends CreateInvoiceState {
   final DateTime selectBillDate;
   final List<ItemBillEntity> itemBillList;
   final List<PickedFile> imageFiles;
+  final List<>
 
   WaitingCreateInvoiceState({
     @required this.viewState,

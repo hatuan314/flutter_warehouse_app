@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/configs/default_env.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
+import 'package:flutterwarehouseapp/src/data/models/item_bill_model.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/product_entity.dart';
@@ -127,5 +128,16 @@ class InvoiceUseCase {
   List<BillEntity> sortByBillDate(List<BillEntity> billList) {
     billList.sort((a, b) => b.billDate.compareTo(a.billDate));
     return billList;
+  }
+
+  List<ItemBillEntity> getItemBillListFromJson(List itemsJson) {
+    List<ItemBillEntity> itemBills = [];
+    if (!ValidatorUtils.isNullEmptyList(itemsJson)) {
+      for (final String json in itemsJson) {
+        ItemBillEntity itemBill = ItemBillModel.fromJson(jsonDecode(json));
+        itemBills.add(itemBill);
+      }
+    }
+    return itemBills;
   }
 }

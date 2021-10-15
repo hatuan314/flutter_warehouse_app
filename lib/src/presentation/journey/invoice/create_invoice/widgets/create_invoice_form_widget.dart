@@ -81,7 +81,7 @@ class CreateInvoiceFormWidget extends StatelessWidget {
         TextFormWidget(
           controller: noteController,
           maxLines: 5,
-          hintText: 'Hãy viết gì đó vào đây',
+          hintText: '(0/200)',
           validator: (_) {},
         ),
       ],

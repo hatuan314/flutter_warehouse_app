@@ -29,7 +29,6 @@ class BaseService {
   }
 
   Future<QuerySnapshot> getQuerySnapshotList(CollectionReference ref) async {
-    QuerySnapshot snapshot;
     try {
       return await ref.get();
     } on FirebaseException catch (e) {

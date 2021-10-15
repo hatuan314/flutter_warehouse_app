@@ -24,14 +24,28 @@ import 'package:flutterwarehouseapp/src/widgets/button/button_widget.dart';
 import 'create_invoice_form_widget.dart';
 
 class CreateInvoiceBodyWidget extends StatelessWidget {
+  final String customer;
+  final String description;
   final TextEditingController _customerController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
+  CreateInvoiceBodyWidget({Key key, this.customer, this.description}) : super(key: key);
+
+  void initialData() {
+    if (!ValidatorUtils.isNullEmpty(customer)) {
+      _customerController.text = customer;
+    }
+    if (!ValidatorUtils.isNullEmpty(description)) {
+      _descriptionController.text = description;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    initialData();
     return BlocConsumer<CreateInvoiceBloc, CreateInvoiceState>(listener: (context, state) {
       if (state is CreateInvoiceSuccessState) {
-        Navigator.of(context).pop({'bill_type': state.billType});
+        Navigator.of(context).pop({ArgumentConstants.invoiceTypeArg: state.billType});
       }
     }, builder: (context, state) {
       if (state is WaitingCreateInvoiceState) {

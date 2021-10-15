@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/configs/default_env.dart';
 import 'package:flutterwarehouseapp/common/configs/firebase_setup.dart';
 import 'package:flutterwarehouseapp/src/data/models/distributor_model.dart';
+import 'package:flutterwarehouseapp/src/data/models/model_field_constants.dart';
 
 import 'base_service.dart';
 
@@ -17,6 +18,11 @@ class DistributorDataSource {
   Future<QuerySnapshot> getDistributorList() async {
     return service.getQuerySnapshotList(
         setup.mainDoc.collection(DefaultConfig.distributorsCollection));
+  }
+
+  Future<QuerySnapshot> getDistributorDetail(String distributorName) async {
+    Query query = setup.mainDoc.collection(DefaultConfig.distributorsCollection).where(ModelFieldConstants.distributor_name, isEqualTo: distributorName);
+    return query.get();
   }
 
   Future<DocumentReference> setDistributor(DistributorModel distributor) async {

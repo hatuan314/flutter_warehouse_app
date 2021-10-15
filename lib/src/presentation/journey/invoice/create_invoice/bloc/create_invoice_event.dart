@@ -5,7 +5,11 @@ import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 
 abstract class CreateInvoiceEvent {}
 
-class InitialCreateInvoiceEvent extends CreateInvoiceEvent {}
+class InitialCreateInvoiceEvent extends CreateInvoiceEvent {
+  final String billJson;
+
+  InitialCreateInvoiceEvent({@required this.billJson});
+}
 
 class SelectDistributorEvent extends CreateInvoiceEvent {
   final DistributorEntity distributor;

@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterwarehouseapp/common/configs/firebase_setup.dart';
@@ -6,10 +9,14 @@ import 'package:flutterwarehouseapp/common/extensions/list_extensions.dart';
 import 'package:flutterwarehouseapp/common/utils/bill_utils.dart';
 import 'package:flutterwarehouseapp/common/utils/image_utils.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
+import 'package:flutterwarehouseapp/src/data/models/bill_model.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/distributor_entity.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/image_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/product_entity.dart';
+import 'package:flutterwarehouseapp/src/domain/usecases/distributor_usecase.dart';
+import 'package:flutterwarehouseapp/src/domain/usecases/image_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/invoice_usecase.dart';
 import 'package:flutterwarehouseapp/src/domain/usecases/product_usecase.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/loader_bloc/bloc.dart';
@@ -27,13 +34,16 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
   final LoaderBloc loaderBloc;
   final SnackbarBloc snackbarBloc;
   final UserBloc userBloc;
+  final DistributorUseCase distributorUC;
   final InvoiceUseCase invoiceUC;
   final ProductUseCase productUC;
+  final ImageUseCase imageUC;
 
   DistributorEntity selectDistributor;
   BillEnum selectBill = BillEnum.Export;
   List<ItemBillEntity> itemBillList = [];
   List<PickedFile> imageFiles = [];
+  List<ImageEntity> imageBillList = [];
   int totalAmountBill = 0;
   int _imageQty = 0;
   bool _enableSelectDistributor = false;
@@ -44,8 +54,10 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     @required this.loaderBloc,
     @required this.snackbarBloc,
     @required this.userBloc,
+    @required this.distributorUC,
     @required this.invoiceUC,
     @required this.productUC,
+    @required this.imageUC,
   });
 
   @override
@@ -65,7 +77,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
   Stream<CreateInvoiceState> mapEventToState(CreateInvoiceEvent event) async* {
     switch (event.runtimeType) {
       case InitialCreateInvoiceEvent:
-        yield* _mapInitialCreateInvoiceEventToState();
+        yield* _mapInitialCreateInvoiceEventToState(event);
         break;
       case SelectDistributorEvent:
         yield* _mapSelectDistributorEventToState(event);
@@ -94,12 +106,39 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     }
   }
 
-  Stream<CreateInvoiceState> _mapInitialCreateInvoiceEventToState() async* {
+  Stream<CreateInvoiceState> _mapInitialCreateInvoiceEventToState(InitialCreateInvoiceEvent event) async* {
     var currentState = state;
     if (currentState is WaitingCreateInvoiceState) {
       loaderBloc.add(StartLoading());
+      BillEntity bill = BillModel.fromJson(jsonDecode(event.billJson));
+      // Bill Type
+      if (bill.type == 'IMPORT') {
+        selectBill = BillEnum.Import;
+        _enableSelectDistributor = true;
+        // Distributor
+        log('>>>>>>>>CretaeInvoiceBloc.InitialInvoiceEvent.bill.distributor: ${bill.distributor}');
+        selectDistributor = await distributorUC.getDistributorDetail(bill.distributor);
+      } else if (bill.type == 'EXPORT') {
+        selectBill = BillEnum.Export;
+        _enableSelectDistributor = false;
+      }
+      // Bill date
+      selectBillDate = DateTime.fromMillisecondsSinceEpoch(bill.billDate);
+      // Item Bill List
+      itemBillList = invoiceUC.getItemBillListFromJson(bill.items);
+      // Total amount
+      totalAmountBill = bill.totalAmount;
+      // Images
+      imageBillList = await _getImageUrls(bill.images);
       loaderBloc.add(FinishLoading());
-      yield currentState.copyWith();
+      yield currentState.copyWith(
+        selectBill: selectBill,
+        enableSelectDistributor: _enableSelectDistributor,
+        distributorName: selectDistributor?.name ?? '',
+        selectBillDate: selectBillDate,
+        itemBillList: itemBillList,
+        totalAmountBill: totalAmountBill
+      );
     }
   }
 
@@ -324,5 +363,14 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     String uid = setupFirebase.auth.currentUser.uid;
     pathList = await invoiceUC.uploadImages(imageFiles: imageFiles, uid: uid);
     return pathList;
+  }
+
+  Future<List<ImageEntity>> _getImageUrls(List<String> images) async {
+    List<ImageEntity> imageList = [];
+    for (final String path in images) {
+      ImageEntity imageEntity = await imageUC.getPhotoUri(ImageEntity(path: path));
+      imageList.add(imageEntity);
+    }
+    return imageList;
   }
 }

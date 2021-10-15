@@ -127,6 +127,7 @@ void setup() {
         loaderBloc: locator<LoaderBloc>(),
         snackbarBloc: locator<SnackbarBloc>(),
         userBloc: locator<UserBloc>(),
+        distributorUC: locator<DistributorUseCase>(),
         invoiceUC: locator<InvoiceUseCase>(),
         productUC: locator<ProductUseCase>(),
       ));
