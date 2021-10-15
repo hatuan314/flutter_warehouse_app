@@ -69,12 +69,6 @@ class InvoiceRepositoryImpl extends InvoiceRepository with MixinRepository {
   }
 
   @override
-  Future<void> update({int index, BillEntity distributor}) {
-    // TODO: implement update
-    throw UnimplementedError();
-  }
-
-  @override
   Future<List<BillEntity>> getExportBillList() async {
     return invoiceHive.getExpectBill();
   }
@@ -82,5 +76,11 @@ class InvoiceRepositoryImpl extends InvoiceRepository with MixinRepository {
   @override
   Future<List<BillEntity>> getImportBillList() async {
     return invoiceHive.getImportBill();
+  }
+
+  @override
+  Future<void> updateBill({int index, BillEntity bill}) async {
+    await invoiceHive.updateInvoice(index: index, bill: bill);
+    invoiceDs.setBill(bill.toModel());
   }
 }

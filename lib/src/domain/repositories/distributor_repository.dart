@@ -6,6 +6,8 @@ abstract class DistributorRepository {
 
   Future<List<DistributorEntity>> getDistributorLocalList();
 
+  Future<DistributorEntity> getDistributorDetail(String distributorName);
+
   Future<bool> setDistributor(DistributorEntity distributor);
 
   Future<String> setDistributorCloud(DistributorEntity distributor);

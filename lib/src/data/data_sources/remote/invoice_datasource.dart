@@ -26,11 +26,11 @@ class InvoiceDataSource {
   }
 
   Future<void> updateBill(BillModel bill) async {
-    // await service.updateDocument(
-    //   ref: setup.mainDoc.collection(DefaultConfig.billCollection),
-    //   request: bill.toJson(),
-    //   document: bill.document,
-    // );
+    await service.updateDocument(
+      ref: setup.mainDoc.collection(DefaultConfig.billCollection),
+      request: bill.toJson(),
+      document: bill.hive.document,
+    );
   }
 
   Future<void> removeBill(String document) async {

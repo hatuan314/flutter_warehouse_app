@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,14 +8,10 @@ import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_dis
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/bloc/add_distributor_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/bloc/add_distributor_state.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/distributor/add_distributor/widgets/distributor_form_widget.dart';
-import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
-import 'package:flutterwarehouseapp/src/themes/theme_text.dart';
 import 'package:flutterwarehouseapp/src/widgets/button/button_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/dialog/common_dialog.dart';
 import 'package:flutterwarehouseapp/src/widgets/internet_widget/check_internet_widget.dart';
 import 'package:flutterwarehouseapp/src/widgets/scaffold/scaffold_widget.dart';
-import 'package:flutterwarehouseapp/src/widgets/view_state_widget/empty_widget.dart';
-import 'package:flutterwarehouseapp/src/widgets/view_state_widget/no_internet_widget.dart';
 
 class AddDistributorScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();

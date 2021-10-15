@@ -27,6 +27,10 @@ class DistributorUseCase {
     return distributorList;
   }
 
+  Future<DistributorEntity> getDistributorDetail(String name) async {
+    return distributorRepo.getDistributorDetail(name);
+  }
+
   Future<void> updateDistributor(
       {int index, DistributorEntity distributor}) async {
     // Step 1: Check document property is Safe

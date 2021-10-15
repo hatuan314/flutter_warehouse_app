@@ -89,4 +89,18 @@ class DistributorRepositoryImpl extends DistributorRepository with MixinReposito
     }
     return '';
   }
+
+  @override
+  Future<DistributorEntity> getDistributorDetail(String distributorName) async {
+    DistributorEntity distributor = await distributorHive.getDistributorDetail(distributorName);
+    if (ValidatorUtils.isNullEmpty(distributor)) {
+      final QuerySnapshot snapshot = await distributorDs.getDistributorDetail(distributorName);
+      List<DistributorModel> distributorList = getCloudDataList<DistributorModel>(snapshot);
+      if (!ValidatorUtils.isNullEmptyList(distributorList)) {
+        distributor = distributorList.first;
+        distributorHive.setDistributor(distributor);
+      }
+    }
+    return distributor;
+  }
 }

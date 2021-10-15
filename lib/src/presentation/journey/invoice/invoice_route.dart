@@ -12,13 +12,15 @@ import 'package:flutterwarehouseapp/src/presentation/journey/invoice/add_item_of
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/add_item_of_invoice/bloc/add_ioi_bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/add_item_of_invoice/bloc/add_ioi_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/bloc/create_invoice_bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/bloc/create_invoice_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/create_invoice_screen.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/main/invoice_page/bloc/invoice_page_event.dart';
 
 class InvoiceRoutes {
   static Map<String, WidgetBuilder> getAll() {
     return {
-      RouteList.createInvoice: (context) =>
-          BlocProvider(create: (_) => locator<CreateInvoiceBloc>(), child: CreateInvoiceScreen()),
+      // RouteList.createInvoice: (context) =>
+      //     BlocProvider(create: (_) => locator<CreateInvoiceBloc>(), child: CreateInvoiceScreen()),
       // RouteList.distributorList: (context) => BlocProvider(
       //     create: (_) => locator<DistributorListBloc>()
       //       ..add(InitialDistributorListEvent()),
@@ -32,6 +34,33 @@ class InvoiceRoutes {
   static Map<String, WidgetBuilder> getRoutesWithSettings(RouteSettings settings) {
     final args = settings.arguments as Map<String, dynamic>;
     return {
+      RouteList.createInvoice: (context) {
+        var billJson;
+        var isEdit;
+        var index;
+        if (!ValidatorUtils.isNullEmpty(args)) {
+          if (!ValidatorUtils.isNullEmpty(args[ArgumentConstants.billArg])) {
+            billJson = args[ArgumentConstants.billArg];
+          }
+          if (!ValidatorUtils.isNullEmpty(args[ArgumentConstants.isEditArg])) {
+            isEdit = args[ArgumentConstants.isEditArg];
+          } else {
+            isEdit = false;
+          }
+          index = args[ArgumentConstants.indexArg];
+        }
+        return BlocProvider(
+            create: (_) => locator<CreateInvoiceBloc>()
+              ..add(InitialCreateInvoiceEvent(
+                billJson: billJson,
+                isEdit: isEdit,
+                index: index,
+              )),
+            child: CreateInvoiceScreen(
+              billJson: billJson,
+              isEdit: isEdit,
+            ));
+      },
       RouteList.addItemOfInvoice: (context) {
         var distributor;
         var billType;

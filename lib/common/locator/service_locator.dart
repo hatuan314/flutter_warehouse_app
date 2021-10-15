@@ -127,8 +127,10 @@ void setup() {
         loaderBloc: locator<LoaderBloc>(),
         snackbarBloc: locator<SnackbarBloc>(),
         userBloc: locator<UserBloc>(),
+        distributorUC: locator<DistributorUseCase>(),
         invoiceUC: locator<InvoiceUseCase>(),
         productUC: locator<ProductUseCase>(),
+        imageUC: locator<ImageUseCase>(),
       ));
   locator.registerFactory<AddIoiBloc>(() => AddIoiBloc(
         loaderBloc: locator<LoaderBloc>(),
@@ -162,7 +164,9 @@ void setup() {
   locator.registerFactory<ProductUseCase>(() => ProductUseCase(
         productRepo: locator<ProductRepository>(),
       ));
-  locator.registerFactory<ImageUseCase>(() => null);
+  locator.registerFactory<ImageUseCase>(() => ImageUseCase(
+        locator<ImageRepository>(),
+      ));
 
   /// Repositories
   locator.registerFactory<UserRepository>(() => UserRepositoryImpl(

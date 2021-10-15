@@ -11,4 +11,7 @@ class ArgumentConstants {
   static const String distributorArg = 'DISTRIBUTOR';
   static const String invoiceTypeArg = 'INVOICE_TYPE';
   static const String itemBillArg = 'ITEM_BILL';
+  static const String billArg = 'BILL';
+  static const String isEditArg = 'IS_EDIT';
+  static const String indexArg = 'INDEX';
 }

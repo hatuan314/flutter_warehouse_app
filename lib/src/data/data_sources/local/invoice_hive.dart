@@ -43,11 +43,11 @@ class InvoiceHive {
     return bills;
   }
 
-  Future<void> removeDistributor(int index) async {
+  Future<void> removeInvoice(int index) async {
     await database.billBox.deleteAt(index);
   }
 
-  Future<void> updateDistributor(
+  Future<void> updateInvoice(
       {int index, BillEntity bill}) async {
     await database.billBox.putAt(index, bill);
   }

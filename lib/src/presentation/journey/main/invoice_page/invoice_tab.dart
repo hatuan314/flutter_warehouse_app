@@ -1,14 +1,20 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterwarehouseapp/common/constants/argument_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/enum_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
+import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/bill_entity.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/invoice_page/bloc/invoice_page_bloc.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/main/invoice_page/bloc/invoice_page_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/invoice_page/bloc/invoice_page_state.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/main/invoice_page/widgets/invoice_widget.dart';
 import 'package:flutterwarehouseapp/src/themes/theme_color.dart';
@@ -40,9 +46,7 @@ class InvoiceTab extends StatelessWidget {
           floatingActionButton: Padding(
             padding: EdgeInsets.only(bottom: LayoutConstants.paddingVertical10),
             child: FloatingActionButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(RouteList.createInvoice);
-              },
+              onPressed: () => _onCreateInvoice(context),
               child: Icon(
                 Icons.add,
                 size: LayoutConstants.smallIconBtnSize,
@@ -71,13 +75,13 @@ class InvoiceTab extends StatelessWidget {
                     isShowSkeleton: state is LoadingInvoicePageState,
                     billList: state is InitialInvoicePageState ? state?.exportBillList ?? [] : [],
                     billType: BillEnum.Export,
-                    onPressedBill: (bill) => _onPressedBill(context, bill),
+                    onPressedBill: (index, bill) => _onPressedBill(context, index, bill),
                   ),
                   InvoiceWidget(
                     isShowSkeleton: state is LoadingInvoicePageState,
                     billList: state is InitialInvoicePageState ? state?.importBillList ?? [] : [],
                     billType: BillEnum.Import,
-                    onPressedBill: (bill) => _onPressedBill(context, bill),
+                    onPressedBill: (index, bill) => _onPressedBill(context, index, bill),
                   ),
                 ]),
               ),
@@ -88,5 +92,27 @@ class InvoiceTab extends StatelessWidget {
     });
   }
 
-  void _onPressedBill(BuildContext context, BillEntity bill) {}
+  void _onPressedBill(BuildContext context, int index, BillEntity bill) {
+    Navigator.of(context).pushNamed(RouteList.createInvoice, arguments: {
+      ArgumentConstants.billArg: jsonEncode(bill.toModel().toJson()),
+      ArgumentConstants.isEditArg: true,
+      ArgumentConstants.indexArg: index,
+    }).then((value) {
+      if (!ValidatorUtils.isNullEmpty(value)) {
+        var data = value as Map<String, dynamic>;
+        var billType = data[ArgumentConstants.invoiceTypeArg];
+        BlocProvider.of<InvoicePageBloc>(context).add(RefreshInvoiceListEvent(billType));
+      }
+    });
+  }
+
+  _onCreateInvoice(BuildContext context) {
+    Navigator.of(context).pushNamed(RouteList.createInvoice).then((value) {
+      if (!ValidatorUtils.isNullEmpty(value)) {
+        var data = value as Map<String, dynamic>;
+        var billType = data[ArgumentConstants.invoiceTypeArg];
+        BlocProvider.of<InvoicePageBloc>(context).add(RefreshInvoiceListEvent(billType));
+      }
+    });
+  }
 }

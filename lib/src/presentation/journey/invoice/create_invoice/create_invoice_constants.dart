@@ -1,5 +1,6 @@
 class CreateInvoiceConstants {
   static const String createInvoiceTitle = 'Viết hóa đơn';
+  static const String editInvoiceTitle = 'Sửa hóa đơn';
   static const String selectDistributorTxt = 'Chọn nhà phân phối';
   static const String selectBillTypeTxt = 'Chọn loại hóa đơn';
   static const String productListTxt = 'Danh sách mặt hàng';
