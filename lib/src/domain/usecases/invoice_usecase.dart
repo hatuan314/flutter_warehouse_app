@@ -67,14 +67,26 @@ class InvoiceUseCase {
     List<BillEntity> billList = await invoiceRepo.getExportBillList();
     if (ValidatorUtils.isNullEmptyList(billList)) {
       List<BillEntity> allBills = await invoiceRepo.getBillListCloud();
+      billList = fixBugBillDateNull(billList);
       bool flag = await invoiceRepo.setBillLocalList(allBills);
       if (flag) {
         billList = await invoiceRepo.getExportBillList();
       } else {
         billList = fillBillList(allBills, 'EXPORT');
       }
+    } else {
+      billList = fixBugBillDateNull(billList);
     }
     billList = sortByBillDate(billList);
+    return billList;
+  }
+
+  List<BillEntity> fixBugBillDateNull(List<BillEntity> billList) {
+    for (final BillEntity bill in billList) {
+      if (ValidatorUtils.isNullEmpty(bill.billDate)) {
+        bill.billDate = bill.createAt;
+      }
+    }
     return billList;
   }
 
@@ -82,12 +94,15 @@ class InvoiceUseCase {
     List<BillEntity> billList = await invoiceRepo.getImportBillList();
     if (ValidatorUtils.isNullEmptyList(billList)) {
       List<BillEntity> allBills = await invoiceRepo.getBillListCloud();
+      billList = fixBugBillDateNull(billList);
       bool flag = await invoiceRepo.setBillLocalList(allBills);
       if (flag) {
         billList = await invoiceRepo.getImportBillList();
       } else {
         billList = fillBillList(allBills, 'IMPORT');
       }
+    } else {
+      billList = fixBugBillDateNull(billList);
     }
     billList = sortByBillDate(billList);
     return billList;
