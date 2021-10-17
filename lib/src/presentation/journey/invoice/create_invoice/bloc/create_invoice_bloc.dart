@@ -112,38 +112,40 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
   Stream<CreateInvoiceState> _mapInitialCreateInvoiceEventToState(InitialCreateInvoiceEvent event) async* {
     var currentState = state;
     if (currentState is WaitingCreateInvoiceState) {
-      loaderBloc.add(StartLoading());
       _isEdit = event.isEdit;
-      BillEntity bill = BillModel.fromJson(jsonDecode(event.billJson));
-      // Bill Type
-      if (bill.type == 'IMPORT') {
-        selectBill = BillEnum.Import;
-        _enableSelectDistributor = true;
-        // Distributor
-        log('>>>>>>>>CretaeInvoiceBloc.InitialInvoiceEvent.bill.distributor: ${bill.distributor}');
-        selectDistributor = await distributorUC.getDistributorDetail(bill.distributor);
-      } else if (bill.type == 'EXPORT') {
-        selectBill = BillEnum.Export;
-        _enableSelectDistributor = false;
+      if (_isEdit) {
+        loaderBloc.add(StartLoading());
+        BillEntity bill = BillModel.fromJson(jsonDecode(event.billJson));
+        // Bill Type
+        if (bill.type == 'IMPORT') {
+          selectBill = BillEnum.Import;
+          _enableSelectDistributor = true;
+          // Distributor
+          log('>>>>>>>>CretaeInvoiceBloc.InitialInvoiceEvent.bill.distributor: ${bill.distributor}');
+          selectDistributor = await distributorUC.getDistributorDetail(bill.distributor);
+        } else if (bill.type == 'EXPORT') {
+          selectBill = BillEnum.Export;
+          _enableSelectDistributor = false;
+        }
+        // Bill date
+        selectBillDate = DateTime.fromMillisecondsSinceEpoch(bill.billDate);
+        // Item Bill List
+        itemBillList = invoiceUC.getItemBillListFromJson(bill.items);
+        // Total amount
+        totalAmountBill = bill.totalAmount;
+        // Images
+        imageNetworkList = await _getImageUrls(bill.images);
+        loaderBloc.add(FinishLoading());
+        yield currentState.copyWith(
+          selectBill: selectBill,
+          enableSelectDistributor: _enableSelectDistributor,
+          distributorName: selectDistributor?.name ?? '',
+          selectBillDate: selectBillDate,
+          itemBillList: itemBillList,
+          totalAmountBill: totalAmountBill,
+          imageNetworkList: imageNetworkList,
+        );
       }
-      // Bill date
-      selectBillDate = DateTime.fromMillisecondsSinceEpoch(bill.billDate);
-      // Item Bill List
-      itemBillList = invoiceUC.getItemBillListFromJson(bill.items);
-      // Total amount
-      totalAmountBill = bill.totalAmount;
-      // Images
-      imageNetworkList = await _getImageUrls(bill.images);
-      loaderBloc.add(FinishLoading());
-      yield currentState.copyWith(
-        selectBill: selectBill,
-        enableSelectDistributor: _enableSelectDistributor,
-        distributorName: selectDistributor?.name ?? '',
-        selectBillDate: selectBillDate,
-        itemBillList: itemBillList,
-        totalAmountBill: totalAmountBill,
-        imageNetworkList: imageNetworkList,
-      );
     }
   }
 
@@ -290,7 +292,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
   Stream<CreateInvoiceState> _editInvoiceStream(BillEntity bill, String customer) async* {
     var currentState = state;
     if (currentState is WaitingCreateInvoiceState) {
-      await invoiceUC.updateInvoice(index: index,bill: bill);
+      await invoiceUC.updateInvoice(index: index, bill: bill);
       updateProductList(customer ?? '');
       snackbarBloc.add(ShowSnackbar(
         title: CreateInvoiceConstants.createInvoiceSuccessMsg,

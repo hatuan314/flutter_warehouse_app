@@ -30,7 +30,7 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
   final TextEditingController _customerController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
-  CreateInvoiceBodyWidget({Key key,this.isEdit, this.customer, this.description}) : super(key: key);
+  CreateInvoiceBodyWidget({Key key,this.isEdit = false, this.customer, this.description}) : super(key: key);
 
   void initialData() {
     if (!ValidatorUtils.isNullEmpty(customer)) {

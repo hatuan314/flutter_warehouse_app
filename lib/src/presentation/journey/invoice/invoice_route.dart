@@ -48,6 +48,9 @@ class InvoiceRoutes {
             isEdit = false;
           }
           index = args[ArgumentConstants.indexArg];
+        } else {
+          isEdit = false;
+          billJson = '';
         }
         return BlocProvider(
             create: (_) => locator<CreateInvoiceBloc>()
