@@ -113,15 +113,17 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     var currentState = state;
     if (currentState is WaitingCreateInvoiceState) {
       _isEdit = event.isEdit;
+      log('>>>>>>>>>>CreateInvoiceBloc.InitialCreateInvoiceEvent.isEdit: $_isEdit');
       if (_isEdit) {
         loaderBloc.add(StartLoading());
         BillEntity bill = BillModel.fromJson(jsonDecode(event.billJson));
+        index = event.index;
+        log('>>>>>>>>>>CreateInvoiceBloc.InitialCreateInvoiceEvent.index: $index');
         // Bill Type
         if (bill.type == 'IMPORT') {
           selectBill = BillEnum.Import;
           _enableSelectDistributor = true;
           // Distributor
-          log('>>>>>>>>CretaeInvoiceBloc.InitialInvoiceEvent.bill.distributor: ${bill.distributor}');
           selectDistributor = await distributorUC.getDistributorDetail(bill.distributor);
         } else if (bill.type == 'EXPORT') {
           selectBill = BillEnum.Export;
@@ -235,6 +237,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
   }
 
   Future<bool> _checkValidator() async {
+    log('>>>>>>>>CreateInvoiceBloc.checkValidator - 1');
     if (ValidatorUtils.isNullEmpty(selectBill)) {
       snackbarBloc.add(ShowSnackbar(title: 'Vui lòng chọn kiểu hóa đơn', type: SnackBarType.warning));
       return false;
@@ -247,12 +250,14 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
       snackbarBloc.add(ShowSnackbar(title: 'Vui lòng nhập danh sách mặt hàng', type: SnackBarType.warning));
       return false;
     }
+    log('>>>>>>>>CreateInvoiceBloc.checkValidator - 2');
     if (selectBill == BillEnum.Export) {
       bool flag = await checkLimitedProduct();
       if (flag) {
         return false;
       }
     }
+    log('>>>>>>>>CreateInvoiceBloc.checkValidator - 3');
     return true;
   }
 
@@ -264,6 +269,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
       if (!flag) {
         yield currentState;
       } else {
+        log('>>>>>>>>>CreateInvoiceBloc.OnCreateEvent - 1');
         List<String> pathList = await uploadImageBills();
         List itemsJsonArray = invoiceUC.getItemBillJsonArray(itemBillList);
         BillEntity bill = BillEntity(
@@ -279,27 +285,35 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
           description: event?.description?.trim() ?? '',
           images: pathList,
         );
+        log('>>>>>>>>>CreateInvoiceBloc.OnCreateEvent - 2');
         if (_isEdit) {
-          yield* _editInvoiceStream(bill, event?.customer ?? '');
+          await invoiceUC.updateInvoice(index: index, bill: bill);
+          updateProductList(event?.customer ?? '');
+          snackbarBloc.add(ShowSnackbar(
+            title: CreateInvoiceConstants.createInvoiceSuccessMsg,
+            type: SnackBarType.success,
+          ));
+          yield CreateInvoiceSuccessState(billType: selectBill);
         } else {
-          yield* _createInvoiceStream(bill, event?.customer ?? '');
+          bool flag = await invoiceUC.createInvoice(bill);
+          if (flag) {
+            updateProductList(event?.customer ?? '');
+            snackbarBloc.add(ShowSnackbar(
+              title: CreateInvoiceConstants.createInvoiceSuccessMsg,
+              type: SnackBarType.success,
+            ));
+            yield CreateInvoiceSuccessState(billType: selectBill);
+          } else {
+            snackbarBloc.add(ShowSnackbar(
+              title: CreateInvoiceConstants.createInvoiceFailedMsg,
+              type: SnackBarType.error,
+            ));
+            yield currentState;
+          }
         }
       }
     }
     loaderBloc.add(FinishLoading());
-  }
-
-  Stream<CreateInvoiceState> _editInvoiceStream(BillEntity bill, String customer) async* {
-    var currentState = state;
-    if (currentState is WaitingCreateInvoiceState) {
-      await invoiceUC.updateInvoice(index: index, bill: bill);
-      updateProductList(customer ?? '');
-      snackbarBloc.add(ShowSnackbar(
-        title: CreateInvoiceConstants.createInvoiceSuccessMsg,
-        type: SnackBarType.success,
-      ));
-      yield CreateInvoiceSuccessState(billType: selectBill);
-    }
   }
 
   Stream<CreateInvoiceState> _createInvoiceStream(BillEntity bill, String customer) async* {

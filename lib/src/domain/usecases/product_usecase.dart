@@ -79,7 +79,10 @@ class ProductUseCase {
     return productList;
   }
 
-  int getProductIndex({List<ProductEntity> productList, ProductEntity currentProduct}) {
+  Future<int> getProductIndex({List<ProductEntity> productList, ProductEntity currentProduct}) async {
+    log('>>>>>>>>>>>ProductUseCase.getProductIndex.currentProduct.name: ${currentProduct.name}');
+    log('>>>>>>>>>>>ProductUseCase.getProductIndex.currentProduct.distributor: ${currentProduct.distributor}');
+    log('>>>>>>>>>>>ProductUseCase.getProductIndex.currentProduct.category: ${currentProduct.category}');
     for (int index = 0; index < productList.length; index++) {
       ProductEntity product = productList[index];
       if (product.name == currentProduct.name &&

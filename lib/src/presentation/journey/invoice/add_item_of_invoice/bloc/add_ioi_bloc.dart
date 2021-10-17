@@ -68,25 +68,17 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
   Stream<AddIoiState> _mapInitialAddIoiEventToState(InitialAddIoiEvent event) async* {
     loaderBloc.add(StartLoading());
     var currentState = state;
+
+    await getProductList(event.distributor);
     if (ValidatorUtils.isNullEmpty(event.itemBill)) {
       UnitEntity unit = await unitUc.getFirstUnit();
       _selectUnit = unit?.name ?? '';
     } else {
       _selectUnit = event.itemBill.unit;
       _selectCategory = event.itemBill.category;
+      _selectProduct = await _setSelectProduct(itemBill: event.itemBill);
+      log('>>>>>>>AddIoiBloc.InitialAddIoiEvent.selectProduct: ${_selectProduct?.distributor}');
     }
-    List<ProductEntity> productList = await productUc.getProductList();
-    log('>>>>>>>>>distributor: ${event.distributor}');
-    if (ValidatorUtils.isNullEmpty(event.distributor)) {
-      _productList.addAll(productList);
-    } else {
-      for (final ProductEntity product in productList) {
-        if (product.distributor == event.distributor) {
-          _productList.add(product);
-        }
-      }
-    }
-
     if (currentState is WaitingAddIoiState) {
       yield currentState.copyWith(
         selectUnit: _selectUnit,
@@ -95,6 +87,31 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
       );
     }
     loaderBloc.add(FinishLoading());
+  }
+
+  Future<void> getProductList(String distributor) async {
+    List<ProductEntity> productList = await productUc.getProductList();
+    if (ValidatorUtils.isNullEmpty(distributor)) {
+      _productList.addAll(productList);
+    } else {
+      for (final ProductEntity product in productList) {
+        if (product.distributor == distributor) {
+          _productList.add(product);
+        }
+      }
+    }
+  }
+
+  Future<ProductEntity> _setSelectProduct({ItemBillEntity itemBill}) async {
+    for (int index = 0; index < _productList.length; index++) {
+      ProductEntity productElement = _productList[index];
+      if (productElement.distributor == itemBill?.distributor &&
+          productElement.name == itemBill.name &&
+          productElement.category == itemBill.category) {
+        return productElement;
+      }
+    }
+    return null;
   }
 
   Stream<AddIoiState> _mapSelectUnitEventToState(SelectUnitEvent event) async* {
@@ -132,8 +149,9 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
           price: price,
           totalPrice: totalPrice,
           unit: _selectUnit ?? '',
+          distributor: _selectProduct.distributor,
         );
-        int index = productUc.getProductIndex(
+        int index = await productUc.getProductIndex(
             productList: _productList,
             currentProduct: ProductEntity(
               name: itemBill?.name ?? '',

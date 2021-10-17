@@ -19,6 +19,8 @@ class ItemBillEntity {
   String unit;
   @HiveField(5)
   String category;
+  @HiveField(6)
+  String distributor;
 
   ItemBillEntity({
     this.name,
@@ -28,6 +30,7 @@ class ItemBillEntity {
     this.unit,
     this.category,
     this.index,
+    this.distributor,
   });
 
   factory ItemBillEntity.fromJson(Map<String, dynamic> json) => ItemBillEntity(
@@ -38,6 +41,7 @@ class ItemBillEntity {
         unit: json['unit'],
         category: json['category'],
     index: json['index'],
+    distributor: json['distributor'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -48,6 +52,7 @@ class ItemBillEntity {
         'unit': unit,
         'category': category,
         'index': index,
+    'distributor': distributor,
       };
 
   ItemBillModel toModel() => ItemBillModel(
@@ -57,5 +62,6 @@ class ItemBillEntity {
         totalPrice: totalPrice,
         unit: unit,
         category: category,
+      distributor: distributor,
       );
 }

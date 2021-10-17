@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -203,6 +204,7 @@ class AddItemOfInvoiceBodyWidget extends StatelessWidget {
   void _onItemSubmitted(BuildContext context, ProductEntity value) {
     nameController.text = value.name;
     priceController.text = CurrencyUtils.convertFormatMoney(value.importPrice, 'vi');
+    log('>>>>>>>>>>>IoiBodyWidget.onItemSubmitted.value: ${value.toModel().toJson()}');
     BlocProvider.of<AddIoiBloc>(context).add(SelectProductEvent(value));
   }
 }

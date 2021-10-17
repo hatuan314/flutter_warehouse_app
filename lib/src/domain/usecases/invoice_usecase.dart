@@ -43,6 +43,7 @@ class InvoiceUseCase {
   }
 
   Future<bool> isLimitedProductQty(ItemBillEntity itemBill) async {
+    log('>>>>>>>>>InvoiceUseCase.isLimitedProductQty.itemBill.index: ${itemBill.index}');
     ProductEntity product = await productRepo.getProduct(itemBill.index);
     if (itemBill.qty > product.qty) {
       locator<SnackbarBloc>().add(ShowSnackbar(

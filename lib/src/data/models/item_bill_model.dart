@@ -8,6 +8,7 @@ class ItemBillModel extends ItemBillEntity {
     int totalPrice,
     String unit,
     String category,
+    String distributor,
   }) : super(
           name: name,
           qty: qty,
@@ -15,6 +16,7 @@ class ItemBillModel extends ItemBillEntity {
           totalPrice: totalPrice,
           unit: unit,
           category: category,
+          distributor: distributor,
         );
 
   factory ItemBillModel.fromJson(Map<String, dynamic> json) => ItemBillModel(
@@ -24,6 +26,7 @@ class ItemBillModel extends ItemBillEntity {
         totalPrice: json['total_price'],
         unit: json['unit'],
         category: json['category'],
+        distributor: json['distributor'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -33,5 +36,6 @@ class ItemBillModel extends ItemBillEntity {
         'total_price': totalPrice,
         'unit': unit,
         'category': category,
+        'distributor': distributor,
       };
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -45,9 +46,10 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     initialData();
     return BlocConsumer<CreateInvoiceBloc, CreateInvoiceState>(listener: (context, state) {
-      if (state is CreateInvoiceSuccessState) {
-        Navigator.of(context).pop({ArgumentConstants.invoiceTypeArg: state.billType});
-      }
+      // if (state is CreateInvoiceSuccessState) {
+      //   log('>>>>>>>>>>CreateInvoiceBodyWidget.CreateInvoiceSuccessState');
+      //   Navigator.pop(context, {ArgumentConstants.invoiceTypeArg: state.billType});
+      // }
     }, builder: (context, state) {
       if (state is WaitingCreateInvoiceState) {
         return SingleChildScrollView(
