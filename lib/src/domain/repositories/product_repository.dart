@@ -1,3 +1,4 @@
+import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/product_entity.dart';
 
 abstract class ProductRepository {
@@ -7,7 +8,9 @@ abstract class ProductRepository {
 
   Future addProductLocalList(List<ProductEntity> productList);
 
-  Future<ProductEntity> getProduct(int index);
+  Future<ProductEntity> getProductForBill(ItemBillEntity itemBill);
+
+  Future<ProductEntity> getProductByIndex(int index);
 
   Future<List<ProductEntity>> getAllProductCloudList();
 

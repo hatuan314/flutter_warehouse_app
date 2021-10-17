@@ -6,6 +6,7 @@ import 'package:flutterwarehouseapp/src/data/data_sources/local/product_hive.dar
 import 'package:flutterwarehouseapp/src/data/data_sources/remote/product_datasource.dart';
 import 'package:flutterwarehouseapp/src/data/models/product_model.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/hive_entity.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/product_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/repositories/product_repository.dart';
 
@@ -72,5 +73,8 @@ class ProductRepositoryImpl extends ProductRepository with MixinRepository {
   }
 
   @override
-  Future<ProductEntity> getProduct(int index) => productHive.getProduct(index);
+  Future<ProductEntity> getProductForBill(ItemBillEntity itemBill) => productHive.getProductForBill(itemBill);
+
+  @override
+  Future<ProductEntity> getProductByIndex(int index) => productHive.getProductByIndex(index);
 }

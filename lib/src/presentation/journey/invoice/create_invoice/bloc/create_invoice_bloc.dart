@@ -269,7 +269,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
       if (!flag) {
         yield currentState;
       } else {
-        log('>>>>>>>>>CreateInvoiceBloc.OnCreateEvent - 1');
+        log('>>>>>>>>>CreateInvoiceBloc.OnCreateEvent.isEdit: $_isEdit');
         List<String> pathList = await uploadImageBills();
         List itemsJsonArray = invoiceUC.getItemBillJsonArray(itemBillList);
         BillEntity bill = BillEntity(
@@ -285,7 +285,6 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
           description: event?.description?.trim() ?? '',
           images: pathList,
         );
-        log('>>>>>>>>>CreateInvoiceBloc.OnCreateEvent - 2');
         if (_isEdit) {
           await invoiceUC.updateInvoice(index: index, bill: bill);
           updateProductList(event?.customer ?? '');
@@ -314,27 +313,6 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
       }
     }
     loaderBloc.add(FinishLoading());
-  }
-
-  Stream<CreateInvoiceState> _createInvoiceStream(BillEntity bill, String customer) async* {
-    var currentState = state;
-    if (currentState is WaitingCreateInvoiceState) {
-      bool flag = await invoiceUC.createInvoice(bill);
-      if (flag) {
-        updateProductList(customer ?? '');
-        snackbarBloc.add(ShowSnackbar(
-          title: CreateInvoiceConstants.createInvoiceSuccessMsg,
-          type: SnackBarType.success,
-        ));
-        yield CreateInvoiceSuccessState(billType: selectBill);
-      } else {
-        snackbarBloc.add(ShowSnackbar(
-          title: CreateInvoiceConstants.createInvoiceFailedMsg,
-          type: SnackBarType.error,
-        ));
-        yield currentState;
-      }
-    }
   }
 
   Future<void> updateProductList(String customer) async {

@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:flutterwarehouseapp/common/configs/local_db_setup.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
+import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
+import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/product_entity.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/bloc.dart';
 import 'package:flutterwarehouseapp/src/presentation/blocs/snackbar_bloc/snackbar_type.dart';
@@ -36,12 +38,30 @@ class ProductHive {
     return productList;
   }
 
-  Future<ProductEntity> getProduct(int index) async {
+  Future<ProductEntity> getProductByIndex(int index) async {
     ProductEntity product;
     if (database.productBox.isNotEmpty) {
       product = database.productBox.getAt(index);
     }
     return product;
+  }
+
+  Future<ProductEntity> getProductForBill(ItemBillEntity itemBill) async {
+    ProductEntity result;
+    if (database.productBox.isNotEmpty) {
+      List<ProductEntity> productList = database.productBox.values.where((product) {
+        if (product.distributor == itemBill.distributor && product.name == itemBill.name && product.category == itemBill.category) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      if (!ValidatorUtils.isNullEmptyList(productList)) {
+        result = productList.first;
+      }
+      return result;
+    }
+    return null;
   }
 
   Future<void> updateProduct(

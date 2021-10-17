@@ -44,7 +44,8 @@ class InvoiceUseCase {
 
   Future<bool> isLimitedProductQty(ItemBillEntity itemBill) async {
     log('>>>>>>>>>InvoiceUseCase.isLimitedProductQty.itemBill.index: ${itemBill.index}');
-    ProductEntity product = await productRepo.getProduct(itemBill.index);
+
+    ProductEntity product = await productRepo.getProductForBill(itemBill);
     if (itemBill.qty > product.qty) {
       locator<SnackbarBloc>().add(ShowSnackbar(
         title: 'Chỉ còn ${product.qty} ${product.name} của ${product.distributor} trong kho',
