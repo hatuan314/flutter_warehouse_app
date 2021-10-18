@@ -68,11 +68,11 @@ class AddIoiBloc extends Bloc<AddIoiEvent, AddIoiState> {
   Stream<AddIoiState> _mapInitialAddIoiEventToState(InitialAddIoiEvent event) async* {
     loaderBloc.add(StartLoading());
     var currentState = state;
-
     await getProductList(event.distributor);
     if (ValidatorUtils.isNullEmpty(event.itemBill)) {
       UnitEntity unit = await unitUc.getFirstUnit();
       _selectUnit = unit?.name ?? '';
+      _selectProduct = ProductEntity(distributor: event.distributor);
     } else {
       _selectUnit = event.itemBill.unit;
       _selectCategory = event.itemBill.category;

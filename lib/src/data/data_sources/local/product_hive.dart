@@ -55,7 +55,7 @@ class ProductHive {
         } else {
           return false;
         }
-      });
+      }).toList();
       if (!ValidatorUtils.isNullEmptyList(productList)) {
         result = productList.first;
       }

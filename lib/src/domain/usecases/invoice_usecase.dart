@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/configs/default_env.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
+import 'package:flutterwarehouseapp/common/utils/image_utils.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/data/models/item_bill_model.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/bill_entity.dart';
@@ -122,7 +123,8 @@ class InvoiceUseCase {
 
   Future<List<String>> uploadImages({List<PickedFile> imageFiles, String uid}) async {
     List<String> pathList = [];
-    List<Uint8List> imageUint8ListArray = [];
+    List<Uint8List> imageUint8ListArray = await ImageUtils.getUint8ListArray(imageFiles);
+
     pathList = await imageRepo.uploadImages(
       imageUint8ListArray: imageUint8ListArray,
       uid: uid,
