@@ -46,9 +46,15 @@ class ProductUseCase {
   }
 
   Future updateProduct(
-      {ProductEntity product, ProductListState productListState = ProductListState.Add, int index}) async {
+      {ProductEntity product, ProductListState productListState = ProductListState.Add}) async {
+    log('>>>>>>>>>>>ProductUseCase.updateProduct - 1');
     List<ProductEntity> productList = await getProductList();
+    log('>>>>>>>>>>>ProductUseCase.updateProduct - 2');
+    int index = await getProductIndex(productList: productList, currentProduct: product);
+    log('>>>>>>>>>>>ProductUseCase.updateProduct - 3');
     ProductEntity currentProduct = productList[index];
+    log('>>>>>>>>>>>ProductUseCase.updateProduct.index: $index');
+    log('>>>>>>>>>>>ProductUseCase.updateProduct.currentProduct.name: ${currentProduct.name}');
     if (productListState == ProductListState.Add) {
       currentProduct.qty += product.qty;
       await productRepo.updateProduct(product: currentProduct, index: index);

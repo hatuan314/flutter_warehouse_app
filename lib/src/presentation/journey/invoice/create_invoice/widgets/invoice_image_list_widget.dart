@@ -38,7 +38,7 @@ class InvoiceImageListWidget extends StatelessWidget {
       itemCount: imageQty + 1,
       physics: NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: 3,
         childAspectRatio: 1,
         mainAxisSpacing: LayoutConstants.paddingHorizontal10,
         crossAxisSpacing: LayoutConstants.paddingVertical10,

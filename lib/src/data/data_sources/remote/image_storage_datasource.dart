@@ -4,13 +4,10 @@ import 'dart:typed_data';
 import 'package:firebase_storage/firebase_storage.dart' as fireStorage;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutterwarehouseapp/common/configs/default_env.dart';
-import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/image_entity.dart';
 
 class ImageStorageDataSource {
   Future<List<String>> uploadImages({List<Uint8List> imageUint8ListArray, String uid, String collection}) async {
-    log('>>>>>>>>>>>ImageStorageDataSource.uploadImages.HERE');
-    log('>>>>>>>>>>>ImageStorageDataSource.uploadImages.imageUint8ListArray: ${ValidatorUtils.isNullEmptyList(imageUint8ListArray)}');
     fireStorage.FirebaseStorage storage =
         fireStorage.FirebaseStorage.instance;
     List<String> pathList = [];
@@ -18,11 +15,10 @@ class ImageStorageDataSource {
       for (Uint8List item in imageUint8ListArray) {
         final int timer = DateTime.now().millisecondsSinceEpoch;
         final String path = 'images/${DefaultConfig.storagePath}/$uid/$collection/{$collection}_{$timer}';
-        log('>>>>>>>>>>>ImageStorageDataSource.uploadImages - 1');
         fireStorage.Reference ref = storage.ref(path);
-        log('>>>>>>>>>>>ImageStorageDataSource.uploadImages - 2');
-        TaskSnapshot snapshot = await ref.putData(item);
-        log('>>>>>>>>>>>ImageStorageDataSource.uploadImages.snapshot: ${snapshot.ref.fullPath}');
+        await ref.putData(item).whenComplete(() {
+          pathList.add(path);
+        });
       }
     } on Exception catch (e) {
       throw FirebaseException(

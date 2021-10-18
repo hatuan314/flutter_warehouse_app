@@ -287,7 +287,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         );
         if (_isEdit) {
           await invoiceUC.updateInvoice(index: index, bill: bill);
-          updateProductList(event?.customer ?? '');
+          updateProductList();
           snackbarBloc.add(ShowSnackbar(
             title: CreateInvoiceConstants.createInvoiceSuccessMsg,
             type: SnackBarType.success,
@@ -296,7 +296,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         } else {
           bool flag = await invoiceUC.createInvoice(bill);
           if (flag) {
-            updateProductList(event?.customer ?? '');
+            await updateProductList();
             snackbarBloc.add(ShowSnackbar(
               title: CreateInvoiceConstants.createInvoiceSuccessMsg,
               type: SnackBarType.success,
@@ -315,12 +315,12 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     loaderBloc.add(FinishLoading());
   }
 
-  Future<void> updateProductList(String customer) async {
+  Future<void> updateProductList() async {
     if (selectBill == BillEnum.Import) {
-      await addProductList();
+      addProductList();
     }
     if (selectBill == BillEnum.Export) {
-      await reduceProductList(customer);
+      reduceProductList();
     }
   }
 
@@ -341,12 +341,13 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
       if (itemBill.index < 0) {
         productUC.createProduct(product);
       } else {
-        productUC.updateProduct(product: product, productListState: ProductListState.Add, index: itemBill.index);
+        log('>>>>>>>>>CreateInvoiceBloc.addProductList.update');
+        await productUC.updateProduct(product: product, productListState: ProductListState.Add);
       }
     }
   }
 
-  Future reduceProductList(String customer) async {
+  Future reduceProductList() async {
     for (final ItemBillEntity itemBill in itemBillList) {
       ProductEntity product = ProductEntity(
         name: itemBill.name,
@@ -357,9 +358,10 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         createAt: DateTime.now().millisecondsSinceEpoch,
         lastUpdate: DateTime.now().millisecondsSinceEpoch,
         unit: itemBill.unit,
-        distributor: customer,
+        distributor: itemBill.distributor,
       );
-      productUC.updateProduct(product: product, productListState: ProductListState.Reduce, index: itemBill.index);
+      log('>>>>>>>>>CreateInvoiceBloc.addProductList.reduce');
+      await productUC.updateProduct(product: product, productListState: ProductListState.Reduce,);
     }
   }
 
