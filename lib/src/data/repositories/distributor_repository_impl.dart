@@ -94,6 +94,7 @@ class DistributorRepositoryImpl extends DistributorRepository with MixinReposito
   Future<DistributorEntity> getDistributorDetail(String distributorName) async {
     DistributorEntity distributor = await distributorHive.getDistributorDetail(distributorName);
     if (ValidatorUtils.isNullEmpty(distributor)) {
+      getDistributorList();
       final QuerySnapshot snapshot = await distributorDs.getDistributorDetail(distributorName);
       List<DistributorModel> distributorList = getCloudDataList<DistributorModel>(snapshot);
       if (!ValidatorUtils.isNullEmptyList(distributorList)) {
@@ -102,5 +103,16 @@ class DistributorRepositoryImpl extends DistributorRepository with MixinReposito
       }
     }
     return distributor;
+  }
+
+  @override
+  Future<List<DistributorEntity>> getDistributorList() async {
+    List<DistributorEntity> distributorList = [];
+    distributorList = await getDistributorLocalList();
+    if (ValidatorUtils.isNullEmptyList(distributorList)) {
+      distributorList = await getDistributorCloudList();
+      setDistributorLocalList(distributorList);
+    }
+    return distributorList;
   }
 }

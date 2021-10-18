@@ -4,6 +4,8 @@ import 'package:flutterwarehouseapp/src/domain/entities/distributor_entity.dart'
 abstract class DistributorRepository {
   Future<List<DistributorEntity>> getDistributorCloudList();
 
+  Future<List<DistributorEntity>> getDistributorList();
+
   Future<List<DistributorEntity>> getDistributorLocalList();
 
   Future<DistributorEntity> getDistributorDetail(String distributorName);
