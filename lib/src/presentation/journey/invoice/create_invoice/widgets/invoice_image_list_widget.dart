@@ -50,12 +50,23 @@ class InvoiceImageListWidget extends StatelessWidget {
             onPressed: () => onSelectedLocal(imageFiles[index]),
           );
         }
-        if (!ValidatorUtils.isNullEmptyList(imageLinks) && index >= imageFiles.length && index < imageLinks.length) {
-
+        if (ValidatorUtils.isNullEmptyList(imageFiles) &&
+            !ValidatorUtils.isNullEmptyList(imageLinks) &&
+            index < imageLinks.length) {
           return InvoiceImageWidget(
-            link: imageLinks[index - imageFiles.length].uri,
+            link: imageLinks[index].uri,
             onPressed: () => onSelectedUrl(imageLinks[index - imageFiles.length].uri),
           );
+        }
+        if (!ValidatorUtils.isNullEmptyList(imageLinks) && index >= imageFiles.length) {
+          final int linkIndex = index - imageFiles.length;
+          if (linkIndex < imageFiles.length) {
+            log('>>>>>>>>>>>>InvoiceImageListWidget.uri.index ${imageLinks[index - imageFiles.length].uri}');
+            return InvoiceImageWidget(
+              link: imageLinks[linkIndex].uri,
+              onPressed: () => onSelectedUrl(imageLinks[index - imageFiles.length].uri),
+            );
+          }
         }
         if (index == imageQty) {
           return AddInvoiceImageWidget(

@@ -10,6 +10,7 @@ import 'package:flutterwarehouseapp/common/constants/layout_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/route_constants.dart';
 import 'package:flutterwarehouseapp/common/constants/string_constants.dart';
 import 'package:flutterwarehouseapp/common/locator/service_locator.dart';
+import 'package:flutterwarehouseapp/common/utils/app_utils.dart';
 import 'package:flutterwarehouseapp/common/utils/validator_utils.dart';
 import 'package:flutterwarehouseapp/src/data/models/distributor_model.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/distributor_entity.dart';
@@ -20,7 +21,9 @@ import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invo
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/bloc/create_invoice_event.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/bloc/create_invoice_state.dart';
 import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/create_invoice_constants.dart';
+import 'package:flutterwarehouseapp/src/presentation/journey/invoice/create_invoice/widgets/invoice_image_dialog.dart';
 import 'package:flutterwarehouseapp/src/widgets/button/button_widget.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'create_invoice_form_widget.dart';
 
@@ -31,7 +34,7 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
   final TextEditingController _customerController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
-  CreateInvoiceBodyWidget({Key key,this.isEdit = false, this.customer, this.description}) : super(key: key);
+  CreateInvoiceBodyWidget({Key key, this.isEdit = false, this.customer, this.description}) : super(key: key);
 
   void initialData() {
     if (!ValidatorUtils.isNullEmpty(customer)) {
@@ -85,6 +88,8 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
                   distributor: state?.distributorName,
                 ),
                 onSelectedBillDate: (date) => _onSelectBillDate(context, date),
+                onSelectInvoiceImageLocal: (value) => _onSelectInvoiceImageLocal(context, value),
+                onSelectInvoiceImageUrl: (value) => _onSelectInvoiceImageUrl(context, value),
               ),
               SizedBox(
                 height: LayoutConstants.paddingVertical20,
@@ -97,9 +102,11 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
                       description: _descriptionController.text.trim(),
                     ));
                   }),
-              (Platform.isIOS) ? SizedBox(
-                height: LayoutConstants.paddingVerticalAppBottom,
-              ) : SizedBox.shrink(),
+              (Platform.isIOS)
+                  ? SizedBox(
+                      height: LayoutConstants.paddingVerticalAppBottom,
+                    )
+                  : SizedBox.shrink(),
             ],
           ),
         );
@@ -121,11 +128,11 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
   }
 
   void _onOpenGallery(BuildContext context) {
-    BlocProvider.of<CreateInvoiceBloc>(context).add(OpenGalleryEvent());
+    BlocProvider.of<CreateInvoiceBloc>(context).add(GetImageLocalEvent(ImageSourceType.Gallery));
   }
 
   void _onOpenCamera(BuildContext context) {
-    BlocProvider.of<CreateInvoiceBloc>(context).add(OpenCameraEvent());
+    BlocProvider.of<CreateInvoiceBloc>(context).add(GetImageLocalEvent(ImageSourceType.Camera));
   }
 
   void _onPressedAddItemBtn(
@@ -204,5 +211,29 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
 
   void _onSelectBillDate(BuildContext context, DateTime date) {
     BlocProvider.of<CreateInvoiceBloc>(context).add(SelectBillDateEvent(billDate: date));
+  }
+
+  void _onSelectInvoiceImageLocal(BuildContext context, PickedFile value) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return InvoiceImageDialog(
+          file: value,
+        );
+      },
+    ).then((value) {
+      AppUtils.unFocusKeyboard(context);
+    });
+  }
+
+  void _onSelectInvoiceImageUrl(BuildContext context, String value) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return InvoiceImageDialog(
+          link: value,
+        );
+      },
+    );
   }
 }

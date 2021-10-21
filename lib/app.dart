@@ -53,7 +53,10 @@ class _MyAppState extends State<MyApp> {
       providers: _getProviders,
       child: GestureDetector(
         onTap: () {
-          AppUtils.unFocusKeyboard(context);
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+            FocusManager.instance.primaryFocus.unfocus();
+          }
         },
         child: MaterialApp(
           navigatorKey: _navigator,

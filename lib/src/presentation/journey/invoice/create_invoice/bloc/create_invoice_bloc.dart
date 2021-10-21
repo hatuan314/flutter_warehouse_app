@@ -94,11 +94,8 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
       case EditItemBillEvent:
         yield* _mapEditItemBillEventToState(event);
         break;
-      case OpenGalleryEvent:
-        yield* _mapOpenGalleryEventToState();
-        break;
-      case OpenCameraEvent:
-        yield* _mapOpenCameraEventToState();
+      case GetImageLocalEvent:
+        yield* _mapGetImageLocalEventToState(event);
         break;
       case OnCreateEvent:
         yield* _mapOnCreateEvent(event);
@@ -113,12 +110,10 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     var currentState = state;
     if (currentState is WaitingCreateInvoiceState) {
       _isEdit = event.isEdit;
-      log('>>>>>>>>>>CreateInvoiceBloc.InitialCreateInvoiceEvent.isEdit: $_isEdit');
       if (_isEdit) {
         loaderBloc.add(StartLoading());
         BillEntity bill = BillModel.fromJson(jsonDecode(event.billJson));
         index = event.index;
-        log('>>>>>>>>>>CreateInvoiceBloc.InitialCreateInvoiceEvent.index: $index');
         // Bill Type
         if (bill.type == 'IMPORT') {
           selectBill = BillEnum.Import;
@@ -137,6 +132,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         totalAmountBill = bill.totalAmount;
         // Images
         imageNetworkList = await _getImageUrls(bill.images);
+        _imageQty = _setImageQty();
         loaderBloc.add(FinishLoading());
         yield currentState.copyWith(
           selectBill: selectBill,
@@ -146,6 +142,7 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
           itemBillList: itemBillList,
           totalAmountBill: totalAmountBill,
           imageNetworkList: imageNetworkList,
+          imageQty: _imageQty,
         );
       }
     }
@@ -206,11 +203,16 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
     return total;
   }
 
-  Stream<CreateInvoiceState> _mapOpenGalleryEventToState() async* {
+  Stream<CreateInvoiceState> _mapGetImageLocalEventToState(GetImageLocalEvent event) async* {
     var currentState = state;
     if (currentState is WaitingCreateInvoiceState) {
       yield currentState.copyWith(viewState: ViewState.loading);
-      final PickedFile image = await ImageUtils.getImageFile(ImageSource.gallery);
+      PickedFile image;
+      if (event.source == ImageSourceType.Gallery) {
+        image = await ImageUtils.getImageFile(ImageSource.gallery);
+      } else if (event.source == ImageSourceType.Camera) {
+        image = await ImageUtils.getImageFile(ImageSource.camera);
+      }
       if (!ValidatorUtils.isNullEmpty(image)) {
         imageFiles.add(image);
         _imageQty = _setImageQty();
@@ -220,24 +222,18 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
   }
 
   int _setImageQty() {
-    return imageFiles.length;
-  }
-
-  Stream<CreateInvoiceState> _mapOpenCameraEventToState() async* {
-    var currentState = state;
-    if (currentState is WaitingCreateInvoiceState) {
-      yield currentState.copyWith(viewState: ViewState.loading);
-      final PickedFile image = await ImageUtils.getImageFile(ImageSource.camera);
-      if (!ValidatorUtils.isNullEmpty(image)) {
-        imageFiles.add(image);
-        _imageQty = _setImageQty();
-      }
-      yield currentState.copyWith(viewState: ViewState.initial, imageFiles: imageFiles, imageQty: _imageQty);
+    if (!ValidatorUtils.isNullEmptyList(imageFiles) && !ValidatorUtils.isNullEmptyList(imageNetworkList)) {
+      return imageFiles.length + imageNetworkList.length;
+    } else if (!ValidatorUtils.isNullEmptyList(imageFiles) && ValidatorUtils.isNullEmptyList(imageNetworkList)) {
+      return imageFiles.length;
+    } else if (ValidatorUtils.isNullEmptyList(imageFiles) && !ValidatorUtils.isNullEmptyList(imageNetworkList)) {
+      return imageNetworkList.length;
+    } else {
+      return 0;
     }
   }
 
   Future<bool> _checkValidator() async {
-    log('>>>>>>>>CreateInvoiceBloc.checkValidator - 1');
     if (ValidatorUtils.isNullEmpty(selectBill)) {
       snackbarBloc.add(ShowSnackbar(title: 'Vui lòng chọn kiểu hóa đơn', type: SnackBarType.warning));
       return false;
@@ -250,14 +246,12 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
       snackbarBloc.add(ShowSnackbar(title: 'Vui lòng nhập danh sách mặt hàng', type: SnackBarType.warning));
       return false;
     }
-    log('>>>>>>>>CreateInvoiceBloc.checkValidator - 2');
     if (selectBill == BillEnum.Export) {
       bool flag = await checkLimitedProduct();
       if (flag) {
         return false;
       }
     }
-    log('>>>>>>>>CreateInvoiceBloc.checkValidator - 3');
     return true;
   }
 
@@ -269,7 +263,6 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
       if (!flag) {
         yield currentState;
       } else {
-        log('>>>>>>>>>CreateInvoiceBloc.OnCreateEvent.isEdit: $_isEdit');
         List<String> pathList = await uploadImageBills();
         List itemsJsonArray = invoiceUC.getItemBillJsonArray(itemBillList);
         BillEntity bill = BillEntity(
@@ -341,7 +334,6 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
       if (itemBill.index < 0) {
         productUC.createProduct(product);
       } else {
-        log('>>>>>>>>>CreateInvoiceBloc.addProductList.update');
         await productUC.updateProduct(product: product, productListState: ProductListState.Add);
       }
     }
@@ -360,7 +352,6 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         unit: itemBill.unit,
         distributor: itemBill.distributor,
       );
-      log('>>>>>>>>>CreateInvoiceBloc.addProductList.reduce');
       await productUC.updateProduct(product: product, productListState: ProductListState.Reduce,);
     }
   }

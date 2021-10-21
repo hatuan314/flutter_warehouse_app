@@ -46,6 +46,12 @@ class OpenGalleryEvent extends CreateInvoiceEvent {}
 
 class OpenCameraEvent extends CreateInvoiceEvent {}
 
+class GetImageLocalEvent extends CreateInvoiceEvent {
+  final ImageSourceType source;
+
+  GetImageLocalEvent(this.source);
+}
+
 class OnCreateEvent extends CreateInvoiceEvent {
   final String customer;
   final String description;
