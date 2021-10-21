@@ -16,7 +16,7 @@ class InvoiceImageDialog extends StatelessWidget {
   const InvoiceImageDialog({Key key, this.file, this.link, this.onDeleted}) : super(key: key);
 
   Widget _imageSource(BuildContext context) {
-    final double imageWidth = MediaQuery.of(context).size.width * 4/5;
+    final double imageWidth = MediaQuery.of(context).size.width * 4 / 5;
     if (!ValidatorUtils.isNullEmpty(file)) {
       return Container(
         width: imageWidth,
@@ -87,22 +87,29 @@ class InvoiceImageDialog extends StatelessWidget {
       ),
       elevation: 0,
       backgroundColor: Colors.transparent,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(LayoutConstants.roundedRadius)),
-            child: _imageSource(context),
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _closeButton(context),
-              _deleteButton(),
-            ],
-          )
-        ],
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).pop();
+        },
+        behavior: HitTestBehavior.translucent,
+        child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox.shrink(),
+            ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(LayoutConstants.roundedRadius)),
+              child: _imageSource(context),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                _deleteButton(),
+                _closeButton(context),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

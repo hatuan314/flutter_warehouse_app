@@ -14,8 +14,8 @@ class InvoiceImageListWidget extends StatelessWidget {
   final List<PickedFile> imageFiles;
   final List<ImageEntity> imageLinks;
   final int imageQty;
-  final Function(PickedFile) onSelectedLocal;
-  final Function(String) onSelectedUrl;
+  final Function(PickedFile, int) onSelectedLocal;
+  final Function(String, int) onSelectedUrl;
   final Function onPressedGallery;
   final Function onPressedCamera;
 
@@ -47,7 +47,7 @@ class InvoiceImageListWidget extends StatelessWidget {
         if (!ValidatorUtils.isNullEmptyList(imageFiles) && index < imageFiles.length) {
           return InvoiceImageWidget(
             file: imageFiles[index],
-            onPressed: () => onSelectedLocal(imageFiles[index]),
+            onPressed: () => onSelectedLocal(imageFiles[index], index),
           );
         }
         if (ValidatorUtils.isNullEmptyList(imageFiles) &&
@@ -55,16 +55,15 @@ class InvoiceImageListWidget extends StatelessWidget {
             index < imageLinks.length) {
           return InvoiceImageWidget(
             link: imageLinks[index].uri,
-            onPressed: () => onSelectedUrl(imageLinks[index - imageFiles.length].uri),
+            onPressed: () => onSelectedUrl(imageLinks[index].uri, index),
           );
         }
         if (!ValidatorUtils.isNullEmptyList(imageLinks) && index >= imageFiles.length) {
           final int linkIndex = index - imageFiles.length;
           if (linkIndex < imageFiles.length) {
-            log('>>>>>>>>>>>>InvoiceImageListWidget.uri.index ${imageLinks[index - imageFiles.length].uri}');
             return InvoiceImageWidget(
               link: imageLinks[linkIndex].uri,
-              onPressed: () => onSelectedUrl(imageLinks[index - imageFiles.length].uri),
+              onPressed: () => onSelectedUrl(imageLinks[linkIndex].uri, linkIndex),
             );
           }
         }

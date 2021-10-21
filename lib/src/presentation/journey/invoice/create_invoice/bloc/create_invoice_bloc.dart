@@ -103,6 +103,9 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
       case SelectBillDateEvent:
         yield* _mapSelectBillDateEventToState(event);
         break;
+      case OnDeletedImageEvent:
+        yield* _mapOnDeletedImageEventToState(event);
+        break;
     }
   }
 
@@ -352,7 +355,10 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
         unit: itemBill.unit,
         distributor: itemBill.distributor,
       );
-      await productUC.updateProduct(product: product, productListState: ProductListState.Reduce,);
+      await productUC.updateProduct(
+        product: product,
+        productListState: ProductListState.Reduce,
+      );
     }
   }
 
@@ -390,5 +396,23 @@ class CreateInvoiceBloc extends Bloc<CreateInvoiceEvent, CreateInvoiceState> {
       }
     }
     return imageList;
+  }
+
+  Stream<CreateInvoiceState> _mapOnDeletedImageEventToState(OnDeletedImageEvent event) async* {
+    var currentState = state;
+    if (currentState is WaitingCreateInvoiceState) {
+      if (!ValidatorUtils.isNullEmpty(event.fileIndex)) {
+        imageFiles.removeAt(event.fileIndex);
+      }
+      if (!ValidatorUtils.isNullEmpty(event.linkIndex)) {
+        imageNetworkList.removeAt(event.linkIndex);
+      }
+      _imageQty = _setImageQty();
+      yield currentState.copyWith(
+        imageFiles: imageFiles,
+        imageNetworkList: imageNetworkList,
+        imageQty: _imageQty,
+      );
+    }
   }
 }

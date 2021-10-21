@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterwarehouseapp/common/constants/enum_constants.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/distributor_entity.dart';
 import 'package:flutterwarehouseapp/src/domain/entities/item_bill_entity.dart';
+import 'package:image_picker/image_picker.dart';
 
 abstract class CreateInvoiceEvent {}
 
@@ -63,4 +64,11 @@ class SelectBillDateEvent extends CreateInvoiceEvent {
   final DateTime billDate;
 
   SelectBillDateEvent({@required this.billDate});
+}
+
+class OnDeletedImageEvent extends CreateInvoiceEvent {
+  final int fileIndex;
+  final int linkIndex;
+
+  OnDeletedImageEvent({this.fileIndex, this.linkIndex});
 }

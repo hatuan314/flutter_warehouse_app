@@ -88,8 +88,8 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
                   distributor: state?.distributorName,
                 ),
                 onSelectedBillDate: (date) => _onSelectBillDate(context, date),
-                onSelectInvoiceImageLocal: (value) => _onSelectInvoiceImageLocal(context, value),
-                onSelectInvoiceImageUrl: (value) => _onSelectInvoiceImageUrl(context, value),
+                onSelectInvoiceImageLocal: (file, fileIndex) => _onSelectInvoiceImageLocal(context, file, fileIndex),
+                onSelectInvoiceImageUrl: (link, linkIndex) => _onSelectInvoiceImageUrl(context, link, linkIndex),
               ),
               SizedBox(
                 height: LayoutConstants.paddingVertical20,
@@ -213,12 +213,16 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
     BlocProvider.of<CreateInvoiceBloc>(context).add(SelectBillDateEvent(billDate: date));
   }
 
-  void _onSelectInvoiceImageLocal(BuildContext context, PickedFile value) {
+  void _onSelectInvoiceImageLocal(BuildContext context, PickedFile value, int index) {
     showDialog(
       context: context,
       builder: (dialogContext) {
         return InvoiceImageDialog(
           file: value,
+          onDeleted: () {
+            Navigator.of(context).pop();
+            BlocProvider.of<CreateInvoiceBloc>(context).add(OnDeletedImageEvent(fileIndex: index));
+          },
         );
       },
     ).then((value) {
@@ -226,14 +230,20 @@ class CreateInvoiceBodyWidget extends StatelessWidget {
     });
   }
 
-  void _onSelectInvoiceImageUrl(BuildContext context, String value) {
+  void _onSelectInvoiceImageUrl(BuildContext context, String value, int index) {
     showDialog(
       context: context,
       builder: (dialogContext) {
         return InvoiceImageDialog(
           link: value,
+          onDeleted: () {
+            Navigator.of(context).pop();
+            BlocProvider.of<CreateInvoiceBloc>(context).add(OnDeletedImageEvent(linkIndex: index));
+          },
         );
       },
-    );
+    ).then((value) {
+      AppUtils.unFocusKeyboard(context);
+    });
   }
 }

@@ -34,8 +34,8 @@ class CreateInvoiceFormWidget extends StatelessWidget {
   final List<PickedFile> imageFiles;
   final List<ImageEntity> imageNetworkList;
   final Function onSelectDistributor;
-  final Function(PickedFile) onSelectInvoiceImageLocal;
-  final Function(String) onSelectInvoiceImageUrl;
+  final Function(PickedFile, int) onSelectInvoiceImageLocal;
+  final Function(String, int) onSelectInvoiceImageUrl;
   final Function(BillEnum) onSelectBillType;
   final Function onPressedGallery;
   final Function onPressedCamera;
